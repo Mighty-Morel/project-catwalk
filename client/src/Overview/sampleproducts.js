@@ -1,4 +1,4 @@
-const sampledata = [
+const sampleproducts = [
   {
         "id": 1,
         "name": "Camo Onesie",
@@ -26,4 +26,4 @@ const sampledata = [
     // ...
 ]
 
-export default sampledata;
+export default sampleproducts;

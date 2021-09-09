@@ -1,19 +1,22 @@
 import React from 'react';
-import sampledata from './sampledata.js'
+import sampleproducts from './sampleproducts.js';
+import samplestyles from './samplestyles.js';
 
 class ProductInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: sampledata[0],
-      style: sampledata[0].results[0], // style of the specific product
+      product: sampleproducts[0],
+      style: samplestyles.results[0], // an object with a style of the specific product
     }
     this.updateProduct = this.updateProduct.bind(this);
+    this.updateStyle = this.updateStyle.bind(this);
+
   }
 
-  updateProduct() {
-    //refactor to pull from api
-
+  updateProduct(productid) {
+    //refactor to pull from api - run this when style changes
+    //product will be chosen based on the style
     this.setState({
       product:
     })
@@ -21,9 +24,12 @@ class ProductInfo extends React.Component {
 
   updateStyle() {
     //refactor to pull from api
+    axios.get()
     this.setState({
       style:
+      product: updateProduct(productid)
     })
+
   }
 
 
