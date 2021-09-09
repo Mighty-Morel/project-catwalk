@@ -1,7 +1,7 @@
 const path = require('path');
+
 const source = path.join(__dirname, 'client', 'src');
 const destination = path.join(__dirname, 'public');
-
 
 module.exports = {
   entry: source,
@@ -17,12 +17,12 @@ module.exports = {
         use: {
           loader: 'babel-loader',
           options: {
-            presets: ['@babel/preset-env', "@babel/preset-react"]
-          }
-        }
-      }
-    ]
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
+        },
+      },
+    ],
   },
   mode: 'development',
-  devtool: 'eval-source-map'
+  devtool: 'eval-source-map',
 };
