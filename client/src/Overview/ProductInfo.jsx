@@ -22,7 +22,7 @@ class ProductInfo extends React.Component {
     })
   }
 
-  updateStyle() {
+  updateStyle(productid) {
     //refactor to pull from api
     axios.get()
     this.setState({
