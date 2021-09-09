@@ -34,7 +34,7 @@ const samplestyles = {
           //...
             }
   },
-{
+  {
       "style_id": 2,
       "name": "Desert Brown & Tan",
       "original_price": "140",
@@ -61,9 +61,10 @@ const samplestyles = {
                       "size": "M"
                 },
           //...
-            }
+            },
   },
 // ...
+  ],
 }
 
-export defaults samplestyles;
+export default samplestyles;
