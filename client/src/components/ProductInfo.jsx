@@ -33,33 +33,32 @@ class ProductInfo extends React.Component {
     console.log(AUTH_TOKEN);
     const { allProducts, productIndex } = this.state;
     this.getAllProducts();
-    this.getAllStyles(48432);
+    // this.getAllStyles(48432);
     // console.log(allProducts[productIndex]);
     // this.updateProduct(allProducts[productIndex].id);
   }
 
-  componentDidUpdate(prevState) {
-    const { allProducts, allStyles, styleIndex } = this.state;
-    if (prevState.allProducts !== allProducts) {
-      // this.state.selectedProduct = allProducts[0];
-    }
-    if (prevState.allStyles !== allStyles) {
-      // this.getAllStyles(allProducts[0].id);
-      // this.setState ({
-      this.state.selectedStyle = allStyles[styleIndex];
-      // });
-    }
-  }
+  // componentDidUpdate(prevState) {
+  //   const { allStyles, styleIndex } = this.state;
+  //   if (prevState.allStyles !== allStyles) {
+  //     this.state.selectedStyle = allStyles[styleIndex];
+  //   }
+  // }
 
   getAllProducts() {
-    const { allProducts } = this.state;
+    const { allProducts, productIndex } = this.state;
     axios.get('/products')
       .then((response) => {
         console.log('get all Products');
-        this.setState({ allProducts: response.data });
+        this.setState({
+          allProducts: response.data,
+          selectedProduct: response.data[productIndex],
+        });
       })
-    // console.log(allProducts.length);
-    // this.getAllStyles(allProducts[0].id)
+      .then(() => {
+        console.log(allProducts.length);
+        this.getAllStyles(allProducts[0].id);
+      })
       .catch((error) => console.log(error));
   }
 
@@ -89,16 +88,25 @@ class ProductInfo extends React.Component {
   // }
 
   render() {
-    const { allStyles, selectedProduct, selectedStyle } = this.state;
-    if (!selectedStyle) {
-      return (
-        <>
-          <span>Social Media Placeholder</span>
-          <h5>{selectedProduct.category}</h5>
-          <h4>{selectedProduct.name}</h4>
-        </>
-      );
-    }
+    const {
+      selectedProduct, selectedStyle, allProducts, productIndex,
+    } = this.state;
+    // if (!selectedProduct) {
+    //   this.getAllProducts(allProducts[productIndex]);
+    //   return (
+    //     <>
+    //       <span>Loading 1</span>
+    //     </>
+    //   );
+    // }
+    // if (!selectedStyle) {
+    //   this.getAllStyles(selectedProduct.id);
+    //   return (
+    //     <>
+    //       <span>Loading 2</span>
+    //     </>
+    //   );
+    // }
     return (
       <>
         <span>Star Ratings</span>
