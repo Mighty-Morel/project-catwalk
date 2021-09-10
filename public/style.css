@@ -19,6 +19,12 @@ body {
 }
 
 
+.ratings {
+  line-height: 2em;
+  font-size: .8em;
+
+}
+
 .product-name {
   font-style: bold;
   font-weight: 800;
@@ -39,4 +45,13 @@ body {
 .price-discount {
   text-decoration: line-through;
   color: rgb(170, 0, 0);
+}
+
+.description {
+  font-size: .9em;
+  font-weight: 400;
+}
+
+.social-media {
+  line-height: 5em;
 }

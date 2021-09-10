@@ -85,7 +85,7 @@ class ProductInfo extends React.Component {
     return (
       <>
       <div className="overview">
-        <span>Star Ratings Placeholder</span>
+        <span className="ratings">Star Ratings Placeholder</span>
         <br />
         <span className="category">{selectedProduct.category}</span>
         <br />
@@ -93,9 +93,9 @@ class ProductInfo extends React.Component {
         <br />
         <span className="price"><Price style={selectedStyle}/></span>
         <br />
-        <span>{selectedProduct.description}</span>
+        <span className="description">{selectedProduct.description}</span>
         <br />
-        <span>Social Media Placeholder</span>
+        <span className="social-media">Social Media Placeholder</span>
       </div>
       </>
     );
