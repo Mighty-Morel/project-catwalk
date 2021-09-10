@@ -25,22 +25,41 @@ class ProductInfo extends React.Component {
     }; // an object with a style of the specific product
     this.getAllProducts = this.getAllProducts.bind(this);
     this.getAllStyles = this.getAllStyles.bind(this);
-    this.updateProduct = this.updateProduct.bind(this);
+    // this.updateProduct = this.updateProduct.bind(this);
   }
 
   // renders the info of the specific product on load
   componentDidMount() {
+    console.log(AUTH_TOKEN);
     const { allProducts, productIndex } = this.state;
     this.getAllProducts();
-    this.updateProduct(allProducts[productIndex].id);
+    this.getAllStyles(48432);
+    // console.log(allProducts[productIndex]);
+    // this.updateProduct(allProducts[productIndex].id);
+  }
+
+  componentDidUpdate(prevState) {
+    const { allProducts, allStyles, styleIndex } = this.state;
+    if (prevState.allProducts !== allProducts) {
+      // this.state.selectedProduct = allProducts[0];
+    }
+    if (prevState.allStyles !== allStyles) {
+      // this.getAllStyles(allProducts[0].id);
+      // this.setState ({
+      this.state.selectedStyle = allStyles[styleIndex];
+      // });
+    }
   }
 
   getAllProducts() {
+    const { allProducts } = this.state;
     axios.get('/products')
       .then((response) => {
         console.log('get all Products');
         this.setState({ allProducts: response.data });
       })
+    // console.log(allProducts.length);
+    // this.getAllStyles(allProducts[0].id)
       .catch((error) => console.log(error));
   }
 
@@ -52,28 +71,37 @@ class ProductInfo extends React.Component {
         console.log('get all styles', response.data);
         this.setState({ allStyles: response.data.results });
       })
-      .then(this.setState({ selectedStyle: allStyles[styleIndex] }))
+      // .then(this.setState({ selectedStyle: allStyles[styleIndex] }))
       .catch((error) => console.log(error));
   }
 
-  updateProduct(productId) {
-    console.log('productId', productId);
-    axios.get(`/products/${productId}`)
-      .then((response) => {
-        console.log('get product info', response.data);
-        this.setState({
-          selectedProduct: response.data,
-        });
-      })
-      .then(this.getAllStyles(productId))
-      .catch((error) => console.log(error));
-  }
+  // updateProduct(productId) {
+  //   console.log('productId', productId);
+  //   axios.get(`/products/${productId}`)
+  //     .then((response) => {
+  //       console.log('get product info', response.data);
+  //       this.setState({
+  //         selectedProduct: response.data,
+  //       });
+  //     })
+  //     .then(this.getAllStyles(productId))
+  //     .catch((error) => console.log(error));
+  // }
 
   render() {
-    const { selectedProduct, selectedStyle } = this.state;
+    const { allStyles, selectedProduct, selectedStyle } = this.state;
+    if (!selectedStyle) {
+      return (
+        <>
+          <span>Social Media Placeholder</span>
+          <h5>{selectedProduct.category}</h5>
+          <h4>{selectedProduct.name}</h4>
+        </>
+      );
+    }
     return (
       <>
-        <span>Social Media Placeholder</span>
+        <span>Star Ratings</span>
         <h5>{selectedProduct.category}</h5>
         <h4>{selectedProduct.name}</h4>
         <Price style={selectedStyle} />

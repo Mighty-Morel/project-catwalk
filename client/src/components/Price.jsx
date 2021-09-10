@@ -4,6 +4,7 @@ import React from 'react';
 // followed by the original price which is struckthrough.
 
 const Price = ({ style }) => {
+  console.log(style);
   if (style.sale_price > 0) {
     return (
       <>
