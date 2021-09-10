@@ -1,5 +1,5 @@
 import React from 'react';
-import ProductInfo from './Overview/ProductInfo.jsx';
+import ProductInfo from './components/ProductInfo.jsx';
 
 class App extends React.Component {
   constructor(props) {
