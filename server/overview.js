@@ -11,14 +11,39 @@ app.get('/products');
 
 app.get('/products/:id', (req, res) => {
   const productId = req.params.id;
-  res.send((err, data) => {
-    if (err) {
-      res.status(500).send(err);
-    } else {
-      console.log('successful get request for product id', productId);
-      res.status(200).send(data);
-    }
-  });
-});
+  axios.get('/products')
+  .then((response) => {
+    res.send(err, data) => {
+      if (err) {
+        res.status(500).send(err);
+      } else {
+        console.log('successful get request for product id', productId);
+        res.status(200).send(data);
+      }
+//     });
+//     console.log('get all Products');
+//     this.setState({
+//       allProducts: response.data,
+//       selectedProduct: response.data[productIndex],
+//     });
+//   })
+//   .then(() => {
+//     console.log(allProducts.length);
+//     this.getAllStyles(allProducts[0].id);
+//   })
+//   .catch((error) => console.log(error));
+// }
 
-app.get('/products/:id/styles');
+
+//   axios.get('/product/pc')
+//   res.send((err, data) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     } else {
+//       console.log('successful get request for product id', productId);
+//       res.status(200).send(data);
+//     }
+//   });
+// });
+
+// app.get('/products/:id/styles');

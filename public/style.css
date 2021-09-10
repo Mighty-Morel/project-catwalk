@@ -12,8 +12,8 @@ body {
   width: 80%;
   margin: 0 auto;
   max-width: 800px;
-  font-size: 1.3em;
-  line-height: 1.5em;
+  font-size: 1em;
+  line-height: 1.2em;
   background-color: white;
   padding: 5px 20px 5px 20px;
 }
@@ -23,9 +23,20 @@ body {
   font-style: bold;
   font-weight: 800;
   font-size: 2em;
+  line-height: 1em;
 }
 
 .category {
-  font-weight: 300
+  font-weight: 300;
+  line-height: 2em;
+  text-transform: uppercase;
 }
 
+.price {
+  line-height: 3.5em;
+}
+
+.price-discount {
+  text-decoration: line-through;
+  color: rgb(170, 0, 0);
+}

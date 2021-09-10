@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
-import AUTH_TOKEN from '../../../config/config.js';
 import Price from './Price.jsx';
+import AUTH_TOKEN from '../../../config/config';
 // import sampleproducts from '../data/sampleproducts.js';
 // import samplestyles from '../data/samplestyles.js';
 
@@ -91,7 +91,7 @@ class ProductInfo extends React.Component {
         <br />
         <span className="product-name">{selectedProduct.name}</span>
         <br />
-        <Price style={selectedStyle} />
+        <span className="price"><Price style={selectedStyle}/></span>
         <br />
         <span>{selectedProduct.description}</span>
         <br />

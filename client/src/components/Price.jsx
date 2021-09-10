@@ -8,13 +8,13 @@ const Price = ({ style }) => {
   if (style.sale_price > 0) {
     return (
       <>
-        <span className="discounted">{style.sale_price}</span>
-        <span className="defaultPrice">{style.original_price}</span>
+        <span>${style.sale_price}</span>
+        <span className="price-discount">${style.original_price}</span>
       </>
     );
   }
   return (
-    <span className="defaultPrice">{style.original_price}</span>
+    <span>${style.original_price}</span>
   );
 };
 
