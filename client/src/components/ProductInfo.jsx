@@ -15,27 +15,28 @@ class ProductInfo extends React.Component {
     super(props);
     this.state = {
       allProducts: [],
-      productIndex: 0,
+      // productIndex: 0,
       // selectedProduct: sampleproducts[0],
       selectedProduct: {},
       allStyles: [],
       styleIndex: 0,
       // selectedStyle: samplestyles.results[0], // an object with a style of the specific product
       selectedStyle: {},
-    }; // an object with a style of the specific product
+    };
     this.getAllProducts = this.getAllProducts.bind(this);
     this.getAllStyles = this.getAllStyles.bind(this);
-    // this.updateProduct = this.updateProduct.bind(this);
+    this.updateProduct = this.updateProduct.bind(this);
   }
 
   // renders the info of the specific product on load
   componentDidMount() {
     console.log(AUTH_TOKEN);
-    const { allProducts, productIndex } = this.state;
-    this.getAllProducts();
-    // this.getAllStyles(48432);
+    const { productId } = this.props;
+    // const { allProducts } = this.state;
+    // this.getAllProducts();
+    // this.getAllStyles(productId);
     // console.log(allProducts[productIndex]);
-    // this.updateProduct(allProducts[productIndex].id);
+    this.updateProduct(productId);
   }
 
   // componentDidUpdate(prevState) {
@@ -68,24 +69,27 @@ class ProductInfo extends React.Component {
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
         console.log('get all styles', response.data);
-        this.setState({ allStyles: response.data.results });
+        this.setState({
+          allStyles: response.data.results,
+          selectedStyle: response.data.results[styleIndex],
+        });
       })
       // .then(this.setState({ selectedStyle: allStyles[styleIndex] }))
       .catch((error) => console.log(error));
   }
 
-  // updateProduct(productId) {
-  //   console.log('productId', productId);
-  //   axios.get(`/products/${productId}`)
-  //     .then((response) => {
-  //       console.log('get product info', response.data);
-  //       this.setState({
-  //         selectedProduct: response.data,
-  //       });
-  //     })
-  //     .then(this.getAllStyles(productId))
-  //     .catch((error) => console.log(error));
-  // }
+  updateProduct(productId) {
+    console.log('productId', productId);
+    axios.get(`/products/${productId}`)
+      .then((response) => {
+        console.log('get product info', response.data);
+        this.setState({
+          selectedProduct: response.data,
+        });
+      })
+      .then(this.getAllStyles(productId))
+      .catch((error) => console.log(error));
+  }
 
   render() {
     const {
