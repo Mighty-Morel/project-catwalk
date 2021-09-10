@@ -8,6 +8,8 @@ body {
   font-size: 1.1em;
 }
 
+/* Product Overview Formatting ---------------------------------------- */
+
 .overview {
   width: 80%;
   margin: 0 auto;
@@ -17,7 +19,6 @@ body {
   background-color: white;
   padding: 5px 20px 5px 20px;
 }
-
 
 .ratings {
   line-height: 2em;
@@ -55,3 +56,7 @@ body {
 .social-media {
   line-height: 5em;
 }
+
+
+
+/* Other Component Formatting ---------------------------------------- */
