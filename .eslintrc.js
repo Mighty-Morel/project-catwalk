@@ -18,5 +18,16 @@ module.exports = {
     'react',
   ],
   rules: {
+
   },
+  overrides: [{
+    files: '*.jsx',
+    rules: {
+      'import/extensions': [
+        'error',
+        'never',
+      ],
+    },
+  },
+  ],
 };

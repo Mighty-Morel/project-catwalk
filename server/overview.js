@@ -1,4 +1,11 @@
+/* eslint-disable import/extensions */
+const axios = require('axios');
 const app = require('./index.js');
+const AUTH_TOKEN = require('../config/config.js');
+
+axios.defaults.baseURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
+axios.defaults.headers.common.Authorization = AUTH_TOKEN;
+
 
 app.get('/products');
 

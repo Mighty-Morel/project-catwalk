@@ -1,7 +1,6 @@
-/* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
-import AUTH_TOKEN from '../config/config.js';
+import AUTH_TOKEN from '../../../config/config.js';
 import Price from './Price.jsx';
 // import sampleproducts from '../data/sampleproducts.js';
 // import samplestyles from '../data/samplestyles.js';
@@ -15,12 +14,9 @@ class ProductInfo extends React.Component {
     super(props);
     this.state = {
       allProducts: [],
-      // productIndex: 0,
-      // selectedProduct: sampleproducts[0],
       selectedProduct: {},
       allStyles: [],
       styleIndex: 0,
-      // selectedStyle: samplestyles.results[0], // an object with a style of the specific product
       selectedStyle: {},
     };
     this.getAllProducts = this.getAllProducts.bind(this);
@@ -32,10 +28,6 @@ class ProductInfo extends React.Component {
   componentDidMount() {
     console.log(AUTH_TOKEN);
     const { productId } = this.props;
-    // const { allProducts } = this.state;
-    // this.getAllProducts();
-    // this.getAllStyles(productId);
-    // console.log(allProducts[productIndex]);
     this.updateProduct(productId);
   }
 
@@ -68,21 +60,18 @@ class ProductInfo extends React.Component {
     // refactor to pull from api
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
-        console.log('get all styles', response.data);
         this.setState({
           allStyles: response.data.results,
           selectedStyle: response.data.results[styleIndex],
         });
       })
-      // .then(this.setState({ selectedStyle: allStyles[styleIndex] }))
       .catch((error) => console.log(error));
   }
 
   updateProduct(productId) {
-    console.log('productId', productId);
     axios.get(`/products/${productId}`)
       .then((response) => {
-        console.log('get product info', response.data);
+        // console.log('get product info', response.data);
         this.setState({
           selectedProduct: response.data,
         });
@@ -92,35 +81,22 @@ class ProductInfo extends React.Component {
   }
 
   render() {
-    const {
-      selectedProduct, selectedStyle, allProducts, productIndex,
-    } = this.state;
-    // if (!selectedProduct) {
-    //   this.getAllProducts(allProducts[productIndex]);
-    //   return (
-    //     <>
-    //       <span>Loading 1</span>
-    //     </>
-    //   );
-    // }
-    // if (!selectedStyle) {
-    //   this.getAllStyles(selectedProduct.id);
-    //   return (
-    //     <>
-    //       <span>Loading 2</span>
-    //     </>
-    //   );
-    // }
+    const { selectedProduct, selectedStyle } = this.state;
     return (
       <>
-        <span>Star Ratings</span>
-        <h5>{selectedProduct.category}</h5>
-        <h4>{selectedProduct.name}</h4>
+      <div className="overview">
+        <span>Star Ratings Placeholder</span>
+        <br />
+        <span className="category">{selectedProduct.category}</span>
+        <br />
+        <span className="product-name">{selectedProduct.name}</span>
+        <br />
         <Price style={selectedStyle} />
         <br />
         <span>{selectedProduct.description}</span>
         <br />
         <span>Social Media Placeholder</span>
+      </div>
       </>
     );
   }
