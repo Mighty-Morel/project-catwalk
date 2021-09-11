@@ -25,7 +25,31 @@ app.get('/products', (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      console.log('error in getting products', err);
+      console.log('error in getting all products', err);
+    });
+});
+
+// gets information for a single product
+app.get('/products/:productId', (req, res) => {
+  const { productId } = req.params;
+  axios.get(`/products/${productId}`)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      console.log('error in getting product info', err);
+    });
+});
+
+// gets all styles for a single product
+app.get('/products/:productId/styles', (req, res) => {
+  const { productId } = req.params;
+  axios.get(`/products/${productId}/styles`)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      console.log('error in getting styles', err);
     });
 });
 

@@ -1,13 +1,7 @@
+/* eslint-disable import/extensions */
 import React from 'react';
 import axios from 'axios';
 import Price from './Price.jsx';
-import AUTH_TOKEN from '../../../config/config';
-// import sampleproducts from '../data/sampleproducts.js';
-// import samplestyles from '../data/samplestyles.js';
-
-axios.defaults.baseURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
-axios.defaults.headers.common.Authorization = AUTH_TOKEN;
-// axios.defaults.headers.post['Content-Type'] = 'application/x-www-form-urlencoded';
 
 class ProductInfo extends React.Component {
   constructor(props) {
@@ -26,7 +20,6 @@ class ProductInfo extends React.Component {
 
   // renders the info of the specific product on load
   componentDidMount() {
-    console.log(AUTH_TOKEN);
     const { productId } = this.props;
     this.updateProduct(productId);
   }
@@ -71,7 +64,6 @@ class ProductInfo extends React.Component {
   updateProduct(productId) {
     axios.get(`/products/${productId}`)
       .then((response) => {
-        // console.log('get product info', response.data);
         this.setState({
           selectedProduct: response.data,
         });
@@ -84,19 +76,19 @@ class ProductInfo extends React.Component {
     const { selectedProduct, selectedStyle } = this.state;
     return (
       <>
-      <div className="overview">
-        <span className="ratings">Star Ratings Placeholder</span>
-        <br />
-        <span className="category">{selectedProduct.category}</span>
-        <br />
-        <span className="product-name">{selectedProduct.name}</span>
-        <br />
-        <span className="price"><Price style={selectedStyle}/></span>
-        <br />
-        <span className="description">{selectedProduct.description}</span>
-        <br />
-        <span className="social-media">Social Media Placeholder</span>
-      </div>
+        <div className="overview">
+          <span className="ratings">Star Ratings Placeholder</span>
+          <br />
+          <span className="category">{selectedProduct.category}</span>
+          <br />
+          <span className="product-name">{selectedProduct.name}</span>
+          <br />
+          <span className="price"><Price style={selectedStyle} /></span>
+          <br />
+          <span className="description">{selectedProduct.description}</span>
+          <br />
+          <span className="social-media">Social Media Placeholder</span>
+        </div>
       </>
     );
   }
