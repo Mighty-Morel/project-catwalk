@@ -4,11 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest --env=jsdom",
+    "test": "jest",
     "react-dev": "webpack -w",
     "start": "nodemon server/index.js"
   },
-
   "repository": {
     "type": "git",
     "url": "git+https://github.com/Mighty-Morel/project-catwalk.git"
