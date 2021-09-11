@@ -1,4 +1,4 @@
-version: 2.1
+version: 2
 jobs:
   build:
     working_directory: ~/redux-async
@@ -7,12 +7,12 @@ jobs:
     steps:
       - checkout
       - restore_cache:
-          key: npm-cache-v1-{ checksum "package-lock.json" }
+          key: npm-cache-v1-{{ checksum "package-lock.json" }}
       - run:
           name: Install Dependencies
           command: npm ci
       - save_cache:
-          key: npm-cache-v1-{ checksum "package-lock.json" }
+          key: npm-cache-v1-{{ checksum "package-lock.json" }}
           paths:
             - /home/circleci/.npm
       - run:
