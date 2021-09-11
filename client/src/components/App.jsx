@@ -1,6 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateItem } from '../reducers/exampleReducer';
 // import ProductInfo from './ProductInfo.jsx';
 // import ReviewList from './ReviewList.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
@@ -14,9 +15,15 @@ import { useSelector } from 'react-redux';
 
 const App = () => {
   const currentId = useSelector((state) => state.product.id);
+  const dispatch = useDispatch();
+
+  const handleClick = () => {
+    dispatch(updateItem(1000)); // this is an example to show how update works
+    // delete when understood
+  };
   return (
     <>
-      <div>
+      <div onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
       </div>
@@ -33,3 +40,6 @@ export default App;
 // anytime you need to call a piece of state from the store, you can simply use useSelecter with a
 // function that takes in state and calls the specfic component and state you'd like to access.
 // see line 16
+
+// to update state you can useDispatch where anything passed into the function will be the
+// action.payload of the reducer
