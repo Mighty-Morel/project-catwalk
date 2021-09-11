@@ -1,5 +1,6 @@
 const express = require('express');
 const axios = require('axios');
+const path = require('path');
 const AUTH_TOKEN = require('../config/config');
 
 axios.defaults.baseURL = 'https://app-hrsei-api.herokuapp.com/api/fec2/hr-sfo';
@@ -7,7 +8,6 @@ axios.defaults.headers.common.Authorization = AUTH_TOKEN;
 
 const app = express();
 const port = 3005;
-const path = require('path');
 
 const staticUrl = path.join(__dirname, '../public');
 app.use(express.json());
@@ -25,11 +25,12 @@ app.get('/products', (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      console.log('error in getting products', err);
+      res.send('error in getting products', err);
     });
 });
 
 app.listen(port, () => {
+  // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
 });
 
