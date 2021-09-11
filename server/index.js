@@ -18,10 +18,10 @@ app.use(express.static(staticUrl));
 //   res.send('Hello World!')
 // })
 
+// gets all product information
 app.get('/products', (req, res) => {
   axios.get('/products')
     .then((response) => {
-      console.log('response.data here', response.data);
       res.send(response.data);
     })
     .catch((err) => {
