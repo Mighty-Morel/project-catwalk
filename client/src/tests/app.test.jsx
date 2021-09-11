@@ -4,9 +4,12 @@
 
 // app.test.js
 // See https://reactjs.org/docs/testing-recipes.html for more testing examples
+// And here: https://testing-library.com/docs/react-testing-library/example-intro/
 import React from 'react';
-import { render, unmountComponentAtNode } from 'react-dom';
+// import { render, unmountComponentAtNode } from 'react-dom';
 import { act } from 'react-dom/test-utils';
+import { render } from '@testing-library/react';
+import '@testing-library/jest-dom';
 
 import App from '../components/App';
 
@@ -32,8 +35,8 @@ import App from '../components/App';
 // });
 console.log(typeof App);
 
-it('renders on load', () => {
-  render(<App />)
-  expect(getByText('Hello World!')).toBeInTheDocument();
+test('renders on load', () => {
+  const { getByText } = render(<App />)
+  expect(getByText('Hello World!')).toBeInTheDocument()
   // expect(getByTestId(<div))
 });
