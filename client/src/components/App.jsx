@@ -21,6 +21,7 @@ const App = () => {
     dispatch(updateItem(1000)); // this is an example to show how update works
     // delete when understood
   };
+
   return (
     <>
       <div onClick={handleClick}>
