@@ -20,7 +20,7 @@ const ProductsList = () => {
     );
   } else if (isSuccess) {
     content = products.map((product) => (
-      <p>
+      <p key={product.id}>
         {product.id}
       </p>
     ));
