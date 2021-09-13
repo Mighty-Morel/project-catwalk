@@ -19,13 +19,15 @@
   },
   "homepage": "https://github.com/Mighty-Morel/project-catwalk#readme",
   "dependencies": {
+    "@reduxjs/toolkit": "^1.6.1",
     "axios": "^0.21.4",
     "babel": "^6.23.0",
     "express": "^4.17.1",
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "regenerator-runtime": "^0.13.9"
+    "regenerator-runtime": "^0.13.9",
+    "react-redux": "^7.2.5"
   },
   "devDependencies": {
     "@babel/core": "^7.15.5",
