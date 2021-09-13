@@ -9,10 +9,16 @@
 import React from 'react';
 import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
+import { Provider } from 'react-redux';
 
-import App from '../components/App';
+import store from '../client/src/store/store';
+import App from '../client/src/components/App';
 
 test('renders on load', () => {
-  const { getByText } = render(<App />);
-  expect(getByText('Hello World!')).toBeInTheDocument();
+  const { getByText } = render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  );
+  expect(getByText('Hello World! CurrentId is48432')).toBeInTheDocument();
 });
