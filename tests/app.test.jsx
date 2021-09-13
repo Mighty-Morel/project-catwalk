@@ -11,8 +11,8 @@ import { render } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import { Provider } from 'react-redux';
 
-import store from '../store/store';
-import App from '../components/App';
+import store from '../client/src/store/store';
+import App from '../client/src/components/App';
 
 test('renders on load', () => {
   const { getByText } = render(
