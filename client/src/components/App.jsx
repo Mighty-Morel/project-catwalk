@@ -4,7 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateItem } from '../reducers/Example-Reducer';
 import ProductList from './ExampleProductList.jsx';
 
-// import ProductInfo from './ProductInfo.jsx';
+import ProductInfo from './ProductInfo.jsx';
 // import ReviewList from './ReviewList.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 // import RelatedItems from './RelatedItems.jsx';
@@ -26,12 +26,12 @@ const App = () => {
 
   return (
     <>
-      <div onClick={handleClick}>
+      <div data-testid='loadapp' onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
       </div>
       <ProductList />
-      {/* <div><ProductInfo productId={productId} /></div> */}
+      <div><ProductInfo productId={currentId} /></div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div>
     <div><RelatedItems productId={productId} /></div> */}

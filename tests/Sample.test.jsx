@@ -1,8 +1,9 @@
 import React from 'react';
-import { render, cleanup, waitForElement } from '@react-testing-library';
-import '@jest-dom/extend-expect';
+import { render, cleanup, waitForElement } from '@testing-library/react';
+import '@testing-library/jest-dom';
+import 'regenerator-runtime/runtime';
 import axiosMock from 'axios';
-import Fetch from '../components/Sample';
+import Fetch from '../client/src/components/Sample';
 
 afterEach(cleanup);
 
