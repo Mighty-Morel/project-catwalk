@@ -13,7 +13,11 @@ const ProductsList = () => {
   let content;
 
   if (isLoading) {
-    content = <p text="Loading..." />;
+    content = (
+      <p>
+        Loading
+      </p>
+    );
   } else if (isSuccess) {
     content = products.map((product) => (
       <p>
