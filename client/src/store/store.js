@@ -1,11 +1,14 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productReducer from '../reducers/exampleReducer';
+import productReducer from '../reducers/Example-Reducer';
+import { productsSlice } from '../reducers/Example-Api-Slice';
 
 export default configureStore({
   reducer: {
     product: productReducer,
+    [productsSlice.reducerPath]: productsSlice.reducer,
     // add Reducers here!
   },
+  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsSlice.middleware),
 });
 
 // store will be called in the Provider of the index.jsx file
