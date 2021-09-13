@@ -1,6 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit';
-import productReducer from '../reducers/exampleReducer';
-import { productsSlice } from '../reducers/exampleApiSlice';
+import productReducer from '../reducers/Example-Reducer';
+import { productsSlice } from '../reducers/Example-Api-Slice';
 
 export default configureStore({
   reducer: {

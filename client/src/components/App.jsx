@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateItem } from '../reducers/exampleReducer';
+import { updateItem } from '../reducers/Example-Reducer';
 import ProductList from './ExampleProductList.jsx';
 
 // import ProductInfo from './ProductInfo.jsx';

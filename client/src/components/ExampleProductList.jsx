@@ -1,5 +1,5 @@
 import React from 'react';
-import { useGetProductsQuery } from '../reducers/exampleApiSlice';
+import { useGetProductsQuery } from '../reducers/Example-Api-Slice';
 
 const ProductsList = () => {
   const {
