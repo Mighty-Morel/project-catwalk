@@ -74,20 +74,23 @@ class ProductInfo extends React.Component {
 
   render() {
     const { selectedProduct, selectedStyle } = this.state;
+    if (!selectedProduct) {
+      return <span data-testid="loading">Loading...</span>;
+    }
     return (
       <>
-        <div className="overview">
-          <span className="ratings">Star Ratings Placeholder</span>
+        <div data-testid="resolved" className="overview">
+          <span data-testid="ratings" className="ratings">Star Ratings Placeholder</span>
           <br />
-          <span className="category">{selectedProduct.category}</span>
+          <span data-testid="show-category" className="category">{selectedProduct.category}</span>
           <br />
-          <span className="product-name">{selectedProduct.name}</span>
+          <span data-testid="show-name" className="product-name">{selectedProduct.name}</span>
           <br />
-          <span className="price"><Price style={selectedStyle} /></span>
+          <span data-testid="show-price" className="price"><Price style={selectedStyle} /></span>
           <br />
-          <span className="description">{selectedProduct.description}</span>
+          <span data-testid="show-description" className="description">{selectedProduct.description}</span>
           <br />
-          <span className="social-media">Social Media Placeholder</span>
+          <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
         </div>
       </>
     );
