@@ -5,7 +5,7 @@ export const questionsSlice = createApi({
   reducerPath: 'questions',
   baseQuery: fetchBaseQuery({ baseUrl: '/qa/questions' }),
   endpoints: (builder) => ({
-    getProiducts: builder.query({
+    getQuestions: builder.query({
       query: () => '/',
     }),
   }),

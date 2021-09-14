@@ -29,6 +29,18 @@ app.get('/products', (req, res) => {
     });
 });
 
+// gets questions for a product
+// need to add param for product_id
+app.get('/qa/questions', (req, res) => {
+  axios.get('/qa/questions')
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send('error in getting questions', err);
+    });
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);

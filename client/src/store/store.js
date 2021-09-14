@@ -1,12 +1,16 @@
 import { configureStore } from '@reduxjs/toolkit';
 import productReducer from '../reducers/Example-Reducer';
 import { productsSlice } from '../reducers/Example-Api-Slice';
+import questionReducer from '../reducers/Questions-Reducer';
+import { questionsSlice } from '../reducers/Questions-Api-Slice';
 
 export default configureStore({
   reducer: {
     product: productReducer,
     [productsSlice.reducerPath]: productsSlice.reducer,
     // add Reducers here!
+    question: questionReducer,
+    [questionsSlice.reducerPath]: questionsSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(productsSlice.middleware),
 });
