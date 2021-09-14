@@ -58,8 +58,14 @@ body {
 }
 
 /* Style Selector Formatting ---------------------------------------- */
-.thumbnail {
-  margin: 3px;
+.style-selector {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 3px;
+  place-items: center;
+  place-content: start;
+  grid-auto-flow: row;
 }
 
 .style-selected {

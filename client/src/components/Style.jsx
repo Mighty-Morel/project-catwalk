@@ -1,27 +1,27 @@
+/* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateItem } from '../reducers/Style-Reducer';
 
 const Style = ({ style }) => {
   const dispatch = useDispatch();
+  const styleId = style.style_id;
 
   const handleClick = () => {
-    const styleId = style.style_id;
     console.log(styleId);
     dispatch(updateItem(styleId));
   };
 
-  const styleId = useSelector((state) => state.style.id);
+  const selectedStyleId = useSelector((state) => state.style.id);
 
   return (
-    <span className="thumbnail">
+    <span role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
       <img
-        className={style.style_id === styleId
+        className={styleId === selectedStyleId
           ? 'style-selected'
           : 'style-unselected'}
         src={style.photos[0].thumbnail_url}
         alt={style.name}
-        onClick={handleClick}
       />
     </span>
   );
