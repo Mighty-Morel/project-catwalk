@@ -29,7 +29,7 @@ it('test 1 using getByText: renders App on load', () => {
 });
 
 it('test 2 using getByTestId: renders App on load', () => {
-  const { getByText } = render(
+  const { getByTestId } = render(
     <Provider store={store}>
       <App />
     </Provider>,

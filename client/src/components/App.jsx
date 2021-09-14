@@ -3,7 +3,6 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateItem } from '../reducers/Example-Reducer';
 import ProductList from './ExampleProductList.jsx';
-
 import ProductInfo from './ProductInfo.jsx';
 // import ReviewList from './ReviewList.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
@@ -17,6 +16,8 @@ import ProductInfo from './ProductInfo.jsx';
 
 const App = () => {
   const currentId = useSelector((state) => state.product.id);
+  // const currentProduct = useSelector((state) => state.product);
+  const currentStyle = useSelector((state) => state.style);
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -26,12 +27,17 @@ const App = () => {
 
   return (
     <>
-      <div data-testid='loadapp' onClick={handleClick}>
+      <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
       </div>
       <ProductList />
-      <div><ProductInfo productId={currentId} /></div>
+      {/* <Router>
+        <Route exact path="products/:productId" component={ProductInfo} />
+        <Redirect to="/" />
+      </Router> */}
+      <div><ProductInfo /></div>
+      {/* <div><ProductInfo product={currentId} style={currentStyle} /></div> */}
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div>
     <div><RelatedItems productId={productId} /></div> */}

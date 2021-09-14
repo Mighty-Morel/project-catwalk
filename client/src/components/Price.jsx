@@ -1,20 +1,38 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
+import { useSelector } from 'react-redux';
+
 // If the SKU is currently discounted, then the sale price should appear in red,
 // followed by the original price which is struckthrough.
 
-const Price = ({ style }) => {
-  console.log(style);
-  if (style.sale_price > 0) {
+const Price = ({ selectedStyle }) => {
+  // ATTEMPT AT REDUX REFACTORING - USE WITH ProductInfoNew.jsx
+  // const styleId = useSelector((state) => state.style.id);
+  // console.log(styleId);
+  // const styles = useSelector(state => state.style);
+  // const selectedStyle = useSelector(state =>
+  //   state.style.find((style) => style.id === styleId));
+  // =======================================================END
+
+  if (selectedStyle.sale_price > 0) {
     return (
       <>
-        <span>${style.sale_price}</span>
-        <span className="price-discount">${style.original_price}</span>
+        <span>
+          $
+          {selectedStyle.sale_price}
+        </span>
+        <span className="price-discount">
+          $
+          {selectedStyle.original_price}
+        </span>
       </>
     );
   }
   return (
-    <span>${style.original_price}</span>
+    <span>
+      $
+      {selectedStyle.original_price}
+    </span>
   );
 };
 

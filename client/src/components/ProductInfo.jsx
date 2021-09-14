@@ -53,6 +53,7 @@ class ProductInfo extends React.Component {
     // refactor to pull from api
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
+        console.log(response.data.results);
         this.setState({
           allStyles: response.data.results,
           selectedStyle: response.data.results[styleIndex],
@@ -86,7 +87,7 @@ class ProductInfo extends React.Component {
           <br />
           <span data-testid="show-name" className="product-name">{selectedProduct.name}</span>
           <br />
-          <span data-testid="show-price" className="price"><Price style={selectedStyle} /></span>
+          <span data-testid="show-price" className="price"><Price selectedStyle={selectedStyle} /></span>
           <br />
           <span data-testid="show-description" className="description">{selectedProduct.description}</span>
           <br />
