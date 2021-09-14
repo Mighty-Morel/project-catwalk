@@ -1,18 +1,15 @@
 /* eslint-disable react/prop-types */
-import React, { useState } from 'react';
+import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateStyleId } from '../reducers/Style-Reducer';
 
 const Style = ({ style }) => {
-  // const [selected, toggleSelect] = useState(false);
-
   const dispatch = useDispatch();
   const styleId = style.style_id;
 
   const handleClick = () => {
     console.log(styleId);
     dispatch(updateStyleId(styleId));
-    // toggleSelect(!selected);
   };
 
   const selectedStyleId = useSelector((state) => state.style.id);

@@ -3,7 +3,7 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   id: 293480,
-  allStyles: {},
+  allStyles: [],
 };
 
 export const styleSlice = createSlice({

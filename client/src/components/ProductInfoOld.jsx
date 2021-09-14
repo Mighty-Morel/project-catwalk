@@ -1,20 +1,18 @@
 /* eslint-disable import/extensions */
-import React, { useState } from 'react';
+import React from 'react';
 import axios from 'axios';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateProductInfo } from '../reducers/Example-Reducer';
-import { updateStyles } from '../reducers/Style-Reducer';
 
 class ProductInfo extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      productId: useSelector((state) => state.product.id),
-      selectedProduct: useSelector((state) => state.product.productInfo),
+      allProducts: [],
+      selectedProduct: {},
       allStyles: [],
-      selectedStyle: '',
+      styleIndex: 0,
+      selectedStyle: {},
     };
     this.getAllProducts = this.getAllProducts.bind(this);
     this.getAllStyles = this.getAllStyles.bind(this);
@@ -23,8 +21,32 @@ class ProductInfo extends React.Component {
 
   // renders the info of the specific product on load
   componentDidMount() {
-    const { productId } = this.state;
+    const { productId } = this.props;
     this.updateProduct(productId);
+  }
+
+  // componentDidUpdate(prevState) {
+  //   const { allStyles, styleIndex } = this.state;
+  //   if (prevState.allStyles !== allStyles) {
+  //     this.state.selectedStyle = allStyles[styleIndex];
+  //   }
+  // }
+
+  getAllProducts() {
+    const { allProducts, productIndex } = this.state;
+    axios.get('/products')
+      .then((response) => {
+        console.log('get all Products');
+        this.setState({
+          allProducts: response.data,
+          selectedProduct: response.data[productIndex],
+        });
+      })
+      .then(() => {
+        console.log(allProducts.length);
+        this.getAllStyles(allProducts[0].id);
+      })
+      .catch((error) => console.log(error));
   }
 
   getAllStyles(productId) {
@@ -35,7 +57,7 @@ class ProductInfo extends React.Component {
         console.log(response.data.results);
         this.setState({
           allStyles: response.data.results,
-          selectedStyle: response.data.results[0],
+          selectedStyle: response.data.results[styleIndex],
         });
       })
       .catch((error) => console.log(error));
@@ -50,6 +72,14 @@ class ProductInfo extends React.Component {
       })
       .then(this.getAllStyles(productId))
       .catch((error) => console.log(error));
+  }
+
+  updateStyle(styleId) {
+    const { allStyles } = this.state;
+    const newStyle = allStyles.find((style) => style.id === styleId);
+    this.setState({
+      selectedStyle: newStyle,
+    });
   }
 
   render() {
