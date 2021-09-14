@@ -14,9 +14,16 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(staticUrl));
 
-// app.get('/', (req, res) => {
-//   res.send('Hello World!')
-// })
+// Identifies properties of the request being sent
+app.use((req, res, next) => {
+  console.log('-----------------------------');
+  console.log(req.body);
+  console.log(req.url);
+  console.log(req.params);
+  console.log(req.method);
+  console.log('-----------------------------');
+  next();
+});
 
 // gets all product information
 app.get('/products', (req, res) => {
@@ -30,9 +37,8 @@ app.get('/products', (req, res) => {
 });
 
 // gets questions for a product
-// need to add param for product_id
-app.get('/qa/questions', (req, res) => {
-  axios.get('/qa/questions')
+app.get('/qa/questions/:product_id', (req, res) => {
+  axios.get('/qa/questions', { params: req.params })
     .then((response) => {
       res.send(response.data);
     })

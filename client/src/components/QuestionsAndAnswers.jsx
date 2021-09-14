@@ -1,42 +1,23 @@
-import React from 'react';
-import { useGetQuestionsQuery } from '../reducers/Questions-Api-Slice';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
+import axios from 'axios';
 
 const QuestionsAndAnswers = () => {
-  const {
-    data: questions,
-    isLoading,
-    isSuccess,
-    isError,
-    error,
-  } = useGetQuestionsQuery();
-
-  let content;
-
-  if (isLoading) {
-    content = (
-      <p>
-        Loading
-      </p>
-    );
-  } else if (isSuccess) {
-    content = questions.map((question) => (
-      <p key={question.id}>
-        {question.body}
-      </p>
-    ));
-  } else if (isError) {
-    content = (
-      <p>
-        {error.toString()}
-      </p>
-    );
-  }
+  const currentId = useSelector((state) => state.product.id);
+  const productParams = { product_id: currentId };
+  const [questions, setQuestions] = useState([]);
+  axios.get(`/qa/questions/${currentId}`)
+    .then((response) => {
+      setQuestions(response.body);
+    })
+    .catch((error) => {
+      console.log('Error from GET request:', error);
+    });
 
   return (
-    <section>
-      <h2> Questions </h2>
-      {content}
-    </section>
+    <>
+      {questions}
+    </>
   );
 };
 
