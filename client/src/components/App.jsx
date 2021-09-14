@@ -17,7 +17,8 @@ import ProductInfo from './ProductInfo.jsx';
 const App = () => {
   const currentId = useSelector((state) => state.product.id);
   // const currentProduct = useSelector((state) => state.product);
-  const currentStyle = useSelector((state) => state.style);
+  const selectedStyleId = useSelector((state) => state.style.id);
+
   const dispatch = useDispatch();
 
   const handleClick = () => {
@@ -30,8 +31,9 @@ const App = () => {
       <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
+        and current Style is {selectedStyleId}
       </div>
-      <ProductList />
+      {/* <ProductList /> */}
       {/* <Router>
         <Route exact path="products/:productId" component={ProductInfo} />
         <Redirect to="/" />
