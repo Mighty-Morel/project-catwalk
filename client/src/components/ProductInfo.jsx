@@ -101,10 +101,10 @@ class ProductInfo extends React.Component {
           <span data-testid="show-description" className="description">{selectedProduct.description}</span>
           <br />
           <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
-        </div>
-        <br />
-        <div data-testid="style-selector" className="style-selector">
-          <StyleSelector allStyles={allStyles} updateStyle={this.updateStyle} />
+          <br />
+          <div data-testid="style-selector" className="style-selector">
+            <StyleSelector allStyles={allStyles} updateStyle={this.updateStyle} />
+          </div>
         </div>
       </>
     );

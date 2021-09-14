@@ -3,6 +3,8 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 import { useGetProductInfoQuery, useGetStylesQuery } from '../reducers/Example-Api-Slice';
 import Price from './Price.jsx';
+import StyleSelector from './StyleSelector.jsx';
+
 
 // const ProductInfo = ({ match }) => {
 //   const { productId } = match.params
@@ -50,6 +52,10 @@ const ProductInfo = () => {
           <span data-testid="show-description" className="description">{product.description}</span>
           <br />
           <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
+          <br />
+          <div data-testid="style-selector" className="style-selector">
+            <StyleSelector allStyles={allStyles} updateStyle={this.updateStyle} />
+          </div>
         </div>
       </>
     );
