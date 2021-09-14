@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateItem } from '../reducers/Example-Reducer';
+import { updateProductId } from '../reducers/Example-Reducer';
 import ProductList from './ExampleProductList.jsx';
 import ProductInfo from './ProductInfo.jsx';
 // import ReviewList from './ReviewList.jsx';
@@ -22,7 +22,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(updateItem(1000)); // this is an example to show how update works
+    dispatch(updateProductId(1000)); // this is an example to show how update works
     // delete when understood
   };
 
