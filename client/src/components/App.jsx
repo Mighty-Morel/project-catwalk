@@ -31,10 +31,11 @@ const App = () => {
         {currentId}
       </div>
       <ProductList />
-      {/* <div><ProductInfo productId={productId} /></div> */}
-      {/* <div><QuestionsAndAnswers productId={productId} /></div>
-    <div><ReviewList productId={productId} /></div>
-    <div><RelatedItems productId={productId} /></div> */}
+      {/* <div><ProductInfo productId={productId} /></div>
+      <div><RelatedItems productId={productId} /></div> */}
+      <div><QuestionsAndAnswers productId={productId} /></div>
+      {/* <div><ReviewList productId={productId} /></div> */}
+
     </>
   );
 };
