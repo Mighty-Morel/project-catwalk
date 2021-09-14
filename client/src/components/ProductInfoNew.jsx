@@ -18,10 +18,7 @@ const ProductInfo = () => {
     error,
   } = useGetProductInfoQuery(productId);
 
-  const {
-    data: styles,
-  } = useGetStylesQuery(productId);
-  console.log(product);
+
 
   // console.log(styles);
   // const styleId = styles.results[0].id;
@@ -48,7 +45,7 @@ const ProductInfo = () => {
           <br />
           <span data-testid="show-name" className="product-name">{product.name}</span>
           <br />
-          {/* <span data-testid="show-price" className="price"><Price /></span> */}
+          <span data-testid="show-price" className="price"><Price /></span>
           <br />
           <span data-testid="show-description" className="description">{product.description}</span>
           <br />

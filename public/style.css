@@ -57,6 +57,9 @@ body {
   line-height: 5em;
 }
 
-
+/* Style Selector Formatting ---------------------------------------- */
+.thumbnail {
+  height: 100px;
+}
 
 /* Other Component Formatting ---------------------------------------- */

@@ -36,8 +36,8 @@ const App = () => {
         <Route exact path="products/:productId" component={ProductInfo} />
         <Redirect to="/" />
       </Router> */}
-      <div><ProductInfo /></div>
-      {/* <div><ProductInfo product={currentId} style={currentStyle} /></div> */}
+      {/* <div><ProductInfo /></div> */}
+      <div><ProductInfo productId={currentId} /></div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div>
     <div><RelatedItems productId={productId} /></div> */}

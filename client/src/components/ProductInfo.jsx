@@ -2,6 +2,7 @@
 import React from 'react';
 import axios from 'axios';
 import Price from './Price.jsx';
+import StyleSelector from './StyleSelector.jsx';
 
 class ProductInfo extends React.Component {
   constructor(props) {
@@ -49,7 +50,7 @@ class ProductInfo extends React.Component {
   }
 
   getAllStyles(productId) {
-    const { allStyles, styleIndex } = this.state;
+    const { styleIndex } = this.state;
     // refactor to pull from api
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
@@ -73,8 +74,16 @@ class ProductInfo extends React.Component {
       .catch((error) => console.log(error));
   }
 
+  updateStyle(styleId) {
+    const { allStyles } = this.state;
+    const newStyle = allStyles.find((style) => style.id === styleId);
+    this.setState({
+      selectedStyle: newStyle,
+    });
+  }
+
   render() {
-    const { selectedProduct, selectedStyle } = this.state;
+    const { selectedProduct, selectedStyle, allStyles } = this.state;
     if (!selectedProduct) {
       return <span data-testid="loading">Loading...</span>;
     }
@@ -92,6 +101,10 @@ class ProductInfo extends React.Component {
           <span data-testid="show-description" className="description">{selectedProduct.description}</span>
           <br />
           <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
+        </div>
+        <br />
+        <div data-testid="style-selector" className="style-selector">
+          <StyleSelector allStyles={allStyles} updateStyle={this.updateStyle} />
         </div>
       </>
     );
