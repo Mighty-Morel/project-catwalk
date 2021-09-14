@@ -12,14 +12,11 @@ export const styleSlice = createSlice({
     updateItem: (state, action) => {
       state.id = action.payload;
     },
-    increment: (state, action) => {
-      state.id = action.payload + 1;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateItem, increment } = styleSlice.actions;
+export const { updateItem } = styleSlice.actions;
 
 export default styleSlice.reducer;
 

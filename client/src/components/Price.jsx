@@ -6,8 +6,8 @@ import { useGetStylesQuery } from '../reducers/Example-Api-Slice';
 // If the SKU is currently discounted, then the sale price should appear in red,
 // followed by the original price which is struckthrough.
 
-const Price = ({ selectedStyle }) => {
-  // // ATTEMPT AT REDUX REFACTORING - USE WITH ProductInfoNew.jsx
+const Price = ({selectedStyle}) => {
+  // // // ATTEMPT AT REDUX REFACTORING - USE WITH ProductInfoNew.jsx
   // const Price = () => {
   // const productId = useSelector((state) => state.product.id);
   // const {

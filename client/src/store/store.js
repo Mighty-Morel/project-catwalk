@@ -9,7 +9,7 @@ export default configureStore({
     [productsSlice.reducerPath]: productsSlice.reducer,
     // add Reducers here!
     style: styleReducer,
-    [stylesSlice.reducerPath]: stylesSlice.reducer,
+    // [stylesSlice.reducerPath]: stylesSlice.reducer,
   },
   middleware: (getDefaultMiddleware) => getDefaultMiddleware()
     .concat(productsSlice.middleware, stylesSlice.middleware),
