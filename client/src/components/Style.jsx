@@ -20,7 +20,9 @@ const Style = ({ style }) => {
         className={style.style_id === selectedStyleId ? 'style-selected' : 'style-unselected'}
         src={style.photos[0].thumbnail_url}
         alt={style.name}
+        title={style.name}
       />
+      <p className='style-name'>{style.name}</p>
     </span>
   );
 };

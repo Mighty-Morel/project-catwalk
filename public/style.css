@@ -46,6 +46,7 @@ body {
 .price-discount {
   text-decoration: line-through;
   color: rgb(170, 0, 0);
+  margin-left: .5em;
 }
 
 .description {
@@ -64,8 +65,8 @@ body {
   grid-template-rows: auto;
   gap: 3px;
   place-items: center;
-  place-content: start;
-  grid-auto-flow: row;
+  place-content: center;
+  margin: 0 auto;
 }
 
 .style-selected {
@@ -83,5 +84,13 @@ body {
   border-radius: 50%;
 }
 
+.style-name {
+  padding-right: .3em;
+  padding-left: .3em;
+  font-weight: 300;
+  line-height: 1em;
+  font-size: .8em;
+  text-align: center;
+}
 
 /* Other Component Formatting ---------------------------------------- */
