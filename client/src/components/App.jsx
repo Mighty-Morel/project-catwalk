@@ -39,6 +39,7 @@ const App = () => {
         <Redirect to="/" />
       </Router> */}
       {/* <div><ProductInfo /></div> */}
+
       <div><ProductInfo productId={currentId} /></div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div>
