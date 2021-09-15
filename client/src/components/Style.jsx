@@ -15,14 +15,14 @@ const Style = ({ style }) => {
   const selectedStyleId = useSelector((state) => state.style.id);
 
   return (
-    <span role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+    <span data-testid="click-style" role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
       <img
         className={style.style_id === selectedStyleId ? 'style-selected' : 'style-unselected'}
         src={style.photos[0].thumbnail_url}
         alt={style.name}
         title={style.name}
       />
-      <p className='style-name'>{style.name}</p>
+      <p className="style-name">{style.name}</p>
     </span>
   );
 };

@@ -6,13 +6,15 @@
 
 import React from 'react';
 import {
-  render, cleanup, waitFor, screen,
+  render, cleanup, waitFor, fireEvent, screen,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import ProductInfo from '../client/src/components/ProductInfo';
+import Style from '../client/src/components/Style';
+
 import store from '../client/src/store/store';
 
 beforeAll(() => {
@@ -173,4 +175,16 @@ it('should load and display the selected product data', async () => {
 //   expect(category).toHaveTextContent('Pants');
 //   expect(name).toHaveTextContent('Morning Joggers');
 //   expect(description).toHaveTextContent('Whether you\'re a morning person or not. Whether you\'re gym bound or not. Everyone looks good in joggers.');
+// });
+
+// // Style Selector Tests ==============================================
+// it('should update the styleId to the one that is clicked', () => {
+//   const { getByTestId } = render(
+//     <Provider store={store}>
+//       <Style />
+//     </Provider>,
+//   );
+
+//   fireEvent.click(getByTestId('click'));
+//   expect(getByTestId('click-style')).toHaveClass('style-selected');
 // });
