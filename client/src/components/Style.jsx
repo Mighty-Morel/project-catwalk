@@ -39,7 +39,7 @@ const Style = ({ style }) => {
   }
 
   return (
-    <div data-testid="click-style" role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+    <div role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
       <p className="style-name">{style.name}</p>
       <div className="thumbnail">
         {imageStyle}
