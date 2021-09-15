@@ -14,15 +14,34 @@ const Style = ({ style }) => {
 
   const selectedStyleId = useSelector((state) => state.style.id);
 
-  return (
-    <span data-testid="click-style" role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
-      <p className="style-name">{style.name}</p>
+  let imageStyle;
+  if (style.style_id === selectedStyleId) {
+    imageStyle = (
+      <>
+        <img className="checkmark-icon" src="https://img.icons8.com/material-rounded/30/000000/ok--v1.png" alt="selected" />
+        <img
+          className="style-selected"
+          src={style.photos[0].thumbnail_url}
+          alt={style.name}
+          title={style.name}
+        />
+      </>
+    );
+  } else {
+    imageStyle = (
       <img
-        className={style.style_id === selectedStyleId ? 'style-selected' : 'style-unselected'}
+        className="style-unselected"
         src={style.photos[0].thumbnail_url}
         alt={style.name}
         title={style.name}
       />
+    );
+  }
+
+  return (
+    <span data-testid="click-style" role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+      <p className="style-name">{style.name}</p>
+      {imageStyle}
     </span>
   );
 };

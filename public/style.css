@@ -77,7 +77,9 @@ body {
   width: 75px;
   object-fit: cover;
   border-radius: 50%;
-  border: 3px solid rgb(0, 138, 156);
+  border: 3px solid black;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .style-unselected {
@@ -85,6 +87,8 @@ body {
   width: 75px;
   object-fit: cover;
   border-radius: 50%;
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .style-name {
@@ -98,9 +102,12 @@ body {
 
 .checkmark-icon {
   display: inline-block;
-  height: 24px;
   vertical-align: text-top;
+  position: absolute;
+  height: 24px;
   width: 24px;
+  background-color: white;
+  border-radius: 50%;
 }
 
 /* Other Component Formatting ---------------------------------------- */
