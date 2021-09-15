@@ -24,6 +24,7 @@ const AddToCart = () => {
   const [selectSku, setSku] = useState(availableSkus[0]);
   const [selectQty, setQty] = useState(0);
   const [selectSize, setSize] = useState('Select Size');
+  const [activeQty, setQtyDisplay] = useState(false);
 
   const availableQty = selectSku[1].quantity;
   // console.log('sku1', selectSku[1]);
@@ -37,10 +38,16 @@ const AddToCart = () => {
   const handleSizeChange = (e) => {
     console.log('value', e.target.value);
     console.log('availableSkus', availableSkus);
-    setSize(e.target.value);
-    // console.log('find sku', availableSkus.find((sku) => e.target.value === sku[1].size));
-    const matchingSku = availableSkus.find((sku) => e.target.value === sku[1].size);
-    setSku(matchingSku);
+    const inputSize = e.target.value;
+    if (inputSize === 'Select Size') {
+      setQtyDisplay(false);
+    } else {
+      setSize(inputSize);
+      // console.log('find sku', availableSkus.find((sku) => e.target.value === sku[1].size));
+      const matchingSku = availableSkus.find((sku) => inputSize === sku[1].size);
+      setSku(matchingSku);
+      setQtyDisplay(true);
+    }
   };
 
   const activeSizeSelector = (
@@ -91,11 +98,28 @@ const AddToCart = () => {
     </select>
   );
 
+  // if Select Size is selected:
+  // Clicking Add to Cart triggers Select Size Dropdown
+  // Qty should be hidden (-) (disable Qty)
+
+  // If no stock:
+  // Hide Add to Cart Button (disable Add)
+  // Show OUT OF STOCK in size selector (disable Size)
+  // Qty should be hidden (-) (disable Qty)
+
+  // If valid size and qty:
+  // show Add to Cart Button
+  // show qty
+  // show sizes
+  // after button click, clear display
+
   return (
     <>
       {availableQty > 0 ? activeSizeSelector : disabledSizeSelector}
-      {selectSize !== 'Select Size' ? activeQtySelector : disabledQtySelector}
-      <button className="addToCart" type="submit">Add to Bag</button>
+      {activeQty ? activeQtySelector : disabledQtySelector}
+      <div>
+        <button className="addToCart" type="submit">Add to Cart</button>
+      </div>
     </>
   );
 };
