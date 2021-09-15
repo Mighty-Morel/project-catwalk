@@ -18,6 +18,7 @@ const QuestionsAndAnswers = () => {
     axios.get(`/qa/questions/${currentId}`)
       .then((response) => {
         const { results } = response.data;
+        results.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
         setQuestions(results);
         // Compares count to number of questions, display up to four questions
         if (results.length > 4) {

@@ -10,6 +10,7 @@ const QuestionEntry = (props) => {
     axios.get(`/qa/questions/${props.id}/answers`)
       .then((response) => {
         const { results } = response.data;
+        results.sort((a, b) => b.helpfulness - a.helpfulness);
         setAnswers(results);
         // Compares count to number of questions, display up to four questions
         if (results.length > 2) {

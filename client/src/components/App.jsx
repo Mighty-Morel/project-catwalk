@@ -41,7 +41,7 @@ const App = () => {
       {/* <div><ProductInfo /></div> */}
 
       <div><ProductInfo productId={currentId} /></div>
-      <div><QuestionsAndAnswers productId={productId} /></div>
+      <div><QuestionsAndAnswers productId={currentId} /></div>
     {/* <div><ReviewList productId={productId} /></div>
     <div><RelatedItems productId={productId} /></div> */}
     </>

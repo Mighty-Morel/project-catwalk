@@ -72,6 +72,7 @@ app.get('/qa/questions/:product_id', (req, res) => {
     });
 });
 
+// gets answers for a question
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   axios.get(req.url)
     .then((response) => {
