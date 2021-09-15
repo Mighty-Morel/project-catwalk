@@ -22,17 +22,42 @@ const AddToCart = () => {
 
   // set default sku, quantity, and sizes
   const [selectSku, setSku] = useState(availableSkus[0]);
-  console.log('select sku', selectSku);
-  // const [selectQuantity, setQuantity] = useState(selectSku.quantity)
-  // const [selectSize, setSize] = useState(selectSku.size)
+  const [selectQty, setQty] = useState(0);
+  const [selectSize, setSize] = useState('Select Size');
 
-  const sizeSelector = () => (
-    availableSkus.map((sku) => <option key={sku[0]} value={sku[1].size}>{sku[1].size}</option>)
+  const availableQty = selectSku[1].quantity;
+  // console.log('sku1', selectSku[1]);
+  // console.log('availableQty', availableQty);
+
+  // SIZE SELECTOR ========================================================
+  const availableSizes = availableSkus.map(
+    (sku) => <option key={sku[0]} value={sku[1].size}>{sku[1].size}</option>,
   );
 
-  // // update quantity based on sku
-  const availableQty = selectSku[1].quantity;
-  console.log(availableQty);
+  const handleSizeChange = (e) => {
+    console.log('value', e.target.value);
+    console.log('availableSkus', availableSkus);
+    setSize(e.target.value);
+    // console.log('find sku', availableSkus.find((sku) => e.target.value === sku[1].size));
+    const matchingSku = availableSkus.find((sku) => e.target.value === sku[1].size);
+    setSku(matchingSku);
+  };
+
+  const activeSizeSelector = (
+    <select className="sizeSelector" name="sizeSelector" onChange={handleSizeChange}>
+      <option defaultValue="Select Size">Select Size</option>
+      {availableSizes}
+    </select>
+  );
+
+  const disabledSizeSelector = (
+    <select className="sizeSelector" name="sizeSelector" disabled>
+      <option defaultValue="OUT OF STOCK">OUT OF STOCK</option>
+    </select>
+  );
+
+  // QUANTITY SELECTOR ========================================================
+  // update quantity based on sku
   // for (sku in style.skus) {
   //   if (sku.size === inputSize) {
   //     let quantity = sku.quantity;
@@ -45,26 +70,31 @@ const AddToCart = () => {
   // or assume that is a typo?
   const qtySelector = () => {
     const listedQty = availableQty > 15 ? 15 : availableQty;
-    const options = [...Array(listedQty + 1).keys()];
+    // const options = [...Array(listedQty + 1).keys()];
+    const options = [...Array(listedQty + 1).keys()].slice(1);
     console.log(options);
     return options.map((i) => <option key={selectSku[0] + i} value={i}>{i}</option>);
   };
 
-  const handleSizeChange = (e) => {
+  const handleQtyChange = (e) => {
     console.log('value', e.target.value);
-    const selectSize = e.target.value;
-    // find the style selected
-    setSku(availableSkus.find((sku) => selectSize === sku[1].size));
+    setQty(e.target.value);
   };
 
-  const handleQtyChange = () => {
+  const activeQtySelector = (
+    <select className="qtySelector" name="qtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
+  );
 
-  };
+  const disabledQtySelector = (
+    <select className="qtySelector" name="qtySelector" disabled>
+      <option defaultValue="-">-</option>
+    </select>
+  );
 
   return (
     <>
-      <select className="sizeSelector" name="sizeSelector" onChange={handleSizeChange}>{sizeSelector()}</select>
-      <select className="qtySelector" name="qtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
+      {availableQty > 0 ? activeSizeSelector : disabledSizeSelector}
+      {selectSize !== 'Select Size' ? activeQtySelector : disabledQtySelector}
       <button className="addToCart" type="submit">Add to Bag</button>
     </>
   );
