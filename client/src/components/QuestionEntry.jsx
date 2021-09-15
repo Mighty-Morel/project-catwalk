@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import AnswerEntry from './AnswerEntry.jsx';
 
 const QuestionEntry = (props) => {
   const [answerCount, setCount] = useState(2);
@@ -29,7 +30,27 @@ const QuestionEntry = (props) => {
   return (
     <>
       <h1>{props.question}</h1>
-      <AnswerEntry />
+      {displayedAnswers.map((answer) => {
+        const {
+          answer_id,
+          body,
+          date,
+          answerer_name,
+          helpfulness,
+          photos,
+        } = answer;
+        return (
+          <AnswerEntry
+          key={answer_id}
+          id={answer_id}
+          answer={body}
+          date={date}
+          answerer={answerer_name}
+          helpfulness={helpfulness}
+          photos={photos}
+          />
+        );
+      })}
       <span>{props.asker} {props.date}</span>
     </>
   );
