@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "jest",
+    "test": "jest --detectOpenHandles",
     "react-dev": "webpack -w",
     "start": "nodemon server/index.js"
   },
@@ -26,6 +26,7 @@
     "path": "^0.12.7",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
+    "regenerator-runtime": "^0.13.9",
     "react-redux": "^7.2.5"
   },
   "devDependencies": {
