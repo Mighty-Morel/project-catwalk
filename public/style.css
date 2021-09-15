@@ -93,4 +93,24 @@ body {
   text-align: center;
 }
 
+
+/* Add To Cart Formatting ---------------------------------------- */
+.add-to-cart {
+  /* display: none; */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown select {
+  display: block
+}
+
+#openSizeSelector {
+  display: block;
+}
+
+
 /* Other Component Formatting ---------------------------------------- */

@@ -17,18 +17,15 @@ const AddToCart = () => {
 
   // set up dropdown for available sizes
   const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
-  // console.log('entries', Object.entries(selectedStyle.skus));
-  // console.log('available skus', availableSkus);
 
   // set default sku, quantity, and sizes
   const [selectSku, setSku] = useState(availableSkus[0]);
-  const [selectQty, setQty] = useState(0);
+  const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
-  const [activeQty, setQtyDisplay] = useState(false);
-
-  const availableQty = selectSku[1].quantity;
-  // console.log('sku1', selectSku[1]);
-  // console.log('availableQty', availableQty);
+  const [showSize, setSizeDisplay] = useState(false);
+  const [showQty, setQtyDisplay] = useState(false);
+  const [outOfStock, toggleStock] = useState(false);
+  const [cart, addToCart] = useState([]);
 
   // SIZE SELECTOR ========================================================
   const availableSizes = availableSkus.map(
@@ -41,9 +38,10 @@ const AddToCart = () => {
     const inputSize = e.target.value;
     if (inputSize === 'Select Size') {
       setQtyDisplay(false);
+      setSku(availableSkus[0]);
     } else {
       setSize(inputSize);
-      // console.log('find sku', availableSkus.find((sku) => e.target.value === sku[1].size));
+      // toggleSizes(false);
       const matchingSku = availableSkus.find((sku) => inputSize === sku[1].size);
       setSku(matchingSku);
       setQtyDisplay(true);
@@ -51,19 +49,27 @@ const AddToCart = () => {
   };
 
   const activeSizeSelector = (
-    <select className="sizeSelector" name="sizeSelector" onChange={handleSizeChange}>
+    <select className="dropdown" name="activeSizeSelector" onChange={handleSizeChange}>
+      <option defaultValue="Select Size">Select Size</option>
+      {availableSizes}
+    </select>
+  );
+
+  const openSizeSelector = (
+    <select className="dropdown" id="openSizeSelector" name="activeSizeSelector" onChange={handleSizeChange}>
       <option defaultValue="Select Size">Select Size</option>
       {availableSizes}
     </select>
   );
 
   const disabledSizeSelector = (
-    <select className="sizeSelector" name="sizeSelector" disabled>
+    <select className="dropdown" name="disabledSizeSelector" disabled>
       <option defaultValue="OUT OF STOCK">OUT OF STOCK</option>
     </select>
   );
 
   // QUANTITY SELECTOR ========================================================
+  const availableQty = selectSku[1].quantity;
   // update quantity based on sku
   // for (sku in style.skus) {
   //   if (sku.size === inputSize) {
@@ -89,11 +95,11 @@ const AddToCart = () => {
   };
 
   const activeQtySelector = (
-    <select className="qtySelector" name="qtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
+    <select className="dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
   );
 
   const disabledQtySelector = (
-    <select className="qtySelector" name="qtySelector" disabled>
+    <select className="dropdown" name="disabledQtySelector" disabled>
       <option defaultValue="-">-</option>
     </select>
   );
@@ -113,13 +119,64 @@ const AddToCart = () => {
   // show sizes
   // after button click, clear display
 
+  // set default displays
+  let displaySize = activeSizeSelector;
+  let displayQty = disabledQtySelector;
+
+  if (availableQty > 0) {
+    displaySize = activeSizeSelector;
+  } else {
+    displaySize = disabledSizeSelector;
+  }
+  if (showQty) {
+    displayQty = activeQtySelector;
+  } else {
+    displayQty = disabledQtySelector;
+  }
+
+  const button = <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>;
+
+  const handleClick = () => {
+    if (selectSize === 'Select Size') {
+      // const sizeDropdown = document.getElementById('activeSizeSelector');
+      // sizeDropdown.classList.toggle('open-dropdown');
+      displaySize = openSizeSelector;
+      console.log('tried to open');
+    } else {
+      const item = {
+        sku: selectSku[0],
+        quantity: selectQty,
+        size: selectSize,
+      };
+      addToCart([...cart, item]);
+      resetDefault();
+    }
+  };
+
+  // reset views on rendering new product
+  const resetDefault = () => {
+    setSku(availableSkus[0]);
+    setSize('Select Size');
+    setQtyDisplay(false);
+  };
+
+  useEffect(resetDefault, [selectedStyleId]);
+
+  if (selectQty > 0) {
+    return (
+      <>
+        {displaySize}
+        {displayQty}
+        <div>
+          <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
+        </div>
+      </>
+    );
+  }
   return (
     <>
-      {availableQty > 0 ? activeSizeSelector : disabledSizeSelector}
-      {activeQty ? activeQtySelector : disabledQtySelector}
-      <div>
-        <button className="addToCart" type="submit">Add to Cart</button>
-      </div>
+      {displaySize}
+      {displayQty}
     </>
   );
 };
