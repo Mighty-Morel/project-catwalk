@@ -23,8 +23,3 @@ export const styleSlice = createSlice({
 export const { updateStyleId, updateStyles } = styleSlice.actions;
 
 export default styleSlice.reducer;
-
-// the reducers will take in an initial state and an action object.
-// the reducers will then return a new form of state or the previous state passed in
-
-// Create a new reducer for each component then add it to the store!
