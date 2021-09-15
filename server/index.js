@@ -54,6 +54,19 @@ app.get('/products/:productId/styles', (req, res) => {
     });
 });
 
+// gets all related ids for a single product
+app.get('/products/:productId/related', (req, res) => {
+  const { productId } = req.params;
+  axios.get(`/products/${productId}/related`)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      console.log('error in getting styles', err);
+      res.send('error in getting styles', err);
+    });
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
