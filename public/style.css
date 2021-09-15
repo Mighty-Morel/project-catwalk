@@ -69,26 +69,30 @@ body {
   gap: 3px;
   place-items: center;
   place-content: center;
+  margin-bottom: 20px;
+}
+
+.thumbnail {
+  height: 70px;
+  width: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
   margin: 0 auto;
 }
 
 .style-selected {
-  height: 75px;
-  width: 75px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
   border-radius: 50%;
   border: 3px solid black;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .style-unselected {
-  height: 75px;
-  width: 75px;
+  height: 70px;
+  width: 70px;
   object-fit: cover;
   border-radius: 50%;
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .style-name {
@@ -104,8 +108,8 @@ body {
   display: inline-block;
   vertical-align: text-top;
   position: absolute;
-  height: 24px;
-  width: 24px;
+  height: 26px;
+  width: 26px;
   background-color: white;
   border-radius: 50%;
 }

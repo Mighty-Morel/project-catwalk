@@ -39,10 +39,12 @@ const Style = ({ style }) => {
   }
 
   return (
-    <span data-testid="click-style" role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+    <div data-testid="click-style" role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
       <p className="style-name">{style.name}</p>
-      {imageStyle}
-    </span>
+      <div className="thumbnail">
+        {imageStyle}
+      </div>
+    </div>
   );
 };
 
