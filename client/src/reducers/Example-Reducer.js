@@ -3,24 +3,24 @@ import { createSlice } from '@reduxjs/toolkit';
 
 const initialState = {
   id: 48432,
-  value: 0,
+  productInfo: {},
 };
 
 export const productSlice = createSlice({
   name: 'product',
   initialState,
   reducers: {
-    updateItem: (state, action) => {
+    updateProductId: (state, action) => {
       state.id = action.payload;
     },
-    increment: (state) => {
-      state.value += 1;
+    updateProductInfo: (state, action) => {
+      state.productInfo = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateItem, increment } = productSlice.actions;
+export const { updateProductId, updateProductInfo } = productSlice.actions;
 
 export default productSlice.reducer;
 
