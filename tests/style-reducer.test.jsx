@@ -1,8 +1,7 @@
 import React from 'react';
-import { render, cleanup } from '@testing-library/react';
+import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
-import { Provider, useSelector, useDispatch } from 'react-redux';
 import reducer, { updateStyleId, updateStyles } from '../client/src/reducers/Style-Reducer';
 
 afterEach(cleanup);

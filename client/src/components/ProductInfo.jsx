@@ -35,9 +35,9 @@ const ProductInfo = () => {
 
   useEffect(updateProduct, [productId]);
 
-  // if (allStyles.length === 0) {
-  //   return <span data-testid="loading">Loading...</span>;
-  // }
+  if (allStyles.length === 0) {
+    return <span data-testid="loading">Loading...</span>;
+  }
   return (
     <>
       <div data-testid="resolved" className="overview">
