@@ -2,7 +2,8 @@
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import React from 'react';
-import { Card, Button } from 'react-bootstrap';
+// import { Card, Button } from 'react-bootstrap';
+import Carousel from 'react-multi-carousel';
 import axios from 'axios';
 
 class ProductCarousel extends React.Component {
@@ -35,18 +36,21 @@ class ProductCarousel extends React.Component {
         for (const id in productInfo) { // [{relatedId: 48433}, {…}, {…}, {…}]
           const { relatedId } = productInfo[id]; // [48433, 48434, 48439, 48438]
           axios.get(`/products/${relatedId}`)
-            .then((res) => { // add each category to each id
-              // if relatedid is same as response product related id
+            .then((res) => {
+              const relatedCategories = res.data;
+              // console.log(relatedCategories)
               for (let j = 0; j < productInfo.length; j++) {
                 if (productInfo[j].relatedId === res.data.id) {
                   productInfo[j] = { category: res.data.category, ...productInfo[j] };
                   productInfo[j] = { features: res.data.features, ...productInfo[j] };
                 }
               }
+              this.setState({
+                productInfo: productInfo,
+              });
             });
           axios.get(`/products/${relatedId}/styles`)
             .then((res) => {
-              // console.log(res.data);
               for (let k = 0; k < productInfo.length; k++) {
                 if (productInfo[k].relatedId === Number(res.data.product_id)) {
                   productInfo[k] = { name: res.data.results[0].name, ...productInfo[k] };
@@ -57,9 +61,11 @@ class ProductCarousel extends React.Component {
                   };
                 }
               }
+              this.setState({
+                productInfo: productInfo,
+              });
             });
         }
-        // console.log(productInfo);
       });
   }
 
@@ -70,28 +76,11 @@ class ProductCarousel extends React.Component {
     }
     return (
       <>
+        {/* {productInfo.map((product) => {
+          console.log(product.category);
+        })} */}
         {productInfo.map((product) => (
-        <Card className="card">
-          <div>
-            <Card.Img className="cardImage" variant="top"
-              src="https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80" />
-
-            <Card.Body className="cardBody">
-              <Card.Text className="cardCategory">
-                {product.relatedId}
-              </Card.Text>
-              <Card.Title className="cardTitle">
-                {product.name}
-              </Card.Title>
-              <Card.Text className="cardPrice">
-                ${product.price}
-              </Card.Text>
-              {/* <Card.Text className="cardRating"> STARS </Card.Text> */}
-            </Card.Body>
-          </div>
-          {/* star button to show product comparison on click */}
-          <Button className="compareProduct" variant="primary"> * </Button>
-        </Card>
+          <ul>{product.name}</ul>
         ))}
       </>
     );
@@ -173,4 +162,3 @@ export default ProductCarousel;
 // {productStyles.map((product) => (
 //   <div>{product.name}</div>
 // ))}
-
