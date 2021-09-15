@@ -94,50 +94,6 @@ body {
 }
 
 
-/* Related Product Cards ---------------------------------------- */
-
-.card {
-  width: 13rem;
-  height: 20rem;
-  border: 0.5px solid grey;
-}
-
-.cardImage {
-  display: block;
-  object-fit: cover;
-  width: 13rem;
-  height: 13rem;
-}
-
-.cardBody {
-  margin-left: 4px;
-}
-
-.cardCategory {
-  color: grey;
-  font-size: 12px;
-}
-
-.cardTitle {
-  color: black;
-  font-size: 14px;
-}
-
-.cardPrice {
-  color: grey;
-  font-size: 12px;
-}
-
-.compareProduct {
-  box-shadow: 0px 0px 0px transparent;
-  text-shadow: 0px 0px 0px transparent;
-  position: relative;
-  transition: 0.5s ease;
-  top: -250px;
-  left: 180px;
-  color: black;
-  font-size: 30px;
-}
 
 
 /* Other Component Formatting ---------------------------------------- */
