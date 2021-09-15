@@ -15,16 +15,15 @@ import RelatedItems from './Related/RelatedItems.jsx';
 // Using product id: 48432 temporarily
 
 const App = () => {
-  const currentId = useSelector((state) => state.product.id);
+  // const currentId = useSelector((state) => state.product.id);
   // const currentProduct = useSelector((state) => state.product);
-  const selectedStyleId = useSelector((state) => state.style.id);
+  // const selectedStyleId = useSelector((state) => state.style.id);
 
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
-  const handleClick = () => {
-    dispatch(updateProductId(1000)); // this is an example to show how update works
-    // delete when understood
-  };
+  // const handleClick = () => {
+  //   dispatch(updateProductId(1000)); // this is an example to show how update works
+  // };
 
   return (
     <>
@@ -43,7 +42,7 @@ const App = () => {
       {/* <div><ProductInfo productId={currentId} /></div> */}
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div> */}
-    <div><RelatedItems productId={currentId} /></div>
+    <div><RelatedItems productId={48432} /></div>
     </>
   );
 };
