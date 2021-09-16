@@ -29,7 +29,7 @@ const Gallery = () => {
   const handleClick = (e) => {
     // const selectedImage = e.target.value;
     // setImage(selectedImage);
-    mainImage = e.target.value;
+    // mainImage = e.target.value;
   };
 
   if (stylePhotos.length === 0) {
