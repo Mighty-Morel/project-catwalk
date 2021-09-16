@@ -18,6 +18,8 @@ afterEach(cleanup);
 
 jest.mock('../client/src/components/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
 jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>Placeholder Questions And Answers</div>));
+jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
+jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));
 
 // Tests 1 and 2 are the same
 it('test 1 using getByText: renders App on load', async () => {
