@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateStyleId } from '../reducers/Style-Reducer';
+import { updateStyle, updateStyleId } from '../reducers/Style-Reducer';
 
 const Style = ({ style }) => {
   const dispatch = useDispatch();
@@ -10,6 +10,7 @@ const Style = ({ style }) => {
   const handleClick = () => {
     console.log(styleId);
     dispatch(updateStyleId(styleId));
+    dispatch(updateStyle(style));
   };
 
   const selectedStyleId = useSelector((state) => state.style.id);

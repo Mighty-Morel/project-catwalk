@@ -4,6 +4,7 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import ProductList from './ExampleProductList.jsx';
 import ProductInfo from './ProductInfo.jsx';
+import Gallery from './Gallery.jsx';
 // import ReviewList from './ReviewList.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 // import RelatedItems from './RelatedItems.jsx';
@@ -39,7 +40,7 @@ const App = () => {
         <Redirect to="/" />
       </Router> */}
       {/* <div><ProductInfo /></div> */}
-
+      <div><Gallery /></div>
       <div><ProductInfo productId={currentId} /></div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div>
