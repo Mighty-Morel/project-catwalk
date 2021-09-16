@@ -7,7 +7,7 @@ import ProductInfo from './ProductInfo.jsx';
 import Gallery from './Gallery.jsx';
 // import ReviewList from './ReviewList.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
-// import RelatedItems from './RelatedItems.jsx';
+import RelatedItems from './Related/RelatedItems.jsx';
 
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
@@ -41,14 +41,11 @@ const App = () => {
           <Route exact path="products/:productId" component={ProductInfo} />
           <Redirect to="/" />
         </Router> */}
-      {/* <div><ProductInfo /></div> */}
       <div className="overview-container">
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
-      {/* <div><QuestionsAndAnswers productId={productId} /></div>
-      <div><ReviewList productId={productId} /></div>
-      <div><RelatedItems productId={productId} /></div> */}
+      <div><RelatedItems productId={currentId} /></div>
     </>
   );
 };
