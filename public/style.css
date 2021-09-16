@@ -113,29 +113,3 @@ body {
   background-color: white;
   border-radius: 50%;
 }
-
-/*  Questions and Answers Formatting  ---------------------------------------- */
-
-.questions-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  width: 70%;
-  margin:auto;
-  border: 1px solid black;
-}
-
-.question-entry {
-  border: 1px solid grey;
-  margin: 5px;
-}
-
-.search-question {
-  background-color: black;
-  color: white;
-  margin: 5px;
-}
-
-::placeholder {
-  color: white;
-}
