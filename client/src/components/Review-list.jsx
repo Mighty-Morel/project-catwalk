@@ -29,6 +29,14 @@ const ReviewList = () => {
     }
   };
 
+  let style;
+
+  if (moreReviews) {
+    style = { display: 'visible' };
+  } else {
+    style = { display: 'none' };
+  }
+
   let content;
   if (isLoading) {
     content = (
@@ -54,7 +62,7 @@ const ReviewList = () => {
     <>
       Dropdownbutton here for sort by
       {content}
-      <button type="button" onClick={moreReviewsVisibility}>More Reviews</button>
+      <button style={style} type="button" onClick={moreReviewsVisibility}>More Reviews</button>
     </>
   );
 };
