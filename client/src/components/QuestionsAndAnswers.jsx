@@ -4,7 +4,7 @@ import axios from 'axios';
 // eslint-disable-next-line import/extensions
 import QuestionEntry from './QuestionEntry.jsx';
 
-const QuestionsAndAnswers = () => {
+const QuestionsAndAnswers = (props) => {
   // Get the current product_id
   const currentId = useSelector((state) => state.product.id);
 
@@ -65,23 +65,21 @@ const QuestionsAndAnswers = () => {
           reported,
         } = question;
         return (
-          <div>
-            <QuestionEntry
-              // eslint-disable-next-line camelcase
-              key={question_id}
-              // eslint-disable-next-line camelcase
-              id={question_id}
-              // eslint-disable-next-line camelcase
-              question={question_body}
-              // eslint-disable-next-line camelcase
-              date={question_date}
-              // eslint-disable-next-line camelcase
-              asker={asker_name}
-              // eslint-disable-next-line camelcase
-              helpfulness={question_helpfulness}
-              reported={reported}
-            />
-          </div>
+          <QuestionEntry
+            // eslint-disable-next-line camelcase
+            key={question_id}
+            // eslint-disable-next-line camelcase
+            id={question_id}
+            // eslint-disable-next-line camelcase
+            question={question_body}
+            // eslint-disable-next-line camelcase
+            date={question_date}
+            // eslint-disable-next-line camelcase
+            asker={asker_name}
+            // eslint-disable-next-line camelcase
+            helpfulness={question_helpfulness}
+            reported={reported}
+          />
         );
       })}
       {/* {() => { if (extra) { return <button type="button"
