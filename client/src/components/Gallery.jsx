@@ -5,19 +5,16 @@ import { useSelector } from 'react-redux';
 const Gallery = () => {
   const allStyles = useSelector((state) => state.style.allStyles);
   const selectedStyleId = useSelector((state) => state.style.id);
-  // const selectedStyle = useSelector((state) => state.style.style);
+  const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
+  const mainImage = stylePhotos[0];
 
   console.log('allStyles', allStyles);
   console.log('selectedStyleId', selectedStyleId);
   console.log('selectedStyle', selectedStyle);
   console.log('stylePhotos', stylePhotos);
-  // console.log('selectedStyle.photos', selectedStyle.photos);
+  console.log('mainImage', stylePhotos[0]);
 
-
-  // // // find the style selected
-  // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-  // console.log(selectedStyle)
 
   const renderGallery = () => {
     if (selectedStyle) {
@@ -26,7 +23,6 @@ const Gallery = () => {
       // const [mainImage, setImage] = useState(allPhotos.url);
       console.log(selectedStyle.photos);
       console.log('stylePhotos', stylePhotos);
-
     }
   };
 
@@ -36,14 +32,14 @@ const Gallery = () => {
     setImage(selectedImage.url);
   };
 
-  if (allStyles.length === 0) {
-    renderGallery();
+  if (stylePhotos.length === 0) {
+    // renderGallery();
     return <div>Loading Images...</div>;
   }
   return (
     <>
       <div>Hello</div>
-      {/* <div className="main-image-area">
+      <div className="main-image-area">
         <img
           className="main-image"
           src={mainImage.url}
@@ -52,7 +48,7 @@ const Gallery = () => {
         />
       </div>
       <div className="thumbnails">
-        {allPhotos.map((photo) => (
+        {stylePhotos.map((photo) => (
           <span role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
             <img
               src={photo.thumbnail_url}
@@ -60,7 +56,7 @@ const Gallery = () => {
             />
           </span>
         ))}
-      </div> */}
+      </div>
     </>
   );
 };
