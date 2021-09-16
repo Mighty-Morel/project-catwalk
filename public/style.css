@@ -114,4 +114,24 @@ body {
   border-radius: 50%;
 }
 
+
+/* Add To Cart Formatting ---------------------------------------- */
+.add-to-cart {
+  /* display: none; */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown select {
+  display: block
+}
+
+#openSizeSelector {
+  display: block;
+}
+
+
 /* Other Component Formatting ---------------------------------------- */

@@ -7,6 +7,8 @@ import { updateStyles } from '../reducers/Style-Reducer';
 
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
+import AddToCart from './AddToCart.jsx';
+
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
@@ -55,6 +57,10 @@ const ProductInfo = () => {
         <br />
         <div data-testid="style-selector" className="style-selector">
           <StyleSelector allStyles={allStyles} />
+        </div>
+        <br />
+        <div data-testid="add-to-cart" className="add-to-cart">
+          <AddToCart allStyles={allStyles} />
         </div>
       </div>
     </>
