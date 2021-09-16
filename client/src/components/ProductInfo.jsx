@@ -42,7 +42,7 @@ const ProductInfo = () => {
   }
   return (
     <>
-      <div data-testid="resolved" className="overview">
+      <div data-testid="resolved" className="product-info">
         <span data-testid="ratings" className="ratings">Star Ratings Placeholder</span>
         <br />
         <span data-testid="show-category" className="category">{product.category}</span>

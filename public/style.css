@@ -8,10 +8,36 @@ body {
   font-size: 1.1em;
 }
 
+.overview-container {
+  width: 80%;
+  max-width: 100vw;
+  display: flex;
+}
+
+/* Gallery Formatting ------------------------------------------------ */
+.gallery-container {
+  flex:3;
+  /* width: 75%; */
+  float: left;
+  padding: 20px;
+}
+
+.main-image-container {
+  width: 30%;
+  background-color: white;
+}
+
+.main-image {
+  max-width: 600px;
+}
+
+
 /* Product Overview Formatting ---------------------------------------- */
 
-.overview {
-  width: 80%;
+.product-info {
+  /* width: 25%; */
+  flex:1;
+  float: right;
   margin: 0 auto;
   max-width: 800px;
   font-size: 1em;

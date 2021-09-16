@@ -38,24 +38,25 @@ const Gallery = () => {
   }
   return (
     <>
-      <div>Hello</div>
-      <div className="main-image-area">
-        <img
-          className="main-image"
-          src={mainImage.url}
-          alt={selectedStyle.name}
-          title={selectedStyle.name}
-        />
-      </div>
-      <div className="thumbnails">
-        {stylePhotos.map((photo) => (
-          <span key={photo.url} role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
-            <img
-              src={photo.thumbnail_url}
-              alt={selectedStyle.name}
-            />
-          </span>
-        ))}
+      <div className="gallery-container">
+        <div className="main-image-container">
+          <img
+            className="main-image"
+            src={mainImage.url}
+            alt={selectedStyle.name}
+            title={selectedStyle.name}
+          />
+        </div>
+        <div className="thumbnails">
+          {stylePhotos.map((photo) => (
+            <span key={photo.url} role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+              <img
+                src={photo.thumbnail_url}
+                alt={selectedStyle.name}
+              />
+            </span>
+          ))}
+        </div>
       </div>
     </>
   );

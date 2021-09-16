@@ -32,19 +32,23 @@ const App = () => {
       <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
-        and current Style is {selectedStyleId}
+        and current Style is
+        {' '}
+        {selectedStyleId}
       </div>
       {/* <ProductList /> */}
       {/* <Router>
-        <Route exact path="products/:productId" component={ProductInfo} />
-        <Redirect to="/" />
-      </Router> */}
+          <Route exact path="products/:productId" component={ProductInfo} />
+          <Redirect to="/" />
+        </Router> */}
       {/* <div><ProductInfo /></div> */}
-      <div><Gallery /></div>
-      <div><ProductInfo productId={currentId} /></div>
+      <div className="overview-container">
+        <div><Gallery /></div>
+        <div><ProductInfo productId={currentId} /></div>
+      </div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
-    <div><ReviewList productId={productId} /></div>
-    <div><RelatedItems productId={productId} /></div> */}
+      <div><ReviewList productId={productId} /></div>
+      <div><RelatedItems productId={productId} /></div> */}
     </>
   );
 };
