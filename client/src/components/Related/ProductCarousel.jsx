@@ -8,6 +8,7 @@
 import React from 'react';
 import axios from 'axios';
 import card from './card.css';
+import carousel from './carousel.css';
 
 class ProductCarousel extends React.Component {
   constructor(props) {

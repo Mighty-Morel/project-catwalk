@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -15,9 +16,9 @@ import RelatedItems from './Related/RelatedItems.jsx';
 // Using product id: 48432 temporarily
 
 const App = () => {
-  // const currentId = useSelector((state) => state.product.id);
+  const currentId = useSelector((state) => state.product.id);
   // const currentProduct = useSelector((state) => state.product);
-  // const selectedStyleId = useSelector((state) => state.style.id);
+  const selectedStyleId = useSelector((state) => state.style.id);
 
   // const dispatch = useDispatch();
 
@@ -30,7 +31,8 @@ const App = () => {
       {/* <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
-        and current Style is {selectedStyleId}
+        and current Style is
+        {selectedStyleId}
       </div> */}
       {/* <ProductList /> */}
       {/* <Router>
@@ -38,11 +40,10 @@ const App = () => {
         <Redirect to="/" />
       </Router> */}
       {/* <div><ProductInfo /></div> */}
-
       {/* <div><ProductInfo productId={currentId} /></div> */}
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
     <div><ReviewList productId={productId} /></div> */}
-    <div><RelatedItems productId={48432} /></div>
+      <div><RelatedItems productId={currentId} /></div>
     </>
   );
 };
