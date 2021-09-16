@@ -4,3 +4,4 @@
 **/vendor
 **/*.min.js
 **/public/bundle.js
+jest.config.js
