@@ -17,6 +17,7 @@ import App from '../client/src/components/App';
 afterEach(cleanup);
 
 jest.mock('../client/src/components/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
+jest.mock('../client/src/components/QuestionsAndAnswers', () => () => (<div>Placeholder Questions And Answers</div>));
 
 // Tests 1 and 2 are the same
 it('test 1 using getByText: renders App on load', async () => {
