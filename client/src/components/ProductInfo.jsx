@@ -9,7 +9,6 @@ import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 
-
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
   const product = useSelector((state) => state.product.productInfo);

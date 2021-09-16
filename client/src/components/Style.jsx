@@ -5,11 +5,8 @@ import { updateStyle } from '../reducers/Style-Reducer';
 
 const Style = ({ style }) => {
   const dispatch = useDispatch();
-  const styleId = style.style_id;
 
   const handleClick = () => {
-    console.log(styleId);
-    // dispatch(updateStyleId(styleId));
     dispatch(updateStyle(style));
   };
 

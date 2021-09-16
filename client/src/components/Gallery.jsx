@@ -7,7 +7,7 @@ const Gallery = () => {
   const selectedStyleId = useSelector((state) => state.style.id);
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
-  const mainImage = stylePhotos[0];
+  let mainImage = stylePhotos[0];
 
   console.log('allStyles', allStyles);
   console.log('selectedStyleId', selectedStyleId);
@@ -16,20 +16,20 @@ const Gallery = () => {
   console.log('mainImage', stylePhotos[0]);
 
 
-  const renderGallery = () => {
-    if (selectedStyle) {
-      // useEffect(renderGallery, [selectedStyleId]);
-      // const allPhotos = selectedStyle.photos;
-      // const [mainImage, setImage] = useState(allPhotos.url);
-      console.log(selectedStyle.photos);
-      console.log('stylePhotos', stylePhotos);
-    }
-  };
-
+  // const [mainImage, setImage] = useState(stylePhotos[0]);
+  // const renderGallery = () => {
+  //   if (selectedStyle) {
+  //     useEffect(renderGallery, [selectedStyleId]);
+  //     const allPhotos = selectedStyle.photos;
+  //     console.log(selectedStyle.photos);
+  //     console.log('stylePhotos', stylePhotos);
+  //   }
+  // };
 
   const handleClick = (e) => {
-    const selectedImage = e.target.value;
-    setImage(selectedImage.url);
+    // const selectedImage = e.target.value;
+    // setImage(selectedImage);
+    mainImage = e.target.value;
   };
 
   if (stylePhotos.length === 0) {
@@ -49,7 +49,7 @@ const Gallery = () => {
       </div>
       <div className="thumbnails">
         {stylePhotos.map((photo) => (
-          <span role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+          <span key={photo.url} role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
             <img
               src={photo.thumbnail_url}
               alt={selectedStyle.name}
