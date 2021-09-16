@@ -177,14 +177,22 @@ it('should load and display the selected product data', async () => {
 //   expect(description).toHaveTextContent('Whether you\'re a morning person or not. Whether you\'re gym bound or not. Everyone looks good in joggers.');
 // });
 
-// // Style Selector Tests ==============================================
-// it('should update the styleId to the one that is clicked', () => {
-//   const { getByTestId } = render(
-//     <Provider store={store}>
-//       <Style />
-//     </Provider>,
-//   );
+// Style Selector Tests ==============================================
+test('selected images should have select formatting with border and checkmark', () => {
+  const style = {
+    style_id: 123456,
+    name: 'Selected Style',
+    original_price: '0',
+    photos: [
+      { thumbnail_url: 'https://testing.com' },
+    ],
+  };
+  const { getByAltText } = render(
+    <Provider store={store}>
+      <Style style={style} />
+    </Provider>,
+  );
 
-//   fireEvent.click(getByTestId('click'));
-//   expect(getByTestId('click-style')).toHaveClass('style-selected');
-// });
+  fireEvent.click(getByAltText('Selected Style'));
+  expect(getByAltText('Selected Style')).toHaveClass('style-selected');
+});
