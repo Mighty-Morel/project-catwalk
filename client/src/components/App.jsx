@@ -2,9 +2,9 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
-import ProductList from './ExampleProductList.jsx';
+// import ProductList from './ExampleProductList.jsx';
 import ProductInfo from './ProductInfo.jsx';
-// import ReviewList from './ReviewList.jsx';
+import ReviewList from './Review-list.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 // import RelatedItems from './RelatedItems.jsx';
 
@@ -22,7 +22,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(updateProductId(1000)); // this is an example to show how update works
+    dispatch(updateProductId(48433)); // this is an example to show how update works
     // delete when understood
   };
 
@@ -42,8 +42,8 @@ const App = () => {
 
       <div><ProductInfo productId={currentId} /></div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div>
-    <div><ReviewList productId={productId} /></div>
     <div><RelatedItems productId={productId} /></div> */}
+      <div><ReviewList /></div>
     </>
   );
 };

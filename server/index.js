@@ -37,7 +37,7 @@ app.get('/products/:productId', (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting product info', err);
+      res.send(err);
     });
 });
 
@@ -55,7 +55,6 @@ app.get('/products/:productId/styles', (req, res) => {
 });
 
 app.get('/api/reviews', (req, res) => {
-  console.log(req.query);
   axios.get('/reviews', {
     params: req.query,
   })
@@ -80,7 +79,6 @@ app.get('/api/reviews/meta', (req, res) => {
 });
 
 app.post('/api/reviews', (req, res) => {
-  console.log(req.body);
   axios.post('/reviews', req.body)
     .then((response) => {
       res.send(response.data);
