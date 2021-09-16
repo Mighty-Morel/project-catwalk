@@ -141,7 +141,7 @@ const AddToCart = () => {
       // const sizeDropdown = document.getElementById('activeSizeSelector');
       // sizeDropdown.classList.toggle('open-dropdown');
       displaySize = openSizeSelector;
-      console.log('tried to open');
+      // console.log('tried to open');
     } else {
       const item = {
         sku: selectSku[0],

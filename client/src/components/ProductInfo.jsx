@@ -20,7 +20,7 @@ const ProductInfo = () => {
   const getAllStyles = () => {
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
-        console.log(response.data.results);
+        // console.log(response.data.results);
         dispatch(updateStyles(response.data.results));
       })
       .catch((error) => console.log(error));

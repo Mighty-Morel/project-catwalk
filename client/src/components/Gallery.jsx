@@ -5,24 +5,22 @@ import { useSelector } from 'react-redux';
 const Gallery = () => {
   const allStyles = useSelector((state) => state.style.allStyles);
   const selectedStyleId = useSelector((state) => state.style.id);
-  const selectedStyle = useSelector((state) => state.style.style);
+  // const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
 
-
-  console.log(allStyles)
-  console.log(selectedStyleId)
-  console.log(selectedStyle)
-  console.log(stylePhotos)
+  console.log('allStyles from store', allStyles);
+  console.log('selectedStyleId from store', selectedStyleId);
 
   // // find the style selected
-  // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-  // console.log(selectedStyle)
+  const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
+  console.log('selectedStyle rendered here', selectedStyle);
+  console.log('photos for style', stylePhotos);
 
-  // const renderGallery = () => {
-  //   if (selectedStyle) {
-  //     console.log(selectedStyle.photo);
-  //   }
-  // };
+  const renderGallery = () => {
+    if (selectedStyle) {
+      console.log(selectedStyle.photos);
+    }
+  };
 
   // useEffect(renderGallery, [selectedStyleId]);
   // const allPhotos = selectedStyle.photos;
@@ -62,7 +60,6 @@ const Gallery = () => {
 };
 
 export default Gallery;
-
 
 // const allStyles = useSelector((state) => state.style.allStyles);
 // const selectedStyleId = useSelector((state) => state.style.id);
