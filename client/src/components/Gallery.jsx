@@ -8,32 +8,36 @@ const Gallery = () => {
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
 
+  console.log('allStyles', allStyles);
+  console.log('selectedStyleId', selectedStyleId);
+  console.log('selectedStyle', selectedStyle);
+  console.log('stylePhotos', stylePhotos);
+  // console.log('selectedStyle.photos', selectedStyle.photos);
 
-  console.log(allStyles)
-  console.log(selectedStyleId)
-  console.log(selectedStyle)
-  console.log(stylePhotos)
 
-  // // find the style selected
+  // // // find the style selected
   // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
   // console.log(selectedStyle)
 
-  // const renderGallery = () => {
-  //   if (selectedStyle) {
-  //     console.log(selectedStyle.photo);
-  //   }
-  // };
+  const renderGallery = () => {
+    if (selectedStyle) {
+      // useEffect(renderGallery, [selectedStyleId]);
+      // const allPhotos = selectedStyle.photos;
+      // const [mainImage, setImage] = useState(allPhotos.url);
+      console.log(selectedStyle.photos);
+      console.log('stylePhotos', stylePhotos);
 
-  // useEffect(renderGallery, [selectedStyleId]);
-  // const allPhotos = selectedStyle.photos;
+    }
+  };
 
-  // const [mainImage, setImage] = useState(allPhotos.url);
 
-  // const handleClick = (e) => {
-  //   const selectedImage = e.target.value;
-  //   setImage(selectedImage.url);
-  // };
+  const handleClick = (e) => {
+    const selectedImage = e.target.value;
+    setImage(selectedImage.url);
+  };
+
   if (allStyles.length === 0) {
+    renderGallery();
     return <div>Loading Images...</div>;
   }
   return (
@@ -62,7 +66,6 @@ const Gallery = () => {
 };
 
 export default Gallery;
-
 
 // const allStyles = useSelector((state) => state.style.allStyles);
 // const selectedStyleId = useSelector((state) => state.style.id);
