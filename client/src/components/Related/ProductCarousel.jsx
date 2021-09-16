@@ -76,22 +76,44 @@ class ProductCarousel extends React.Component {
       return 'loading...';
     }
     return (
-      <>
-        {productInfo.map((product, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div className="column" key={i}>
-            <div className="card">
-              <img className="cardImage" src={product.pic} alt="related product" />
-              <ul className="cardCategory">{product.category}</ul>
-              <ul className="cardTitle">{product.name}</ul>
-              <ul className="cardPrice">${product.price}</ul>
-              <ul className="cardRating">* star placeholder *</ul>
-            </div>
-          </div>
-        ))}
-      </>
+      <div className="carousel">
+        <button className="carousel__button">
+          <img src="" alt=""/>
+        </button>
+        <div className="carousel__track-container">
+          <ul className="carousel__track">
+            <li className="carousel__slide">
+              <img src="https://bit.ly/3hFxW3E" alt="" />
+            </li>
+            <li className="carousel__slide">
+              <img src="https://bit.ly/3zfr8Qk" alt="" />
+            </li>
+            <li className="carousel__slide">
+              <img src="https://bit.ly/3hH1Nc5" alt="" />
+            </li>
+          </ul>
+        </div>
+        <button className="carousel__button"></button>
+      </div>
     );
   }
 }
 
 export default ProductCarousel;
+
+// return (
+//   <>
+//     {productInfo.map((product, i) => (
+//       // eslint-disable-next-line react/no-array-index-key
+//       <div className="column" key={i}>
+//         <div className="card">
+//           <img className="cardImage" src={product.pic} alt="related product" />
+//           <ul className="cardCategory">{product.category}</ul>
+//           <ul className="cardTitle">{product.name}</ul>
+//           <ul className="cardPrice">${product.price}</ul>
+//           <ul className="cardRating">* star placeholder *</ul>
+//         </div>
+//       </div>
+//     ))}
+//   </>
+// );
