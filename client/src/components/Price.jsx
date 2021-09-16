@@ -12,11 +12,11 @@ const Price = () => {
   if (selectedStyle.sale_price > 0) {
     return (
       <>
-        <span>
+        <span className="price-sale">
           $
           {selectedStyle.sale_price}
         </span>
-        <span className="price-discount">
+        <span className="price-original">
           $
           {selectedStyle.original_price}
         </span>
