@@ -75,18 +75,16 @@ class ProductCarousel extends React.Component {
     }
     return (
       <>
-        {productInfo.map((product) => (
-            <div className="column">
-              <div className="card">
-                <div className="cardImage" src={product.pic} />
-                <div className="cardBody">
-                  <ul className="cardCategory">{product.category}</ul>
-                  <ul className="cardTitle">{product.name}</ul>
-                  <ul className="cardPrice">${product.price}</ul>
-                  <ul className="cardRating">* star placeholder *</ul>
-                </div>
-              </div>
+        {productInfo.map((product, i) => (
+          <div className="column" key={i}>
+            <div className="card">
+              <img className="cardImage" src={product.pic} alt="related product" />
+              <ul className="cardCategory">{product.category}</ul>
+              <ul className="cardTitle">{product.name}</ul>
+              <ul className="cardPrice">${product.price}</ul>
+              <ul className="cardRating">* star placeholder *</ul>
             </div>
+          </div>
         ))}
       </>
     );
@@ -95,9 +93,8 @@ class ProductCarousel extends React.Component {
 
 export default ProductCarousel;
 
-// return (
-//   {productInfo.map((product) => (
-//     <ul>{product.name} - {product.category}</ul>
-//   ))}
-
-// );
+{/* <div>
+  {productInfo.map((product) => (
+    <img src={product.pic} alt="related products" />
+  ))}
+</div> */}

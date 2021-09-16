@@ -7,10 +7,10 @@
   height: 13rem;
 }
 
-.cardBody {
-  margin-right: 50px;
-  margin-top: -20px;
-  /* margin-left: 10px; */
+ul,li {
+  margin-left:10;
+  padding-left:0;
+  padding-right: 0;
 }
 
 .cardCategory {
@@ -51,7 +51,7 @@
 /* Float four columns side by side */
 .column {
   float: left;
-  width: 25%;
+  width: 24%;
   padding: 0 10px;
 }
 
