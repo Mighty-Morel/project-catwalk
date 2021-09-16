@@ -1,3 +1,7 @@
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-plusplus */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
@@ -21,7 +25,6 @@ class ProductCarousel extends React.Component {
     // axios.get('/products/${current product id}/related')
     axios.get('/products/48432/related')
       .then((res) => {
-        // console.log('list of related ids', res.data);
         const relatedIds = res.data;
         const ids = [];
         for (let i = 0; i < relatedIds.length; i++) {
@@ -36,8 +39,6 @@ class ProductCarousel extends React.Component {
           const { relatedId } = productInfo[id]; // [48433, 48434, 48439, 48438]
           axios.get(`/products/${relatedId}`)
             .then((res) => {
-              const relatedCategories = res.data;
-              // console.log(relatedCategories)
               for (let j = 0; j < productInfo.length; j++) {
                 if (productInfo[j].relatedId === res.data.id) {
                   productInfo[j] = { category: res.data.category, ...productInfo[j] };
@@ -76,6 +77,7 @@ class ProductCarousel extends React.Component {
     return (
       <>
         {productInfo.map((product, i) => (
+          // eslint-disable-next-line react/no-array-index-key
           <div className="column" key={i}>
             <div className="card">
               <img className="cardImage" src={product.pic} alt="related product" />
@@ -92,9 +94,3 @@ class ProductCarousel extends React.Component {
 }
 
 export default ProductCarousel;
-
-{/* <div>
-  {productInfo.map((product) => (
-    <img src={product.pic} alt="related products" />
-  ))}
-</div> */}
