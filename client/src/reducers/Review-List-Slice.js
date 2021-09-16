@@ -8,7 +8,7 @@ export const reviewsSlice = createApi({
   tagTypes: ['Reviews', 'MetaReviews'],
   endpoints: (build) => ({
     getReviews: build.query({
-      query: (productId, count = 5, sort = 'helpful') => (`reviews?product_id=${productId}&count=${count}&sort=${sort}`),
+      query: ({ productId, count, sort }) => (`reviews?product_id=${productId}&count=${count}&sort=${sort}`),
       providesTags: (result, error, id) => [{ type: 'Reviews', id }],
     }),
     getMetaReviews: build.query({

@@ -2,7 +2,6 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
-// import ProductList from './ExampleProductList.jsx';
 import ProductInfo from './ProductInfo.jsx';
 import ReviewList from './Review-list.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
@@ -41,9 +40,9 @@ const App = () => {
       {/* <div><ProductInfo /></div> */}
 
       {/* <div><ProductInfo productId={currentId} /></div> */}
-      {/* <div><QuestionsAndAnswers productId={productId} /></div>
-      <div><ReviewList productId={productId} /></div> */}
-      <div><RelatedItems productId={currentId} /></div>
+      {/* <div><QuestionsAndAnswers productId={productId} /></div> */}
+      <div><ReviewList /></div>
+      {/* <div><RelatedItems productId={currentId} /></div> */}
     </>
   );
 };

@@ -3,7 +3,9 @@ import { useSelector } from 'react-redux';
 import { useGetReviewsQuery } from '../reducers/Review-List-Slice';
 
 const ReviewList = () => {
-  const [moreReviews, setMoreReviews] = useState(false);
+  const [moreReviews, setMoreReviews] = useState(true);
+  const [sortBy, setSortBy] = useState('helpful');
+  const [count, setCount] = useState(10);
   const productId = useSelector((state) => state.product.id);
 
   const {
@@ -12,10 +14,22 @@ const ReviewList = () => {
     isSuccess,
     isError,
     error,
-  } = useGetReviewsQuery(productId);
-  console.log(reviews);
-  let content;
+  } = useGetReviewsQuery(
+    {
+      productId,
+      count,
+      sort: sortBy,
+    },
+  );
 
+  const moreReviewsVisibility = () => {
+    setCount(count + 2);
+    if (reviews.results.length < count) {
+      setMoreReviews(false);
+    }
+  };
+
+  let content;
   if (isLoading) {
     content = (
       <p>
@@ -36,16 +50,11 @@ const ReviewList = () => {
     );
   }
 
-  if (moreReviews) {
-    return (
-      <>
-        {content}
-      </>
-    );
-  }
   return (
     <>
+      Dropdownbutton here for sort by
       {content}
+      <button type="button" onClick={moreReviewsVisibility}>More Reviews</button>
     </>
   );
 };
