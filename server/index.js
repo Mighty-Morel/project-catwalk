@@ -61,6 +61,18 @@ app.get('/products/:productId/styles', (req, res) => {
     });
 });
 
+// gets all related ids for a single product
+app.get('/products/:productId/related', (req, res) => {
+  const { productId } = req.params;
+  axios.get(`/products/${productId}/related`)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send('error in getting related items', err);
+    });
+});
+
 // gets questions for a product
 app.get('/qa/questions/:product_id', (req, res) => {
   axios.get('/qa/questions', { params: req.params })
@@ -79,7 +91,7 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting questions', err);
+      res.send('error in getting answers', err);
     });
 });
 
