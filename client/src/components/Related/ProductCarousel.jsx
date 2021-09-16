@@ -36,8 +36,6 @@ class ProductCarousel extends React.Component {
           const { relatedId } = productInfo[id]; // [48433, 48434, 48439, 48438]
           axios.get(`/products/${relatedId}`)
             .then((res) => {
-              const relatedCategories = res.data;
-              // console.log(relatedCategories)
               for (let j = 0; j < productInfo.length; j++) {
                 if (productInfo[j].relatedId === res.data.id) {
                   productInfo[j] = { category: res.data.category, ...productInfo[j] };
@@ -75,8 +73,9 @@ class ProductCarousel extends React.Component {
     }
     return (
       <>
-        {productInfo.map((product) => (
-          <ul className="card">{product.name} - {product.category}</ul>
+        {productInfo.map((product, i) => (
+          // eslint-disable-next-line react/no-array-index-key
+          <div className="card" key={i}>{product.name} - {product.category}</div>
         ))}
       </>
     );
