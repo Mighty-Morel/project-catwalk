@@ -4,6 +4,8 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   id: 293480,
   allStyles: [],
+  style: {},
+  photos: [],
 };
 
 export const styleSlice = createSlice({
@@ -12,6 +14,10 @@ export const styleSlice = createSlice({
   reducers: {
     updateStyleId: (state, action) => {
       state.id = action.payload;
+    },
+    updateStyle: (state, action) => {
+      state.style = action.payload;
+      state.photos = action.payload.photos;
     },
     updateStyles: (state, action) => {
       state.allStyles = action.payload;

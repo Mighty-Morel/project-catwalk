@@ -1,25 +1,45 @@
 /* eslint-disable import/extensions */
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
 const Gallery = () => {
   const allStyles = useSelector((state) => state.style.allStyles);
   const selectedStyleId = useSelector((state) => state.style.id);
+  const selectedStyle = useSelector((state) => state.style.style);
+  const stylePhotos = useSelector((state) => state.style.photos);
 
-  // find the style selected
-  const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-  const allPhotos = selectedStyle.photos;
 
-  const [mainImage, setImage] = useState(allPhotos[0].url);
+  console.log(allStyles)
+  console.log(selectedStyleId)
+  console.log(selectedStyle)
+  console.log(stylePhotos)
 
-  const handleClick = (e) => {
-    const selectedImage = e.target.value;
-    setImage(selectedImage.url);
-  };
+  // // find the style selected
+  // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
+  // console.log(selectedStyle)
 
+  // const renderGallery = () => {
+  //   if (selectedStyle) {
+  //     console.log(selectedStyle.photo);
+  //   }
+  // };
+
+  // useEffect(renderGallery, [selectedStyleId]);
+  // const allPhotos = selectedStyle.photos;
+
+  // const [mainImage, setImage] = useState(allPhotos.url);
+
+  // const handleClick = (e) => {
+  //   const selectedImage = e.target.value;
+  //   setImage(selectedImage.url);
+  // };
+  if (allStyles.length === 0) {
+    return <div>Loading Images...</div>;
+  }
   return (
     <>
-      <div className="main-image-area">
+      <div>Hello</div>
+      {/* <div className="main-image-area">
         <img
           className="main-image"
           src={mainImage.url}
@@ -36,9 +56,33 @@ const Gallery = () => {
             />
           </span>
         ))}
-      </div>
+      </div> */}
     </>
   );
 };
 
 export default Gallery;
+
+
+// const allStyles = useSelector((state) => state.style.allStyles);
+// const selectedStyleId = useSelector((state) => state.style.id);
+
+// // find the style selected
+// const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
+
+// // set up dropdown for available sizes
+// const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
+
+// // set default sku, quantity, and sizes
+// const [selectSku, setSku] = useState(availableSkus[0]);
+// const [selectQty, setQty] = useState(1);
+// const [selectSize, setSize] = useState('Select Size');
+// const [showSize, setSizeDisplay] = useState(false);
+// const [showQty, setQtyDisplay] = useState(false);
+// const [outOfStock, toggleStock] = useState(false);
+// const [cart, addToCart] = useState([]);
+
+// // SIZE SELECTOR ========================================================
+// const availableSizes = availableSkus.map(
+//   (sku) => <option key={sku[0]} value={sku[1].size}>{sku[1].size}</option>,
+// );
