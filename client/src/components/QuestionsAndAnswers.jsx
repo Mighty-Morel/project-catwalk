@@ -49,7 +49,7 @@ const QuestionsAndAnswers = (props) => {
   const displayedQuestions = questions.slice(0, questionCount);
   return (
     <>
-      <input type="text" placeholder="Search questions..." />
+      <input className="search-question" type="text" placeholder="Search questions..." />
       {displayedQuestions.map((question) => {
         const {
           // eslint-disable-next-line camelcase
