@@ -77,23 +77,25 @@ class ProductCarousel extends React.Component {
     }
     return (
       <div className="carousel">
-        <button className="carousel__button">
-          <img src="./images/arrow-left.png" alt=""/>
+        <button className="carousel__button carousel__button--left" type="button">
+          <img src="./images/arrow-left.png" alt="" />
         </button>
         <div className="carousel__track-container">
           <ul className="carousel__track">
             <li className="carousel__slide">
-              <img src="https://bit.ly/3hFxW3E" alt="" />
+              <img className="carousel__image" src="https://bit.ly/3hFxW3E" alt="" />
             </li>
             <li className="carousel__slide">
-              <img src="https://bit.ly/3zfr8Qk" alt="" />
+              <img className="carousel__image" src="https://bit.ly/3zfr8Qk" alt="" />
             </li>
             <li className="carousel__slide">
-              <img src="https://bit.ly/3hH1Nc5" alt="" />
+              <img className="carousel__image" src="https://bit.ly/3hH1Nc5" alt="" />
             </li>
           </ul>
         </div>
-        <button className="carousel__button"></button>
+        <button className="carousel__button carousel__button--right" type="button">
+          <img src="./images/arrow-right.png" alt="" />
+        </button>
       </div>
     );
   }

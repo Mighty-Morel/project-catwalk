@@ -1,0 +1,59 @@
+body {
+  background: #dcd0ff8f;
+}
+
+.carousel {
+  background: whitesmoke;
+  position: relative;
+  height: 350px;
+  width: 80%;
+  margin: 0 auto;
+}
+
+.carousel__image {
+  width: 20%;
+  height: 20%;
+  object-fit: cover;
+}
+
+.carousel__track-container {
+  background: lightsteelblue;
+  height: 50%;
+  position: relative;
+}
+
+.carousel__track {
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.carousel__slide {
+  /* position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 100%; */
+}
+
+/* transform move btn to exact mid */
+/* border removes btn shadow*/
+.carousel__button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
+}
+
+.carousel__button--left {
+  left: -15px;
+}
+
+.carousel__button--right {
+  right: -15px;
+}
+
+.carousel__button img {
+  width: 7px;
+}
