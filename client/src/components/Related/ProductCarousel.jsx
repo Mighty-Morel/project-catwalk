@@ -78,7 +78,7 @@ class ProductCarousel extends React.Component {
     return (
       <div className="carousel">
         <button className="carousel__button">
-          <img src="" alt=""/>
+          <img src="./images/arrow-left.png" alt=""/>
         </button>
         <div className="carousel__track-container">
           <ul className="carousel__track">
