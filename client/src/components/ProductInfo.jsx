@@ -3,7 +3,7 @@ import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductInfo } from '../reducers/Example-Reducer';
-import { updateStyles } from '../reducers/Style-Reducer';
+import { updateStyles, updateStyle } from '../reducers/Style-Reducer';
 
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
@@ -22,6 +22,7 @@ const ProductInfo = () => {
       .then((response) => {
         // console.log(response.data.results);
         dispatch(updateStyles(response.data.results));
+        dispatch(updateStyle(response.data.results[0]));
       })
       .catch((error) => console.log(error));
   };

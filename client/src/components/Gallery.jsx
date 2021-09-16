@@ -8,30 +8,36 @@ const Gallery = () => {
   // const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
 
-  console.log('allStyles from store', allStyles);
-  console.log('selectedStyleId from store', selectedStyleId);
+  console.log('allStyles', allStyles);
+  console.log('selectedStyleId', selectedStyleId);
+  console.log('selectedStyle', selectedStyle);
+  console.log('stylePhotos', stylePhotos);
+  // console.log('selectedStyle.photos', selectedStyle.photos);
 
-  // // find the style selected
-  const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-  console.log('selectedStyle rendered here', selectedStyle);
-  console.log('photos for style', stylePhotos);
+
+  // // // find the style selected
+  // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
+  // console.log(selectedStyle)
 
   const renderGallery = () => {
     if (selectedStyle) {
+      // useEffect(renderGallery, [selectedStyleId]);
+      // const allPhotos = selectedStyle.photos;
+      // const [mainImage, setImage] = useState(allPhotos.url);
       console.log(selectedStyle.photos);
+      console.log('stylePhotos', stylePhotos);
+
     }
   };
 
-  // useEffect(renderGallery, [selectedStyleId]);
-  // const allPhotos = selectedStyle.photos;
 
-  // const [mainImage, setImage] = useState(allPhotos.url);
+  const handleClick = (e) => {
+    const selectedImage = e.target.value;
+    setImage(selectedImage.url);
+  };
 
-  // const handleClick = (e) => {
-  //   const selectedImage = e.target.value;
-  //   setImage(selectedImage.url);
-  // };
   if (allStyles.length === 0) {
+    renderGallery();
     return <div>Loading Images...</div>;
   }
   return (
