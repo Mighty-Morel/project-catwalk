@@ -76,7 +76,17 @@ class ProductCarousel extends React.Component {
     return (
       <>
         {productInfo.map((product) => (
-          <ul className="card">{product.name} - {product.category}</ul>
+            <div className="column">
+              <div className="card">
+                <div className="cardImage" src={product.pic} />
+                <div className="cardBody">
+                  <ul className="cardCategory">{product.category}</ul>
+                  <ul className="cardTitle">{product.name}</ul>
+                  <ul className="cardPrice">${product.price}</ul>
+                  <ul className="cardRating">* star placeholder *</ul>
+                </div>
+              </div>
+            </div>
         ))}
       </>
     );
