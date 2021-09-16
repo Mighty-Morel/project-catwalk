@@ -4,7 +4,8 @@ import styling from './questions.css';
 const AnswerEntry = (props) => {
   return (
     <>
-      {props.answer}
+      <h2>Answer:</h2>
+      <p>{props.answer}</p>
     </>
   );
 }

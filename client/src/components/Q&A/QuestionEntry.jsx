@@ -6,6 +6,7 @@ import styling from './questions.css';
 const QuestionEntry = (props) => {
   const [answerCount, setCount] = useState(2);
   const [answers, setAnswers] = useState([]);
+  const [extra, setExtra] = useState(false);
 
   const getAnswers = () => {
     axios.get(`/qa/questions/${props.id}/answers`)
@@ -16,7 +17,7 @@ const QuestionEntry = (props) => {
         // Compares count to number of questions, display up to four questions
         if (results.length > 2) {
           setCount(2);
-          // setExtra(true);
+          setExtra(true);
         } else {
           setCount(results.length);
         }
@@ -31,7 +32,7 @@ const QuestionEntry = (props) => {
   const displayedAnswers = answers.slice(0, answerCount);
   return (
     <div className="question-entry">
-      <h1>{props.question}</h1>
+      <h1>Q: {props.question}</h1>
       {displayedAnswers.map((answer) => {
         const {
           answer_id,

@@ -5,7 +5,7 @@ import styling from './questions.css';
 // eslint-disable-next-line import/extensions
 import QuestionEntry from './QuestionEntry.jsx';
 
-const QuestionsAndAnswers = (props) => {
+const QuestionsAndAnswers = () => {
   // Get the current product_id
   const currentId = useSelector((state) => state.product.id);
 
