@@ -54,6 +54,19 @@ app.get('/products/:productId/styles', (req, res) => {
     });
 });
 
+// gets all related ids for a single product
+app.get('/products/:productId/related', (req, res) => {
+  const { productId } = req.params;
+  axios.get(`/products/${productId}/related`)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      console.log('error in getting styles', err);
+      res.send('error in getting styles', err);
+    });
+});
+
 app.get('/api/reviews', (req, res) => {
   axios.get('/reviews', {
     params: req.query,
