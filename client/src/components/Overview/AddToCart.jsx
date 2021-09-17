@@ -5,14 +5,22 @@ import { useSelector } from 'react-redux';
 import overviewStyling from './overview.css';
 
 const AddToCart = () => {
-  const allStyles = useSelector((state) => state.style.allStyles);
+  // const allStyles = useSelector((state) => state.style.allStyles);
   const selectedStyleId = useSelector((state) => state.style.id);
   // const selectedStyle = useSelector((state) => state.style.style);
-  // console.log(selectedStyle);
+  const selectedSkus = useSelector((state) => state.style.skus);
 
+  let availableSkus = [];
+
+  if (selectedSkus !== undefined) {
+    console.log('skus', selectedSkus);
+    availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
+  }
+
+  console.log('availableskus', availableSkus);
   // find the style selected and skus in stock
-  const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-  const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
+  // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
+  // const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
 
   // set initial sku, quantity, size, views and cart
   const [selectSku, setSku] = useState(availableSkus[0]);
@@ -31,6 +39,7 @@ const AddToCart = () => {
     // document.getElementById('defaultSize').setAttribute('selected', '');
   };
 
+
   useEffect(resetDefault, [selectedStyleId]);
 
   // QUANTITY SELECTOR ========================================================
@@ -38,7 +47,15 @@ const AddToCart = () => {
   // In default style, should sku 1702769 be 'XXL' instead?
   //   1702768: {quantity: 15, size: 'XL'}
   //   1702769: {quantity: 4, size: 'XL'}
-  const availableQty = selectSku[1].quantity;
+  let availableQty = 0;
+  if (selectSku !== undefined) {
+    availableQty = selectSku[1].quantity;
+    console.log('availableQty', availableQty);
+  }
+
+  if (document.getElementById('disabledSizeSelector') && availableQty > 0) {
+    console.log('found');
+  }
 
   const qtySelector = () => {
     // show max of 15 in dropdown
@@ -163,6 +180,10 @@ const AddToCart = () => {
     return <div />;
   };
 
+
+  if (!selectSku) {
+    return <div>Loading Styles...</div>;
+  }
   return (
     <div className="addToCart-container">
       {renderSizeSelecter()}

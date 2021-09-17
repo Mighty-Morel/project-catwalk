@@ -7,6 +7,7 @@ const initialState = {
   style: {},
   photos: [],
   mainPhoto: [],
+  skus: {},
 };
 
 export const styleSlice = createSlice({
@@ -19,6 +20,7 @@ export const styleSlice = createSlice({
       state.photos = action.payload.photos;
       // eslint-disable-next-line prefer-destructuring
       state.mainPhoto = action.payload.photos[0];
+      state.skus = action.payload.skus;
     },
     updateStyles: (state, action) => {
       state.allStyles = action.payload;

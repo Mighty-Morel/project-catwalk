@@ -24,7 +24,7 @@ const ProductInfo = () => {
         dispatch(updateStyles(response.data.results));
         dispatch(updateStyle(response.data.results[0]));
       })
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('Error getting all styles:', error));
   };
 
   const updateProduct = () => {
@@ -33,7 +33,7 @@ const ProductInfo = () => {
         dispatch(updateProductInfo(response.data));
       })
       .then(getAllStyles(productId))
-      .catch((error) => console.log(error));
+      .catch((error) => console.log('Error getting product info:', error));
   };
 
   useEffect(updateProduct, [productId]);
