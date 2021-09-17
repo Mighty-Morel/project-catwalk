@@ -20,7 +20,7 @@ body {
 }
 
 .carousel__track-container {
-  background: lightsteelblue;
+  background: rgb(227, 227, 228);
   display: flex;
   overflow: hidden;
   padding: 10px;

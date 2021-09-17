@@ -100,10 +100,10 @@ class ProductCarousel extends React.Component {
               <li className="carousel__slide">
                 <div className="card">
                   <img className="cardImage" src={product.pic} alt="" />
-                  <div className="cardCategory">{product.category}</div>
-                  <div className="cardTitle">{product.name}</div>
-                  <div className="cardPrice">${product.price}</div>
-                  <div className="cardRating">* star placeholder *</div>
+                  <dl className="cardCategory">{product.category}</dl>
+                  <dl className="cardTitle">{product.name}</dl>
+                  <dl className="cardPrice">${product.price}</dl>
+                  <dl className="cardRating">* star placeholder *</dl>
                 </div>
               </li>
 
