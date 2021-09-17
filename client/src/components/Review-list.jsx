@@ -1,5 +1,3 @@
-import SplitButton from 'react-bootstrap/SplitButton';
-import Dropdown from 'react-bootstrap/Dropdown';
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetReviewsQuery } from '../reducers/Review-List-Slice';
@@ -42,7 +40,7 @@ const ReviewList = () => {
   if (isLoading) {
     content = (
       <p>
-        Loading...plz forgive us, this request might be taking some time
+        Loading...zzz, this request might be taking some time
       </p>
     );
   } else if (isSuccess) {
@@ -61,19 +59,7 @@ const ReviewList = () => {
 
   return (
     <>
-      <SplitButton
-        key="sortBy"
-        id="sortBy-dropDown"
-        variant="sortby"
-        title="sortBy"
-      >
-        <Dropdown.Item eventKey="1">Action</Dropdown.Item>
-        <Dropdown.Item eventKey="2">Another action</Dropdown.Item>
-        <Dropdown.Item eventKey="3" active>
-          Active Item
-        </Dropdown.Item>
-
-      </SplitButton>
+      Add Dropdown here
       {content}
       <button style={style} type="button" onClick={moreReviewsVisibility}>More Reviews</button>
     </>
