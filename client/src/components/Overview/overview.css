@@ -1,7 +1,6 @@
 /* Product Overview Formatting ---------------------------------------- */
 .overview-container {
   width: 90%;
-  /* display: flex; */
   display: grid;
   grid-template-columns: 4fr 1fr;
   grid-template-rows: auto;
@@ -10,9 +9,7 @@
 
 /* Gallery Formatting --------------------------------------------------- */
 .gallery-container {
-  /* flex:3; */
   grid-column: 1 / 4;
-  /* float: left; */
   height: 650px;
   display: grid;
   grid-template-columns: repeat(6, 1fr);
@@ -33,18 +30,14 @@
 
 .main-image {
   max-height: 100%;
-  /* max-width: 100%; */
-  /* width: auto;
-  height: auto; */
   position: absolute;
-  top: 0;
-  bottom: 0;
-  left: 0;
-  right: 0;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
   margin: auto;
   z-index: 1;
   object-fit: cover;
-  align-content: center;
 }
 
 .thumbnail-container {
@@ -68,9 +61,6 @@
 /* Product Info Formatting ---------------------------------------- */
 
 .product-info-container {
-  /* width: 25%; */
-  /* flex:1; */
-  /* float: right; */
   grid-column: 4 / 5;
   margin: 0 auto;
   max-width: 800px;
