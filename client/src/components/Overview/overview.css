@@ -49,13 +49,26 @@
   margin-left: 25px;
 }
 
-
 .image-thumbnail {
   object-fit: cover;
   height: 60px;
   width: 60px;
-  margin-bottom: 15px;
+  margin-top: 15px;
   border: 1px solid white;
+}
+
+#selected-thumbnail {
+  border-width: 2px;
+}
+
+hr {
+  width: 64px;
+  border-width: 0;
+  color: white;
+  background-color: white;
+  height: 2px;
+  align-self: left;
+  margin: 2px 0px 0px 0px;
 }
 
 /* Product Info Formatting ---------------------------------------- */
