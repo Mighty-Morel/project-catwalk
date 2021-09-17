@@ -18,7 +18,7 @@ class ProductCarousel extends React.Component {
       productInfo: [],
       index: 0,
     };
-    // this.prev = this.prev.bind(this);
+    this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
     this.myRef = React.createRef();
   }
@@ -75,9 +75,9 @@ class ProductCarousel extends React.Component {
       });
   }
 
-  // prev() {
-
-  // }
+  prev() {
+    console.log('check previous button')
+  }
 
   // click right button, move slides to the left by one card
   next() {
@@ -90,7 +90,7 @@ class ProductCarousel extends React.Component {
 
       // this.refs[i].scrollIntoView({block: 'end', behavior: 'smooth'});
       // this.myRef.current.scrollIntoView();
-      console.log(this.myRef.current.scrollLeft += 250);
+      console.log(this.myRef.current.scrollLeft += 500);
     });
   }
 
@@ -102,7 +102,7 @@ class ProductCarousel extends React.Component {
     return (
       <div className="carousel">
         <div>RELATED PRODUCTS</div>
-        <button className="carousel__button carousel__button--left" type="button">
+        <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
           <img src="./images/arrow-left.png" alt="" />
         </button>
 
