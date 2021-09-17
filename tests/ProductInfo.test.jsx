@@ -12,8 +12,8 @@ import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 import { Provider } from 'react-redux';
-import ProductInfo from '../client/src/components/ProductInfo';
-import Style from '../client/src/components/Style';
+import ProductInfo from '../client/src/components/Overview/ProductInfo';
+import Style from '../client/src/components/Overview/Style';
 
 import store from '../client/src/store/store';
 
@@ -33,8 +33,9 @@ beforeAll(() => {
 afterEach(cleanup);
 
 jest.mock('axios');
-jest.mock('../client/src/components/Price.jsx', () => () => (<div>$100</div>));
-jest.mock('../client/src/components/StyleSelector.jsx', () => () => (<div>Styles Placeholder</div>));
+jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style</div>));
+jest.mock('../client/src/components/Overview/Price.jsx', () => () => (<div>$100</div>));
+jest.mock('../client/src/components/Overview/StyleSelector.jsx', () => () => (<div>Styles Placeholder</div>));
 
 const mockProductData = {
   id: 3,
