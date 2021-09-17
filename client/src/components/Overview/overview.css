@@ -1,0 +1,165 @@
+/* Product Overview Formatting ---------------------------------------- */
+.overview-container {
+  width: 90%;
+  display: flex;
+}
+
+/* Gallery Formatting --------------------------------------------------- */
+.gallery-container {
+  flex:3;
+  float: left;
+  height: 650px;
+}
+
+.main-image-container {
+  min-width: 400px;
+  height: 660px;
+  background-color: white;
+  position: relative;
+}
+
+.main-image {
+  max-height: 100%;
+  max-width: 100%;
+  width: auto;
+  height: auto;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+}
+
+
+/* Product Info Formatting ---------------------------------------- */
+
+.product-info-container {
+  /* width: 25%; */
+  flex:1;
+  float: right;
+  margin: 0 auto;
+  max-width: 800px;
+  height: 650px;
+  font-size: 1em;
+  line-height: 1.2em;
+  background-color: white;
+  padding: 5px 20px 5px 20px;
+}
+
+.ratings {
+  line-height: 2em;
+  font-size: .8em;
+
+}
+
+.product-name {
+  font-style: bold;
+  font-weight: 800;
+  font-size: 2em;
+  line-height: 1em;
+}
+
+.category {
+  font-weight: 300;
+  line-height: 2em;
+  text-transform: uppercase;
+}
+
+.price {
+  line-height: 3.5em;
+}
+
+.price-sale {
+  color: rgb(170, 0, 0);
+}
+
+.price-original {
+  text-decoration: line-through;
+  margin-left: .5em;
+}
+
+.description {
+  font-size: .9em;
+  font-weight: 400;
+}
+
+.social-media {
+  line-height: 5em;
+}
+
+/* Style Selector Formatting ---------------------------------------- */
+.style-selector {
+  display: inline-grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-template-rows: auto;
+  gap: 3px;
+  place-items: center;
+  place-content: center;
+  margin-bottom: 20px;
+}
+
+.thumbnail {
+  height: 70px;
+  width: 70px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin: 0 auto;
+}
+
+.style-selected {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid black;
+}
+
+.style-unselected {
+  height: 70px;
+  width: 70px;
+  object-fit: cover;
+  border-radius: 50%;
+}
+
+.style-name {
+  padding-right: .3em;
+  padding-left: .3em;
+  font-weight: 300;
+  line-height: 1em;
+  font-size: .8em;
+  text-align: center;
+}
+
+.checkmark-icon {
+  display: inline-block;
+  vertical-align: text-top;
+  position: absolute;
+  height: 26px;
+  width: 26px;
+  background-color: white;
+  border-radius: 50%;
+}
+
+
+/* Add To Cart Formatting ---------------------------------------- */
+.add-to-cart {
+  /* display: none; */
+}
+
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown select {
+  display: block
+}
+
+#openSizeSelector {
+  display: block;
+}
+
+
+/* Other Component Formatting ---------------------------------------- */
+

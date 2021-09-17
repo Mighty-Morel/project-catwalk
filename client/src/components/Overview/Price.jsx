@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector } from 'react-redux';
+import overviewStyling from './overview.css';
+
 
 const Price = () => {
   const styleId = useSelector((state) => state.style.id);

@@ -1,7 +1,9 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateStyle } from '../reducers/Style-Reducer';
+import { updateStyle } from '../../reducers/Style-Reducer';
+import overviewStyling from './overview.css';
+
 
 const Style = ({ style }) => {
   const dispatch = useDispatch();

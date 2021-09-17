@@ -1,6 +1,8 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import overviewStyling from './overview.css';
+
 
 const Gallery = () => {
   const allStyles = useSelector((state) => state.style.allStyles);

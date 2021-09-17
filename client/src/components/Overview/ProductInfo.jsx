@@ -2,12 +2,13 @@
 import React, { useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateProductInfo } from '../reducers/Example-Reducer';
-import { updateStyles, updateStyle } from '../reducers/Style-Reducer';
-
+import { updateProductInfo } from '../../reducers/Example-Reducer';
+import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
+import overviewStyling from './overview.css';
+
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);

@@ -3,15 +3,14 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
-import ProductInfo from './ProductInfo.jsx';
-<<<<<<< HEAD
-import Gallery from './Gallery.jsx';
+import ProductInfo from './Overview/ProductInfo.jsx';
+import Gallery from './Overview/Gallery.jsx';
 // import ReviewList from './ReviewList.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
-=======
->>>>>>> main
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
+import overviewStyling from './Overview/overview.css';
+
 
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
