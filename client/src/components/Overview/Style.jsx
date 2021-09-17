@@ -2,8 +2,8 @@
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateStyle } from '../../reducers/Style-Reducer';
+// eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
-
 
 const Style = ({ style }) => {
   const dispatch = useDispatch();

@@ -6,6 +6,7 @@ const initialState = {
   allStyles: [],
   style: {},
   photos: [],
+  mainPhoto: [],
 };
 
 export const styleSlice = createSlice({
@@ -14,16 +15,21 @@ export const styleSlice = createSlice({
   reducers: {
     updateStyle: (state, action) => {
       state.style = action.payload;
-      state.photos = action.payload.photos;
       state.id = action.payload.style_id;
+      state.photos = action.payload.photos;
+      // eslint-disable-next-line prefer-destructuring
+      state.mainPhoto = action.payload.photos[0];
     },
     updateStyles: (state, action) => {
       state.allStyles = action.payload;
+    },
+    updatePhoto: (state, action) => {
+      state.mainPhoto = action.payload;
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateStyles, updateStyle } = styleSlice.actions;
+export const { updateStyles, updateStyle, updatePhoto } = styleSlice.actions;
 
 export default styleSlice.reducer;

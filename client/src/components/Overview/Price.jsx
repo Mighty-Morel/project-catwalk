@@ -1,6 +1,7 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
 

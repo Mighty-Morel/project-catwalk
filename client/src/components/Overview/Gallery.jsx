@@ -1,43 +1,24 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { updatePhoto } from '../../reducers/Style-Reducer';
+
+// eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 import GalleryThumbnail from './GalleryThumbnail.jsx';
 
 const Gallery = () => {
-  const allStyles = useSelector((state) => state.style.allStyles);
-  const selectedStyleId = useSelector((state) => state.style.id);
+  const dispatch = useDispatch();
+
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
-  let mainImage = stylePhotos[0];
+  const mainImage = useSelector((state) => state.style.mainPhoto);
 
-  console.log('allStyles', allStyles);
-  console.log('selectedStyleId', selectedStyleId);
-  console.log('selectedStyle', selectedStyle);
-  console.log('stylePhotos', stylePhotos);
-  console.log('mainImage', stylePhotos[0]);
-
-
-  // const [mainImage, setImage] = useState(stylePhotos[0]);
-  // const renderGallery = () => {
-  //   if (selectedStyle) {
-  //     useEffect(renderGallery, [selectedStyleId]);
-  //     const allPhotos = selectedStyle.photos;
-  //     console.log(selectedStyle.photos);
-  //     console.log('stylePhotos', stylePhotos);
-  //   }
-  // };
-
-  // useEffect(render, [mainImage]);
-
-  const handleClick = (e) => {
-    const selectedImage = e.target.value;
-    // setImage(selectedImage);
-    mainImage = e.target.value;
+  const changePhoto = (photo) => {
+    dispatch(updatePhoto(photo));
   };
 
-  if (stylePhotos.length === 0) {
-    // renderGallery();
+  if (!mainImage) {
     return <div>Loading Images...</div>;
   }
   return (
@@ -53,14 +34,12 @@ const Gallery = () => {
         </div>
         <div className="thumbnail-container">
           {stylePhotos.map((photo) => (
-            <GalleryThumbnail key={photo.url} style={selectedStyle} photo={photo} />
-            // <span key={photo.url} role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
-            //   <img
-            //     className="image-thumbnail"
-            //     src={photo.thumbnail_url}
-            //     alt={selectedStyle.name}
-            //   />
-            // </span>
+            <GalleryThumbnail
+              key={photo.url}
+              style={selectedStyle}
+              photo={photo}
+              changePhoto={changePhoto}
+            />
           ))}
         </div>
       </div>

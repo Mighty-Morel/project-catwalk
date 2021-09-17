@@ -7,8 +7,8 @@ import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
+// eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
-
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);

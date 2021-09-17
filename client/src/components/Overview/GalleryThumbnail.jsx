@@ -1,18 +1,16 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+import React from 'react';
+// eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
-const GalleryThumbnail = ({photo, style}) => {
-  const handleClick = (e) => {
-    // const selectedImage = e.target.value;
-    // setImage(selectedImage);
-    // const mainImage = e.target.value;
-    console.log(photo);
+const GalleryThumbnail = ({ photo, style, changePhoto }) => {
+  const handleClick = () => {
+    changePhoto(photo);
   };
 
   return (
-    <span role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick} >
+    <span role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
       <img
         className="image-thumbnail"
         src={photo.thumbnail_url}
