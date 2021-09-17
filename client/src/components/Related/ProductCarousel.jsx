@@ -88,6 +88,7 @@ class ProductCarousel extends React.Component {
     }
     return (
       <div className="carousel">
+        <div>RELATED PRODUCTS</div>
         <button className="carousel__button carousel__button--left" type="button">
           <img src="./images/arrow-left.png" alt="" />
         </button>
