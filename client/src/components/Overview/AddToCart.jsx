@@ -1,14 +1,8 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-import { useSelector, useDispatch } from 'react-redux';
-import { updateProductInfo } from '../../reducers/Example-Reducer';
-import { updateStyles } from '../../reducers/Style-Reducer';
-import Price from './Price.jsx';
-import StyleSelector from './StyleSelector.jsx';
+import { useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
-
 
 const AddToCart = () => {
   const allStyles = useSelector((state) => state.style.allStyles);
