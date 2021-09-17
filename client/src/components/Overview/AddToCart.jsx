@@ -5,22 +5,16 @@ import { useSelector } from 'react-redux';
 import overviewStyling from './overview.css';
 
 const AddToCart = () => {
-  // const allStyles = useSelector((state) => state.style.allStyles);
-  const selectedStyleId = useSelector((state) => state.style.id);
-  // const selectedStyle = useSelector((state) => state.style.style);
   const selectedSkus = useSelector((state) => state.style.skus);
 
   let availableSkus = [];
 
   if (selectedSkus !== undefined) {
-    console.log('skus', selectedSkus);
+    // console.log('skus', selectedSkus);
     availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
   }
 
   console.log('availableskus', availableSkus);
-  // find the style selected and skus in stock
-  // const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-  // const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
 
   // set initial sku, quantity, size, views and cart
   const [selectSku, setSku] = useState(availableSkus[0]);
@@ -36,11 +30,9 @@ const AddToCart = () => {
     setSize('Select Size');
     showQty(false);
     openSizes(false);
-    // document.getElementById('defaultSize').setAttribute('selected', '');
   };
 
-
-  useEffect(resetDefault, [selectedStyleId]);
+  useEffect(resetDefault, [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -50,11 +42,6 @@ const AddToCart = () => {
   let availableQty = 0;
   if (selectSku !== undefined) {
     availableQty = selectSku[1].quantity;
-    console.log('availableQty', availableQty);
-  }
-
-  if (document.getElementById('disabledSizeSelector') && availableQty > 0) {
-    console.log('found');
   }
 
   const qtySelector = () => {
@@ -83,7 +70,6 @@ const AddToCart = () => {
 
   // SIZE SELECTOR ========================================================
   const handleSizeInput = (inputSize) => {
-    // const inputSize = e.target.value;
     if (inputSize === 'Select Size') {
       showQty(false);
       setSku(availableSkus[0]);
@@ -93,7 +79,6 @@ const AddToCart = () => {
       setSku(matchingSku);
       showQty(true);
       openSizes(false);
-      console.log(selectSize);
     }
   };
 
@@ -120,8 +105,6 @@ const AddToCart = () => {
           <p className="help-text">Please select a size</p>
           <div className="size-dropdown" id="openSizeSelector">
             <button className="size-dropdown-btn" type="submit">{selectSize}</button>
-            {/* <ul className="dropdown" id="openSizeSelector">
-              <li className="dropdown-button">Select Size</li> */}
             {availableSizes}
           </div>
         </>
@@ -135,9 +118,6 @@ const AddToCart = () => {
             <button className="size-dropdown-btn" type="submit">{selectSize}</button>
             <span className="disabled-content">OUT OF STOCK</span>
           </div>
-          {/* <ul className="dropdown" id="disabledSizeSelector" disabled>
-            <li className="dropdown-content" defaultValue="OUT OF STOCK">OUT OF STOCK</li>
-          </ul> */}
         </>
       );
     }
