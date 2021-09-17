@@ -1,11 +1,13 @@
 /* Product Overview Formatting ---------------------------------------- */
 .overview-container {
   width: 90%;
+  height:fit-content;
   display: grid;
   grid-template-columns: 4fr 1fr;
   grid-template-rows: auto;
   margin: auto;
   background-color: white;
+  padding-bottom: 20px;
 }
 
 /* Gallery Formatting --------------------------------------------------- */
@@ -78,7 +80,7 @@ hr {
   grid-column: 4 / 5;
   margin: 0 auto;
   max-width: 800px;
-  height: 650px;
+  height: fit-content;
   font-size: 1em;
   line-height: 1.2em;
   background-color: white;
@@ -204,33 +206,42 @@ hr {
   margin: 0px;
 }
 
-.dropdown {
+.size-dropdown-btn {
+  font-family: 'Roboto Condensed', sans-serif;
+  font-size: 1em;
+  height: 30px;
+  width: 200px;
+  background-color: #ececec;
+  color: #2C3E50;
+  border: 1px solid #2C3E50;
+  cursor: pointer;
+  margin-right: 10px;
+}
+
+.size-dropdown {
   position: relative;
   display: inline-block;
   margin: 5px 0px;
 }
 
-.dropdown-content {
-  display: block !important;
+.sizes {
+  display: none;
   position: absolute;
   background-color: #f9f9f9;
-  width: 100%;
-  height: auto!important;
-  overflow: auto;
+  min-width: 160px;
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-  padding: 12px 16px;
   z-index: 1;
 }
-/*
-.dropdown:hover .dropdown-content {
+.sizes span {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
   display: block;
-} */
-
-.dropdown select {
-  display: block
 }
 
-#openSizeSelector {
+.sizes span:hover {background-color: #f1f1f1}
+
+.size-dropdown:hover .sizes {
   display: block;
 }
 
@@ -238,7 +249,7 @@ button.addToCart {
   height: 30px;
   width: 200px;
   font-family: 'Roboto Condensed', sans-serif;
-  margin: 10px 0px;
+  margin: 5px 0px;
   background-color: #2C3E50;
   color: #ECF0F1;
   font-size: 1.1em;

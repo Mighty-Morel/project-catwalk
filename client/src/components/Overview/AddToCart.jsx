@@ -65,8 +65,8 @@ const AddToCart = () => {
   };
 
   // SIZE SELECTOR ========================================================
-  const handleSizeChange = (e) => {
-    const inputSize = e.target.value;
+  const handleSizeInput = (inputSize) => {
+    // const inputSize = e.target.value;
     if (inputSize === 'Select Size') {
       showQty(false);
       setSku(availableSkus[0]);
@@ -76,11 +76,23 @@ const AddToCart = () => {
       setSku(matchingSku);
       showQty(true);
       openSizes(false);
+      console.log(selectSize);
     }
   };
 
   const availableSizes = availableSkus.map(
-    (sku) => <option key={sku[0]} value={sku[1].size} className="dropdown-content">{sku[1].size}</option>,
+    (sku) => (
+      <span
+        key={sku[0]}
+        className="sizes"
+        role="menuitem"
+        tabIndex="-1"
+        onClick={() => handleSizeInput(sku[1].size)}
+        onKeyPress={() => handleSizeInput(sku[1].size)}
+      >
+        {sku[1].size}
+      </span>
+    ),
   );
 
   const renderSizeSelecter = () => {
@@ -89,10 +101,12 @@ const AddToCart = () => {
       return (
         <>
           <p className="help-text">Please select a size</p>
-          <select className="dropdown" name="openSizeSelector" onChange={handleSizeChange}>
-            <option className="dropdown-content" defaultValue="Select Size">Select Size</option>
+          <div className="size-dropdown" id="openSizeSelector">
+            <button className="size-dropdown-btn" type="submit">{selectSize}</button>
+            {/* <ul className="dropdown" id="openSizeSelector">
+              <li className="dropdown-button">Select Size</li> */}
             {availableSizes}
-          </select>
+          </div>
         </>
       );
     // Show OUT OF STOCK if no stock
@@ -100,19 +114,23 @@ const AddToCart = () => {
       return (
         <>
           <div className="help-text-space" />
-          <select className="dropdown" name="disabledSizeSelector" disabled>
-            <option className="dropdown-content" defaultValue="OUT OF STOCK">OUT OF STOCK</option>
-          </select>
+          <div className="size-dropdown" id="disabledSizeSelector">
+            <button className="size-dropdown-btn" type="submit">{selectSize}</button>
+            <span className="disabled-content">OUT OF STOCK</span>
+          </div>
+          {/* <ul className="dropdown" id="disabledSizeSelector" disabled>
+            <li className="dropdown-content" defaultValue="OUT OF STOCK">OUT OF STOCK</li>
+          </ul> */}
         </>
       );
     }
     return (
       <>
         <div className="help-text-space" />
-        <select className="dropdown" name="activeSizeSelector" onChange={handleSizeChange}>
-          <option id="defaultSize" defaultValue="Select Size">Select Size</option>
+        <div className="size-dropdown" id="openSizeSelector">
+          <button className="size-dropdown-btn" type="submit">{selectSize}</button>
           {availableSizes}
-        </select>
+        </div>
       </>
     );
   };
