@@ -95,6 +95,19 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
     });
 });
 
+// post helpfulness for a question
+
+// post helpfulness for an answer
+app.put(`/qa/answers/:answer_id/helpful`, (req, res) => {
+  axios.put(req.url)
+    .then((response) => {
+      res.status(204);
+    })
+    .catch((err) => {
+      res.status(504).send('error in putting answers as helpful', err);
+    });
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
