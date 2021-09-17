@@ -16,6 +16,8 @@ class ProductCarousel extends React.Component {
     this.state = {
       productInfo: [],
     };
+    // this.prev = this.prev.bind(this);
+    // this.next = this.next.bind(this);
   }
 
   componentDidMount() {
@@ -24,7 +26,8 @@ class ProductCarousel extends React.Component {
 
   getInfo() {
     // axios.get('/products/${current product id}/related')
-    axios.get('/products/48432/related')
+    // original #48432
+    axios.get('/products/48439/related')
       .then((res) => {
         const relatedIds = res.data;
         const ids = [];
@@ -70,6 +73,14 @@ class ProductCarousel extends React.Component {
       });
   }
 
+  // prev() {
+
+  // }
+
+  // next() {
+
+  // }
+
   render() {
     const { productInfo } = this.state;
     if (productInfo.length === 0) {
@@ -80,19 +91,27 @@ class ProductCarousel extends React.Component {
         <button className="carousel__button carousel__button--left" type="button">
           <img src="./images/arrow-left.png" alt="" />
         </button>
+
         <div className="carousel__track-container">
-          <ul className="carousel__track">
-            <li className="carousel__slide">
-              <img className="carousel__image" src="https://bit.ly/3hFxW3E" alt="" />
-            </li>
-            <li className="carousel__slide">
-              <img className="carousel__image" src="https://bit.ly/3zfr8Qk" alt="" />
-            </li>
-            <li className="carousel__slide">
-              <img className="carousel__image" src="https://bit.ly/3hH1Nc5" alt="" />
-            </li>
-          </ul>
+          {productInfo.map((product, i) => (
+
+            <ul className="carousel__track">
+
+              <li className="carousel__slide">
+                <div className="card">
+                  <img className="cardImage" src={product.pic} alt="" />
+                  <div className="cardCategory">{product.category}</div>
+                  <div className="cardTitle">{product.name}</div>
+                  <div className="cardPrice">${product.price}</div>
+                  <div className="cardRating">* star placeholder *</div>
+                </div>
+              </li>
+
+            </ul>
+
+          ))}
         </div>
+
         <button className="carousel__button carousel__button--right" type="button">
           <img src="./images/arrow-right.png" alt="" />
         </button>
@@ -102,6 +121,10 @@ class ProductCarousel extends React.Component {
 }
 
 export default ProductCarousel;
+
+{/* <li className="carousel__slide">
+  <img className="carousel__image" src="https://bit.ly/3hFxW3E" alt="" />
+</li> */}
 
 // return (
 //   <>
