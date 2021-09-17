@@ -77,20 +77,22 @@ class ProductCarousel extends React.Component {
 
   prev() {
     console.log('check previous button')
+    this.myRef.current.scrollLeft -= 300;
   }
 
   // click right button, move slides to the left by one card
   next() {
+    this.myRef.current.scrollLeft += 300;
     // add to 0 and move slide
     // want to change position of slides by 1
     this.setState((prevState) => ({
       index: prevState.index + 1,
     }), (i) => {
-      console.log(this.state.index);
+      // console.log(this.state.index);
 
       // this.refs[i].scrollIntoView({block: 'end', behavior: 'smooth'});
       // this.myRef.current.scrollIntoView();
-      console.log(this.myRef.current.scrollLeft += 500);
+      // console.log(this.myRef.current.scrollLeft += 500);
     });
   }
 
