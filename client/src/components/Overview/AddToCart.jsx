@@ -7,12 +7,14 @@ import overviewStyling from './overview.css';
 const AddToCart = () => {
   const allStyles = useSelector((state) => state.style.allStyles);
   const selectedStyleId = useSelector((state) => state.style.id);
+  // const selectedStyle = useSelector((state) => state.style.style);
+  // console.log(selectedStyle);
 
   // find the style selected and skus in stock
   const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
   const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
 
-  // set initial sku, quantity, sizes, views and cart
+  // set initial sku, quantity, size, views and cart
   const [selectSku, setSku] = useState(availableSkus[0]);
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
@@ -42,7 +44,7 @@ const AddToCart = () => {
     // show max of 15 in dropdown
     const listedQty = availableQty > 15 ? 15 : availableQty;
     const options = [...Array(listedQty + 1).keys()].slice(1);
-    return options.map((i) => <option key={selectSku[0] + i} value={i}>{i}</option>);
+    return options.map((i) => <option key={selectSku[0] + i} className="dropdown-content" value={i}>{i}</option>);
   };
 
   const handleQtyChange = (e) => {
@@ -78,7 +80,7 @@ const AddToCart = () => {
   };
 
   const availableSizes = availableSkus.map(
-    (sku) => <option key={sku[0]} value={sku[1].size}>{sku[1].size}</option>,
+    (sku) => <option key={sku[0]} value={sku[1].size} className="dropdown-content">{sku[1].size}</option>,
   );
 
   const renderSizeSelecter = () => {
@@ -87,8 +89,8 @@ const AddToCart = () => {
       return (
         <>
           <p className="help-text">Please select a size</p>
-          <select className="dropdown" id="openSizeSelector" name="openSizeSelector" onChange={handleSizeChange}>
-            <option defaultValue="Select Size">Select Size</option>
+          <select className="dropdown" name="openSizeSelector" onChange={handleSizeChange}>
+            <option className="dropdown-content" defaultValue="Select Size">Select Size</option>
             {availableSizes}
           </select>
         </>
@@ -97,7 +99,7 @@ const AddToCart = () => {
     } if (availableQty === 0) {
       return (
         <select className="dropdown" name="disabledSizeSelector" disabled>
-          <option defaultValue="OUT OF STOCK">OUT OF STOCK</option>
+          <option className="dropdown-content" defaultValue="OUT OF STOCK">OUT OF STOCK</option>
         </select>
       );
     }
