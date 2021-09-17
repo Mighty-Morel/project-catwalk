@@ -5,11 +5,11 @@ import { useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
-const GalleryThumbnail = ({ photo, style, changePhoto }) => {
+const GalleryThumbnail = ({ photo, style, selectPhoto }) => {
   const selectedPhotoUrl = useSelector((state) => state.style.mainPhoto.url);
 
   const handleClick = () => {
-    changePhoto(photo);
+    selectPhoto(photo);
   };
 
   const renderThumbnail = () => {

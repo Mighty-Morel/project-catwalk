@@ -14,7 +14,7 @@ const Gallery = () => {
   const stylePhotos = useSelector((state) => state.style.photos);
   const mainImage = useSelector((state) => state.style.mainPhoto);
 
-  const changePhoto = (photo) => {
+  const selectPhoto = (photo) => {
     dispatch(updatePhoto(photo));
   };
 
@@ -38,7 +38,7 @@ const Gallery = () => {
               key={photo.url}
               style={selectedStyle}
               photo={photo}
-              changePhoto={changePhoto}
+              selectPhoto={selectPhoto}
             />
           ))}
         </div>
