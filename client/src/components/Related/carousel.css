@@ -22,6 +22,7 @@ body {
 .carousel__track-container {
   background: lightsteelblue;
   display: flex;
+  overflow: hidden;
   /* padding: 10px; */
   /* height: 100%; */
   /* position: relative; */
