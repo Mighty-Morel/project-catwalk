@@ -45,13 +45,13 @@ const QuestionEntry = (props) => {
         } = answer;
         return (
           <AnswerEntry
-          key={answer_id}
-          id={answer_id}
-          answer={body}
-          date={date}
-          answerer={answerer_name}
-          helpfulness={helpfulness}
-          photos={photos}
+            key={answer_id}
+            id={answer_id}
+            answer={body}
+            date={date}
+            answerer={answerer_name}
+            helpfulness={helpfulness}
+            photos={photos}
           />
         );
       })}
