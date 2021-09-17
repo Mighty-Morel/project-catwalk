@@ -16,7 +16,7 @@ class ProductCarousel extends React.Component {
     super(props);
     this.state = {
       productInfo: [],
-      position: 0,
+      index: 0,
     };
     // this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -82,10 +82,15 @@ class ProductCarousel extends React.Component {
   // click right button, move slides to the left by one card
   next() {
     // add to 0 and move slide
+    // want to change position of slides by 1
     this.setState((prevState) => ({
-      position: prevState.position + 1,
-    }), () => {
-      console.log(this.state.position)
+      index: prevState.index + 1,
+    }), (i) => {
+      console.log(this.state.index);
+
+      // this.refs[i].scrollIntoView({block: 'end', behavior: 'smooth'});
+      // this.myRef.current.scrollIntoView();
+      console.log(this.myRef.current.scrollLeft += 250);
     });
   }
 
@@ -126,6 +131,9 @@ class ProductCarousel extends React.Component {
 }
 
 export default ProductCarousel;
+
+{/* <ul className="carousel__track" ref={this.myRef}> */}
+
 
 // return (
 //   <>
