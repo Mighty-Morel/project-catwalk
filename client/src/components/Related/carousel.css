@@ -30,9 +30,9 @@ body {
 
 /* ul */
 .carousel__track {
-  /* padding: 0;
+  padding: 0;
   margin: 0;
-  list-style: none; */
+  list-style: none;
 }
 
 .carousel__slide {
