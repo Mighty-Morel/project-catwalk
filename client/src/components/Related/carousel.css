@@ -23,7 +23,7 @@ body {
   background: lightsteelblue;
   display: flex;
   overflow: hidden;
-  /* padding: 10px; */
+  padding: 10px;
   /* height: 100%; */
   /* position: relative; */
 }
@@ -40,6 +40,7 @@ body {
   top: 0;
   bottom: 0;
   width: 100%; */
+  padding: 10px;
 }
 
 /* transform move btn to exact mid */
