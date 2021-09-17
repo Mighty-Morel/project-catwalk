@@ -98,16 +98,22 @@ const AddToCart = () => {
     // Show OUT OF STOCK if no stock
     } if (availableQty === 0) {
       return (
-        <select className="dropdown" name="disabledSizeSelector" disabled>
-          <option className="dropdown-content" defaultValue="OUT OF STOCK">OUT OF STOCK</option>
-        </select>
+        <>
+          <div className="help-text-space" />
+          <select className="dropdown" name="disabledSizeSelector" disabled>
+            <option className="dropdown-content" defaultValue="OUT OF STOCK">OUT OF STOCK</option>
+          </select>
+        </>
       );
     }
     return (
-      <select className="dropdown" name="activeSizeSelector" onChange={handleSizeChange}>
-        <option id="defaultSize" defaultValue="Select Size">Select Size</option>
-        {availableSizes}
-      </select>
+      <>
+        <div className="help-text-space" />
+        <select className="dropdown" name="activeSizeSelector" onChange={handleSizeChange}>
+          <option id="defaultSize" defaultValue="Select Size">Select Size</option>
+          {availableSizes}
+        </select>
+      </>
     );
   };
 

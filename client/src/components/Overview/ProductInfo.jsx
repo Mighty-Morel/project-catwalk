@@ -60,9 +60,7 @@ const ProductInfo = () => {
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />
-        <div data-testid="add-to-cart" className="add-to-cart">
-          <AddToCart allStyles={allStyles} />
-        </div>
+        <AddToCart allStyles={allStyles} />
       </div>
     </>
   );
