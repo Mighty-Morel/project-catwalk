@@ -82,7 +82,7 @@ class ProductCarousel extends React.Component {
   // click right button, move slides to the left by one card
   next() {
     const slide = this.myRef.current; // should be each carousel slide
-    console.log('checking my node', slide); // should return an object in console
+    console.log('checking my node', slide.children); // should return an object in console
     // add to 0 and move slide
     // this.setState({
     //   position:
