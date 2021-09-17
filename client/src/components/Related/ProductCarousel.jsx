@@ -16,6 +16,7 @@ class ProductCarousel extends React.Component {
     super(props);
     this.state = {
       productInfo: [],
+      position: 0,
     };
     // this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -79,8 +80,12 @@ class ProductCarousel extends React.Component {
   // }
 
   next() {
-    const node = this.myRef.current; // should be each carousel slide
-    console.log('checking my node', node); // should return an object in console
+    const slide = this.myRef.current; // should be each carousel slide
+    console.log('checking my node', slide); // should return an object in console
+    // add to 0 and move slide
+    // this.setState({
+    //   position:
+    // });
   }
 
   render() {
