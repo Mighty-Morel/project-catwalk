@@ -8,19 +8,28 @@ const AddToCart = () => {
   const allStyles = useSelector((state) => state.style.allStyles);
   const selectedStyleId = useSelector((state) => state.style.id);
 
-  // find the style selected
+  // find the style selected and skus in stock
   const selectedStyle = allStyles.find((style) => selectedStyleId === style.style_id);
-
-  // set up dropdown for available sizes
   const availableSkus = Object.entries(selectedStyle.skus).filter((sku) => sku[1].quantity > 0);
 
-  // set initial sku, quantity, and sizes
+  // set initial sku, quantity, sizes, views and cart
   const [selectSku, setSku] = useState(availableSkus[0]);
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
-  const [showQty, setQtyDisplay] = useState(false);
-  const [clickedAdd, setClickedAdd] = useState(false);
+  const [isQtyShown, showQty] = useState(false);
+  const [areSizesOpen, openSizes] = useState(false);
   const [cart, addToCart] = useState([]);
+
+  // reset views when rendering new style
+  const resetDefault = () => {
+    setSku(availableSkus[0]);
+    setSize('Select Size');
+    showQty(false);
+    openSizes(false);
+    // document.getElementById('defaultSize').setAttribute('selected', '');
+  };
+
+  useEffect(resetDefault, [selectedStyleId]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -41,7 +50,8 @@ const AddToCart = () => {
   };
 
   const renderQtySelector = () => {
-    if (showQty) {
+    // only show Qty dropdown if size is selected and in stock
+    if (isQtyShown && availableQty > 0) {
       return (
         <select className="dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
       );
@@ -56,14 +66,14 @@ const AddToCart = () => {
   const handleSizeChange = (e) => {
     const inputSize = e.target.value;
     if (inputSize === 'Select Size') {
-      setQtyDisplay(false);
+      showQty(false);
       setSku(availableSkus[0]);
     } else {
       setSize(inputSize);
       const matchingSku = availableSkus.find((sku) => inputSize === sku[1].size);
       setSku(matchingSku);
-      setQtyDisplay(true);
-      setClickedAdd(false);
+      showQty(true);
+      openSizes(false);
     }
   };
 
@@ -73,7 +83,7 @@ const AddToCart = () => {
 
   const renderSizeSelecter = () => {
     // if no size is chosen, clicking Add to Cart opens Select Size Dropdown
-    if (selectSize === 'Select Size' && availableQty > 0 && clickedAdd) {
+    if (selectSize === 'Select Size' && availableQty > 0 && areSizesOpen) {
       return (
         <>
           <p className="help-text">Please select a size</p>
@@ -99,33 +109,11 @@ const AddToCart = () => {
     );
   };
 
-  // If no stock:
-  // Hide Add to Cart Button (disable Add)
-  // Qty should be hidden (-) (disable Qty)
-
-  // If valid size and qty:
-  // show Add to Cart Button
-  // show qty
-  // show sizes
-  // after button click, clear display
-
   // ADD TO CART BUTTON ========================================================
-  // reset views when rendering new style
-  const resetDefault = () => {
-    setSku(availableSkus[0]);
-    setSize('Select Size');
-    setQtyDisplay(false);
-    setClickedAdd(false);
-    // document.getElementById('defaultSize').setAttribute('selected', '');
-  };
-
-  useEffect(resetDefault, [selectedStyleId]);
-
   const handleClick = () => {
+    // if clicked without selecting size, trigger size dropdown
     if (selectSize === 'Select Size') {
-      // const sizeDropdown = document.getElementById('activeSizeSelector');
-      // sizeDropdown.classList.toggle('open-dropdown');
-      setClickedAdd(true);
+      openSizes(true);
     } else {
       const item = {
         sku: selectSku[0],
@@ -137,6 +125,7 @@ const AddToCart = () => {
     }
   };
 
+  // Hide Add to Cart button if no stock available
   const renderButton = () => {
     if (availableQty > 0) {
       return (
