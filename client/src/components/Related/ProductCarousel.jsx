@@ -79,6 +79,7 @@ class ProductCarousel extends React.Component {
 
   // }
 
+  // click right button, move slides to the left by one card
   next() {
     const slide = this.myRef.current; // should be each carousel slide
     console.log('checking my node', slide); // should return an object in console
@@ -100,10 +101,10 @@ class ProductCarousel extends React.Component {
           <img src="./images/arrow-left.png" alt="" />
         </button>
 
-        <div className="carousel__track-container" ref={this.myRef}>
-          {productInfo.map((product, i) => (
-            <ul className="carousel__track" key={i}>
-              <li className="carousel__slide">
+        <div className="carousel__track-container">
+          <ul className="carousel__track" ref={this.myRef}>
+            {productInfo.map((product, i) => (
+              <li className="carousel__slide" key={i}>
                 <div className="card">
                   <img className="cardImage" src={product.pic} alt="" />
                   <dl className="cardCategory">{product.category}</dl>
@@ -112,8 +113,8 @@ class ProductCarousel extends React.Component {
                   <dl className="cardRating">* star placeholder *</dl>
                 </div>
               </li>
-            </ul>
-          ))}
+            ))}
+          </ul>
         </div>
 
         <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
