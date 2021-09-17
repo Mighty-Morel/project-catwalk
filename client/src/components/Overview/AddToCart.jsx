@@ -160,7 +160,6 @@ const AddToCart = () => {
     return <div />;
   };
 
-
   if (!selectSku) {
     return <div>Loading Styles...</div>;
   }
@@ -169,6 +168,7 @@ const AddToCart = () => {
       {renderSizeSelecter()}
       {renderQtySelector()}
       {renderButton()}
+      <div className="heart-icon" />
     </div>
   );
 };
