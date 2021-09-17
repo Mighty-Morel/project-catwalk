@@ -1,12 +1,12 @@
 body {
-  background: #dcd0ff8f;
+  /* background: #dcd0ff8f; */
 }
 
 .carousel {
   background: whitesmoke;
   position: relative;
   height: 315px;
-  width: 80%;
+  width: 60%;
   margin: 0 auto;
 }
 
@@ -25,7 +25,7 @@ body {
   overflow: hidden;
   padding: 10px;
   /* height: 100%; */
-  /* position: relative; */
+  position: relative;
 }
 
 /* ul */

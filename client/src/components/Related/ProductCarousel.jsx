@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
@@ -17,7 +18,8 @@ class ProductCarousel extends React.Component {
       productInfo: [],
     };
     // this.prev = this.prev.bind(this);
-    // this.next = this.next.bind(this);
+    this.next = this.next.bind(this);
+    this.myRef = React.createRef();
   }
 
   componentDidMount() {
@@ -25,9 +27,8 @@ class ProductCarousel extends React.Component {
   }
 
   getInfo() {
-    // axios.get('/products/${current product id}/related')
     // original #48432
-    axios.get('/products/48439/related')
+    axios.get('/products/48438/related')
       .then((res) => {
         const relatedIds = res.data;
         const ids = [];
@@ -77,9 +78,10 @@ class ProductCarousel extends React.Component {
 
   // }
 
-  // next() {
-
-  // }
+  next() {
+    const node = this.myRef.current; // should be each carousel slide
+    console.log('checking my node', node); // should return an object in console
+  }
 
   render() {
     const { productInfo } = this.state;
@@ -93,27 +95,23 @@ class ProductCarousel extends React.Component {
           <img src="./images/arrow-left.png" alt="" />
         </button>
 
-        <div className="carousel__track-container">
+        <div className="carousel__track-container" ref={this.myRef}>
           {productInfo.map((product, i) => (
-
-            <ul className="carousel__track">
-
+            <ul className="carousel__track" key={i}>
               <li className="carousel__slide">
                 <div className="card">
                   <img className="cardImage" src={product.pic} alt="" />
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
-                  <dl className="cardPrice">${product.price}</dl>
+                  <dl className="cardPrice">${product.price} ${product.sale}</dl>
                   <dl className="cardRating">* star placeholder *</dl>
                 </div>
               </li>
-
             </ul>
-
           ))}
         </div>
 
-        <button className="carousel__button carousel__button--right" type="button">
+        <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
           <img src="./images/arrow-right.png" alt="" />
         </button>
       </div>
@@ -122,10 +120,6 @@ class ProductCarousel extends React.Component {
 }
 
 export default ProductCarousel;
-
-{/* <li className="carousel__slide">
-  <img className="carousel__image" src="https://bit.ly/3hFxW3E" alt="" />
-</li> */}
 
 // return (
 //   <>
