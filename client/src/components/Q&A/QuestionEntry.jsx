@@ -33,6 +33,7 @@ const QuestionEntry = (props) => {
   return (
     <div className="question-entry">
       <h1>Q: {props.question}</h1>
+      <h2>A: </h2>
       {displayedAnswers.map((answer) => {
         const {
           answer_id,
@@ -54,7 +55,6 @@ const QuestionEntry = (props) => {
           />
         );
       })}
-      <span>{props.asker} {props.date}</span>
     </div>
   );
 };

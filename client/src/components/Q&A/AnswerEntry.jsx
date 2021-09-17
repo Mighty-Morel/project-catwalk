@@ -1,13 +1,18 @@
 import React from 'react';
+import moment from 'moment';
 import styling from './questions.css';
 
 const AnswerEntry = (props) => {
+  // Destructuring
+  const { date, answer, answerer } = props;
+  // Format date
+  const formattedDate = moment(date).format('LL');
   return (
     <>
-      <h2>Answer:</h2>
-      <p>{props.answer}</p>
+      <p>{answer}</p>
+      <span>{formattedDate}</span>
     </>
   );
-}
+};
 
 export default AnswerEntry;
