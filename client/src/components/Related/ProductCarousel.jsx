@@ -57,6 +57,7 @@ class ProductCarousel extends React.Component {
                 if (productInfo[j].relatedId === res.data.id) {
                   productInfo[j] = { category: res.data.category, ...productInfo[j] };
                   productInfo[j] = { features: res.data.features, ...productInfo[j] };
+                  productInfo[j] = { name: res.data.name, ...productInfo[j] };
                 }
               }
               this.setState({
@@ -67,7 +68,6 @@ class ProductCarousel extends React.Component {
             .then((res) => {
               for (let k = 0; k < productInfo.length; k++) {
                 if (productInfo[k].relatedId === Number(res.data.product_id)) {
-                  productInfo[k] = { name: res.data.results[0].name, ...productInfo[k] };
                   productInfo[k] = { price: res.data.results[0].original_price, ...productInfo[k] };
                   productInfo[k] = { sale: res.data.results[0].sale_price, ...productInfo[k] };
                   productInfo[k] = {
@@ -88,15 +88,42 @@ class ProductCarousel extends React.Component {
     // get id for currently viewed product
     axios.get('/products/48432')
       .then((res) => {
-        console.log(res.data);
+        console.log('data for overviewId', res.data);
         // this.setState({
         //   modalInfo: ids,
         // });
       });
-    // get id of the card clicked
-    // get data on features of card clicked with acquired id
-    console.log(this.state.productInfo);
+    // 0: { feature: 'Fabric', value: 'Canvas' }
+    // 1: { feature: 'Buttons', value: 'Brass' }
+    axios.get(`/products/${cardId}`)
+      .then((res) => {
+        console.log('data for cardId', res.data);
+      });
+    // 0: {feature: 'Lenses', value: 'Ultrasheen'}
+    // 1: {feature: 'UV Protection', value: null}
+    // 2: {feature: 'Frames', value: 'LightCompose'}
+    this.setState({
+      modalInfo: [],
+    });
   }
+
+  /*
+  add overview product features to modalInfo state array as objects
+  if card product feature is the same as overview product feature
+  add a check to
+  then add card product features to modalInfo state array as objects
+
+
+
+  Comparing ----------------------------------------   x
+  48432 overview product              48433 card product
+                      Canvas Fabric
+                      Brass Buttons
+                      Ultrasheen Lenses
+                      UV Protection
+                      LightCompose Frames
+              {res.data.value}{res.data.feature}
+  */
 
   prev() {
     this.myRef.current.scrollLeft -= 230;
@@ -114,7 +141,6 @@ class ProductCarousel extends React.Component {
   }
 
   showModal(cardId) {
-    console.log('checking id', cardId);
     this.getModalInfo(cardId);
     this.setState({
       show: true,
@@ -158,7 +184,7 @@ class ProductCarousel extends React.Component {
                   <div className="card">
                     <div className="image__container">
                       <img className="cardImage" src={product.pic} alt="" />
-                      <button id={product.relatedId} className="card__star" type="button" onClick={() => this.showModal(product.relatedId)}>
+                      <button className="card__star" type="button" onClick={() => this.showModal(product.relatedId)}>
                         <img src="./images/star.png" alt="" />
                       </button>
                     </div>
