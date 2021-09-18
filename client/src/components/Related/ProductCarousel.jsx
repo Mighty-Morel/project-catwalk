@@ -157,8 +157,8 @@ class ProductCarousel extends React.Component {
                   <div className="card">
                     <div className="image__container">
                       <img className="cardImage" src={product.pic} alt="" />
-                      <button className="carousel__button" onClick={() => this.showModal()} type="button">
-                        <img className="cardStar" src="./images/star.png" alt="" />
+                      <button className="card__star" type="button" onClick={() => this.showModal()}>
+                        <img src="./images/star.png" alt="" />
                       </button>
                     </div>
                     <dl className="cardCategory">{product.category}</dl>

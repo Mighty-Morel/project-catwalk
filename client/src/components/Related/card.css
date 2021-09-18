@@ -14,13 +14,18 @@
   height: 13rem;
 }
 
-.cardStar {
+.card__star {
   position: absolute;
   top: 10px;
-  left: 180px;
+  left: 170px;
   width: 20px;
   background: transparent;
   cursor: pointer;
+  border: none;
+}
+
+.card__star img {
+  width: 20px;
 }
 
 ul,li {
