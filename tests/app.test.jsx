@@ -49,5 +49,5 @@ it('updates id on click', async () => {
     </Provider>,
   );
   fireEvent.click(getByTestId('loadapp'));
-  expect(getByTestId('loadapp')).toHaveTextContent('Hello World! CurrentId is1000and current Style is 293480');
+  expect(getByTestId('loadapp')).toHaveTextContent('Hello World! CurrentId is48434and current Style is 293480');
 });

@@ -9,6 +9,8 @@ import StyleSelector from './StyleSelector.jsx';
 import AddToCart from './AddToCart.jsx';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
+import 'regenerator-runtime/runtime';
+
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
@@ -17,7 +19,7 @@ const ProductInfo = () => {
 
   const dispatch = useDispatch();
 
-  const getAllStyles = () => {
+  const getAllStyles = async () => {
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
         // console.log(response.data.results);
@@ -27,7 +29,7 @@ const ProductInfo = () => {
       .catch((error) => console.log('Error getting all styles:', error));
   };
 
-  const updateProduct = () => {
+  const updateProduct = async () => {
     axios.get(`/products/${productId}`)
       .then((response) => {
         dispatch(updateProductInfo(response.data));

@@ -13,6 +13,8 @@ test('should return the initial state', () => {
       allStyles: [],
       style: {},
       photos: [],
+      mainPhoto: [],
+      skus: {},
     },
   );
 });
@@ -23,6 +25,8 @@ test('should update the Style Id', () => {
     allStyles: [],
     style: {},
     photos: [],
+    mainPhoto: [],
+    skus: {},
   };
 
   const newStyle = {
@@ -30,6 +34,13 @@ test('should update the Style Id', () => {
     name: 'Desert Brown & Tan',
     original_price: '140.00',
     photos: [1, 2],
+    mainPhoto: 1,
+    skus: {
+      123: {
+        size: 'xs',
+        quantity: 4,
+      },
+    },
   };
 
   expect(reducer(previousState, updateStyle(newStyle))).toEqual(
@@ -37,11 +48,19 @@ test('should update the Style Id', () => {
       id: 293480,
       allStyles: [],
       photos: [1, 2],
+      mainPhoto: 1,
       style: {
         style_id: 293480,
         name: 'Desert Brown & Tan',
         original_price: '140.00',
         photos: [1, 2],
+      },
+
+      skus: {
+        123: {
+          size: 'xs',
+          quantity: 4,
+        },
       },
     },
   );
@@ -53,6 +72,8 @@ test('should return an array of objects with style info', () => {
     allStyles: [],
     style: {},
     photos: [],
+    mainPhoto: [],
+    skus: {},
   };
   expect(reducer(previousState, updateStyles([
     {
@@ -91,5 +112,7 @@ test('should return an array of objects with style info', () => {
     ],
     style: {},
     photos: [],
+    mainPhoto: [],
+    skus: {},
   });
 });
