@@ -23,6 +23,7 @@ class ProductCarousel extends React.Component {
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
     this.myRef = React.createRef();
+    this.modal = this.modal.bind(this);
   }
 
   componentDidMount() {
@@ -92,6 +93,11 @@ class ProductCarousel extends React.Component {
     }
   }
 
+  modal() {
+    console.log('clicked star response');
+    const { productInfo } = this.state;
+  }
+
   render() {
     const { productInfo } = this.state;
     if (productInfo.length === 0) {
@@ -112,7 +118,7 @@ class ProductCarousel extends React.Component {
                 <div className="card">
                   <div className="image__container">
                     <img className="cardImage" src={product.pic} alt="" />
-                    <img className="cardStar" src="./images/star.png" alt="" />
+                    <img className="cardStar" src="./images/star.png" alt="" onClick={() => this.modal()} />
                   </div>
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
