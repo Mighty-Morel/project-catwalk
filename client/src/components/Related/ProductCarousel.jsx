@@ -23,7 +23,6 @@ class ProductCarousel extends React.Component {
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
     this.myRef = React.createRef();
-    this.modal = this.modal.bind(this);
   }
 
   componentDidMount() {
@@ -117,7 +116,7 @@ class ProductCarousel extends React.Component {
                   </div>
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
-                  <dl className="cardPrice">${product.price} ${product.sale}</dl>
+                  <dl className="cardPrice">${product.price}</dl>
                   <dl className="cardRating">* star placeholder *</dl>
                 </div>
               </li>
