@@ -16,9 +16,9 @@ class ProductCarousel extends React.Component {
     super(props);
     this.state = {
       productInfo: [],
-      index: 0,
       prev: false,
       next: true,
+      counter: 0,
     };
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -30,7 +30,7 @@ class ProductCarousel extends React.Component {
   }
 
   getInfo() {
-    // original #48432
+    // original #48432, holder 48438, 48439, 48434
     axios.get('/products/48438/related')
       .then((res) => {
         const relatedIds = res.data;
@@ -78,29 +78,39 @@ class ProductCarousel extends React.Component {
   }
 
   prev() {
-    console.log('check previous button');
     this.myRef.current.scrollLeft -= 230;
-    // set the state of prev to be false
-    // change state of prev to true when next is clicked
-    // when state of prev is false button is hidden
-    // when state of prev is true button is displayed
-  }
-
-  // click right button, move slides to the left by one card
-  next() {
-    console.log(this.myRef);
-    this.myRef.current.scrollLeft += 230;
-    if (this.myRef.current.scrollLeft === 0) {
-      console.log('current state is 0')
+    console.log(this.myRef.current.scrollLeft)
+    if (this.myRef.current.scrollLeft <230) {
+      console.log('BEGINNING OF SCROLL')
     }
-    this.setState({
-      prev: true,
-    });
-    // if scroll state is 0 hide the prev button
-    // on next click unhide prev button
-    // get length of how many cards to find around how much scroll should be
-    // if scroll number hits the scroll end length
-    // hide the next button
+   }
+
+  next() {
+    const { productInfo, counter } = this.state;
+    // console.log(productInfo.length);
+    // console.log(this.myRef.current.scrollWidth)
+    this.myRef.current.scrollLeft += 230;
+    console.log(this.myRef.current.scrollLeft);
+    // 230 * 6 === 1380 end of scroll
+    // (productInfo.length - 3) * 230 === end of scroll!
+    if ((productInfo.length - 3) * 230 === this.myRef.current.scrollLeft) {
+      console.log('END OF SCROLL')
+    }
+    // 9 cards 6 clicks
+    // 6 cards 3 clicks
+    // 5 cards 2 clicks
+    // productInfo.length - 3 clicks = end of flexbox
+    // if counter === productInfo.length - 3 (end of flexbox)
+    // change
+
+    // this.setState((prevState) => ({
+    //   counter: prevState.counter + 1,
+    // }), () => {
+    //   console.log(this.state.counter)
+    //   if (counter === productInfo.length - 4) {
+    //     console.log('end of flexbox!')
+    //   }
+    // });
   }
 
   render() {
