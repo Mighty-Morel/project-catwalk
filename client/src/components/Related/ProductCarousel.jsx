@@ -16,9 +16,9 @@ class ProductCarousel extends React.Component {
     super(props);
     this.state = {
       productInfo: [],
-      prev: false,
-      next: true,
-      counter: 0,
+      // prev: false,
+      // next: true,
+      // counter: 0,
     };
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -80,43 +80,17 @@ class ProductCarousel extends React.Component {
 
   prev() {
     this.myRef.current.scrollLeft -= 230;
-    console.log(this.myRef.current.scrollLeft)
     if (this.myRef.current.scrollLeft < 230) {
-      console.log('BEGINNING OF SCROLL')
+      console.log('BEGINNING OF SCROLL');
     }
   }
 
   next() {
-    const { productInfo, counter } = this.state;
-    // console.log(productInfo.length);
-    // console.log(this.myRef.current.scrollWidth)
+    const { productInfo } = this.state;
     this.myRef.current.scrollLeft += 230;
-    console.log(this.myRef.current.scrollLeft);
-    // 230 * 6 === 1380 end of scroll
-    // (productInfo.length - 3) * 230 === end of scroll!
     if ((productInfo.length - 3) * 230 === this.myRef.current.scrollLeft) {
-      console.log('END OF SCROLL')
+      console.log('END OF SCROLL');
     }
-    // 9 cards 6 clicks
-    // 6 cards 3 clicks
-    // 5 cards 2 clicks
-    // productInfo.length - 3 clicks = end of flexbox
-    // if counter === productInfo.length - 3 (end of flexbox)
-    // change
-
-    // this.setState((prevState) => ({
-    //   counter: prevState.counter + 1,
-    // }), () => {
-    //   console.log(this.state.counter)
-    //   if (counter === productInfo.length - 4) {
-    //     console.log('end of flexbox!')
-    //   }
-    // });
-  }
-
-  modal() {
-    // show modal pop up window
-    console.log('clicked on star')
   }
 
   render() {
@@ -139,9 +113,8 @@ class ProductCarousel extends React.Component {
                 <div className="card">
                   <div className="image__container">
                     <img className="cardImage" src={product.pic} alt="" />
-                    <img className="cardStar" src="./images/star.png" alt="" onClick={() => this.modal()}/>
+                    <img className="cardStar" src="./images/star.png" alt="" />
                   </div>
-
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
                   <dl className="cardPrice">${product.price} ${product.sale}</dl>
@@ -162,23 +135,3 @@ class ProductCarousel extends React.Component {
 }
 
 export default ProductCarousel;
-
-{/* <ul className="carousel__track" ref={this.myRef}> */ }
-
-
-// return (
-//   <>
-//     {productInfo.map((product, i) => (
-//       // eslint-disable-next-line react/no-array-index-key
-//       <div className="column" key={i}>
-//         <div className="card">
-//           <img className="cardImage" src={product.pic} alt="related product" />
-//           <ul className="cardCategory">{product.category}</ul>
-//           <ul className="cardTitle">{product.name}</ul>
-//           <ul className="cardPrice">${product.price}</ul>
-//           <ul className="cardRating">* star placeholder *</ul>
-//         </div>
-//       </div>
-//     ))}
-//   </>
-// );
