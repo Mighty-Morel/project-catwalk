@@ -1,3 +1,4 @@
+/* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-unused-vars */
@@ -10,6 +11,7 @@ import React from 'react';
 import axios from 'axios';
 import card from './card.css';
 import carousel from './carousel.css';
+import Modal from './Modal.jsx';
 
 class ProductCarousel extends React.Component {
   constructor(props) {
@@ -104,6 +106,8 @@ class ProductCarousel extends React.Component {
       return 'loading...';
     }
     return (
+      <>
+      <Modal />
       <div className="carousel">
         <div>RELATED PRODUCTS</div>
 
@@ -135,6 +139,7 @@ class ProductCarousel extends React.Component {
         </button>
 
       </div>
+      </>
     );
   }
 }
