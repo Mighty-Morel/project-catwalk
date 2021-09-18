@@ -43,10 +43,11 @@ const App = () => {
       </Router> */}
       {/* <div><ProductInfo /></div> */}
 
-      {/* <div><ProductInfo productId={currentId} /></div> */}
+      <div><ProductInfo productId={currentId} /></div>
       {/* <div><QuestionsAndAnswers productId={productId} /></div> */}
-      <div><ReviewList /></div>
-      {/* <div><RelatedItems productId={currentId} /></div> */}
+      {/* <div><ReviewList /></div> */}
+      <br />
+      <div><RelatedItems productId={currentId} /></div>
     </>
   );
 };
