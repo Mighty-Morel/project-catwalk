@@ -83,7 +83,8 @@ class ProductCarousel extends React.Component {
       });
   }
 
-  getModalInfo() {
+  getModalInfo(cardId) {
+    console.log('checking cardId in getModalInfo', cardId);
     // get id for currently viewed product
     axios.get('/products/48432')
       .then((res) => {
@@ -112,9 +113,9 @@ class ProductCarousel extends React.Component {
     }
   }
 
-  showModal(check) {
-    console.log('checking id', check);
-    this.getModalInfo();
+  showModal(cardId) {
+    console.log('checking id', cardId);
+    this.getModalInfo(cardId);
     this.setState({
       show: true,
     });
