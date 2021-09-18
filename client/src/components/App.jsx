@@ -5,6 +5,8 @@ import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
 import ProductInfo from './ProductInfo.jsx';
+import ReviewList from './Review-list.jsx';
+// import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
 
@@ -21,9 +23,10 @@ const App = () => {
 
   const dispatch = useDispatch();
 
-  // const handleClick = () => {
-  //   dispatch(updateProductId(1000)); // this is an example to show how update works
-  // };
+  const handleClick = () => {
+    dispatch(updateProductId(48433)); // this is an example to show how update works
+    // delete when understood
+  };
 
   return (
     <>
@@ -40,10 +43,10 @@ const App = () => {
       </Router> */}
       {/* <div><ProductInfo /></div> */}
 
-      <div><ProductInfo productId={currentId} /></div>
-      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
-    {/* <div><ReviewList productId={productId} /></div> */}
-      <div><RelatedItems productId={currentId} /></div>
+      {/* <div><ProductInfo productId={currentId} /></div> */}
+      {/* <div><QuestionsAndAnswers productId={productId} /></div> */}
+      <div><ReviewList /></div>
+      {/* <div><RelatedItems productId={currentId} /></div> */}
     </>
   );
 };
