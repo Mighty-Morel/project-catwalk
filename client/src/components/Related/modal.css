@@ -12,8 +12,8 @@
   background: white;
   width: 30%;
   height: 30%;
-  top:50%;
-  left:50%;
+  top: 50%;
+  left: 50%;
   transform: translate(-50%,-50%);
 }
 
@@ -24,4 +24,14 @@
 
 .display-none {
   display: none;
+}
+
+.modal-button {
+  position: absolute;
+  top: 5%;
+  left: 95%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: 0;
+  cursor: pointer;
 }

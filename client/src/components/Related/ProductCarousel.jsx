@@ -18,14 +18,15 @@ class ProductCarousel extends React.Component {
     super(props);
     this.state = {
       productInfo: [],
+      modalInfo: [],
       show: false,
       // prev: false,
       // next: true,
       // counter: 0,
     };
+    this.myRef = React.createRef();
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
-    this.myRef = React.createRef();
     this.showModal = this.showModal.bind(this);
     this.hideModal = this.hideModal.bind(this);
   }
@@ -35,8 +36,8 @@ class ProductCarousel extends React.Component {
   }
 
   getInfo() {
-    // original #48432, holder 48438, 48439, 48434
-    axios.get('/products/48438/related')
+    // original #48432
+    axios.get('/products/48432/related')
       .then((res) => {
         const relatedIds = res.data;
         const ids = [];
@@ -82,6 +83,20 @@ class ProductCarousel extends React.Component {
       });
   }
 
+  getModalInfo() {
+    // get id for currently viewed product
+    axios.get('/products/48432')
+      .then((res) => {
+        console.log(res.data)
+        // this.setState({
+        //   modalInfo: ids,
+        // });
+      });
+    // get id of the card clicked
+    // get data on features of card clicked with acquired id
+    console.log(this.myRef.current);
+  }
+
   prev() {
     this.myRef.current.scrollLeft -= 230;
     if (this.myRef.current.scrollLeft < 230) {
@@ -98,15 +113,16 @@ class ProductCarousel extends React.Component {
   }
 
   showModal() {
+    this.getModalInfo();
     console.log('clicked star response');
     this.setState({
-      show: true
+      show: true,
     });
   }
 
   hideModal() {
     this.setState({
-      show: false
+      show: false,
     });
   }
 
@@ -119,7 +135,10 @@ class ProductCarousel extends React.Component {
       <>
         <main>
           <Modal show={this.state.show} handleClose={this.hideModal}>
-            <p>Modal</p>
+            <div>Comparing</div>
+            <ul>
+              <li>{ }</li>
+            </ul>
           </Modal>
         </main>
 
@@ -131,13 +150,16 @@ class ProductCarousel extends React.Component {
           </button>
 
           <div className="carousel__track-container">
+
             <ul className="carousel__track" ref={this.myRef}>
               {productInfo.map((product, i) => (
                 <li className="carousel__slide" key={i}>
                   <div className="card">
                     <div className="image__container">
                       <img className="cardImage" src={product.pic} alt="" />
-                      <img className="cardStar" src="./images/star.png" alt="" onClick={() => this.showModal()} />
+                      <button onClick={() => this.showModal()} type="button">
+                        <img className="cardStar" src="./images/star.png" alt="" />
+                      </button>
                     </div>
                     <dl className="cardCategory">{product.category}</dl>
                     <dl className="cardTitle">{product.name}</dl>
