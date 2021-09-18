@@ -99,30 +99,58 @@ class ProductCarousel extends React.Component {
       .then((res) => {
         console.log('data for cardId', res.data);
       });
-    // 0: {feature: 'Lenses', value: 'Ultrasheen'}
-    // 1: {feature: 'UV Protection', value: null}
-    // 2: {feature: 'Frames', value: 'LightCompose'}
+    // 0: {feature: 'Sole', value: 'Rubber'}
+    // 1: {feature: 'Material', value: 'FullControlSkin'}
+    // 2: {feature: 'Stitching', value: 'Double Stitch'}
     this.setState({
       modalInfo: [],
     });
   }
 
   /*
-  add overview product features to modalInfo state array as objects
-  if card product feature is the same as overview product feature
-  add a check to
-  then add card product features to modalInfo state array as objects
+  set key to be {res.data.value}{res.data.feature}
+  modalInfo: [
+    {name: Camo Onesie,
+    Canvas Fabric: [true, false]
+    Brass Buttons: [true, false]}
+  ]
+  if key exists when adding card feature, change that matching key true
+  modalInfo: [
+    {name: [Camo Onesie, YEasy 350],
+    Canvas Fabric: [true, false],
+    Brass Buttons: [true, false],
+    Rubber Soles: [false, true],
+    FullControlSkin Material: [false, true],
+    Double Stitch Stiching: [false, true],}
+  ]
 
+  modalInfo: [
+    {name: Camo Onesie,
+    Canvas Fabric: [true, false]
+    Brass Buttons: [true, false]}
+  ]
+  if key exists when adding card feature, change that matching key true
+  if has brass buttons change the false to true
+  modalInfo: [
+    {name: [Camo Onesie, YEasy 350],
+    Canvas Fabric: [true, false],
+    Brass Buttons: [true, true],
+    Rubber Soles: [false, true],
+    FullControlSkin Material: [false, true],
+    Double Stitch Stiching: [false, true],}
+  ]
 
+  map over array object
+  feature array 0 or 1 true add checkmark
+  {checkmark} feature {checkmark}
 
   Comparing ----------------------------------------   x
-  48432 overview product              48433 card product
+  48432 modalInfo.name[0]           48433 modalInfo.name[1]
                       Canvas Fabric
                       Brass Buttons
                       Ultrasheen Lenses
                       UV Protection
                       LightCompose Frames
-              {res.data.value}{res.data.feature}
   */
 
   prev() {
@@ -162,7 +190,7 @@ class ProductCarousel extends React.Component {
       <>
         <main>
           <Modal show={show} handleClose={this.hideModal}>
-            <div>Comparing</div>
+            <div>Comparing ✓</div>
             <ul>
               <li>{ }</li>
             </ul>
