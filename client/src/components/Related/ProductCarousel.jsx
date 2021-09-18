@@ -127,14 +127,14 @@ class ProductCarousel extends React.Component {
   }
 
   render() {
-    const { productInfo } = this.state;
+    const { productInfo, show } = this.state;
     if (productInfo.length === 0) {
       return 'loading...';
     }
     return (
       <>
         <main>
-          <Modal show={this.state.show} handleClose={this.hideModal}>
+          <Modal show={show} handleClose={this.hideModal}>
             <div>Comparing</div>
             <ul>
               <li>{ }</li>
