@@ -17,6 +17,8 @@ class ProductCarousel extends React.Component {
     this.state = {
       productInfo: [],
       index: 0,
+      prev: false,
+      next: true,
     };
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
@@ -76,24 +78,29 @@ class ProductCarousel extends React.Component {
   }
 
   prev() {
-    console.log('check previous button')
-    this.myRef.current.scrollLeft -= 300;
+    console.log('check previous button');
+    this.myRef.current.scrollLeft -= 230;
+    // set the state of prev to be false
+    // change state of prev to true when next is clicked
+    // when state of prev is false button is hidden
+    // when state of prev is true button is displayed
   }
 
   // click right button, move slides to the left by one card
   next() {
-    this.myRef.current.scrollLeft += 300;
-    // add to 0 and move slide
-    // want to change position of slides by 1
-    this.setState((prevState) => ({
-      index: prevState.index + 1,
-    }), (i) => {
-      // console.log(this.state.index);
-
-      // this.refs[i].scrollIntoView({block: 'end', behavior: 'smooth'});
-      // this.myRef.current.scrollIntoView();
-      // console.log(this.myRef.current.scrollLeft += 500);
+    console.log(this.myRef);
+    this.myRef.current.scrollLeft += 230;
+    if (this.myRef.current.scrollLeft === 0) {
+      console.log('current state is 0')
+    }
+    this.setState({
+      prev: true,
     });
+    // if scroll state is 0 hide the prev button
+    // on next click unhide prev button
+    // get length of how many cards to find around how much scroll should be
+    // if scroll number hits the scroll end length
+    // hide the next button
   }
 
   render() {
@@ -104,6 +111,7 @@ class ProductCarousel extends React.Component {
     return (
       <div className="carousel">
         <div>RELATED PRODUCTS</div>
+
         <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
           <img src="./images/arrow-left.png" alt="" />
         </button>
@@ -127,6 +135,7 @@ class ProductCarousel extends React.Component {
         <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
           <img src="./images/arrow-right.png" alt="" />
         </button>
+
       </div>
     );
   }
