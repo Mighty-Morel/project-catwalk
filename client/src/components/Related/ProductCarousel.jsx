@@ -18,6 +18,7 @@ class ProductCarousel extends React.Component {
     super(props);
     this.state = {
       productInfo: [],
+      show: false,
       // prev: false,
       // next: true,
       // counter: 0,
@@ -25,7 +26,8 @@ class ProductCarousel extends React.Component {
     this.prev = this.prev.bind(this);
     this.next = this.next.bind(this);
     this.myRef = React.createRef();
-    this.modal = this.modal.bind(this);
+    this.showModal = this.showModal.bind(this);
+    this.hideModal = this.hideModal.bind(this);
   }
 
   componentDidMount() {
@@ -95,9 +97,17 @@ class ProductCarousel extends React.Component {
     }
   }
 
-  modal() {
+  showModal() {
     console.log('clicked star response');
-    const { productInfo } = this.state;
+    this.setState({
+      show: true
+    });
+  }
+
+  hideModal() {
+    this.setState({
+      show: false
+    });
   }
 
   render() {
@@ -107,38 +117,43 @@ class ProductCarousel extends React.Component {
     }
     return (
       <>
-      <Modal />
-      <div className="carousel">
-        <div>RELATED PRODUCTS</div>
+        <main>
+          <Modal show={this.state.show} handleClose={this.hideModal}>
+            <p>Modal</p>
+          </Modal>
+        </main>
 
-        <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
-          <img src="./images/arrow-left.png" alt="" />
-        </button>
+        <div className="carousel">
+          <div>RELATED PRODUCTS</div>
 
-        <div className="carousel__track-container">
-          <ul className="carousel__track" ref={this.myRef}>
-            {productInfo.map((product, i) => (
-              <li className="carousel__slide" key={i}>
-                <div className="card">
-                  <div className="image__container">
-                    <img className="cardImage" src={product.pic} alt="" />
-                    <img className="cardStar" src="./images/star.png" alt="" onClick={() => this.modal()} />
+          <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
+            <img src="./images/arrow-left.png" alt="" />
+          </button>
+
+          <div className="carousel__track-container">
+            <ul className="carousel__track" ref={this.myRef}>
+              {productInfo.map((product, i) => (
+                <li className="carousel__slide" key={i}>
+                  <div className="card">
+                    <div className="image__container">
+                      <img className="cardImage" src={product.pic} alt="" />
+                      <img className="cardStar" src="./images/star.png" alt="" onClick={() => this.showModal()} />
+                    </div>
+                    <dl className="cardCategory">{product.category}</dl>
+                    <dl className="cardTitle">{product.name}</dl>
+                    <dl className="cardPrice">${product.price}</dl>
+                    <dl className="cardRating">* star placeholder *</dl>
                   </div>
-                  <dl className="cardCategory">{product.category}</dl>
-                  <dl className="cardTitle">{product.name}</dl>
-                  <dl className="cardPrice">${product.price}</dl>
-                  <dl className="cardRating">* star placeholder *</dl>
-                </div>
-              </li>
-            ))}
-          </ul>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
+            <img src="./images/arrow-right.png" alt="" />
+          </button>
+
         </div>
-
-        <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
-          <img src="./images/arrow-right.png" alt="" />
-        </button>
-
-      </div>
       </>
     );
   }
