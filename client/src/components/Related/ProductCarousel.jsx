@@ -87,14 +87,14 @@ class ProductCarousel extends React.Component {
     // get id for currently viewed product
     axios.get('/products/48432')
       .then((res) => {
-        console.log(res.data)
+        console.log(res.data);
         // this.setState({
         //   modalInfo: ids,
         // });
       });
     // get id of the card clicked
     // get data on features of card clicked with acquired id
-    console.log(this.myRef.current);
+    console.log(this.state.productInfo);
   }
 
   prev() {
@@ -112,9 +112,9 @@ class ProductCarousel extends React.Component {
     }
   }
 
-  showModal() {
+  showModal(check) {
+    console.log('checking id', check);
     this.getModalInfo();
-    console.log('clicked star response');
     this.setState({
       show: true,
     });
@@ -157,7 +157,7 @@ class ProductCarousel extends React.Component {
                   <div className="card">
                     <div className="image__container">
                       <img className="cardImage" src={product.pic} alt="" />
-                      <button className="card__star" type="button" onClick={() => this.showModal()}>
+                      <button id={product.relatedId} className="card__star" type="button" onClick={() => this.showModal(product.relatedId)}>
                         <img src="./images/star.png" alt="" />
                       </button>
                     </div>
