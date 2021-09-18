@@ -80,10 +80,10 @@ class ProductCarousel extends React.Component {
   prev() {
     this.myRef.current.scrollLeft -= 230;
     console.log(this.myRef.current.scrollLeft)
-    if (this.myRef.current.scrollLeft <230) {
+    if (this.myRef.current.scrollLeft < 230) {
       console.log('BEGINNING OF SCROLL')
     }
-   }
+  }
 
   next() {
     const { productInfo, counter } = this.state;
@@ -131,7 +131,11 @@ class ProductCarousel extends React.Component {
             {productInfo.map((product, i) => (
               <li className="carousel__slide" key={i}>
                 <div className="card">
-                  <img className="cardImage" src={product.pic} alt="" />
+                  <div className="image__container">
+                    <img className="cardImage" src={product.pic} alt="" />
+                    <img className="cardStar" src="./images/star.png" alt="" />
+                  </div>
+
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
                   <dl className="cardPrice">${product.price} ${product.sale}</dl>
@@ -153,7 +157,7 @@ class ProductCarousel extends React.Component {
 
 export default ProductCarousel;
 
-{/* <ul className="carousel__track" ref={this.myRef}> */}
+{/* <ul className="carousel__track" ref={this.myRef}> */ }
 
 
 // return (

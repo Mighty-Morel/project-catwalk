@@ -1,10 +1,27 @@
 /* Related Product Cards ---------------------------------------- */
 
+.image__container {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+
 .cardImage {
+  position: relative;
   display: block;
   object-fit: cover;
   width: 13rem;
   height: 13rem;
+  /* z-index: 1; */
+}
+
+.cardStar {
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  width: 20px;
+  background: transparent;
+  /* z-index: 3; */
 }
 
 ul,li {
