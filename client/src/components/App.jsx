@@ -5,7 +5,7 @@ import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
-// import ReviewList from './ReviewList.jsx';
+import ReviewList from './Review-list.jsx';
 // import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
