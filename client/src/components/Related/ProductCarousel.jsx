@@ -85,52 +85,6 @@ class ProductCarousel extends React.Component {
       });
   }
 
-  // getModalInfo(cardId) {
-  //   const { modalInfo } = this.state;
-  //   // get id for currently viewed product
-  //   axios.get('/products/48432')
-  //     .then((res) => {
-  //       const overviewName = res.data.name;
-  //       const modalObj = {};
-  //       modalObj.names = [overviewName];
-  //       modalInfo.push(modalObj);
-  //       this.setState({
-  //         modalInfo,
-  //       });
-  //       const overviewFeatures = res.data.features;
-  //       for (let l = 0; l < overviewFeatures.length; l++) {
-  //         const characteristic = `${overviewFeatures[l].value}-- ${overviewFeatures[l].feature}`;
-  //         modalInfo[0][characteristic] = [true, false];
-  //       }
-  //       this.setState({
-  //         modalInfo,
-  //       });
-  //     });
-  //   axios.get(`/products/${cardId}`)
-  //     .then((res) => {
-  //       const cardName = res.data.name;
-  //       modalInfo[0].names.push(cardName);
-  //       this.setState({
-  //         modalInfo,
-  //       });
-  //       const cardFeatures = res.data.features;
-  //       for (let m = 0; m < cardFeatures.length; m++) {
-  //         const characteristic = `${cardFeatures[m].value}-- ${cardFeatures[m].feature}`;
-  //         for (const key in modalInfo[0]) {
-  //           if (modalInfo[0] === characteristic) {
-  //             modalInfo[0] = [true, true];
-  //           } else {
-  //             modalInfo[0][characteristic] = [false, true];
-  //           }
-  //         }
-  //       }
-  //       this.setState({
-  //         modalInfo,
-  //       });
-  //     });
-  //   // remove when modal card is finished
-  // }
-
   getModalInfo(cardId) {
     // get id for currently viewed product
     axios.get('/products/48432')
@@ -155,8 +109,6 @@ class ProductCarousel extends React.Component {
         const cardFeatures = res.data.features;
         for (let m = 0; m < cardFeatures.length; m++) {
           const cardFeature = cardFeatures[m];
-          // console.log(cardFeature)
-          // console.log(modalInfo)
           for (let n = 0; n < modalInfo.length; n++) {
             const overviewFeature = modalInfo[n].feature;
             if (overviewFeature === cardFeature.feature) {
@@ -171,65 +123,11 @@ class ProductCarousel extends React.Component {
               });
             }
           }
-          // const match = modalInfo.find(((featureItem) => featureItem.feature === cardFeature.feature));
-          // console.log(match);
-          // modalInfo.forEach((featureItem) => {
-          //   console.log(featureItem)
-            // if (featureItem.feature === cardFeature.feature) {
-            //   featureItem.card = true;
-            // } else {
-            //   cardFeature.overview = false;
-            //   cardFeature.card = true;
-            // }
-          // })
-            // console.log(cardFeature)
-            // if cardfeature
-            // if (cardFeature === modalInfo)
-
         }
-        this.setState({
-          cardName,
-        });
       });
   }
 
   /*
-  set key to be {res.data.value}{res.data.feature}
-  modalInfo: [
-    {name: Camo Onesie,
-    Canvas Fabric: [true, false]
-    Brass Buttons: [true, false]}
-  ]
-  if key exists when adding card feature, change that matching key true
-  modalInfo: [
-    {name: [Camo Onesie, YEasy 350],
-    Canvas Fabric: [true, false],
-    Brass Buttons: [true, false],
-    Rubber Soles: [false, true],
-    FullControlSkin Material: [false, true],
-    Double Stitch Stiching: [false, true],}
-  ]
-
-  modalInfo: [
-    {name: Camo Onesie,
-    Canvas Fabric: [true, false]
-    Brass Buttons: [true, false]}
-  ]
-  if key exists when adding card feature, change that matching key true
-  if has brass buttons change the false to true
-  modalInfo: [
-    {name: [Camo Onesie, YEasy 350],
-    Canvas Fabric: [true, false],
-    Brass Buttons: [true, true],
-    Rubber Soles: [false, true],
-    FullControlSkin Material: [false, true],
-    Double Stitch Stiching: [false, true],}
-  ]
-
-  map over array object
-  feature array 0 or 1 true add checkmark
-  {checkmark} feature {checkmark}
-
   Comparing ----------------------------------------   x
   48432 modalInfo.name[0]           48433 modalInfo.name[1]
                       Canvas Fabric
@@ -278,7 +176,7 @@ class ProductCarousel extends React.Component {
         <main>
           <Modal show={show} handleClose={this.hideModal}>
             <div>Comparing ✓</div>
-            {console.log('checking modalInfo in return', modalInfo)}
+            {/* {console.log('checking modalInfo in return', modalInfo)} */}
             {/* {console.log('checking overviewName in return', overviewName)} */}
             {/* {console.log('checking cardName in return', cardName)} */}
           </Modal>
