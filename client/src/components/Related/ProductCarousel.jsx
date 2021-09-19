@@ -84,14 +84,17 @@ class ProductCarousel extends React.Component {
   }
 
   getModalInfo(cardId) {
-    console.log('checking cardId in getModalInfo', cardId);
     // get id for currently viewed product
     axios.get('/products/48432')
       .then((res) => {
-        console.log('data for overviewId', res.data);
-        // this.setState({
-        //   modalInfo: ids,
-        // });
+        const { modalInfo } = this.state;
+        const overviewName = res.data.name;
+        const modalObj = {};
+        modalObj.names = overviewName;
+        modalInfo.push(modalObj);
+        this.setState({
+          modalInfo,
+        });
       });
     // 0: { feature: 'Fabric', value: 'Canvas' }
     // 1: { feature: 'Buttons', value: 'Brass' }
@@ -182,7 +185,8 @@ class ProductCarousel extends React.Component {
   }
 
   render() {
-    const { productInfo, show } = this.state;
+    const { productInfo, show, modalInfo } = this.state;
+    console.log('checking in render', modalInfo);
     if (productInfo.length === 0) {
       return 'loading...';
     }
