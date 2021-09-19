@@ -12,8 +12,13 @@ const QuestionEntry = (props) => {
     axios.get(`/qa/questions/${props.id}/answers`)
       .then((response) => {
         const { results } = response.data;
-        results.sort((a, b) => b.helpfulness - a.helpfulness);
-        setAnswers(results);
+        // Sorts answers whether the user is a 'seller' then by helpfulness
+        const sellerAnswers = results.filter(answer => answer.answerer_name.toLowerCase() === 'seller');
+        const otherAnswers = results.filter(answer => answer.answerer_name.toLowerCase() !== 'seller');
+        sellerAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
+        otherAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
+        const sortedAnswers = sellerAnswers.concat(otherAnswers);
+        setAnswers(sortedAnswers);
         // Compares count to number of questions, display up to four questions
         if (results.length > 2) {
           setCount(2);
