@@ -84,14 +84,24 @@ class ProductCarousel extends React.Component {
   }
 
   getModalInfo(cardId) {
+    const { modalInfo } = this.state;
     // get id for currently viewed product
     axios.get('/products/48432')
       .then((res) => {
-        const { modalInfo } = this.state;
+        // console.log('here are the features for first:', res.data.features)
+        // console.log('here are the data for first:', res.data)
         const overviewName = res.data.name;
         const modalObj = {};
-        modalObj.names = overviewName;
+        modalObj.names = [overviewName];
         modalInfo.push(modalObj);
+        this.setState({
+          modalInfo,
+        });
+        const overviewFeatures = res.data.features;
+        for (var l = 0; l < overviewFeatures.length; l++) {
+          const characteristic = `${overviewFeatures[l].value}-- ${overviewFeatures[l].feature}`;
+          modalInfo[0][characteristic] = [true, false];
+        }
         this.setState({
           modalInfo,
         });
@@ -100,7 +110,11 @@ class ProductCarousel extends React.Component {
     // 1: { feature: 'Buttons', value: 'Brass' }
     axios.get(`/products/${cardId}`)
       .then((res) => {
-        console.log('data for cardId', res.data);
+        const cardName = res.data.name;
+        modalInfo[0].names.push(cardName);
+        this.setState({
+          modalInfo,
+        });
       });
     // 0: {feature: 'Sole', value: 'Rubber'}
     // 1: {feature: 'Material', value: 'FullControlSkin'}
@@ -186,7 +200,7 @@ class ProductCarousel extends React.Component {
 
   render() {
     const { productInfo, show, modalInfo } = this.state;
-    console.log('checking in render', modalInfo);
+    console.log('checking in render', JSON.stringify(modalInfo));
     if (productInfo.length === 0) {
       return 'loading...';
     }
