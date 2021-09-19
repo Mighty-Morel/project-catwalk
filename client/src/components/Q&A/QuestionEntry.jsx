@@ -39,9 +39,15 @@ const QuestionEntry = (props) => {
     setCount(answerCount + 2);
   };
 
+  const collapseAnswers = () => {
+    setCount(2);
+  };
+
   const renderMoreAnswers = () => {
     if (extra) {
       return (<button type="button" onClick={showMoreAnswers}>See more answers</button>);
+    } else if (answerCount > 2) {
+      return (<button type="button" onClick={collapseAnswers}>Collapse answers</button>);
     }
   };
 
