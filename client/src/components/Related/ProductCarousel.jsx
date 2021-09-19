@@ -127,16 +127,6 @@ class ProductCarousel extends React.Component {
       });
   }
 
-  /*
-  Comparing ----------------------------------------   x
-  48432 modalInfo.name[0]           48433 modalInfo.name[1]
-                      Canvas Fabric
-                      Brass Buttons
-                      Ultrasheen Lenses
-                      UV Protection
-                      LightCompose Frames
-  */
-
   prev() {
     this.myRef.current.scrollLeft -= 230;
     if (this.myRef.current.scrollLeft < 230) {
@@ -165,9 +155,18 @@ class ProductCarousel extends React.Component {
     });
   }
 
+  /*
+  Comparing ----------------------------------------   x
+  48432 modalInfo.name[0]           48433 modalInfo.name[1]
+                      Canvas Fabric
+                      Brass Buttons
+                      Ultrasheen Lenses
+                      UV Protection
+                      LightCompose Frames
+  */
+
   render() {
     const { productInfo, show, modalInfo, overviewName, cardName } = this.state;
-    // console.log('checking in render', JSON.stringify(modalInfo));
     if (productInfo.length === 0) {
       return 'loading...';
     }
@@ -176,9 +175,16 @@ class ProductCarousel extends React.Component {
         <main>
           <Modal show={show} handleClose={this.hideModal}>
             <div>Comparing ✓</div>
-            {/* {console.log('checking modalInfo in return', modalInfo)} */}
-            {/* {console.log('checking overviewName in return', overviewName)} */}
-            {/* {console.log('checking cardName in return', cardName)} */}
+            {console.log('checking modalInfo in return', modalInfo)}
+            <ul>
+              {modalInfo.map((item, i) => (
+                <li key={i}>
+                  <div>
+                    <dl>{item.feature} {item.value} </dl>
+                  </div>
+                </li>
+              ))}
+            </ul>
           </Modal>
         </main>
 
