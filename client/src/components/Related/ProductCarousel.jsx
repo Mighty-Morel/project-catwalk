@@ -150,18 +150,42 @@ class ProductCarousel extends React.Component {
       });
     axios.get(`/products/${cardId}`)
       .then((res) => {
-        const { modalInfo }= this.state;
+        const { modalInfo } = this.state;
         const cardName = res.data.name;
         const cardFeatures = res.data.features;
         for (let m = 0; m < cardFeatures.length; m++) {
           const cardFeature = cardFeatures[m];
           // console.log(cardFeature)
           // console.log(modalInfo)
-          for (const key in cardFeature) {
-            console.log(modalInfo)
-            console.log(cardFeature)
-            // if (cardFeature === modalInfo)
+          for (let n = 0; n < modalInfo.length; n++) {
+            const overviewFeature = modalInfo[n].feature;
+            if (overviewFeature === cardFeature.feature) {
+              overviewFeature.card = true;
+            } else {
+              cardFeature.overview = false;
+              cardFeature.card = true;
+              modalInfo.push(cardFeature);
+              this.setState({
+                modalInfo,
+                cardName,
+              });
+            }
           }
+          // const match = modalInfo.find(((featureItem) => featureItem.feature === cardFeature.feature));
+          // console.log(match);
+          // modalInfo.forEach((featureItem) => {
+          //   console.log(featureItem)
+            // if (featureItem.feature === cardFeature.feature) {
+            //   featureItem.card = true;
+            // } else {
+            //   cardFeature.overview = false;
+            //   cardFeature.card = true;
+            // }
+          // })
+            // console.log(cardFeature)
+            // if cardfeature
+            // if (cardFeature === modalInfo)
+
         }
         this.setState({
           cardName,
@@ -254,7 +278,7 @@ class ProductCarousel extends React.Component {
         <main>
           <Modal show={show} handleClose={this.hideModal}>
             <div>Comparing ✓</div>
-            {/* {console.log('checking modalInfo in return', modalInfo)} */}
+            {console.log('checking modalInfo in return', modalInfo)}
             {/* {console.log('checking overviewName in return', overviewName)} */}
             {/* {console.log('checking cardName in return', cardName)} */}
           </Modal>
