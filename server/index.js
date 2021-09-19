@@ -96,6 +96,15 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 });
 
 // post helpfulness for a question
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  axios.put(req.url)
+    .then(() => {
+      res.status(204).send('NO CONTENT');
+    })
+    .catch((err) => {
+      res.status(504).send('error in putting answers as helpful', err);
+    });
+});
 
 // post helpfulness for an answer
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {

@@ -7,9 +7,13 @@ const QuestionEntry = (props) => {
   const [answerCount, setCount] = useState(2);
   const [answers, setAnswers] = useState([]);
   const [extra, setExtra] = useState(false);
+  const [helpfulnessClick, setHelpfulnessClick] = useState(false);
+
+  // Destructuring of props
+  const { id, helpfulness } = props;
 
   const getAnswers = () => {
-    axios.get(`/qa/questions/${props.id}/answers`)
+    axios.get(`/qa/questions/${id}/answers`)
       .then((response) => {
         const { results } = response.data;
         // Sorts answers whether the user is a 'seller' then by helpfulness
@@ -32,7 +36,7 @@ const QuestionEntry = (props) => {
       });
   };
 
-  useEffect(getAnswers, [props.id]);
+  useEffect(getAnswers, [id]);
 
   // Show more answers and conditional rendering for extras
   const showMoreAnswers = () => {
@@ -59,9 +63,27 @@ const QuestionEntry = (props) => {
 
   const displayedAnswers = answers.slice(0, answerCount);
 
+  // Click to add helpfulness to question
+  const putHelpfulness = () => {
+    axios.put(`/qa/questions/${id}/helpful`)
+      .then(() => {
+        setHelpfulnessClick(true);
+      });
+  };
+
+  const renderHelpful = () => {
+    if (!helpfulnessClick) {
+      return (<span onClick={putHelpfulness}>Yes &#40;{helpfulness}&#41;</span>);
+    } else {
+      return (<span><b>Yes &#40;{helpfulness + 1}&#41;</b></span>);
+    }
+  };
+
   return (
     <div className="question-entry">
       <h1>Q: {props.question}</h1>
+      <span>Helpful? </span>
+      {renderHelpful()}
       <h2>A: </h2>
       {displayedAnswers.map((answer) => {
         const {
