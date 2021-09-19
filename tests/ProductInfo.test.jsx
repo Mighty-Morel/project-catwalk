@@ -92,7 +92,8 @@ it('should load and display the selected product data', () => {
   // expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
   // expect(category).toHaveTextContent('Pants');
   // expect(name).toHaveTextContent('Morning Joggers');
-  // expect(description).toHaveTextContent('Whether you\'re a morning person or not. Whether you\'re gym bound or not. Everyone looks good in joggers.');
+  // expect(description).toHaveTextContent('Whether you\'re a morning person or not.
+  // Whether you\'re gym bound or not. Everyone looks good in joggers.');
 });
 
 it('should load and display the selected product data', async () => {
@@ -146,7 +147,8 @@ it('should load and display the selected product data', async () => {
 //   expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
 //   expect(category).toHaveTextContent('Pants');
 //   expect(name).toHaveTextContent('Morning Joggers');
-//   expect(description).toHaveTextContent('Whether you\'re a morning person or not. Whether you\'re gym bound or not. Everyone looks good in joggers.');
+//   expect(description).toHaveTextContent('Whether you\'re a morning person or not.
+// Whether you\'re gym bound or not. Everyone looks good in joggers.');
 // });
 
 // it('should load and display the selected styles data', async () => {
@@ -174,7 +176,8 @@ it('should load and display the selected product data', async () => {
 //   expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
 //   expect(category).toHaveTextContent('Pants');
 //   expect(name).toHaveTextContent('Morning Joggers');
-//   expect(description).toHaveTextContent('Whether you\'re a morning person or not. Whether you\'re gym bound or not. Everyone looks good in joggers.');
+//   expect(description).toHaveTextContent('Whether you\'re a morning person or not.
+// Whether you\'re gym bound or not. Everyone looks good in joggers.');
 // });
 
 // Style Selector Tests ==============================================

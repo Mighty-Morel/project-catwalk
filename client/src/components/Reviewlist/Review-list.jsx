@@ -1,16 +1,16 @@
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetReviewsQuery } from '../reducers/Review-List-Slice';
+import { useGetReviewsQuery } from '../../reducers/Review-List-Slice';
+import './reviewlist.css';
 
 const ReviewList = () => {
-  const [style, setStyle] = useState({ display: 'visible' });
-  const [sortBy, setSortBy] = useState('helpful');
+  const [sortBy, setSort] = useState('helpful');
   const [count, setCount] = useState(() => 2);
   const productId = useSelector((state) => state.product.id);
 
   useEffect(() => {
     setCount(2);
-    setSortBy('helpful');
+    setSort('helpful');
   }, [productId]);
 
   const {
@@ -27,7 +27,10 @@ const ReviewList = () => {
     },
   );
 
+  let dropdown;
   let content;
+  let moreReviews;
+
   if (isLoading) {
     content = (
       <p>
@@ -35,20 +38,29 @@ const ReviewList = () => {
       </p>
     );
   } else if (isSuccess) {
-    console.log('success:', reviews.results.length);
-    console.log(count);
+    dropdown = (
+      <>
+        {reviews.results.length}
+        &nbsp;reviews, sorted by&nbsp;
+        <div className="dropdown">
+          {sortBy}
+          <div className="dropdown-content">
+            <option onClick={() => setSort('helpful')}>helpful</option>
+            <option onClick={() => setSort('relevant')}>relevant</option>
+            <option onClick={() => setSort('newest')}>recent</option>
+          </div>
+        </div>
+      </>
+    );
     content = reviews.results.map((review) => (
       <p key={review.review_id} value="test">
         {review.review_id}
       </p>
     ));
     if (count === reviews.results.length) {
-      return (
+      moreReviews = (
         <>
-          Add Dropdown here
-          {content}
           <button
-            style={style}
             type="button"
             onClick={() => {
               setCount((prevCount) => prevCount + 2);
@@ -69,8 +81,9 @@ const ReviewList = () => {
 
   return (
     <>
-      Add Dropdown here
+      {dropdown}
       {content}
+      {moreReviews}
     </>
   );
 };
