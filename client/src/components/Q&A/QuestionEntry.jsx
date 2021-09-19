@@ -34,7 +34,25 @@ const QuestionEntry = (props) => {
 
   useEffect(getAnswers, [props.id]);
 
+  // Show more answers and conditional rendering for extras
+  const showMoreAnswers = () => {
+    setCount(answerCount + 2);
+  };
+
+  const renderMoreAnswers = () => {
+    if (extra) {
+      return (<button type="button" onClick={showMoreAnswers}>See more answers</button>);
+    }
+  };
+
+  useEffect(() => {
+    if (answers.length < answerCount) {
+      setExtra(false);
+    }
+  }, [answerCount]);
+
   const displayedAnswers = answers.slice(0, answerCount);
+
   return (
     <div className="question-entry">
       <h1>Q: {props.question}</h1>
@@ -60,6 +78,7 @@ const QuestionEntry = (props) => {
           />
         );
       })}
+      {renderMoreAnswers()}
     </div>
   );
 };

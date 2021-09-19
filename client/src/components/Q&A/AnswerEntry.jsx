@@ -57,7 +57,6 @@ const AnswerEntry = (props) => {
       <span>Helpful?</span>
       {renderHelpful()}
       {renderReported()}
-      {/* <span onClick={putHelpfulness}>Yes &#40;{helpfulness}&#41;</span> */}
     </>
   );
 };
