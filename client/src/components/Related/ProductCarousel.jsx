@@ -98,7 +98,7 @@ class ProductCarousel extends React.Component {
           modalInfo,
         });
         const overviewFeatures = res.data.features;
-        for (var l = 0; l < overviewFeatures.length; l++) {
+        for (let l = 0; l < overviewFeatures.length; l++) {
           const characteristic = `${overviewFeatures[l].value}-- ${overviewFeatures[l].feature}`;
           modalInfo[0][characteristic] = [true, false];
         }
@@ -106,8 +106,6 @@ class ProductCarousel extends React.Component {
           modalInfo,
         });
       });
-    // 0: { feature: 'Fabric', value: 'Canvas' }
-    // 1: { feature: 'Buttons', value: 'Brass' }
     axios.get(`/products/${cardId}`)
       .then((res) => {
         const cardName = res.data.name;
@@ -115,13 +113,25 @@ class ProductCarousel extends React.Component {
         this.setState({
           modalInfo,
         });
+        const cardFeatures = res.data.features;
+        for (let m = 0; m < cardFeatures.length; m++) {
+          const characteristic = `${cardFeatures[m].value}-- ${cardFeatures[m].feature}`;
+          for (const key in modalInfo[0]) {
+            if (modalInfo[0] === characteristic) {
+              modalInfo[0] = [true, true];
+            } else {
+              modalInfo[0][characteristic] = [false, true];
+            }
+          }
+        }
+        this.setState({
+          modalInfo,
+        });
       });
+
     // 0: {feature: 'Sole', value: 'Rubber'}
     // 1: {feature: 'Material', value: 'FullControlSkin'}
     // 2: {feature: 'Stitching', value: 'Double Stitch'}
-    this.setState({
-      modalInfo: [],
-    });
   }
 
   /*
