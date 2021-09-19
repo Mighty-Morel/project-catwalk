@@ -177,10 +177,12 @@ class ProductCarousel extends React.Component {
             <div>Comparing ✓</div>
             {console.log('checking modalInfo in return', modalInfo)}
             <ul>
+              <li>{overviewName}</li>
+              <li>{cardName}</li>
               {modalInfo.map((item, i) => (
                 <li key={i}>
                   <div>
-                    <dl>{item.feature} {item.value} </dl>
+                    <ul>{item.feature} {item.value} </ul>
                   </div>
                 </li>
               ))}
