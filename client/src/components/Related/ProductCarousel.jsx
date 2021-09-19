@@ -20,6 +20,8 @@ class ProductCarousel extends React.Component {
       productInfo: [],
       modalInfo: [],
       show: false,
+      overviewName: null,
+      cardName: null,
       // prev: false,
       // next: true,
       // counter: 0,
@@ -83,55 +85,88 @@ class ProductCarousel extends React.Component {
       });
   }
 
+  // getModalInfo(cardId) {
+  //   const { modalInfo } = this.state;
+  //   // get id for currently viewed product
+  //   axios.get('/products/48432')
+  //     .then((res) => {
+  //       const overviewName = res.data.name;
+  //       const modalObj = {};
+  //       modalObj.names = [overviewName];
+  //       modalInfo.push(modalObj);
+  //       this.setState({
+  //         modalInfo,
+  //       });
+  //       const overviewFeatures = res.data.features;
+  //       for (let l = 0; l < overviewFeatures.length; l++) {
+  //         const characteristic = `${overviewFeatures[l].value}-- ${overviewFeatures[l].feature}`;
+  //         modalInfo[0][characteristic] = [true, false];
+  //       }
+  //       this.setState({
+  //         modalInfo,
+  //       });
+  //     });
+  //   axios.get(`/products/${cardId}`)
+  //     .then((res) => {
+  //       const cardName = res.data.name;
+  //       modalInfo[0].names.push(cardName);
+  //       this.setState({
+  //         modalInfo,
+  //       });
+  //       const cardFeatures = res.data.features;
+  //       for (let m = 0; m < cardFeatures.length; m++) {
+  //         const characteristic = `${cardFeatures[m].value}-- ${cardFeatures[m].feature}`;
+  //         for (const key in modalInfo[0]) {
+  //           if (modalInfo[0] === characteristic) {
+  //             modalInfo[0] = [true, true];
+  //           } else {
+  //             modalInfo[0][characteristic] = [false, true];
+  //           }
+  //         }
+  //       }
+  //       this.setState({
+  //         modalInfo,
+  //       });
+  //     });
+  //   // remove when modal card is finished
+  // }
+
   getModalInfo(cardId) {
-    const { modalInfo } = this.state;
     // get id for currently viewed product
     axios.get('/products/48432')
       .then((res) => {
-        // console.log('here are the features for first:', res.data.features)
-        // console.log('here are the data for first:', res.data)
+        const { modalInfo } = this.state;
+        const result = [];
         const overviewName = res.data.name;
-        const modalObj = {};
-        modalObj.names = [overviewName];
-        modalInfo.push(modalObj);
-        this.setState({
-          modalInfo,
-        });
         const overviewFeatures = res.data.features;
         for (let l = 0; l < overviewFeatures.length; l++) {
-          const characteristic = `${overviewFeatures[l].value}-- ${overviewFeatures[l].feature}`;
-          modalInfo[0][characteristic] = [true, false];
+          overviewFeatures[l].overview = true;
+          result.push(overviewFeatures[l]);
         }
         this.setState({
-          modalInfo,
+          modalInfo: result,
+          overviewName,
         });
       });
     axios.get(`/products/${cardId}`)
       .then((res) => {
+        const { modalInfo }= this.state;
         const cardName = res.data.name;
-        modalInfo[0].names.push(cardName);
-        this.setState({
-          modalInfo,
-        });
         const cardFeatures = res.data.features;
         for (let m = 0; m < cardFeatures.length; m++) {
-          const characteristic = `${cardFeatures[m].value}-- ${cardFeatures[m].feature}`;
-          for (const key in modalInfo[0]) {
-            if (modalInfo[0] === characteristic) {
-              modalInfo[0] = [true, true];
-            } else {
-              modalInfo[0][characteristic] = [false, true];
-            }
+          const cardFeature = cardFeatures[m];
+          // console.log(cardFeature)
+          // console.log(modalInfo)
+          for (const key in cardFeature) {
+            console.log(modalInfo)
+            console.log(cardFeature)
+            // if (cardFeature === modalInfo)
           }
         }
         this.setState({
-          modalInfo,
+          cardName,
         });
       });
-
-    // 0: {feature: 'Sole', value: 'Rubber'}
-    // 1: {feature: 'Material', value: 'FullControlSkin'}
-    // 2: {feature: 'Stitching', value: 'Double Stitch'}
   }
 
   /*
@@ -209,8 +244,8 @@ class ProductCarousel extends React.Component {
   }
 
   render() {
-    const { productInfo, show, modalInfo } = this.state;
-    console.log('checking in render', JSON.stringify(modalInfo));
+    const { productInfo, show, modalInfo, overviewName, cardName } = this.state;
+    // console.log('checking in render', JSON.stringify(modalInfo));
     if (productInfo.length === 0) {
       return 'loading...';
     }
@@ -219,9 +254,9 @@ class ProductCarousel extends React.Component {
         <main>
           <Modal show={show} handleClose={this.hideModal}>
             <div>Comparing ✓</div>
-            <ul>
-              <li>{ }</li>
-            </ul>
+            {/* {console.log('checking modalInfo in return', modalInfo)} */}
+            {/* {console.log('checking overviewName in return', overviewName)} */}
+            {/* {console.log('checking cardName in return', cardName)} */}
           </Modal>
         </main>
 
