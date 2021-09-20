@@ -137,6 +137,9 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     })
     .catch((err) => {
       res.status(504).send('error in putting answer as reported', err);
+    });
+});
+
 app.get('/api/reviews', (req, res) => {
   axios.get('/reviews', {
     params: req.query,
