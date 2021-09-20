@@ -110,7 +110,7 @@ app.post('/qa/questions/:question_id/answers', (req, res) => {
 // put helpfulness for a question
 app.put('/qa/questions/:question_id/helpful', (req, res) => {
   axios.put(req.url)
-    .then((response) => {
+    .then(() => {
       res.status(204).send('CREATED');
     })
     .catch((err) => {

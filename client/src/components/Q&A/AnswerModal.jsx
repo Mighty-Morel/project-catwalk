@@ -11,7 +11,8 @@ const AnswerModal = (props) => {
   // Destructuring
   const { toggleAnswerForm, id } = props;
 
-  const onChangeHandler = (event) => {
+  // Input change handlers
+  const textChangeHandler = (event) => {
     setTextInput(event.target.value);
   };
 
@@ -25,8 +26,6 @@ const AnswerModal = (props) => {
     };
     axios.post(`/qa/questions/${id}/answers`, answerInfo)
       .then(() => {
-        console.log(answerInfo);
-        console.log('SUCCESS');
         toggleAnswerForm();
       })
       .catch((error) => {
@@ -41,7 +40,7 @@ const AnswerModal = (props) => {
           <h4 className="modal-title">Submit Answer</h4>
         </div>
         <div className="modal-body">
-          <textarea id="answer-entry" maxLength="200" onChange={onChangeHandler} />
+          <textarea id="answer-entry" maxLength="200" onChange={textChangeHandler} />
         </div>
         <div className="modal-footer">
           <button type="button" onClick={toggleAnswerForm}>Close</button>
