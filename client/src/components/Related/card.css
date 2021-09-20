@@ -1,20 +1,38 @@
 /* Related Product Cards ---------------------------------------- */
 
-.card {
-  width: 13rem;
-  height: 20rem;
-  border: 0.5px solid grey;
+.image__container {
+  position: relative;
+  top: 0;
+  left: 0;
 }
 
 .cardImage {
+  position: relative;
   display: block;
   object-fit: cover;
   width: 13rem;
   height: 13rem;
 }
 
-.cardBody {
-  margin-left: 4px;
+.cardStar {
+  position: absolute;
+  top: 10px;
+  left: 180px;
+  width: 20px;
+  background: transparent;
+  cursor: pointer;
+}
+
+ul,li {
+  /* margin-top: 10;
+  margin-left:10;
+  padding-left: 0;
+  padding-right: 0; */
+}
+
+dl {
+  margin-left: 10px;
+  line-height: 1;
 }
 
 .cardCategory {
@@ -32,6 +50,11 @@
   font-size: 12px;
 }
 
+.cardRating {
+  color: grey;
+  font-size: 12px;
+}
+
 .compareProduct {
   box-shadow: 0px 0px 0px transparent;
   text-shadow: 0px 0px 0px transparent;
@@ -41,4 +64,41 @@
   left: 180px;
   color: black;
   font-size: 30px;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+/* Float four columns side by side */
+.column {
+  float: left;
+  width: 24%;
+  padding: 0 10px;
+}
+
+/* Remove extra left and right margins, due to padding in columns */
+.row {margin: 0 -5px;}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+
+/* Style the counter cards */
+.card {
+  width: 13rem;
+  height: 20rem;
+  border: 0.5px solid grey;
+}
+
+/* Responsive columns - one column layout (vertical) on small screens */
+@media screen and (max-width: 600px) {
+  .column {
+    width: 100%;
+    display: block;
+    margin-bottom: 20px;
+  }
 }

@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -9,7 +10,6 @@ import ReviewList from './Review-list.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
 import overviewStyling from './Overview/overview.css';
-
 
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
@@ -23,6 +23,7 @@ const App = () => {
   const selectedStyleId = useSelector((state) => state.style.id);
 
   const dispatch = useDispatch();
+
 
   const handleClick = () => {
     dispatch(updateProductId(48434)); // this is an example to show how update works
@@ -47,8 +48,8 @@ const App = () => {
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
-      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><RelatedItems productId={currentId} /></div>
+      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><ReviewList /></div>
     </>
   );
