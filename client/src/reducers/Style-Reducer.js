@@ -25,13 +25,10 @@ export const styleSlice = createSlice({
     updateStyles: (state, action) => {
       state.allStyles = action.payload;
     },
-    updatePhoto: (state, action) => {
-      state.mainPhoto = action.payload;
-    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateStyles, updateStyle, updatePhoto } = styleSlice.actions;
+export const { updateStyles, updateStyle } = styleSlice.actions;
 
 export default styleSlice.reducer;
