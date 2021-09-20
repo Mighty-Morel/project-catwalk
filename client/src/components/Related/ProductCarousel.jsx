@@ -95,6 +95,7 @@ class ProductCarousel extends React.Component {
         const overviewFeatures = res.data.features;
         for (let l = 0; l < overviewFeatures.length; l++) {
           overviewFeatures[l].overview = true;
+          overviewFeatures[l].card = false;
           result.push(overviewFeatures[l]);
         }
         this.setState({
@@ -111,18 +112,23 @@ class ProductCarousel extends React.Component {
           const cardFeature = cardFeatures[m];
           for (let n = 0; n < modalInfo.length; n++) {
             const overviewFeature = modalInfo[n].feature;
-            if (overviewFeature === cardFeature.feature) {
+            const overviewValue = modalInfo[n].value;
+            if (overviewFeature === cardFeature.feature
+              && overviewValue === cardFeature.value) {
               overviewFeature.card = true;
             } else {
-              cardFeature.overview = false;
-              cardFeature.card = true;
-              modalInfo.push(cardFeature);
               this.setState({
                 modalInfo,
                 cardName,
               });
             }
           }
+          cardFeature.overview = false;
+          cardFeature.card = true;
+          modalInfo.push(cardFeature);
+          this.setState({
+            modalInfo,
+          });
         }
       });
   }

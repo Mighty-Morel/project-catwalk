@@ -28,6 +28,7 @@ import modal from './modal.css';
 //   }
 // }
 
+// eslint-disable-next-line react/prop-types
 const Modal = ({ handleClose, show, children }) => {
   const showHideClassName = show ? 'modal display-block' : 'modal display-none';
 

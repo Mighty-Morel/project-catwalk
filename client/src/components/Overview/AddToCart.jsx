@@ -14,7 +14,7 @@ const AddToCart = () => {
     availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
   }
 
-  console.log('availableskus', availableSkus);
+  // console.log('availableskus', availableSkus);
 
   // set initial sku, quantity, size, views and cart
   const [selectSku, setSku] = useState(availableSkus[0]);
