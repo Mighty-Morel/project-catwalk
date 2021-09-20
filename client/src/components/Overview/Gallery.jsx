@@ -14,17 +14,17 @@ const Gallery = () => {
 
   const mainImage = stylePhotos[mainPhotoIndex];
   // limit to show only up to 7 thumbnails
-  let displayedPhotos = [];
-  const limitPhotos = () => {
-    if (stylePhotos.length > 7) {
-      displayedPhotos = stylePhotos.slice(0, 7);
-      // toggleDownArrow(true);
-    }
-    displayedPhotos = stylePhotos;
-    // toggleDownArrow(false);
-  };
+  // let displayedPhotos = [];
+  // const limitPhotos = () => {
+  //   if (stylePhotos.length > 7) {
+  //     displayedPhotos = stylePhotos.slice(0, 7);
+  //     // toggleDownArrow(true);
+  //   }
+  //   displayedPhotos = stylePhotos;
+  //   // toggleDownArrow(false);
+  // };
 
-  useEffect(limitPhotos, [mainImage]);
+  // useEffect(limitPhotos, [mainImage]);
 
   const selectPhoto = (index) => {
     setPhotoIndex(index);
@@ -39,13 +39,22 @@ const Gallery = () => {
   const moveDown = () => {
     if (mainPhotoIndex < stylePhotos.length - 1) {
       setPhotoIndex(mainPhotoIndex + 1);
+      // document.getElementsByClassName('thumbnail-image-container')[0].setAttribute('id', 'scroll');
+    }
+  };
+
+  const handleKeyDown = (e) => {
+    if (e.keyCode === 37 || e.keyCode === 38) { // left or up
+      moveUp();
+    } else if (e.keyCode === 39 || e.keyCode === 40) { // right or down
+      moveDown();
     }
   };
 
   const renderUpArrow = () => {
-    if (mainPhotoIndex > 0) {
+    if (stylePhotos.length > 7 && mainPhotoIndex > 0) {
       return (
-        <span role="button" tabIndex="-1" onClick={moveUp} onKeyPress={moveUp}>
+        <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
           <img className="thumbnail-arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png" />
         </span>
       );
@@ -54,9 +63,9 @@ const Gallery = () => {
   };
 
   const renderDownArrow = () => {
-    if (mainPhotoIndex < stylePhotos.length - 1) {
+    if (stylePhotos.length > 7 && mainPhotoIndex < stylePhotos.length - 1) {
       return (
-        <span role="button" tabIndex="-1" onClick={moveDown} onKeyPress={moveDown}>
+        <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
           <img className="thumbnail-arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png" />
         </span>
       );
@@ -79,7 +88,7 @@ const Gallery = () => {
           />
         </div>
         <div className="thumbnail-container">
-          {renderUpArrow}
+          {renderUpArrow()}
           <div className="thumbnail-image-container">
             {stylePhotos.map((photo, index) => (
               <GalleryThumbnail
@@ -92,13 +101,13 @@ const Gallery = () => {
               />
             ))}
           </div>
-          {renderDownArrow}
+          {renderDownArrow()}
         </div>
         <div className="main-arrow-container">
-          <span role="button" tabIndex="-1" onClick={moveUp} onKeyPress={moveUp}>
+          <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
             <img className="main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
           </span>
-          <span role="button" tabIndex="-1" onClick={moveDown} onKeyPress={moveDown}>
+          <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
             <img className="main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
           </span>
         </div>

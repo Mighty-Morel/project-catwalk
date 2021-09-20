@@ -90,8 +90,8 @@
 
 .thumbnail-arrow {
   margin-left: 20px;
-  margin-top: 10px;
-  margin-bottom: 0px;
+  margin-top: 8px;
+  margin-bottom: -5px;
   width: 15px;
 }
 
@@ -114,6 +114,10 @@
 .thumbnail-image-container::-webkit-scrollbar {
   display: none;
 }
+
+/* #scroll {
+  transform: translateY(60px);
+} */
 
 .image-thumbnail {
   object-fit: cover;
@@ -261,6 +265,7 @@ hr {
   grid-template-columns: 3fr 1fr;
   grid-template-rows: auto;
   margin: auto;
+  gap: 3px;
 }
 
 .help-text-space {
