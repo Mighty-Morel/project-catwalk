@@ -141,11 +141,9 @@ const AddToCart = () => {
           <button
             className="size-dropdown-btn"
             type="submit"
-            onClick={() => { showSizes(true); }}
           >
-            {selectSize}
+            OUT OF STOCK
           </button>
-          <li className="size">OUT OF STOCK</li>
         </div>
       </>
     );
