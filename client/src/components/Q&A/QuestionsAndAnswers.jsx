@@ -11,7 +11,7 @@ const QuestionsAndAnswers = () => {
 
   // Create the state component to hold the questions
   const [questions, setQuestions] = useState([]);
-  const [questionCount, setCount] = useState(4);
+  const [questionCount, setCount] = useState(2);
   const [extra, setExtra] = useState(false);
 
   // Retrieve the questions from the API
@@ -22,8 +22,8 @@ const QuestionsAndAnswers = () => {
         results.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
         setQuestions(results);
         // Compares count to number of questions, display up to four questions
-        if (results.length > 4) {
-          setCount(4);
+        if (results.length > 2) {
+          setCount(2);
           setExtra(true);
         } else {
           setCount(results.length);
@@ -54,14 +54,14 @@ const QuestionsAndAnswers = () => {
   };
 
   const collapseQuestions = () => {
-    setCount(4);
+    setCount(2);
     setExtra(true);
   };
 
   const renderMoreQuestions = () => {
     if (extra) {
       return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
-    } if (questionCount > 4) {
+    } if (questionCount > 2) {
       return (<button type="button" onClick={collapseQuestions}>Collapse questions</button>);
     }
     return null;
