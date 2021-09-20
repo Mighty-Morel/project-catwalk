@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -24,6 +25,7 @@ const App = () => {
 
   const dispatch = useDispatch();
 
+
   const handleClick = () => {
     dispatch(updateProductId(48434)); // this is an example to show how update works
     // delete when understood
@@ -31,7 +33,7 @@ const App = () => {
 
   return (
     <>
-      <div data-testid="loadapp" onClick={handleClick}>
+      {/* <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
         and current Style is

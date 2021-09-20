@@ -13,7 +13,6 @@ class RelatedItems extends React.Component {
   render() {
     return (
       <>
-        <div>RELATED PRODUCTS</div>
         <ProductCarousel />
         {/* <ComparisonModal /> */}
       </>
