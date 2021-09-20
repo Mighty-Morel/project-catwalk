@@ -58,7 +58,7 @@ const QuestionEntry = (props) => {
   };
 
   useEffect(() => {
-    if (answers.length < answerCount) {
+    if (answers.length <= answerCount) {
       setExtra(false);
     }
   }, [answerCount]);
@@ -87,7 +87,7 @@ const QuestionEntry = (props) => {
 
   const renderModal = () => {
     if (answerModal) {
-      return (<AnswerModal toggleAnswerForm={toggleAnswerForm}/>);
+      return (<AnswerModal toggleAnswerForm={toggleAnswerForm} id={id} />);
     }
     return null;
   };

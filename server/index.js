@@ -95,36 +95,48 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
     });
 });
 
-// post helpfulness for a question
-app.put('/qa/questions/:question_id/helpful', (req, res) => {
-  axios.put(req.url)
+// post an answer
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  axios.post(req.url, req.body)
     .then(() => {
-      res.status(204).send('NO CONTENT');
+      console.log(req.body);
+      res.status(201).send('CREATED');
     })
     .catch((err) => {
-      res.status(504).send('error in putting answers as helpful', err);
+      res.status(504).send('error in posting new answer', err);
     });
 });
 
-// post helpfulness for an answer
+// put helpfulness for a question
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  axios.put(req.url)
+    .then((response) => {
+      res.status(204).send('CREATED');
+    })
+    .catch((err) => {
+      res.status(504).send('error in putting question as helpful', err);
+    });
+});
+
+// put helpfulness for an answer
 app.put('/qa/answers/:answer_id/helpful', (req, res) => {
   axios.put(req.url)
     .then(() => {
       res.status(204).send('NO CONTENT');
     })
     .catch((err) => {
-      res.status(504).send('error in putting answers as helpful', err);
+      res.status(504).send('error in putting answer as helpful', err);
     });
 });
 
-// post reported for an answer
+// put reported for an answer
 app.put('/qa/answers/:answer_id/report', (req, res) => {
   axios.put(req.url)
     .then(() => {
       res.status(204).send('NO CONTENT');
     })
     .catch((err) => {
-      res.status(504).send('error in putting answers as reported', err);
+      res.status(504).send('error in putting answer as reported', err);
     });
 });
 

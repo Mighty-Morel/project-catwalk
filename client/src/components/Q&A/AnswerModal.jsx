@@ -1,16 +1,37 @@
 import React, { useState } from 'react';
-import moment from 'moment';
 import axios from 'axios';
 import styling from './questions.css';
 
 const AnswerModal = (props) => {
   const [textInput, setTextInput] = useState('');
+  const [nameInput, setNameInput] = useState('sample');
+  const [emailInput, setEmailInput] = useState('sample@yahoo.com');
+  const [imageInput, setImageInput] = useState([]);
 
   // Destructuring
-  const { toggleAnswerForm } = props;
+  const { toggleAnswerForm, id } = props;
 
   const onChangeHandler = (event) => {
     setTextInput(event.target.value);
+  };
+
+  // post answer information to API
+  const postAnswer = () => {
+    const answerInfo = {
+      body: textInput,
+      name: nameInput,
+      email: emailInput,
+      photos: imageInput,
+    };
+    axios.post(`/qa/questions/${id}/answers`, answerInfo)
+      .then(() => {
+        console.log(answerInfo);
+        console.log('SUCCESS');
+        toggleAnswerForm();
+      })
+      .catch((error) => {
+        console.log('error in posting answer on the client', error);
+      });
   };
 
   return (
@@ -24,7 +45,7 @@ const AnswerModal = (props) => {
         </div>
         <div className="modal-footer">
           <button type="button" onClick={toggleAnswerForm}>Close</button>
-          <button type="submit" onClick={toggleAnswerForm}>Submit</button>
+          <button type="submit" onClick={postAnswer}>Submit</button>
         </div>
       </div>
     </div>
