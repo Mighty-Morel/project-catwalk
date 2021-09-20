@@ -11,7 +11,6 @@ import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
 import overviewStyling from './Overview/overview.css';
 
-
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
 // all other components will reference this product ID reflected in app
@@ -33,7 +32,7 @@ const App = () => {
 
   return (
     <>
-      {/* <div data-testid="loadapp" onClick={handleClick}>
+      <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
         and current Style is
@@ -49,8 +48,8 @@ const App = () => {
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
-      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><RelatedItems productId={currentId} /></div>
+      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><ReviewList /></div>
     </>
   );
