@@ -32,7 +32,7 @@ app.get('/products', (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting all products', err);
+      res.send(err);
     });
 });
 
@@ -44,7 +44,7 @@ app.get('/products/:productId', (req, res) => {
       res.send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting product info', err);
+      res.send(err);
     });
 });
 
@@ -137,6 +137,57 @@ app.put('/qa/answers/:answer_id/report', (req, res) => {
     })
     .catch((err) => {
       res.status(504).send('error in putting answer as reported', err);
+app.get('/api/reviews', (req, res) => {
+  axios.get('/reviews', {
+    params: req.query,
+  })
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.get('/api/reviews/meta', (req, res) => {
+  axios.get('/reviews/meta', {
+    params: req.query,
+  })
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.post('/api/reviews', (req, res) => {
+  axios.post('/reviews', req.body)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.put('/api/reviews/:review_id/helpful', (req, res) => {
+  axios.put(`/reviews/${req.params.review_id}/helpful`)
+    .then((response) => {
+      res.sendStatus(response.status);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.put('/api/reviews/:review_id/report', (req, res) => {
+  axios.put(`/reviews/${req.params.review_id}/report`)
+    .then((response) => {
+      res.sendStatus(response.status);
+    })
+    .catch((err) => {
+      res.send(err);
     });
 });
 
