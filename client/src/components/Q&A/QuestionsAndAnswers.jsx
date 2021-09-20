@@ -49,25 +49,23 @@ const QuestionsAndAnswers = () => {
   // Show more questions and conditional rendering for extras
   const showMoreQuestions = () => {
     setCount(questionCount + 2);
+    (() => { if (questions.length <= questionCount + 2) { setExtra(false); } })();
+    // checkQuestionCount();
   };
 
   const collapseQuestions = () => {
     setCount(4);
+    setExtra(true);
   };
 
   const renderMoreQuestions = () => {
     if (extra) {
       return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
-    } else if (questionCount > 4) {
+    } if (questionCount > 4) {
       return (<button type="button" onClick={collapseQuestions}>Collapse questions</button>);
     }
+    return null;
   };
-
-  useEffect(() => {
-    if (questions.length <= questionCount) {
-      setExtra(false);
-    }
-  }, [questionCount]);
 
   const displayedQuestions = questions.slice(0, questionCount);
 
