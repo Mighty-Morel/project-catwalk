@@ -1,20 +1,14 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updatePhoto } from '../../reducers/Style-Reducer';
-
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 import GalleryThumbnail from './GalleryThumbnail.jsx';
 
 const Gallery = () => {
-  const dispatch = useDispatch();
-
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
-  // const mainImage = useSelector((state) => state.style.mainPhoto);
   const [mainPhotoIndex, setPhotoIndex] = useState(0);
-  // const [mainImage, setMainImage] = useState(stylePhotos[photoIndex])
   const [downArrow, toggleDownArrow] = useState(false);
 
   const mainImage = stylePhotos[mainPhotoIndex];
@@ -51,6 +45,7 @@ const Gallery = () => {
           />
         </div>
         <div className="thumbnail-container">
+          <img className="arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png"/>
           {stylePhotos.map((photo, index) => (
             <GalleryThumbnail
               key={photo.url}
@@ -61,6 +56,7 @@ const Gallery = () => {
               mainPhotoIndex={mainPhotoIndex}
             />
           ))}
+          <img className="arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png"/>
         </div>
       </div>
     </>
