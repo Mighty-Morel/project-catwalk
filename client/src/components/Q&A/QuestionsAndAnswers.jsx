@@ -50,15 +50,16 @@ const QuestionsAndAnswers = () => {
   const showMoreQuestions = () => {
     setCount(questionCount + 2);
     (() => { if (questions.length <= questionCount + 2) { setExtra(false); } })();
-    // checkQuestionCount();
   };
 
+  // Can be taken out if deemed collapse is unnecessary
   const collapseQuestions = () => {
     setCount(2);
     setExtra(true);
   };
 
   const renderMoreQuestions = () => {
+    // Can be taken out if deemed collapse is unnecessary
     if (extra) {
       return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
     } if (questionCount > 2) {
