@@ -6,8 +6,10 @@ import styling from './questions.css';
 const AnswerEntry = (props) => {
   const [helpfulnessClick, setHelpfulnessClick] = useState(false);
   const [reportClick, setReportClick] = useState(false);
+
   // Destructuring
   const { date, answer, answerer, helpfulness, id } = props;
+
   // Format date
   const formattedDate = moment(date).format('LL');
 

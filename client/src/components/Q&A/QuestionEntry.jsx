@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AnswerEntry from './AnswerEntry.jsx';
+import AnswerModal from './AnswerModal.jsx';
 import styling from './questions.css';
 
 const QuestionEntry = (props) => {
@@ -8,6 +9,7 @@ const QuestionEntry = (props) => {
   const [answers, setAnswers] = useState([]);
   const [extra, setExtra] = useState(false);
   const [helpfulnessClick, setHelpfulnessClick] = useState(false);
+  const [answerModal, setAnswerModal] = useState(false);
 
   // Destructuring of props
   const { id, helpfulness } = props;
@@ -78,12 +80,25 @@ const QuestionEntry = (props) => {
       return (<span><b>Yes &#40;{helpfulness + 1}&#41;</b></span>);
     }
   };
+  // Add answer button and modal render
+  const toggleAnswerForm = () => {
+    setAnswerModal(!answerModal);
+  };
+
+  const renderModal = () => {
+    if (answerModal) {
+      return (<AnswerModal toggleAnswerForm={toggleAnswerForm}/>);
+    }
+    return null;
+  };
 
   return (
     <div className="question-entry">
       <h1>Q: {props.question}</h1>
       <span>Helpful? </span>
       {renderHelpful()}
+      <button type="button" onClick={toggleAnswerForm}> Add Answer</button>
+      {renderModal()}
       <h2>A: </h2>
       {displayedAnswers.map((answer) => {
         const {
