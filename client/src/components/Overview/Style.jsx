@@ -1,15 +1,15 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { updateStyleId } from '../reducers/Style-Reducer';
+import { updateStyle } from '../../reducers/Style-Reducer';
+// eslint-disable-next-line no-unused-vars
+import overviewStyling from './overview.css';
 
 const Style = ({ style }) => {
   const dispatch = useDispatch();
-  const styleId = style.style_id;
 
   const handleClick = () => {
-    console.log(styleId);
-    dispatch(updateStyleId(styleId));
+    dispatch(updateStyle(style));
   };
 
   const selectedStyleId = useSelector((state) => state.style.id);
@@ -39,9 +39,9 @@ const Style = ({ style }) => {
   }
 
   return (
-    <div role="button" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
+    <div role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
       <p className="style-name">{style.name}</p>
-      <div className="thumbnail">
+      <div className="style-thumbnail">
         {imageStyle}
       </div>
     </div>
