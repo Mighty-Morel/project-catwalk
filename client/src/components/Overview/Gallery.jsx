@@ -9,7 +9,8 @@ const Gallery = () => {
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
   const [mainPhotoIndex, setPhotoIndex] = useState(0);
-  const [downArrow, toggleDownArrow] = useState(false);
+  // const [upArrow, toggleUpArrow] = useState(false);
+  // const [downArrow, toggleDownArrow] = useState(false);
 
   const mainImage = stylePhotos[mainPhotoIndex];
   // limit to show only up to 7 thumbnails
@@ -17,17 +18,50 @@ const Gallery = () => {
   const limitPhotos = () => {
     if (stylePhotos.length > 7) {
       displayedPhotos = stylePhotos.slice(0, 7);
-      toggleDownArrow(true);
+      // toggleDownArrow(true);
     }
     displayedPhotos = stylePhotos;
-    toggleDownArrow(false);
-    console.log('limit photos', displayedPhotos);
+    // toggleDownArrow(false);
   };
 
   useEffect(limitPhotos, [mainImage]);
 
   const selectPhoto = (index) => {
     setPhotoIndex(index);
+  };
+
+  const moveUp = () => {
+    if (mainPhotoIndex > 0) {
+      setPhotoIndex(mainPhotoIndex - 1);
+    }
+  };
+
+  const moveDown = () => {
+    if (mainPhotoIndex < stylePhotos.length - 1) {
+      setPhotoIndex(mainPhotoIndex + 1);
+    }
+  };
+
+  const renderUpArrow = () => {
+    if (mainPhotoIndex > 0) {
+      return (
+        <span role="button" tabIndex="-1" onClick={moveUp} onKeyPress={moveUp}>
+          <img className="thumbnail-arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png" />
+        </span>
+      );
+    }
+    return <span />;
+  };
+
+  const renderDownArrow = () => {
+    if (mainPhotoIndex < stylePhotos.length - 1) {
+      return (
+        <span role="button" tabIndex="-1" onClick={moveDown} onKeyPress={moveDown}>
+          <img className="thumbnail-arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png" />
+        </span>
+      );
+    }
+    return <span />;
   };
 
   if (!mainImage) {
@@ -45,7 +79,7 @@ const Gallery = () => {
           />
         </div>
         <div className="thumbnail-container">
-          <img className="arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png"/>
+          {renderUpArrow}
           {stylePhotos.map((photo, index) => (
             <GalleryThumbnail
               key={photo.url}
@@ -56,7 +90,15 @@ const Gallery = () => {
               mainPhotoIndex={mainPhotoIndex}
             />
           ))}
-          <img className="arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png"/>
+          {renderDownArrow}
+        </div>
+        <div className="main-arrow-container">
+          <span role="button" tabIndex="-1" onClick={moveUp} onKeyPress={moveUp}>
+            <img className="main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
+          </span>
+          <span role="button" tabIndex="-1" onClick={moveDown} onKeyPress={moveDown}>
+            <img className="main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
+          </span>
         </div>
       </div>
     </>
