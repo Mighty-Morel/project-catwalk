@@ -5,8 +5,7 @@ import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
-// import ReviewList from './ReviewList.jsx';
-// import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
+import ReviewList from './Review-list.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
 import overviewStyling from './Overview/overview.css';
@@ -50,6 +49,7 @@ const App = () => {
       </div>
       <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><RelatedItems productId={currentId} /></div>
+      <div><ReviewList /></div>
     </>
   );
 };
