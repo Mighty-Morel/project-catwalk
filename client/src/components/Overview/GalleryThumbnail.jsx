@@ -1,19 +1,18 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React from 'react';
-import { useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
-const GalleryThumbnail = ({ photo, style, selectPhoto }) => {
-  const selectedPhotoUrl = useSelector((state) => state.style.mainPhoto.url);
-
+const GalleryThumbnail = ({
+  photo, index, style, selectPhoto, mainPhotoIndex,
+}) => {
   const handleClick = () => {
-    selectPhoto(photo);
+    selectPhoto(index);
   };
 
   const renderThumbnail = () => {
-    if (selectedPhotoUrl === photo.url) {
+    if (index === mainPhotoIndex) {
       return (
         <>
           <img className="image-thumbnail" id="selected-thumbnail" src={photo.thumbnail_url} alt={style.name} />
