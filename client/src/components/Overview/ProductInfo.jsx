@@ -6,11 +6,10 @@ import { updateProductInfo } from '../../reducers/Example-Reducer';
 import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import AddToCart from './AddToCart.jsx';
+import AddToCartFeatures from './AddToCartFeatures.jsx';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 import 'regenerator-runtime/runtime';
-
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
@@ -62,7 +61,7 @@ const ProductInfo = () => {
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />
-        <AddToCart allStyles={allStyles} />
+        <AddToCartFeatures allStyles={allStyles} />
       </div>
     </>
   );

@@ -40,29 +40,25 @@ const AddToCartFeatures = () => {
 
   // Find the available quantity of the sku
   let availableQty = 0;
-  let userCart = [];
+  // let userCart = [];
   // Retrieves list of products added to the cart by a user
   const getCart = async () => {
-    try {
-      const cartData = await axios.get('/cart');
-      addToCart(cartData);
-      // consolidate cart items to {sku_id: count}
-      userCart = cartData.map((set) => {
-        const item = {};
-        item.set.sku_id = set.count;
-        return item;
-      });
-    } catch (err) {
-      console.log('Error getting user cart:', error);
-    }
+    axios.get('/cart')
+      .then((response) => {
+        console.log(response.data);
+        addToCart(response.data);
+      })
+      .catch((err) => console.log('Error getting all styles:', err));
   };
 
-  getCart();
+  useEffect(getCart, [selectSku]);
+  // getCart();
 
   if (selectSku !== undefined) {
-    const cartItem = userCart.find((item) => selectSku[0] === item.sku_id);
-    console.log('cartItem', cartItem);
-    availableQty = selectSku[1].quantity - cartItem.count;
+    const cartItem = 0;
+    // const cartItem = userCart.find((item) => selectSku[0] === item.sku_id);
+    // console.log('cartItem', cartItem);
+    availableQty = selectSku[1].quantity - cartItem;
   }
 
   const qtySelector = () => {
@@ -175,7 +171,7 @@ const AddToCartFeatures = () => {
 
   // ADD TO CART BUTTON ========================================================
   const postToCartOnce = (skuId) => {
-    axios.post('/cart', null, { params: { skuId } })
+    axios.post('/cart', { sku_id: skuId })
       .then((response) => response.status)
       .catch((err) => console.log('Error posting to cart', err));
   };
