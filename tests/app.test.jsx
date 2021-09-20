@@ -16,7 +16,9 @@ import App from '../client/src/components/App';
 
 afterEach(cleanup);
 
-jest.mock('../client/src/components/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
+jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style</div>));
+jest.mock('../client/src/components/Overview/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
+jest.mock('../client/src/components/Overview/Gallery', () => () => (<div>Placeholder Gallery</div>));
 jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
 jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));

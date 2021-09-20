@@ -2,7 +2,7 @@
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
-import reducer, { updateStyleId, updateStyles } from '../client/src/reducers/Style-Reducer';
+import reducer, { updateStyle, updateStyles } from '../client/src/reducers/Style-Reducer';
 
 afterEach(cleanup);
 
@@ -11,6 +11,10 @@ test('should return the initial state', () => {
     {
       id: 293480,
       allStyles: [],
+      style: {},
+      photos: [],
+      mainPhoto: [],
+      skus: {},
     },
   );
 });
@@ -19,19 +23,51 @@ test('should update the Style Id', () => {
   const previousState = {
     id: 293480,
     allStyles: [],
+    style: {},
+    photos: [],
+    mainPhoto: [],
+    skus: {},
   };
-  expect(reducer(previousState, updateStyleId(123456))).toEqual(
-    {
-      id: 123456,
-      allStyles: [],
+
+  const newStyle = {
+    style_id: 293480,
+    name: 'Desert Brown & Tan',
+    original_price: '140.00',
+    photos: [1, 2],
+    mainPhoto: 1,
+    skus: {
+      123: {
+        size: 'xs',
+        quantity: 4,
+      },
     },
-  );
-});
+  };
+
+  expect(reducer(previousState, updateStyle(newStyle))).toEqual(
+    {
+      style_id: 293480,
+      name: 'Desert Brown & Tan',
+      original_price: '140.00',
+      photos: [1, 2],
+      mainPhoto: 1,
+      skus: {
+        123: {
+          size: 'xs',
+          quantity: 4,
+        },
+      },
+    }
+  )
+})
 
 test('should return an array of objects with style info', () => {
   const previousState = {
     id: 293480,
     allStyles: [],
+    style: {},
+    photos: [],
+    mainPhoto: [],
+    skus: {},
   };
   expect(reducer(previousState, updateStyles([
     {
@@ -68,5 +104,9 @@ test('should return an array of objects with style info', () => {
         original_price: '10.00',
       },
     ],
-  });
-});
+  style: {},
+  photos: [], 
+  mainPhoto: [],
+  skus: {},
+  })
+})
