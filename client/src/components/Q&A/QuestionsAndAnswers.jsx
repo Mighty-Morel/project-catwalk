@@ -45,9 +45,32 @@ const QuestionsAndAnswers = () => {
       </>
     );
   }
-  // onChange handler to sort questions
-  // change format on button
+
+  // Show more questions and conditional rendering for extras
+  const showMoreQuestions = () => {
+    setCount(questionCount + 2);
+  };
+
+  const collapseQuestions = () => {
+    setCount(4);
+  };
+
+  const renderMoreQuestions = () => {
+    if (extra) {
+      return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
+    } else if (questionCount > 4) {
+      return (<button type="button" onClick={collapseQuestions}>Collapse questions</button>);
+    }
+  };
+
+  useEffect(() => {
+    if (questions.length <= questionCount) {
+      setExtra(false);
+    }
+  }, [questionCount]);
+
   const displayedQuestions = questions.slice(0, questionCount);
+
   return (
     <>
       <input className="search-question" type="text" placeholder="Search questions..." />
@@ -83,8 +106,7 @@ const QuestionsAndAnswers = () => {
           />
         );
       })}
-      {/* {() => { if (extra) { return <button type="button"
-      onClick={() => { setCount(questionCount + 2); }}>Load More Questions</button>; } }} */}
+      {renderMoreQuestions()}
     </>
   );
 };
