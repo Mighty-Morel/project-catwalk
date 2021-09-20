@@ -1,6 +1,8 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
 import { useSelector } from 'react-redux';
+// eslint-disable-next-line no-unused-vars
+import overviewStyling from './overview.css';
 
 const Price = () => {
   const styleId = useSelector((state) => state.style.id);
@@ -9,6 +11,9 @@ const Price = () => {
     () => allStyles.find((style) => style.style_id === styleId),
   );
 
+  if (!selectedStyle) {
+    return <div>Updating latest prices...</div>;
+  }
   if (selectedStyle.sale_price > 0) {
     return (
       <>

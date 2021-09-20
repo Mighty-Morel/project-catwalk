@@ -4,11 +4,13 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
-import ProductInfo from './ProductInfo.jsx';
+import ProductInfo from './Overview/ProductInfo.jsx';
+import Gallery from './Overview/Gallery.jsx';
 import ReviewList from './Review-list.jsx';
-// import QuestionsAndAnswers from './QuestionsAndAnswers.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
+import overviewStyling from './Overview/overview.css';
+
 
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
@@ -24,7 +26,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(updateProductId(48433)); // this is an example to show how update works
+    dispatch(updateProductId(48434)); // this is an example to show how update works
     // delete when understood
   };
 
@@ -34,20 +36,21 @@ const App = () => {
         Hello World! CurrentId is
         {currentId}
         and current Style is
+        {' '}
         {selectedStyleId}
-      </div> */}
+      </div>
       {/* <ProductList /> */}
       {/* <Router>
-        <Route exact path="products/:productId" component={ProductInfo} />
-        <Redirect to="/" />
-      </Router> */}
-      {/* <div><ProductInfo /></div> */}
-
-      <div><ProductInfo productId={currentId} /></div>
-      {/* <div><QuestionsAndAnswers productId={productId} /></div> */}
-      {/* <div><ReviewList /></div> */}
-      <br />
+          <Route exact path="products/:productId" component={ProductInfo} />
+          <Redirect to="/" />
+        </Router> */}
+      <div className="overview-container">
+        <div><Gallery /></div>
+        <div><ProductInfo productId={currentId} /></div>
+      </div>
+      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><RelatedItems productId={currentId} /></div>
+      <div><ReviewList /></div>
     </>
   );
 };
