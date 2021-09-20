@@ -21,6 +21,7 @@ const AddToCartFeatures = () => {
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
   const [cart, addToCart] = useState([]);
+  const [apiCart, addToAPICart] = useState([]);
 
   // reset views when rendering new style
   const resetDefault = () => {
@@ -42,24 +43,40 @@ const AddToCartFeatures = () => {
   let availableQty = 0;
   // let userCart = [];
   // Retrieves list of products added to the cart by a user
-  const getCart = async () => {
+  const getCart = () => {
     axios.get('/cart')
       .then((response) => {
-        console.log(response.data);
-        addToCart(response.data);
+        const cartData = response.data;
+        addToAPICart(cartData);
+        console.log('cartData', cartData);
+        const newCart = {};
+        cartData.forEach((item) => {
+          console.log(item);
+          newCart[item.sku_id] = item.count;
+        });
+        console.log(newCart);
+        return newCart;
+      })
+      .then((newCart) => {
+        if (selectSku !== undefined) {
+          const skuId = selectSku[0];
+          const cartQty = !newCart[skuId] ? 0 : newCart[skuId];
+          console.log('cartQty', cartQty);
+          availableQty = selectSku[1].quantity - cartQty;
+          console.log('availableQty', availableQty);
+        }
       })
       .catch((err) => console.log('Error getting all styles:', err));
   };
 
   useEffect(getCart, [selectSku]);
-  // getCart();
 
-  if (selectSku !== undefined) {
-    const cartItem = 0;
-    // const cartItem = userCart.find((item) => selectSku[0] === item.sku_id);
-    // console.log('cartItem', cartItem);
-    availableQty = selectSku[1].quantity - cartItem;
-  }
+  // if (selectSku !== undefined) {
+  //   // const cartItem = 0;
+  //   const cartItem = apiCart.find((item) => selectSku[0] === item.sku_id);
+  //   console.log('cartItem', cartItem);
+  //   availableQty = selectSku[1].quantity - cartItem.count;
+  // }
 
   const qtySelector = () => {
     // show max of 15 in dropdown

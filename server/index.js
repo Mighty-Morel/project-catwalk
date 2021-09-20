@@ -150,10 +150,8 @@ app.put('/api/reviews/:review_id/report', (req, res) => {
 });
 
 app.get('/cart', (req, res) => {
-  console.log(req.body);
   axios.get('/cart')
     .then((response) => {
-      console.log(response.data);
       res.send(response.data);
     })
     .catch((err) => {
@@ -164,7 +162,6 @@ app.get('/cart', (req, res) => {
 app.post('/cart', (req, res) => {
   axios.post('/cart', req.body)
     .then((response) => {
-      console.log(response.data);
       res.send(response.data);
     })
     .catch((err) => {
