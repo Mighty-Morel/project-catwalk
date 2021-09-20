@@ -80,16 +80,18 @@ const Gallery = () => {
         </div>
         <div className="thumbnail-container">
           {renderUpArrow}
-          {stylePhotos.map((photo, index) => (
-            <GalleryThumbnail
-              key={photo.url}
-              style={selectedStyle}
-              photo={photo}
-              index={index}
-              selectPhoto={selectPhoto}
-              mainPhotoIndex={mainPhotoIndex}
-            />
-          ))}
+          <div className="thumbnail-image-container">
+            {stylePhotos.map((photo, index) => (
+              <GalleryThumbnail
+                key={photo.url}
+                style={selectedStyle}
+                photo={photo}
+                index={index}
+                selectPhoto={selectPhoto}
+                mainPhotoIndex={mainPhotoIndex}
+              />
+            ))}
+          </div>
           {renderDownArrow}
         </div>
         <div className="main-arrow-container">

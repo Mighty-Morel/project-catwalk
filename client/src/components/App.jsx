@@ -32,7 +32,7 @@ const App = () => {
 
   return (
     <>
-      {/* <div data-testid="loadapp" onClick={handleClick}>
+      <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is
         {currentId}
         and current Style is
