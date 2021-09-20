@@ -7,24 +7,31 @@ import overviewStyling from './overview.css';
 
 const AddToCartFeatures = () => {
   // identify skus in stock
-  let availableSkus = [];
+  let initialSkus = [];
   const selectedSkus = useSelector((state) => state.style.skus);
-  if (selectedSkus !== undefined) {
-    availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
-  }
-
+  const renderAvailableSkus = () => {
+    if (selectedSkus !== undefined) {
+      initialSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
+    }
+  };
+  renderAvailableSkus();
   // set initial sku, quantity, size, views and cart
-  const [selectSku, setSku] = useState(availableSkus[0]);
+  const [selectSku, setSku] = useState(initialSkus[0]);
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
   const [isQtyShown, showQty] = useState(false);
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
   const [cart, addToCart] = useState([]);
-  const [apiCart, addToAPICart] = useState([]);
+  const [availableQty, setAvailableQty] = useState(0);
+  const [availableSkus, setAvailableSkus] = useState(initialSkus);
+  // const [apiCart, addToAPICart] = useState([]);
+  console.log('initialSkus', initialSkus);
+  console.log('selectSku', initialSkus[0]);
 
   // reset views when rendering new style
   const resetDefault = () => {
+    renderAvailableSkus();
     setSku(availableSkus[0]);
     setSize('Select Size');
     showQty(false);
@@ -32,6 +39,7 @@ const AddToCartFeatures = () => {
     showError(false);
   };
   useEffect(resetDefault, [selectedSkus]);
+  // useEffect(setSku(initialSkus[0]), [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -40,34 +48,47 @@ const AddToCartFeatures = () => {
   //   1702769: {quantity: 4, size: 'XL'}
 
   // Find the available quantity of the sku
-  let availableQty = 0;
+  // let availableQty = 0;
   // let userCart = [];
   // Retrieves list of products added to the cart by a user
   const getCart = () => {
     axios.get('/cart')
       .then((response) => {
         const cartData = response.data;
-        addToAPICart(cartData);
-        console.log('cartData', cartData);
+        addToCart(cartData);
         const newCart = {};
         cartData.forEach((item) => {
-          console.log(item);
           newCart[item.sku_id] = item.count;
         });
-        console.log(newCart);
         return newCart;
       })
       .then((newCart) => {
         if (selectSku !== undefined) {
           const skuId = selectSku[0];
           const cartQty = !newCart[skuId] ? 0 : newCart[skuId];
-          console.log('cartQty', cartQty);
-          availableQty = selectSku[1].quantity - cartQty;
+          const totalQty = selectSku[1].quantity - cartQty;
           console.log('availableQty', availableQty);
+          console.log('initialSkus', initialSkus);
+          console.log('newCart', newCart);
+          setAvailableQty(totalQty);
+          const newSkus = initialSkus.map((sku) => {
+            const newItem = [];
+            newItem.push(sku[0]);
+            const sizeQty = {};
+            const newQty = sku[1].quantity - newCart[sku[0]];
+            sizeQty.size = sku[1].size;
+            sizeQty.quantity = newQty;
+            newItem.push(sizeQty);
+            console.log(newItem);
+            return newItem;
+          });
+          console.log('newSkus', newSkus);
+          setAvailableSkus(newSkus);
         }
       })
       .catch((err) => console.log('Error getting all styles:', err));
   };
+  console.log('availableQty outside', availableQty);
 
   useEffect(getCart, [selectSku]);
 
@@ -133,10 +154,12 @@ const AddToCartFeatures = () => {
       </li>
     ),
   );
+  console.log(availableSkus);
+  console.log(availableSizes);
 
   const renderSizeSelector = () => {
     // if no size is chosen, clicking Add to Cart opens Select Size Dropdown
-    if (availableQty > 0) {
+    if (availableSkus.length > 0) {
       return (
         <>
           <div className={error ? 'help-text' : 'help-text-space'}>{error ? 'Please select a size' : ''}</div>
@@ -203,7 +226,7 @@ const AddToCartFeatures = () => {
         sku_id: selectSku[0],
         count: selectQty,
       };
-      addToCart([...cart, item]);
+      // addToCart([...cart, item]);
       for (let i = 0; i < selectQty; i += 1) {
         postToCartOnce(selectSku[0]);
       }
@@ -223,7 +246,7 @@ const AddToCartFeatures = () => {
     return <div />;
   };
 
-  if (!selectSku) {
+  if (initialSkus.length === 0) {
     return <div>Checking our inventory...</div>;
   }
   return (
