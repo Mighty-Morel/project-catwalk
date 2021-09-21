@@ -68,7 +68,7 @@ const ProductInfo = () => {
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />
-        <AddToCart allStyles={allStyles} />
+        <AddToCartFeatures style={style} />
       </div>
     </>
   );

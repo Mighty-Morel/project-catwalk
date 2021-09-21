@@ -15,7 +15,7 @@
 .gallery-container {
   grid-column: 1 / 4;
   height: 100%;
-  max-height: 690px;
+  max-height: 670px;
   display: grid;
   grid-template-columns: repeat(50, 1fr);
   grid-template-rows: auto;
@@ -30,7 +30,7 @@
   grid-row: 1 / 2;
   min-width: 300px;
   height: 100%;
-  max-height: 690px;
+  max-height: 670px;
   background-color: rgb(44, 44, 44);
   position: relative;
   overflow: auto;
@@ -153,7 +153,7 @@ hr {
   grid-column: 4 / 5;
   margin: 0 auto;
   max-width: 800px;
-  height: 710px;
+  height: 670px;
   font-size: 1em;
   line-height: 1.2em;
   background-color: white;

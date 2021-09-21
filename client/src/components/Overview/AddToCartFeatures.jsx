@@ -5,16 +5,15 @@ import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
-const AddToCartFeatures = () => {
+const AddToCartFeatures = ({ style }) => {
   // identify skus in stock
   let initialSkus = [];
-  const selectedSkus = useSelector((state) => state.style.skus);
-  const renderAvailableSkus = () => {
-    if (selectedSkus !== undefined) {
-      initialSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
-    }
-  };
-  renderAvailableSkus();
+  const selectedSkus = style.skus;
+
+  if (selectedSkus !== undefined) {
+    initialSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
+  }
+
   // set initial sku, quantity, size, views and cart
   const [selectSku, setSku] = useState(initialSkus[0]);
   const [selectQty, setQty] = useState(1);
@@ -22,24 +21,26 @@ const AddToCartFeatures = () => {
   const [isQtyShown, showQty] = useState(false);
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
-  // const [cart, addToCart] = useState([]);
   const [availableQty, setAvailableQty] = useState(0);
   const [availableSkus, setAvailableSkus] = useState(initialSkus);
-  // const [apiCart, addToAPICart] = useState([]);
-  console.log('initialSkus', initialSkus);
-  console.log('selectSku', initialSkus[0]);
 
   // reset views when rendering new style
   const resetDefault = () => {
-    renderAvailableSkus();
-    setSku(availableSkus[0]);
+    console.log('called resetDefault');
+
+    // renderAvailableSkus();
+    !availableSkus[0] ? setSku(initialSkus[0]) : setSku(availableSkus[0]);
+
     setSize('Select Size');
     showQty(false);
     showSizes(false);
     showError(false);
   };
-  useEffect(resetDefault, [selectedSkus]);
-  // useEffect(setSku(initialSkus[0]), [selectedSkus]);
+
+  useEffect(() => {
+    resetDefault();
+    console.log('called useEffect');
+  }, [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -55,7 +56,6 @@ const AddToCartFeatures = () => {
     axios.get('/cart')
       .then((response) => {
         const cartData = response.data;
-        // addToCart(cartData);
         const newCart = {};
         cartData.forEach((item) => {
           newCart[item.sku_id] = item.count;
@@ -67,11 +67,12 @@ const AddToCartFeatures = () => {
           const skuId = selectSku[0];
           const cartQty = !newCart[skuId] ? 0 : newCart[skuId];
           const totalQty = selectSku[1].quantity - cartQty;
-          console.log('availableQty', availableQty);
-          console.log('initialSkus', initialSkus);
-          console.log('newCart', newCart);
+          // console.log('availableQty', availableQty);
+          // console.log('initialSkus', initialSkus);
+          // console.log('newCart', newCart);
           setAvailableQty(totalQty);
-          const newSkus = initialSkus.map((sku) => {
+          const newSkus = [];
+          initialSkus.forEach((sku) => {
             const newItem = [];
             newItem.push(sku[0]);
             const sizeQty = {};
@@ -79,8 +80,10 @@ const AddToCartFeatures = () => {
             sizeQty.size = sku[1].size;
             sizeQty.quantity = newQty;
             newItem.push(sizeQty);
-            console.log(newItem);
-            return newItem;
+            if (newQty > 0) {
+              newSkus.push(newItem);
+            }
+            // console.log(newItem);
           });
           console.log('newSkus', newSkus);
           setAvailableSkus(newSkus);
@@ -89,6 +92,8 @@ const AddToCartFeatures = () => {
       .catch((err) => console.log('Error getting all styles:', err));
   };
   console.log('availableQty outside', availableQty);
+  console.log('availableSkus', availableSkus);
+
 
   useEffect(getCart, [selectSku]);
 
@@ -235,7 +240,10 @@ const AddToCartFeatures = () => {
   };
 
   const renderButton = () => {
-    if (availableQty > 0) {
+    console.log('render button');
+
+    if (selectSku) {
+      console.log('sku exists');
       return (
         <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
@@ -244,7 +252,7 @@ const AddToCartFeatures = () => {
     return <div />;
   };
 
-  if (initialSkus.length === 0) {
+  if (!selectSku) {
     return <div>Checking our inventory...</div>;
   }
   return (
