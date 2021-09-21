@@ -94,8 +94,8 @@ class ProductCarousel extends React.Component {
         const overviewName = res.data.name;
         const overviewFeatures = res.data.features;
         for (let l = 0; l < overviewFeatures.length; l++) {
-          overviewFeatures[l].overview = true;
-          overviewFeatures[l].card = false;
+          overviewFeatures[l].overview = '✓'; // true
+          overviewFeatures[l].card = ' '; // false
           result.push(overviewFeatures[l]);
         }
         this.setState({
@@ -115,7 +115,7 @@ class ProductCarousel extends React.Component {
             const overviewValue = modalInfo[n].value;
             if (overviewFeature === cardFeature.feature
               && overviewValue === cardFeature.value) {
-              overviewFeature.card = true;
+              overviewFeature.card = '✓'; // true
             } else {
               this.setState({
                 modalInfo,
@@ -123,8 +123,8 @@ class ProductCarousel extends React.Component {
               });
             }
           }
-          cardFeature.overview = false;
-          cardFeature.card = true;
+          cardFeature.overview = ' '; // false
+          cardFeature.card = '✓'; // true
           modalInfo.push(cardFeature);
           this.setState({
             modalInfo,
@@ -180,15 +180,17 @@ class ProductCarousel extends React.Component {
       <>
         <main>
           <Modal show={show} handleClose={this.hideModal}>
-            <div>Comparing ✓</div>
-            {console.log('checking modalInfo in return', modalInfo)}
+            <div className="modal-title">Comparing</div>
+            {/* {console.log('checking modalInfo in return', modalInfo)} */}
+            <div className="modal-title-wrapper">
+              <div className="modal-overview">{overviewName}</div>
+              <div className="modal-card">{cardName}</div>
+            </div>
             <ul>
-              <li>{overviewName}</li>
-              <li>{cardName}</li>
               {modalInfo.map((item, i) => (
                 <li key={i}>
                   <div>
-                    <ul>{item.feature} {item.value} </ul>
+                    <ul className="modal-features">{item.overview} {item.feature}: {item.value}{item.card}</ul>
                   </div>
                 </li>
               ))}

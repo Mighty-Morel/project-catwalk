@@ -35,3 +35,35 @@
   border: 0;
   cursor: pointer;
 }
+
+.modal-title {
+  font-size: 15px;
+  margin-left: 5px;
+  margin-bottom: 20px;
+}
+
+.modal-title-wrapper {
+  border: 1px solid lightgrey;
+  overflow: hidden;
+}
+
+.modal-overview {
+  font-size: 15px;
+  margin-left: 5px;
+  float: left;
+}
+
+.modal-card {
+  font-size: 15px;
+  margin-right: 5px;
+  float: right;
+}
+
+ul {
+  list-style-type: none;
+}
+
+.modal-features {
+  font-size: 15px;
+  list-style-type: none;
+}
