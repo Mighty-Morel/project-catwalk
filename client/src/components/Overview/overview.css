@@ -1,13 +1,13 @@
 /* Product Overview Formatting ---------------------------------------- */
 .overview-container {
-  width: 90%;
+  width: 100%;
   height:fit-content;
   display: grid;
   grid-template-columns: 4fr 1fr;
   grid-template-rows: auto;
   margin: auto;
-  background-color: white;
-  padding-bottom: 20px;
+  /* background-color: white; */
+  /* padding-bottom: 20px; */
 }
 
 /* Gallery Formatting --------------------------------------------------- */
@@ -152,7 +152,7 @@ hr {
   grid-column: 4 / 5;
   margin: 0 auto;
   max-width: 800px;
-  height: 100%;
+  height: 710px;
   font-size: 1em;
   line-height: 1.2em;
   background-color: white;
