@@ -23,6 +23,8 @@ beforeAll(() => {
         return Promise.resolve(mockProductData);
       case '/products/1/related':
         return Promise.resolve(mockRelatedIds);
+      case '/products/48421/styles':
+        return Promise.resolve(mockStyleData);
       default:
         return Promise.reject(new Error('Error - this test is not working'));
     }
@@ -92,3 +94,16 @@ it('should load and display the related ids of the product',
 it('should load and display the styles of the product',
   () => axios.get('/products/48421/styles')
     .then((productStyles) => expect(productStyles).toEqual(mockStyleData)));
+
+it('should load and display module title', async () => {
+  render(
+    <RelatedItems />,
+  );
+
+  axios.get('/products/48421/styles')
+    .then(async () => {
+      const carousel = await waitFor(() => screen.getByTestId('carousel'));
+      expect(carousel).toHaveTextContent('RELATED PRODUCTS');
+    })
+    .catch((err) => console.log(err));
+});

@@ -198,7 +198,7 @@ class ProductCarousel extends React.Component {
           </Modal>
         </main>
 
-        <div className="carousel">
+        <div className="carousel" data-testid="carousel">
           <div>RELATED PRODUCTS</div>
 
           <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
