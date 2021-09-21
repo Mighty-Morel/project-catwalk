@@ -22,7 +22,7 @@ const AddToCartFeatures = () => {
   const [isQtyShown, showQty] = useState(false);
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
-  const [cart, addToCart] = useState([]);
+  // const [cart, addToCart] = useState([]);
   const [availableQty, setAvailableQty] = useState(0);
   const [availableSkus, setAvailableSkus] = useState(initialSkus);
   // const [apiCart, addToAPICart] = useState([]);
@@ -55,7 +55,7 @@ const AddToCartFeatures = () => {
     axios.get('/cart')
       .then((response) => {
         const cartData = response.data;
-        addToCart(cartData);
+        // addToCart(cartData);
         const newCart = {};
         cartData.forEach((item) => {
           newCart[item.sku_id] = item.count;
