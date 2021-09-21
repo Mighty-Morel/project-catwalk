@@ -10,11 +10,13 @@ import {
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
+import { Provider } from 'react-redux';
 import axios from 'axios';
 
 import ProductCarousel from '../client/src/components/Related/ProductCarousel';
 import Modal from '../client/src/components/Related/Modal';
 import RelatedItems from '../client/src/components/Related/RelatedItems';
+import store from '../client/src/store/store';
 
 beforeAll(() => {
   axios.get.mockImplementation((url) => {
@@ -97,7 +99,9 @@ it('should load and display the styles of the product',
 
 it('should load and display module title', async () => {
   render(
-    <RelatedItems />,
+    <Provider store={store}>
+      <RelatedItems />
+    </Provider>,
   );
 
   axios.get('/products/48421/styles')
