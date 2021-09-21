@@ -1,3 +1,5 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
+/* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
