@@ -4,9 +4,9 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
+import ReviewList from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
-import ReviewList from './Review-list.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
 import overviewStyling from './Overview/overview.css';
@@ -33,10 +33,9 @@ const App = () => {
   return (
     <>
       <div data-testid="loadapp" onClick={handleClick}>
-        Hello World! CurrentId is
+        Hello World! CurrentId is&nbsp;
         {currentId}
-        and current Style is
-        {' '}
+        &nbsp;and current Style is&nbsp;
         {selectedStyleId}
       </div>
       {/* <ProductList /> */}
