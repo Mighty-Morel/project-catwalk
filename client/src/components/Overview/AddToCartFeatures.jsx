@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
@@ -9,7 +10,6 @@ const AddToCartFeatures = ({ style }) => {
   // identify skus in stock
   let initialSkus = [];
   const selectedSkus = style.skus;
-
   if (selectedSkus !== undefined) {
     initialSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
   }
@@ -38,9 +38,10 @@ const AddToCartFeatures = ({ style }) => {
   };
 
   useEffect(() => {
-    resetDefault();
+    resetDefault(),
     console.log('called useEffect');
-  }, [selectedSkus]);
+  },
+  [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -48,29 +49,26 @@ const AddToCartFeatures = ({ style }) => {
   //   1702768: {quantity: 15, size: 'XL'}
   //   1702769: {quantity: 4, size: 'XL'}
 
-  // Find the available quantity of the sku
-  // let availableQty = 0;
-  // let userCart = [];
   // Retrieves list of products added to the cart by a user
   const getCart = () => {
     axios.get('/cart')
       .then((response) => {
         const cartData = response.data;
-        const newCart = {};
+        const newCart = {}; // {sku_id: count}
         cartData.forEach((item) => {
           newCart[item.sku_id] = item.count;
         });
         return newCart;
       })
       .then((newCart) => {
+        // use cart data to find remaining available stock
         if (selectSku !== undefined) {
           const skuId = selectSku[0];
           const cartQty = !newCart[skuId] ? 0 : newCart[skuId];
+          // subtract amount in user cart from total amount to find amount available
           const totalQty = selectSku[1].quantity - cartQty;
-          // console.log('availableQty', availableQty);
-          // console.log('initialSkus', initialSkus);
-          // console.log('newCart', newCart);
           setAvailableQty(totalQty);
+          // create new array of available skus w/ id, quantity and size
           const newSkus = [];
           initialSkus.forEach((sku) => {
             const newItem = [];
@@ -83,7 +81,6 @@ const AddToCartFeatures = ({ style }) => {
             if (newQty > 0) {
               newSkus.push(newItem);
             }
-            // console.log(newItem);
           });
           console.log('newSkus', newSkus);
           setAvailableSkus(newSkus);
@@ -91,18 +88,8 @@ const AddToCartFeatures = ({ style }) => {
       })
       .catch((err) => console.log('Error getting all styles:', err));
   };
-  console.log('availableQty outside', availableQty);
-  console.log('availableSkus', availableSkus);
-
 
   useEffect(getCart, [selectSku]);
-
-  // if (selectSku !== undefined) {
-  //   // const cartItem = 0;
-  //   const cartItem = apiCart.find((item) => selectSku[0] === item.sku_id);
-  //   console.log('cartItem', cartItem);
-  //   availableQty = selectSku[1].quantity - cartItem.count;
-  // }
 
   const qtySelector = () => {
     // show max of 15 in dropdown
@@ -159,8 +146,6 @@ const AddToCartFeatures = ({ style }) => {
       </li>
     ),
   );
-  console.log(availableSkus);
-  console.log(availableSizes);
 
   const renderSizeSelector = () => {
     // if no size is chosen, clicking Add to Cart opens Select Size Dropdown
