@@ -212,10 +212,10 @@ const AddToCartFeatures = ({ style }) => {
       showError(true);
       showSizes(true);
     } else {
-      const item = {
-        sku_id: selectSku[0],
-        count: selectQty,
-      };
+      // const item = {
+      //   sku_id: selectSku[0],
+      //   count: selectQty,
+      // };
       // addToCart([...cart, item]);
       for (let i = 0; i < selectQty; i += 1) {
         postToCartOnce(selectSku[0]);
