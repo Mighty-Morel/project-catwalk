@@ -3,7 +3,7 @@
   width: 100%;
   height:fit-content;
   display: grid;
-  grid-template-columns: 4fr 1fr;
+  grid-template-columns: 3fr 1fr;
   grid-template-rows: auto;
   margin: auto;
   padding-right: 10px;
@@ -157,7 +157,7 @@ hr {
   font-size: 1em;
   line-height: 1.2em;
   background-color: white;
-  padding: 40px 15px 15px 25px;
+  padding: 40px 20px 15px 30px;
 }
 
 .ratings {
@@ -214,10 +214,10 @@ hr {
   display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
-  gap: 5px;
+  gap: 4%;
   place-items: center;
   place-content: center;
-  margin-bottom: 10px;
+  margin: 15px;
 }
 
 .style-thumbnail {
@@ -244,9 +244,10 @@ hr {
 }
 
 .style-name {
-  margin: 30px 0px 10px;
+  margin: 35px 0px 0px;
   font-weight: 300;
-  font-size: .9em;
+  font-size: .85em;
+  text-transform: uppercase;
 }
 
 /* .style-name {
@@ -279,14 +280,16 @@ hr {
   display:grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr 1fr 1fr;
-  margin: auto;
-  column-gap: 6px;
+  margin: 0;
+  column-gap: 10px;
+  row-gap: 5px;
+  width: 270px;
 }
 
 .help-text-space {
   height: 30px;
   /* margin: 1px; */
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
   grid-row: 1 / 2;
 }
 
@@ -298,7 +301,7 @@ hr {
   font-size: .8em;
   color: rgb(170, 0, 0);
   margin: 1px 0px 0px;
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
   grid-row: 1 / 2;
 }
 
@@ -309,15 +312,15 @@ hr {
   font-size: .8em;
   text-transform: uppercase;
   height: 30px;
-  min-width: 170px;
+  min-width: 180px;
   background-color: #f5f5f5;
   color: #2C3E50;
   border: 1px solid #2C3E50;
   cursor: pointer;
   background-image: url('https://img.icons8.com/material/24/000000/sort-down--v1.png');
   background-repeat: no-repeat;
-  background-position: 143px center;
-  grid-column: 1 / 4;
+  background-position: right 3% center;
+  grid-column: 1 / 5;
   grid-row: 2 / 3;
 
 }
@@ -326,7 +329,7 @@ hr {
   position: relative;
   display: inline-block;
   margin: 5px 0px;
-  grid-column: 1 / 4;
+  grid-column: 1 / 5;
   grid-row: 2 / 3;
   vertical-align: middle;
 }
@@ -335,8 +338,9 @@ hr {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
-  min-width: 168px;
-  height: 22px;
+  min-width: 100%;
+  width: 180px;
+  height: 25px;
   border: 1px solid #2C3E50;
   z-index: 1;
   font-size: .8em;
@@ -347,7 +351,7 @@ hr {
   display: block;
   position: absolute;
   background-color: #f9f9f9;
-  width: 170px;
+  width: 180px;
   border: 1px solid #2C3E50;
   z-index: 1;
   font-size: .9em;
@@ -387,7 +391,7 @@ select {
   /* Down arrow background image */
   background-image: url('https://img.icons8.com/material/24/000000/sort-down--v1.png');
   background-repeat: no-repeat;
-  background-position: 45px center;
+  background-position: right 4% center;
   grid-column: 5 / -1;
   grid-row: 2 / 3;
   align-self: center;
@@ -395,7 +399,7 @@ select {
 }
 
 button.addToCart {
-  height: 35px;
+  height: 40px;
   /* width: 220px; */
   font-family: 'Roboto Condensed', sans-serif;
   text-transform: uppercase;
@@ -408,7 +412,7 @@ button.addToCart {
 }
 
 .heart-icon {
-  height: 35px;
+  height: 40px;
   width: 44px;
   border: 1px solid #2C3E50;
   background-image: url("https://img.icons8.com/material-outlined/24/000000/like--v1.png");
@@ -421,7 +425,7 @@ button.addToCart {
 }
 
 .heart-icon:hover {
-  height: 35px;
+  height: 40px;
   width: 44px;
   border: 1px solid #2C3E50;
   background-image: url("https://img.icons8.com/material-rounded/24/000000/like--v1.png");

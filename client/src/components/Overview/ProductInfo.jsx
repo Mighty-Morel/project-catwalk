@@ -63,12 +63,12 @@ const ProductInfo = () => {
         <br />
         {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
         <br /> */}
-        <p className="style-name">{style.name}</p>
+        <p className="style-name"><b>STYLE >  </b>{style.name}</p>
         <div data-testid="style-selector" className="style-selector">
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />
-        <AddToCartFeatures allStyles={allStyles} />
+        <AddToCart allStyles={allStyles} />
       </div>
     </>
   );
