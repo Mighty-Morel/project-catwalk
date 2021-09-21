@@ -1,5 +1,4 @@
 /* eslint-disable react/prop-types */
-/* eslint-disable import/extensions */
 import React from 'react';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
