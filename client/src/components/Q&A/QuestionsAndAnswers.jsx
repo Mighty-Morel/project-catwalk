@@ -4,6 +4,7 @@ import axios from 'axios';
 import styling from './questions.css';
 // eslint-disable-next-line import/extensions
 import QuestionEntry from './QuestionEntry.jsx';
+import QuestionModal from './QuestionModal.jsx';
 
 const QuestionsAndAnswers = () => {
   // Get the current product_id
@@ -13,6 +14,7 @@ const QuestionsAndAnswers = () => {
   const [questions, setQuestions] = useState([]);
   const [questionCount, setCount] = useState(2);
   const [extra, setExtra] = useState(false);
+  const [questionModal, setQuestionModal] = useState(false);
 
   // Retrieve the questions from the API
   const getQuestions = () => {
@@ -36,15 +38,6 @@ const QuestionsAndAnswers = () => {
 
   // Mount questions to state
   useEffect(getQuestions, [currentId]);
-
-  if (questions.length === 0) {
-    // display a button to submit a new question
-    return (
-      <>
-        <button type="button">Submit Question</button>
-      </>
-    );
-  }
 
   // Show more questions and conditional rendering for extras
   const showMoreQuestions = () => {
@@ -70,6 +63,17 @@ const QuestionsAndAnswers = () => {
   };
 
   const displayedQuestions = questions.slice(0, questionCount);
+
+  const toggleQuestionForm = () => {
+    setQuestionModal(!questionModal);
+  };
+
+  const renderModal = () => {
+    if (questionModal) {
+      return (<QuestionModal toggleQuestionForm={toggleQuestionForm} productId={currentId} />);
+    }
+    return null;
+  };
 
   return (
     <>
@@ -107,6 +111,8 @@ const QuestionsAndAnswers = () => {
         );
       })}
       {renderMoreQuestions()}
+      <button type="button" onClick={toggleQuestionForm}> Add Question</button>
+      {renderModal()}
     </>
   );
 };

@@ -95,6 +95,17 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
     });
 });
 
+// post a question
+app.post('/qa/questions', (req, res) => {
+  axios.post(req.url, req.body)
+    .then(() => {
+      res.status(201).send('CREATED');
+    })
+    .catch((err) => {
+      res.status(501).send('error in posting new question', err);
+    });
+});
+
 // post an answer
 app.post('/qa/questions/:question_id/answers', (req, res) => {
   axios.post(req.url, req.body)

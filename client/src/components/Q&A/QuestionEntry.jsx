@@ -102,6 +102,7 @@ const QuestionEntry = (props) => {
       </span>
     );
   };
+
   // Add answer button and modal render
   const toggleAnswerForm = () => {
     setAnswerModal(!answerModal);
