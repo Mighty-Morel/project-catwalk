@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -22,6 +23,7 @@ const App = () => {
   const selectedStyleId = useSelector((state) => state.style.id);
 
   const dispatch = useDispatch();
+
 
   const handleClick = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works

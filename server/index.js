@@ -77,10 +77,10 @@ app.get('/products/:productId/related', (req, res) => {
 app.get('/qa/questions/:product_id', (req, res) => {
   axios.get('/qa/questions', { params: req.params })
     .then((response) => {
-      res.send(response.data);
+      res.status(200).send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting questions', err);
+      res.status(500).send('error in getting questions', err);
     });
 });
 
@@ -88,10 +88,54 @@ app.get('/qa/questions/:product_id', (req, res) => {
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   axios.get(req.url)
     .then((response) => {
-      res.send(response.data);
+      res.status(200).send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting answers', err);
+      res.status(500).send('error in getting answers', err);
+    });
+});
+
+// post an answer
+app.post('/qa/questions/:question_id/answers', (req, res) => {
+  axios.post(req.url, req.body)
+    .then(() => {
+      res.status(201).send('CREATED');
+    })
+    .catch((err) => {
+      res.status(501).send('error in posting new answer', err);
+    });
+});
+
+// put helpfulness for a question
+app.put('/qa/questions/:question_id/helpful', (req, res) => {
+  axios.put(req.url)
+    .then(() => {
+      res.status(204).send('CREATED');
+    })
+    .catch((err) => {
+      res.status(504).send('error in putting question as helpful', err);
+    });
+});
+
+// put helpfulness for an answer
+app.put('/qa/answers/:answer_id/helpful', (req, res) => {
+  axios.put(req.url)
+    .then(() => {
+      res.status(204).send('NO CONTENT');
+    })
+    .catch((err) => {
+      res.status(504).send('error in putting answer as helpful', err);
+    });
+});
+
+// put reported for an answer
+app.put('/qa/answers/:answer_id/report', (req, res) => {
+  axios.put(req.url)
+    .then(() => {
+      res.status(204).send('NO CONTENT');
+    })
+    .catch((err) => {
+      res.status(504).send('error in putting answer as reported', err);
     });
 });
 
