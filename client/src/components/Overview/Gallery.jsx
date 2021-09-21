@@ -1,6 +1,6 @@
 /* eslint-disable import/extensions */
-import React, { useState, useEffect } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import React, { useState } from 'react';
+import { useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 import GalleryThumbnail from './GalleryThumbnail.jsx';
@@ -9,23 +9,10 @@ const Gallery = () => {
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
   const [mainPhotoIndex, setPhotoIndex] = useState(0);
-  // const [upArrow, toggleUpArrow] = useState(false);
-  // const [downArrow, toggleDownArrow] = useState(false);
 
   const mainImage = stylePhotos[mainPhotoIndex];
-  // limit to show only up to 7 thumbnails
-  // let displayedPhotos = [];
-  // const limitPhotos = () => {
-  //   if (stylePhotos.length > 7) {
-  //     displayedPhotos = stylePhotos.slice(0, 7);
-  //     // toggleDownArrow(true);
-  //   }
-  //   displayedPhotos = stylePhotos;
-  //   // toggleDownArrow(false);
-  // };
 
-  // useEffect(limitPhotos, [mainImage]);
-
+  // sets the main image based on index o thumbnail selected
   const selectPhoto = (index) => {
     setPhotoIndex(index);
   };
@@ -39,7 +26,6 @@ const Gallery = () => {
   const moveDown = () => {
     if (mainPhotoIndex < stylePhotos.length - 1) {
       setPhotoIndex(mainPhotoIndex + 1);
-      // document.getElementsByClassName('thumbnail-image-container')[0].setAttribute('id', 'scroll');
     }
   };
 
