@@ -54,6 +54,32 @@ const mockRelatedIds = [
   7,
 ];
 
+const mockStyleData = {
+  product_id: '48421',
+  results: [
+    {
+      style_id: 48432,
+      name: 'Camo Onesie',
+      original_price: '80.00',
+    },
+    {
+      style_id: 48433,
+      name: 'Purple Onesie',
+      original_price: '90.00',
+    },
+    {
+      style_id: 48432,
+      name: 'Grey Onesie',
+      original_price: '900.00',
+    },
+    {
+      style_id: 48432,
+      name: 'Gold Onesie',
+      original_price: '8000.00',
+    },
+  ],
+};
+
 // TESTS =======================================================
 it('should load and display the selected product data',
   () => axios.get('/products/1')
@@ -62,3 +88,7 @@ it('should load and display the selected product data',
 it('should load and display the related ids of the product',
   () => axios.get('/products/1/related')
     .then((relatedIds) => expect(relatedIds).toEqual(mockRelatedIds)));
+
+it('should load and display the styles of the product',
+  () => axios.get('/products/48421/styles')
+    .then((productStyles) => expect(productStyles).toEqual(mockStyleData)));
