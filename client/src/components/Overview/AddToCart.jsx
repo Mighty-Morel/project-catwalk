@@ -169,9 +169,7 @@ const AddToCart = () => {
   const renderButton = () => {
     if (availableQty > 0) {
       return (
-        <div>
-          <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
-        </div>
+        <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
     }
     // Hide Add to Cart button if no stock available

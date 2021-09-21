@@ -264,6 +264,7 @@ hr {
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr 1fr 1fr;
   margin: auto;
+  column-gap: 6px;
 }
 
 .help-text-space {
@@ -297,7 +298,6 @@ hr {
   color: #2C3E50;
   border: 1px solid #2C3E50;
   cursor: pointer;
-  margin-right: 10px;
   background-image: url('https://img.icons8.com/material/24/000000/sort-down--v1.png');
   background-repeat: no-repeat;
   background-position: 143px center;
@@ -331,13 +331,13 @@ hr {
   display: block;
   position: absolute;
   background-color: #f9f9f9;
-  width: 168px;
+  width: 170px;
   border: 1px solid #2C3E50;
   z-index: 1;
   font-size: .9em;
   line-height: 1.5em;
-  /* margin: 0px;
-  padding: 0px; */
+  margin: 0px;
+  padding: 0px;
   text-align: center;
 }
 
@@ -354,7 +354,7 @@ hr {
 /* Quantity Selector Styling ------------------- */
 select {
   height: 30px;
-  width: 75px;
+  width: 78px;
   border-radius: 0;
   padding-left: 10px;
   /* margin: 5px 0px; */
@@ -375,12 +375,12 @@ select {
   grid-column: 5 / -1;
   grid-row: 2 / 3;
   align-self: center;
-  margin-left: 15px;
+  margin-left: 16px;
 }
 
 button.addToCart {
   height: 35px;
-  width: 220px;
+  /* width: 220px; */
   font-family: 'Roboto Condensed', sans-serif;
   text-transform: uppercase;
   font-size: 0.8em;
@@ -392,8 +392,8 @@ button.addToCart {
 }
 
 .heart-icon {
-  height: 33px;
-  width: 45px;
+  height: 35px;
+  width: 44px;
   border: 1px solid #2C3E50;
   background-image: url("https://img.icons8.com/material-outlined/24/000000/like--v1.png");
   background-repeat: no-repeat;
@@ -405,8 +405,8 @@ button.addToCart {
 }
 
 .heart-icon:hover {
-  height: 33px;
-  width: 45px;
+  height: 35px;
+  width: 44px;
   border: 1px solid #2C3E50;
   background-image: url("https://img.icons8.com/material-rounded/24/000000/like--v1.png");
   background-repeat: no-repeat;
