@@ -45,7 +45,7 @@ const Gallery = () => {
         </span>
       );
     }
-    return <span />;
+    return null;
   };
 
   const renderDownArrow = () => {
@@ -56,7 +56,7 @@ const Gallery = () => {
         </span>
       );
     }
-    return <span />;
+    return null;
   };
 
   if (!mainImage) {
