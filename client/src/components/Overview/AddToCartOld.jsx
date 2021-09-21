@@ -1,107 +1,46 @@
-/* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
-// import { useSelector } from 'react-redux';
-import axios from 'axios';
+import { useSelector } from 'react-redux';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
-const AddToCartFeatures = ({ style }) => {
+const AddToCart = () => {
   // identify skus in stock
-  let initialSkus = [];
-  const selectedSkus = style.skus;
+  let availableSkus = [];
+  const selectedSkus = useSelector((state) => state.style.skus);
   if (selectedSkus !== undefined) {
-    initialSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
+    availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
   }
 
   // set initial sku, quantity, size, views and cart
-  const [selectSku, setSku] = useState(initialSkus[0]); // [ "1702764", {quantity: 8, size: "XS"} ]
+  const [selectSku, setSku] = useState(availableSkus[0]);
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
   const [isQtyShown, showQty] = useState(false);
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
-  const [availableQty, setAvailableQty] = useState(0);
-  // let availableQty;
-  const [availableSkus, setAvailableSkus] = useState(initialSkus);
-  const [userCart, setUserCart] = useState({});
+  const [cart, addToCart] = useState([]);
 
   // reset views when rendering new style
   const resetDefault = () => {
-    console.log('called resetDefault');
-
-    // renderAvailableSkus();
-    !availableSkus[0] ? setSku(initialSkus[0]) : setSku(availableSkus[0]);
-
+    setSku(availableSkus[0]);
     setSize('Select Size');
     showQty(false);
     showSizes(false);
     showError(false);
   };
-
-  useEffect(() => resetDefault(), [style]);
+  useEffect(resetDefault, [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
   // In default style, should sku 1702769 be 'XXL' instead?
   //   1702768: {quantity: 15, size: 'XL'}
   //   1702769: {quantity: 4, size: 'XL'}
+  let availableQty = 0;
+  if (selectSku !== undefined) {
+    availableQty = selectSku[1].quantity;
+  }
 
-  // Retrieves list of products added to the cart by a user
-  const getCart = () => {
-    axios.get('/cart')
-      .then((response) => {
-        const cartData = response.data;
-        const newCart = {}; // {sku_id: count}
-        cartData.forEach((item) => {
-          newCart[item.sku_id] = item.count;
-        });
-        setUserCart(newCart);
-        return newCart;
-      })
-      .then((newCart) => {
-        // use cart data to find remaining available stock
-        if (selectSku) {
-          const selectId = selectSku[0];
-          // const cartQty = !newCart[selectId] ? 0 : newCart[selectId];
-          // // subtract amount in user cart from total amount to find amount available
-          // const totalQty = selectSku[1].quantity - cartQty;
-          // setAvailableQty(totalQty);
-          // console.log(availableQty);
-          // availableQty = totalQty
-          // create new array of available skus w/ id, quantity and size
-          const newSkus = [];
-          console.log('newCart object', newCart);
-          console.log('initialSku', initialSkus);
-          initialSkus.forEach((sku) => {
-            const id = sku[0];
-            const currentQty = sku[1].quantity;
-            const newItem = [];
-            newItem.push(id);
-            const sizeQty = {};
-            console.log('newCart id', id, newCart[id]);
-            // if cart contains sku, subtract cart qty from current, otherwise keep current qty
-            const newQty = newCart[id] ? currentQty - newCart[id] : currentQty;
-            sizeQty.size = sku[1].size;
-            sizeQty.quantity = newQty;
-            newItem.push(sizeQty);
-            if (newQty > 0) {
-              newSkus.push(newItem);
-            }
-            if (id === selectId) {
-              setAvailableQty(newQty);
-            }
-          });
-          console.log('newSkus', newSkus);
-          setAvailableSkus(newSkus);
-        }
-      })
-      .catch((err) => console.log('Error getting all styles:', err));
-  };
-
-  useEffect(getCart, [selectSku]);
-
-  console.log('availableQty', availableQty);
   const qtySelector = () => {
     // show max of 15 in dropdown
     const listedQty = availableQty > 15 ? 15 : availableQty;
@@ -143,7 +82,6 @@ const AddToCartFeatures = ({ style }) => {
   };
 
   // find the sizes for skus in stock
-  console.log('availableSkus', availableSkus)
   const availableSizes = availableSkus.map(
     (sku) => (
       <li
@@ -161,7 +99,7 @@ const AddToCartFeatures = ({ style }) => {
 
   const renderSizeSelector = () => {
     // if no size is chosen, clicking Add to Cart opens Select Size Dropdown
-    if (availableSkus.length > 0) {
+    if (availableQty > 0) {
       return (
         <>
           <div className={error ? 'help-text' : 'help-text-space'}>{error ? 'Please select a size' : ''}</div>
@@ -212,12 +150,6 @@ const AddToCartFeatures = ({ style }) => {
   };
 
   // ADD TO CART BUTTON ========================================================
-  const postToCartOnce = (skuId) => {
-    axios.post('/cart', { sku_id: skuId })
-      .then((response) => response.status)
-      .catch((err) => console.log('Error posting to cart', err));
-  };
-
   const handleClick = () => {
     // if clicked without selecting a size, show error message and open size dropdown
     if (selectSize === 'Select Size') {
@@ -225,29 +157,23 @@ const AddToCartFeatures = ({ style }) => {
       showSizes(true);
     } else {
       const item = {
-        sku_id: selectSku[0],
-        count: selectQty,
+        sku: selectSku[0],
+        quantity: selectQty,
+        size: selectSize,
       };
-      console.log('added *****************', item);
-      // addToCart([...cart, item]);
-      for (let i = 0; i < selectQty; i += 1) {
-        postToCartOnce(selectSku[0]);
-      }
+      addToCart([...cart, item]);
       resetDefault();
     }
   };
 
   const renderButton = () => {
-    console.log('render button');
-    if (selectSku) {
-      console.log('sku exists');
-      console.log('The cart contains', userCart);
+    if (availableQty > 0) {
       return (
         <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
     }
     // Hide Add to Cart button if no stock available
-    return <div />;
+    return null;
   };
 
   if (!selectSku) {
@@ -263,4 +189,4 @@ const AddToCartFeatures = ({ style }) => {
   );
 };
 
-export default AddToCartFeatures;
+export default AddToCart;

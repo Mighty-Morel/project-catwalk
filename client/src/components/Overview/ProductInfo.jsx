@@ -6,7 +6,6 @@ import { updateProductInfo } from '../../reducers/Example-Reducer';
 import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import AddToCartFeatures from './AddToCartFeatures.jsx';
 import AddToCart from './AddToCart.jsx';
 
 // eslint-disable-next-line no-unused-vars
@@ -68,7 +67,7 @@ const ProductInfo = () => {
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />
-        <AddToCartFeatures style={style} />
+        <AddToCart style={style} />
       </div>
     </>
   );
