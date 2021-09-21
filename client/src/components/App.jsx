@@ -24,7 +24,7 @@ const App = () => {
   const dispatch = useDispatch();
 
   const handleClick = () => {
-    dispatch(updateProductId(48433)); // this is an example to show how update works
+    dispatch(updateProductId(48434)); // this is an example to show how update works
     // delete when understood
   };
 
