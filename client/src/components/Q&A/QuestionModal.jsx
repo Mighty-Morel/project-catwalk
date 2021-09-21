@@ -1,22 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
 import axios from 'axios';
 import styling from './questions.css';
 
-const AnswerModal = (props) => {
-  const currentId = useSelector((state) => state.product.id);
-
+const QuestionModal = (props) => {
   const [productName, setProductName] = useState('');
   const [textInput, setTextInput] = useState('');
-  const [nameInput, setNameInput] = useState('sample');
-  const [emailInput, setEmailInput] = useState('sample@yahoo.com');
-  const [imageInput, setImageInput] = useState([]);
+  const [nameInput, setNameInput] = useState('');
+  const [emailInput, setEmailInput] = useState('');
   const [textCheck, setTextCheck] = useState(false);
   const [nameCheck, setNameCheck] = useState(false);
   const [emailCheck, setEmailCheck] = useState(false);
 
   // Destructuring
-  const { toggleAnswerForm, id, question } = props;
+  const { toggleQuestionForm, productId } = props;
 
   // Input change handlers
   const textChangeHandler = (event) => {
@@ -46,21 +42,21 @@ const AnswerModal = (props) => {
     }
   };
 
-  // post answer information to API
-  const postAnswer = () => {
-    const answerInfo = {
+  // submit question information to API
+  const submitQuestion = () => {
+    const questionInfo = {
       body: textInput,
       name: nameInput,
       email: emailInput,
-      photos: imageInput,
+      product_id: productId,
     };
     if (textCheck && nameCheck && emailCheck) {
-      axios.post(`/qa/questions/${id}/answers`, answerInfo)
+      axios.post('/qa/questions', questionInfo)
         .then(() => {
-          toggleAnswerForm();
+          toggleQuestionForm();
         })
         .catch((error) => {
-          console.log('error in posting answer on the client', error);
+          console.log('error in posting question on the client', error);
         });
     } else {
       alert('You must contain the following: answer, nickname, and email.');
@@ -69,7 +65,7 @@ const AnswerModal = (props) => {
 
   // Get product name
   const getProductName = () => {
-    axios.get(`/products/${currentId}`)
+    axios.get(`/products/${productId}`)
       .then((response) => {
         setProductName(response.data.name);
       })
@@ -78,42 +74,41 @@ const AnswerModal = (props) => {
       });
   };
 
-  useEffect(getProductName, [currentId]);
+  useEffect(getProductName, [productId]);
 
   return (
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h4 className="modal-title">Submit Your Answer</h4>
+          <h4 className="modal-title">Ask Your Question</h4>
           <span>
             &#34;
+            About the&#160;
             {productName}
-            :&#160;
-            {question}
             &#34;
           </span>
         </div>
         <form>
           <div className="modal-body">
-            <span>Your Answer: *</span>
+            <span>Your Question: *</span>
             <br />
-            <textarea type="text" id="modal-textbox" maxLength="1000" onChange={textChangeHandler} />
+            <textarea type="text" id="modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
             <br />
             <br />
             <span>What is your nickname: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="Example: jack543!" onChange={nameChangeHandler} />
+            <input type="text" size="60" maxLength="60" placeholder="Example: jackson11!" onChange={nameChangeHandler} />
             <br />
             <span><em>For privacy reasons, do not use your full name or email address</em></span>
             <br />
             <br />
             <span>Your email: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="jack@email.com" onChange={emailChangeHandler} />
+            <input type="text" size="60" maxLength="60" placeholder="jackson@email.com" onChange={emailChangeHandler} />
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
           <div className="modal-footer">
-            <button type="button" onClick={toggleAnswerForm}>Close</button>
-            <button type="button" onClick={postAnswer}>Submit</button>
+            <button type="button" onClick={toggleQuestionForm}>Close</button>
+            <button type="button" onClick={submitQuestion}>Submit</button>
           </div>
         </form>
       </div>
@@ -121,4 +116,4 @@ const AnswerModal = (props) => {
   );
 };
 
-export default AnswerModal;
+export default QuestionModal;
