@@ -11,7 +11,7 @@ const QuestionsAndAnswers = () => {
 
   // Create the state component to hold the questions
   const [questions, setQuestions] = useState([]);
-  const [questionCount, setCount] = useState(4);
+  const [questionCount, setCount] = useState(2);
   const [extra, setExtra] = useState(false);
 
   // Retrieve the questions from the API
@@ -22,8 +22,8 @@ const QuestionsAndAnswers = () => {
         results.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
         setQuestions(results);
         // Compares count to number of questions, display up to four questions
-        if (results.length > 4) {
-          setCount(4);
+        if (results.length > 2) {
+          setCount(2);
           setExtra(true);
         } else {
           setCount(results.length);
@@ -45,9 +45,32 @@ const QuestionsAndAnswers = () => {
       </>
     );
   }
-  // onChange handler to sort questions
-  // change format on button
+
+  // Show more questions and conditional rendering for extras
+  const showMoreQuestions = () => {
+    setCount(questionCount + 2);
+    (() => { if (questions.length <= questionCount + 2) { setExtra(false); } })();
+  };
+
+  // Can be taken out if deemed collapse is unnecessary
+  const collapseQuestions = () => {
+    setCount(2);
+    setExtra(true);
+  };
+
+  const renderMoreQuestions = () => {
+    // Can be taken out if deemed collapse is unnecessary
+    if (extra) {
+      return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
+    }
+    if (questionCount > 2) {
+      return (<button type="button" onClick={collapseQuestions}>Collapse questions</button>);
+    }
+    return null;
+  };
+
   const displayedQuestions = questions.slice(0, questionCount);
+
   return (
     <>
       <input className="search-question" type="text" placeholder="Search questions..." />
@@ -83,8 +106,7 @@ const QuestionsAndAnswers = () => {
           />
         );
       })}
-      {/* {() => { if (extra) { return <button type="button"
-      onClick={() => { setCount(questionCount + 2); }}>Load More Questions</button>; } }} */}
+      {renderMoreQuestions()}
     </>
   );
 };

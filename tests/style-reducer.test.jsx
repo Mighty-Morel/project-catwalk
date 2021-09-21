@@ -43,22 +43,8 @@ test('should update the Style Id', () => {
     },
   };
 
-  expect(reducer(previousState, updateStyle(newStyle))).toEqual(
-    {
-      style_id: 293480,
-      name: 'Desert Brown & Tan',
-      original_price: '140.00',
-      photos: [1, 2],
-      mainPhoto: 1,
-      skus: {
-        123: {
-          size: 'xs',
-          quantity: 4,
-        },
-      },
-    }
-  )
-})
+  expect(reducer(previousState, updateStyle(newStyle)).id).toEqual(293480);
+});
 
 test('should return an array of objects with style info', () => {
   const previousState = {
@@ -85,28 +71,5 @@ test('should return an array of objects with style info', () => {
       name: 'Testing 2',
       original_price: '10.00',
     },
-  ]))).toEqual({
-    id: 293480,
-    allStyles: [
-      {
-        style_id: 293480,
-        name: 'Desert Brown & Tan',
-        original_price: '140.00',
-      },
-      {
-        style_id: 123456,
-        name: 'Testing only',
-        original_price: '0',
-      },
-      {
-        style_id: 654321,
-        name: 'Testing 2',
-        original_price: '10.00',
-      },
-    ],
-  style: {},
-  photos: [], 
-  mainPhoto: [],
-  skus: {},
-  })
-})
+  ])).allStyles.length).toEqual(3);
+});

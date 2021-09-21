@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -23,6 +24,7 @@ const App = () => {
 
   const dispatch = useDispatch();
 
+
   const handleClick = () => {
     dispatch(updateProductId(48434)); // this is an example to show how update works
     // delete when understood
@@ -45,8 +47,8 @@ const App = () => {
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
-      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><RelatedItems productId={currentId} /></div>
+      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><ReviewList /></div>
     </>
   );
