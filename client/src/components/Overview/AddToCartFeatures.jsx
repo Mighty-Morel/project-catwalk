@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
-import { useSelector } from 'react-redux';
+// import { useSelector } from 'react-redux';
 import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
@@ -15,14 +15,16 @@ const AddToCartFeatures = ({ style }) => {
   }
 
   // set initial sku, quantity, size, views and cart
-  const [selectSku, setSku] = useState(initialSkus[0]);
+  const [selectSku, setSku] = useState(initialSkus[0]); // [ "1702764", {quantity: 8, size: "XS"} ]
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
   const [isQtyShown, showQty] = useState(false);
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
   const [availableQty, setAvailableQty] = useState(0);
+  // let availableQty;
   const [availableSkus, setAvailableSkus] = useState(initialSkus);
+  const [userCart, setUserCart] = useState({});
 
   // reset views when rendering new style
   const resetDefault = () => {
@@ -37,11 +39,7 @@ const AddToCartFeatures = ({ style }) => {
     showError(false);
   };
 
-  useEffect(() => {
-    resetDefault(),
-    console.log('called useEffect');
-  },
-  [selectedSkus]);
+  useEffect(() => resetDefault(), [style]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -58,28 +56,40 @@ const AddToCartFeatures = ({ style }) => {
         cartData.forEach((item) => {
           newCart[item.sku_id] = item.count;
         });
+        setUserCart(newCart);
         return newCart;
       })
       .then((newCart) => {
         // use cart data to find remaining available stock
-        if (selectSku !== undefined) {
-          const skuId = selectSku[0];
-          const cartQty = !newCart[skuId] ? 0 : newCart[skuId];
-          // subtract amount in user cart from total amount to find amount available
-          const totalQty = selectSku[1].quantity - cartQty;
-          setAvailableQty(totalQty);
+        if (selectSku) {
+          const selectId = selectSku[0];
+          // const cartQty = !newCart[selectId] ? 0 : newCart[selectId];
+          // // subtract amount in user cart from total amount to find amount available
+          // const totalQty = selectSku[1].quantity - cartQty;
+          // setAvailableQty(totalQty);
+          // console.log(availableQty);
+          // availableQty = totalQty
           // create new array of available skus w/ id, quantity and size
           const newSkus = [];
+          console.log('newCart object', newCart);
+          console.log('initialSku', initialSkus);
           initialSkus.forEach((sku) => {
+            const id = sku[0];
+            const currentQty = sku[1].quantity;
             const newItem = [];
-            newItem.push(sku[0]);
+            newItem.push(id);
             const sizeQty = {};
-            const newQty = sku[1].quantity - newCart[sku[0]];
+            console.log('newCart id', id, newCart[id]);
+            // if cart contains sku, subtract cart qty from current, otherwise keep current qty
+            const newQty = newCart[id] ? currentQty - newCart[id] : currentQty;
             sizeQty.size = sku[1].size;
             sizeQty.quantity = newQty;
             newItem.push(sizeQty);
             if (newQty > 0) {
               newSkus.push(newItem);
+            }
+            if (id === selectId) {
+              setAvailableQty(newQty);
             }
           });
           console.log('newSkus', newSkus);
@@ -91,6 +101,7 @@ const AddToCartFeatures = ({ style }) => {
 
   useEffect(getCart, [selectSku]);
 
+  console.log('availableQty', availableQty);
   const qtySelector = () => {
     // show max of 15 in dropdown
     const listedQty = availableQty > 15 ? 15 : availableQty;
@@ -132,6 +143,7 @@ const AddToCartFeatures = ({ style }) => {
   };
 
   // find the sizes for skus in stock
+  console.log('availableSkus', availableSkus)
   const availableSizes = availableSkus.map(
     (sku) => (
       <li
@@ -212,10 +224,11 @@ const AddToCartFeatures = ({ style }) => {
       showError(true);
       showSizes(true);
     } else {
-      // const item = {
-      //   sku_id: selectSku[0],
-      //   count: selectQty,
-      // };
+      const item = {
+        sku_id: selectSku[0],
+        count: selectQty,
+      };
+      console.log('added *****************', item);
       // addToCart([...cart, item]);
       for (let i = 0; i < selectQty; i += 1) {
         postToCartOnce(selectSku[0]);
@@ -226,9 +239,9 @@ const AddToCartFeatures = ({ style }) => {
 
   const renderButton = () => {
     console.log('render button');
-
     if (selectSku) {
       console.log('sku exists');
+      console.log('The cart contains', userCart);
       return (
         <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
