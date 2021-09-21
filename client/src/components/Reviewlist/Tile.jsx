@@ -1,4 +1,5 @@
 import React from 'react';
+import moment from 'moment';
 
 const tile = (props) => {
   console.log(props.review);
@@ -8,8 +9,8 @@ const tile = (props) => {
         stars placeholder
         <span className="identity">
           {props.review.reviewer_name}
-          &nbsp;
-          {props.review.date}
+          ,&nbsp;
+          {moment(props.review.date).format('LL')}
         </span>
       </p>
       <p className="review-summary">
