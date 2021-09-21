@@ -1,45 +1,95 @@
+/* eslint-disable react/prop-types */
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
+import axios from 'axios';
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 
-const AddToCart = () => {
+const AddToCartFeatures = ({ style }) => {
   // identify skus in stock
-  let availableSkus = [];
-  const selectedSkus = useSelector((state) => state.style.skus);
+  let initialSkus = [];
+  const selectedSkus = style.skus;
   if (selectedSkus !== undefined) {
-    availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
+    initialSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
   }
 
   // set initial sku, quantity, size, views and cart
-  const [selectSku, setSku] = useState(availableSkus[0]);
+  const [selectSku, setSku] = useState(initialSkus[0]);
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
   const [isQtyShown, showQty] = useState(false);
   const [areSizesOpen, showSizes] = useState(false);
   const [error, showError] = useState(false);
-  const [cart, addToCart] = useState([]);
+  const [availableQty, setAvailableQty] = useState(0);
+  const [availableSkus, setAvailableSkus] = useState(initialSkus);
 
   // reset views when rendering new style
   const resetDefault = () => {
-    setSku(availableSkus[0]);
+    console.log('called resetDefault');
+
+    // renderAvailableSkus();
+    !availableSkus[0] ? setSku(initialSkus[0]) : setSku(availableSkus[0]);
+
     setSize('Select Size');
     showQty(false);
     showSizes(false);
     showError(false);
   };
-  useEffect(resetDefault, [selectedSkus]);
+
+  useEffect(() => {
+    resetDefault(),
+    console.log('called useEffect');
+  },
+  [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
   // In default style, should sku 1702769 be 'XXL' instead?
   //   1702768: {quantity: 15, size: 'XL'}
   //   1702769: {quantity: 4, size: 'XL'}
-  let availableQty = 0;
-  if (selectSku !== undefined) {
-    availableQty = selectSku[1].quantity;
-  }
+
+  // Retrieves list of products added to the cart by a user
+  const getCart = () => {
+    axios.get('/cart')
+      .then((response) => {
+        const cartData = response.data;
+        const newCart = {}; // {sku_id: count}
+        cartData.forEach((item) => {
+          newCart[item.sku_id] = item.count;
+        });
+        return newCart;
+      })
+      .then((newCart) => {
+        // use cart data to find remaining available stock
+        if (selectSku !== undefined) {
+          const skuId = selectSku[0];
+          const cartQty = !newCart[skuId] ? 0 : newCart[skuId];
+          // subtract amount in user cart from total amount to find amount available
+          const totalQty = selectSku[1].quantity - cartQty;
+          setAvailableQty(totalQty);
+          // create new array of available skus w/ id, quantity and size
+          const newSkus = [];
+          initialSkus.forEach((sku) => {
+            const newItem = [];
+            newItem.push(sku[0]);
+            const sizeQty = {};
+            const newQty = sku[1].quantity - newCart[sku[0]];
+            sizeQty.size = sku[1].size;
+            sizeQty.quantity = newQty;
+            newItem.push(sizeQty);
+            if (newQty > 0) {
+              newSkus.push(newItem);
+            }
+          });
+          console.log('newSkus', newSkus);
+          setAvailableSkus(newSkus);
+        }
+      })
+      .catch((err) => console.log('Error getting all styles:', err));
+  };
+
+  useEffect(getCart, [selectSku]);
 
   const qtySelector = () => {
     // show max of 15 in dropdown
@@ -99,7 +149,7 @@ const AddToCart = () => {
 
   const renderSizeSelector = () => {
     // if no size is chosen, clicking Add to Cart opens Select Size Dropdown
-    if (availableQty > 0) {
+    if (availableSkus.length > 0) {
       return (
         <>
           <div className={error ? 'help-text' : 'help-text-space'}>{error ? 'Please select a size' : ''}</div>
@@ -150,28 +200,37 @@ const AddToCart = () => {
   };
 
   // ADD TO CART BUTTON ========================================================
+  const postToCartOnce = (skuId) => {
+    axios.post('/cart', { sku_id: skuId })
+      .then((response) => response.status)
+      .catch((err) => console.log('Error posting to cart', err));
+  };
+
   const handleClick = () => {
     // if clicked without selecting a size, show error message and open size dropdown
     if (selectSize === 'Select Size') {
       showError(true);
       showSizes(true);
     } else {
-      const item = {
-        sku: selectSku[0],
-        quantity: selectQty,
-        size: selectSize,
-      };
-      addToCart([...cart, item]);
+      // const item = {
+      //   sku_id: selectSku[0],
+      //   count: selectQty,
+      // };
+      // addToCart([...cart, item]);
+      for (let i = 0; i < selectQty; i += 1) {
+        postToCartOnce(selectSku[0]);
+      }
       resetDefault();
     }
   };
 
   const renderButton = () => {
-    if (availableQty > 0) {
+    console.log('render button');
+
+    if (selectSku) {
+      console.log('sku exists');
       return (
-        <div>
-          <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
-        </div>
+        <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
     }
     // Hide Add to Cart button if no stock available
@@ -191,4 +250,4 @@ const AddToCart = () => {
   );
 };
 
-export default AddToCart;
+export default AddToCartFeatures;
