@@ -47,6 +47,7 @@ const QuestionEntry = (props) => {
 
   const collapseAnswers = () => {
     setCount(2);
+    setExtra(true);
   };
 
   const renderMoreAnswers = () => {
