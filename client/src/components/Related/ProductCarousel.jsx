@@ -7,39 +7,26 @@
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
-import React from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { updateProductId } from '../../reducers/Example-Reducer.js';
 import card from './card.css';
 import carousel from './carousel.css';
 import Modal from './Modal.jsx';
 
-class ProductCarousel extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      productInfo: [],
-      modalInfo: [],
-      show: false,
-      overviewName: null,
-      cardName: null,
-      // prev: false,
-      // next: true,
-      // counter: 0,
-    };
-    this.myRef = React.createRef();
-    this.prev = this.prev.bind(this);
-    this.next = this.next.bind(this);
-    this.showModal = this.showModal.bind(this);
-    this.hideModal = this.hideModal.bind(this);
-  }
+const ProductCarousel = (props) => {
+  const [productInfo, setProductInfo] = useState([]);
+  const [modalInfo, setModalInfo] = useState([]);
+  const [show, setShow] = useState(false);
+  const [overviewName, setOverviewName] = useState('');
+  const [cardName, setCardName] = useState('');
+  const productId = useSelector((state) => state.product.id);
+  const dispatch = useDispatch();
+  const myRef = useRef(null);
 
-  componentDidMount() {
-    this.getInfo();
-  }
-
-  getInfo() {
-    // original #48432
-    axios.get('/products/48432/related')
+  const getInfo = () => {
+    axios.get(`/products/${productId}/related`)
       .then((res) => {
         const relatedIds = res.data;
         const ids = [];
@@ -47,49 +34,41 @@ class ProductCarousel extends React.Component {
           const relatedId = relatedIds[i];
           ids[i] = { relatedId };
         }
-        this.setState({
-          productInfo: ids,
-        });
-        const { productInfo } = this.state;
-        for (const id in productInfo) { // [{relatedId: 48433}, {…}, {…}, {…}]
-          const { relatedId } = productInfo[id]; // [48433, 48434, 48439, 48438]
+        for (const id in ids) { // [{relatedId: 48433}, {…}, {…}, {…}]
+          const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
           axios.get(`/products/${relatedId}`)
             .then((res) => {
-              for (let j = 0; j < productInfo.length; j++) {
-                if (productInfo[j].relatedId === res.data.id) {
-                  productInfo[j] = { category: res.data.category, ...productInfo[j] };
-                  productInfo[j] = { features: res.data.features, ...productInfo[j] };
-                  productInfo[j] = { name: res.data.name, ...productInfo[j] };
+              for (let j = 0; j < ids.length; j++) {
+                if (ids[j].relatedId === res.data.id) {
+                  ids[j] = { category: res.data.category, ...ids[j] };
+                  ids[j] = { features: res.data.features, ...ids[j] };
+                  ids[j] = { name: res.data.name, ...ids[j] };
                 }
               }
-              this.setState({
-                productInfo,
-              });
             });
           axios.get(`/products/${relatedId}/styles`)
             .then((res) => {
-              for (let k = 0; k < productInfo.length; k++) {
-                if (productInfo[k].relatedId === Number(res.data.product_id)) {
-                  productInfo[k] = { price: res.data.results[0].original_price, ...productInfo[k] };
-                  productInfo[k] = { sale: res.data.results[0].sale_price, ...productInfo[k] };
-                  productInfo[k] = {
-                    pic: res.data.results[0].photos[0].thumbnail_url, ...productInfo[k],
+              for (let k = 0; k < ids.length; k++) {
+                if (ids[k].relatedId === Number(res.data.product_id)) {
+                  ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
+                  ids[k] = { sale: res.data.results[0].sale_price, ...ids[k] };
+                  ids[k] = {
+                    pic: res.data.results[0].photos[0].thumbnail_url, ...ids[k],
                   };
                 }
               }
-              this.setState({
-                productInfo,
-              });
+              setProductInfo([...ids]);
             });
         }
       });
-  }
+  };
 
-  getModalInfo(cardId) {
-    // get id for currently viewed product
-    axios.get('/products/48432')
+  useEffect(() => { getInfo(); }, []);
+
+  const getModalInfo = (cardId) => {
+    let modal;
+    axios.get(`/products/${productId}`)
       .then((res) => {
-        const { modalInfo } = this.state;
         const result = [];
         const overviewName = res.data.name;
         const overviewFeatures = res.data.features;
@@ -98,143 +77,122 @@ class ProductCarousel extends React.Component {
           overviewFeatures[l].card = ' '; // false
           result.push(overviewFeatures[l]);
         }
-        this.setState({
-          modalInfo: result,
-          overviewName,
-        });
-      });
-    axios.get(`/products/${cardId}`)
-      .then((res) => {
-        const { modalInfo } = this.state;
-        const cardName = res.data.name;
-        const cardFeatures = res.data.features;
-        for (let m = 0; m < cardFeatures.length; m++) {
-          const cardFeature = cardFeatures[m];
-          for (let n = 0; n < modalInfo.length; n++) {
-            const overviewFeature = modalInfo[n].feature;
-            const overviewValue = modalInfo[n].value;
-            if (overviewFeature === cardFeature.feature
-              && overviewValue === cardFeature.value) {
-              overviewFeature.card = '✓'; // true
-            } else {
-              this.setState({
-                modalInfo,
-                cardName,
-              });
+        modal = result;
+        setOverviewName(overviewName);
+      })
+      .then(() => {
+        axios.get(`/products/${cardId}`)
+          .then((res) => {
+            const cardName = res.data.name;
+            const cardFeatures = res.data.features;
+            for (let m = 0; m < cardFeatures.length; m++) {
+              const cardFeature = cardFeatures[m];
+              for (let n = 0; n < modal.length; n++) {
+                const overviewFeature = modal[n].feature;
+                const overviewValue = modal[n].value;
+                if (overviewFeature === cardFeature.feature
+                  && overviewValue === cardFeature.value) {
+                  overviewFeature.card = '✓'; // true
+                }
+              }
+              cardFeature.overview = ' '; // false
+              cardFeature.card = '✓'; // true
+              modal.push(cardFeature);
             }
-          }
-          cardFeature.overview = ' '; // false
-          cardFeature.card = '✓'; // true
-          modalInfo.push(cardFeature);
-          this.setState({
-            modalInfo,
+            setCardName(cardName);
+            setModalInfo([...modal]);
           });
-        }
       });
-  }
+  };
 
-  prev() {
-    this.myRef.current.scrollLeft -= 230;
-    if (this.myRef.current.scrollLeft < 230) {
+  const prev = () => {
+    myRef.current.scrollLeft -= 230;
+    if (myRef.current.scrollLeft < 230) {
       console.log('BEGINNING OF SCROLL');
     }
-  }
+  };
 
-  next() {
-    const { productInfo } = this.state;
-    this.myRef.current.scrollLeft += 230;
-    if ((productInfo.length - 3) * 230 === this.myRef.current.scrollLeft) {
+  const next = () => {
+    myRef.current.scrollLeft += 230;
+    if ((productInfo.length - 3) * 230 === myRef.current.scrollLeft) {
       console.log('END OF SCROLL');
     }
+  };
+
+  const showModal = (cardId) => {
+    getModalInfo(cardId);
+    setShow(true);
+  };
+
+  const hideModal = () => {
+    setShow(false);
+  };
+
+  const showOverview = (productId) => {
+    dispatch(updateProductId(productId));
+  };
+
+  if (productInfo.length === 0) {
+    return 'loading...';
   }
-
-  showModal(cardId) {
-    this.getModalInfo(cardId);
-    this.setState({
-      show: true,
-    });
-  }
-
-  hideModal() {
-    this.setState({
-      show: false,
-    });
-  }
-
-  /*
-  Comparing ----------------------------------------   x
-  48432 modalInfo.name[0]           48433 modalInfo.name[1]
-                      Canvas Fabric
-                      Brass Buttons
-                      Ultrasheen Lenses
-                      UV Protection
-                      LightCompose Frames
-  */
-
-  render() {
-    const { productInfo, show, modalInfo, overviewName, cardName } = this.state;
-    if (productInfo.length === 0) {
-      return 'loading...';
-    }
-    return (
-      <>
-        <main>
-          <Modal show={show} handleClose={this.hideModal}>
-            <div className="modal-title">Comparing</div>
-            {/* {console.log('checking modalInfo in return', modalInfo)} */}
-            <div className="modal-title-wrapper">
-              <div className="modal-overview">{overviewName}</div>
-              <div className="modal-card">{cardName}</div>
-            </div>
-            <ul>
-              {modalInfo.map((item, i) => (
-                <li key={i}>
-                  <div>
-                    <ul className="modal-features">{item.overview} {item.feature}: {item.value}{item.card}</ul>
-                  </div>
-                </li>
-              ))}
-            </ul>
-          </Modal>
-        </main>
-
-        <div className="carousel" data-testid="carousel">
-          <div>RELATED PRODUCTS</div>
-
-          <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
-            <img src="./images/arrow-left.png" alt="" />
-          </button>
-
-          <div className="carousel__track-container">
-
-            <ul className="carousel__track" ref={this.myRef}>
-              {productInfo.map((product, i) => (
-                <li className="carousel__slide" key={i}>
-                  <div className="card">
-                    <div className="image__container">
-                      <img className="cardImage" src={product.pic} alt="" />
-                      <button className="card__star" type="button" onClick={() => this.showModal(product.relatedId)}>
-                        <img src="./images/star.png" alt="" />
-                      </button>
-                    </div>
-                    <dl className="cardCategory">{product.category}</dl>
-                    <dl className="cardTitle">{product.name}</dl>
-                    <dl className="cardPrice">${product.price}</dl>
-                    <dl className="cardRating">* star placeholder *</dl>
-                  </div>
-                </li>
-              ))}
-            </ul>
+  return (
+    <>
+      <main>
+        <Modal show={show} handleClose={hideModal}>
+          <div className="modal-title">Comparing</div>
+          <div className="modal-title-wrapper">
+            <div className="modal-overview">{overviewName}</div>
+            <div className="modal-card">{cardName}</div>
           </div>
+          <ul>
+            {modalInfo.map((item, i) => (
+              <li key={i}>
+                <div>
+                  <ul className="modal-features">{item.overview} {item.feature}: {item.value}{item.card}</ul>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </Modal>
+      </main>
 
-          <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
-            <img src="./images/arrow-right.png" alt="" />
-          </button>
+      <div className="carousel" data-testid="carousel">
+        <div>RELATED PRODUCTS</div>
 
+        <button className="carousel__button carousel__button--left" type="button" onClick={() => prev()}>
+          <img src="./images/arrow-left.png" alt="" />
+        </button>
+
+        <div className="carousel__track-container">
+
+          <ul className="carousel__track" ref={myRef}>
+            {console.log(productInfo)}
+            {productInfo.map((product, i) => (
+              <li className="carousel__slide" key={i}>
+                <div className="card">
+                  <div className="image__container">
+                    <img className="cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
+                    <button className="card__star" type="button" onClick={() => showModal(product.relatedId)}>
+                      <img src="./images/star.png" alt="" />
+                    </button>
+                  </div>
+                  <dl className="cardCategory">{product.category}</dl>
+                  <dl className="cardTitle">{product.name}</dl>
+                  <dl className="cardPrice">${product.price}</dl>
+                  <dl className="cardRating">* star placeholder *</dl>
+                </div>
+              </li>
+            ))}
+          </ul>
         </div>
-      </>
-    );
-  }
-}
+
+        <button className="carousel__button carousel__button--right" type="button" onClick={() => next()}>
+          <img src="./images/arrow-right.png" alt="" />
+        </button>
+
+      </div>
+    </>
+  );
+};
 
 export default ProductCarousel;

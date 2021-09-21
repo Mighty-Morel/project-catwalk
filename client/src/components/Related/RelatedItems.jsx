@@ -6,7 +6,6 @@ class RelatedItems extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-
     };
   }
 
@@ -14,7 +13,6 @@ class RelatedItems extends React.Component {
     return (
       <>
         <ProductCarousel />
-        {/* <ComparisonModal /> */}
       </>
     );
   }
