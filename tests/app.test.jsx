@@ -22,6 +22,8 @@ jest.mock('../client/src/components/Overview/Gallery', () => () => (<div>Placeho
 jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
 jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));
+jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Review List Style</div>));
+
 
 // Tests 1 and 2 are the same
 it('test 1 using getByText: renders App on load', async () => {
@@ -30,7 +32,7 @@ it('test 1 using getByText: renders App on load', async () => {
       <App />
     </Provider>,
   );
-  expect(getByText('Hello World! CurrentId is48432and current Style is 293480')).toBeInTheDocument();
+  expect(getByText('Hello World! CurrentId is 48432 and current Style is 293480')).toBeInTheDocument();
 });
 
 it('test 2 using getByTestId: renders App on load', async () => {
@@ -39,7 +41,7 @@ it('test 2 using getByTestId: renders App on load', async () => {
       <App />
     </Provider>,
   );
-  expect(getByTestId('loadapp')).toHaveTextContent('Hello World! CurrentId is48432and current Style is 293480');
+  expect(getByTestId('loadapp')).toHaveTextContent('Hello World! CurrentId is 48432 and current Style is 293480');
 });
 
 it('updates id on click', async () => {
@@ -49,5 +51,5 @@ it('updates id on click', async () => {
     </Provider>,
   );
   fireEvent.click(getByTestId('loadapp'));
-  expect(getByTestId('loadapp')).toHaveTextContent('Hello World! CurrentId is48434and current Style is 293480');
+  expect(getByTestId('loadapp')).toHaveTextContent('Hello World! CurrentId is 48436 and current Style is 293480');
 });

@@ -175,7 +175,7 @@ const AddToCart = () => {
       );
     }
     // Hide Add to Cart button if no stock available
-    return <div />;
+    return null;
   };
 
   if (!selectSku) {

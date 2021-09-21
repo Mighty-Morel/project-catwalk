@@ -1,0 +1,85 @@
+/* Reviews ---------------------------------------- */
+h4 {
+  color: rgba(44, 62, 80, 0.8);
+  font-weight: 300
+}
+.container {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  grid-template-rows: auto;
+  grid-template-areas:
+    "ratings reviews";
+}
+
+.item-reviews {
+  grid-area: reviews;
+}
+.item-ratings {
+  grid-area: ratings;
+}
+
+.tile {
+  border-bottom: thin solid;
+}
+.review-title {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+.identity {
+  font-size: 60%;
+  color: rgba(0,0,0,0.5);
+  align-self: center;
+}
+.review-summary {
+  word-wrap: break-word;
+}
+.review-body {
+  font-size: 90%;
+  color: rgba(0,0,0,0.5);
+}
+
+/* Buttons ---------------------------------------- */
+.more-reviews {
+  display:inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid #FFFFFF;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+ }
+.more-reviews:hover {
+  color:#000000;
+  background-color:#FFFFFF;
+}
+/* Dropdown ---------------------------------------- */
+.dropdown {
+  display: inline-block;
+  position: relative;
+}
+.dropdown-content {
+  display: none;
+  position: absolute;
+  width: 100%;
+  overflow: auto;
+  box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
+}
+.dropdown:hover .dropdown-content {
+  display: block;
+  width: 70px;
+}
+.dropdown-content option {
+  display: block;
+  color: #000000;
+  padding: 5px;
+  text-decoration: none;
+}
+.dropdown-content option:hover {
+  color: #FFFFFF;
+  background-color: #00A4BD;
+}

@@ -1,4 +1,4 @@
-import React from 'react';
+// import React from 'react';
 import { cleanup } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
@@ -13,7 +13,6 @@ test('should return the initial state', () => {
       allStyles: [],
       style: {},
       photos: [],
-      mainPhoto: [],
       skus: {},
     },
   );
@@ -25,7 +24,6 @@ test('should update the Style Id', () => {
     allStyles: [],
     style: {},
     photos: [],
-    mainPhoto: [],
     skus: {},
   };
 
@@ -34,7 +32,6 @@ test('should update the Style Id', () => {
     name: 'Desert Brown & Tan',
     original_price: '140.00',
     photos: [1, 2],
-    mainPhoto: 1,
     skus: {
       123: {
         size: 'xs',
@@ -52,7 +49,6 @@ test('should return an array of objects with style info', () => {
     allStyles: [],
     style: {},
     photos: [],
-    mainPhoto: [],
     skus: {},
   };
   expect(reducer(previousState, updateStyles([

@@ -47,6 +47,7 @@ const QuestionEntry = (props) => {
 
   const collapseAnswers = () => {
     setCount(2);
+    setExtra(true);
   };
 
   const renderMoreAnswers = () => {
@@ -101,6 +102,7 @@ const QuestionEntry = (props) => {
       </span>
     );
   };
+
   // Add answer button and modal render
   const toggleAnswerForm = () => {
     setAnswerModal(!answerModal);
@@ -108,7 +110,7 @@ const QuestionEntry = (props) => {
 
   const renderModal = () => {
     if (answerModal) {
-      return (<AnswerModal toggleAnswerForm={toggleAnswerForm} id={id} />);
+      return (<AnswerModal toggleAnswerForm={toggleAnswerForm} id={id} question={question} />);
     }
     return null;
   };
