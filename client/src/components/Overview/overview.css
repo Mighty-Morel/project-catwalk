@@ -157,13 +157,20 @@ hr {
   font-size: 1em;
   line-height: 1.2em;
   background-color: white;
-  padding: 5px 15px 15px 25px;
+  padding: 40px 15px 15px 25px;
 }
 
 .ratings {
   line-height: 2em;
   font-size: .8em;
+}
 
+.link {
+  margin-left: 5px;
+  text-decoration: underline;
+  font-weight: 200;
+  font-size: .7em;
+  color: rgb(44, 44, 44);
 }
 
 .product-name {
@@ -174,13 +181,14 @@ hr {
 }
 
 .category {
+  font-size: .9em;
   font-weight: 300;
-  line-height: 2em;
+  line-height: 2.5em;
   text-transform: uppercase;
 }
 
 .price {
-  line-height: 3.5em;
+  line-height: 4em;
 }
 
 .price-sale {
@@ -209,6 +217,7 @@ hr {
   gap: 5px;
   place-items: center;
   place-content: center;
+  margin-bottom: 10px;
 }
 
 .style-thumbnail {
@@ -216,6 +225,7 @@ hr {
   width: 60px;
   padding-left: 5px;
   padding-right: 5px;
+  margin-top: 8px;
 }
 
 .style-selected {
@@ -234,6 +244,12 @@ hr {
 }
 
 .style-name {
+  margin: 30px 0px 10px;
+  font-weight: 300;
+  font-size: .9em;
+}
+
+/* .style-name {
   padding-right: .3em;
   padding-left: .3em;
   font-weight: 300;
@@ -242,7 +258,7 @@ hr {
   min-height: 35px;
   text-align: center;
   margin: 20px 2px 5px;
-}
+} */
 
 .checkmark-icon {
   display: inline-block;

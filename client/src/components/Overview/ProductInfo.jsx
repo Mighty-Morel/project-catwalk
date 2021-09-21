@@ -17,6 +17,7 @@ const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
   const product = useSelector((state) => state.product.productInfo);
   const allStyles = useSelector((state) => state.style.allStyles);
+  const style = useSelector((state) => state.style.style);
 
   const dispatch = useDispatch();
 
@@ -47,7 +48,10 @@ const ProductInfo = () => {
   return (
     <>
       <div data-testid="resolved" className="product-info-container">
-        <span data-testid="ratings" className="ratings">Star Ratings Placeholder</span>
+        <span data-testid="ratings" className="ratings">
+          ★★★★☆
+          <a className="link">Read all reviews</a>
+        </span>
         <br />
         <span data-testid="show-category" className="category">{product.category}</span>
         <br />
@@ -57,8 +61,9 @@ const ProductInfo = () => {
         <br />
         <span data-testid="show-description" className="description">{product.description}</span>
         <br />
-        <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
-        <br />
+        {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
+        <br /> */}
+        <p className="style-name">{style.name}</p>
         <div data-testid="style-selector" className="style-selector">
           <StyleSelector allStyles={allStyles} />
         </div>
