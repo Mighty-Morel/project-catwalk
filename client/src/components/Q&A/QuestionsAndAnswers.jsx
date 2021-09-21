@@ -62,7 +62,8 @@ const QuestionsAndAnswers = () => {
     // Can be taken out if deemed collapse is unnecessary
     if (extra) {
       return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
-    } if (questionCount > 2) {
+    }
+    if (questionCount > 2) {
       return (<button type="button" onClick={collapseQuestions}>Collapse questions</button>);
     }
     return null;
