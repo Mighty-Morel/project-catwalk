@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { useGetReviewsQuery } from '../../reducers/Review-List-Slice';
 import './reviewlist.css';
+// eslint-disable-next-line import/extensions
+import Tile from './Tile.jsx';
 
 const ReviewList = () => {
   const [sortBy, setSort] = useState('helpful');
@@ -53,14 +55,13 @@ const ReviewList = () => {
       </>
     );
     content = reviews.results.map((review) => (
-      <p key={review.review_id} value="test">
-        {review.review_id}
-      </p>
+      <Tile key={review.review_id} review={review} />
     ));
     if (count === reviews.results.length) {
       moreReviews = (
         <>
           <button
+            className="more-reviews"
             type="button"
             onClick={() => {
               setCount((prevCount) => prevCount + 2);
@@ -81,9 +82,17 @@ const ReviewList = () => {
 
   return (
     <>
-      {dropdown}
-      {content}
-      {moreReviews}
+      <h4> Ratings & Reviews</h4>
+      <div className="container">
+        <div className=".item-ratings">
+          Ratings Placeholder
+        </div>
+        <div className="item-reviews">
+          {dropdown}
+          {content}
+          {moreReviews}
+        </div>
+      </div>
     </>
   );
 };
