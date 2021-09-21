@@ -64,12 +64,17 @@ const AnswerModal = (props) => {
         <form>
           <div className="modal-body">
             <span>Your Answer:</span>
+            <br />
             <input type="text" id="question-entry" size="100" maxLength="1000" onChange={textChangeHandler} />
+            <br />
             <span>Name: </span>
             <input type="text" maxLength="60" placeholder="Example:jack543!" onChange={nameChangeHandler} />
-            <span>For privacy reasons, do not use your full name or email address</span>
+            <br />
+            <span><em>For privacy reasons, do not use your full name or email address</em></span>
+            <br />
             <span>Email: </span>
             <input type="text" maxLength="60" placeholder="jack@email.com" onChange={emailChangeHandler} />
+            <br />
             <span>For authentication reasons, you will not be emailed</span>
           </div>
           <div className="modal-footer">
