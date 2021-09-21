@@ -31,6 +31,7 @@ beforeAll(() => {
 
 afterEach(cleanup);
 
+jest.mock('axios');
 jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
 jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
 jest.mock('../client/src/components/Related/modal.css', () => () => (<div>PlModal Style Placeholder</div>));
@@ -52,3 +53,12 @@ const mockRelatedIds = [
   8,
   7,
 ];
+
+// TESTS =======================================================
+it('should load and display the selected product data',
+  () => axios.get('/products/1')
+    .then((productInfo) => expect(productInfo).toEqual(mockProductData)));
+
+it('should load and display the related ids of the product',
+  () => axios.get('/products/1/related')
+    .then((relatedIds) => expect(relatedIds).toEqual(mockRelatedIds)));
