@@ -110,7 +110,7 @@ const QuestionEntry = (props) => {
 
   const renderModal = () => {
     if (answerModal) {
-      return (<AnswerModal toggleAnswerForm={toggleAnswerForm} id={id} />);
+      return (<AnswerModal toggleAnswerForm={toggleAnswerForm} id={id} question={question} />);
     }
     return null;
   };
