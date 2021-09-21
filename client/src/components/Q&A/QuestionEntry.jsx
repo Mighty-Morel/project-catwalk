@@ -12,15 +12,15 @@ const QuestionEntry = (props) => {
   const [answerModal, setAnswerModal] = useState(false);
 
   // Destructuring of props
-  const { id, helpfulness } = props;
+  const { id, helpfulness, question } = props;
 
   const getAnswers = () => {
     axios.get(`/qa/questions/${id}/answers`)
       .then((response) => {
         const { results } = response.data;
         // Sorts answers whether the user is a 'seller' then by helpfulness
-        const sellerAnswers = results.filter(answer => answer.answerer_name.toLowerCase() === 'seller');
-        const otherAnswers = results.filter(answer => answer.answerer_name.toLowerCase() !== 'seller');
+        const sellerAnswers = results.filter((answer) => answer.answerer_name.toLowerCase() === 'seller');
+        const otherAnswers = results.filter((answer) => answer.answerer_name.toLowerCase() !== 'seller');
         sellerAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
         otherAnswers.sort((a, b) => b.helpfulness - a.helpfulness);
         const sortedAnswers = sellerAnswers.concat(otherAnswers);
@@ -52,9 +52,11 @@ const QuestionEntry = (props) => {
   const renderMoreAnswers = () => {
     if (extra) {
       return (<button type="button" onClick={showMoreAnswers}>See more answers</button>);
-    } else if (answerCount > 2) {
+    }
+    if (answerCount > 2) {
       return (<button type="button" onClick={collapseAnswers}>Collapse answers</button>);
     }
+    return null;
   };
 
   useEffect(() => {
@@ -75,10 +77,29 @@ const QuestionEntry = (props) => {
 
   const renderHelpful = () => {
     if (!helpfulnessClick) {
-      return (<span onClick={putHelpfulness}>Yes &#40;{helpfulness}&#41;</span>);
-    } else {
-      return (<span><b>Yes &#40;{helpfulness + 1}&#41;</b></span>);
+      return (
+        <span
+          onClick={putHelpfulness}
+          onKeyPress={putHelpfulness}
+          role="button"
+          tabIndex="0"
+        >
+          Yes &#40;
+          {helpfulness}
+          &#41;
+        </span>
+      );
     }
+    return (
+      <span>
+        <b>
+          Yes
+          &#40;
+          {helpfulness + 1}
+          &#41;
+        </b>
+      </span>
+    );
   };
   // Add answer button and modal render
   const toggleAnswerForm = () => {
@@ -94,7 +115,10 @@ const QuestionEntry = (props) => {
 
   return (
     <div className="question-entry">
-      <h1>Q: {props.question}</h1>
+      <h1>
+        Q:
+        {question}
+      </h1>
       <span>Helpful? </span>
       {renderHelpful()}
       <button type="button" onClick={toggleAnswerForm}> Add Answer</button>

@@ -239,31 +239,40 @@ hr {
   vertical-align: middle;
 }
 
-.sizes {
+.size-options {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
   width: 218px;
-  height: 25px;
+  height: 22px;
   border: 1px solid #2C3E50;
-  /* box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2); */
   z-index: 1;
-}
-.sizes span {
-  color: black;
-  /* padding: 12px 16px; */
-  text-decoration: none;
-
+  font-size: .8em;
+  margin: 0px;
 }
 
-.sizes span:hover {background-color: #f1f1f1}
-
-.size-dropdown:hover .sizes {
-  /* display: block; */
-  /* padding: 10px; */
-  display: inline-block;
+.size-options-open {
+  display: block;
+  position: absolute;
+  background-color: #f9f9f9;
+  width: 218px;
+  border: 1px solid #2C3E50;
+  z-index: 1;
+  font-size: .9em;
+  line-height: 1.5em;
+  margin: 0px;
+  padding: 0px;
   text-align: center;
-  padding: 5px 0px 0px;
+}
+
+
+.size {
+  display: block;
+}
+
+.size:hover {
+  color: white;
+  background-color: #00747c;
 }
 
 /* Quantity Selector Styling ------------------- */
@@ -274,7 +283,7 @@ select {
   padding-left: 10px;
   margin: 5px 0px;
   font-family: 'Roboto Condensed', sans-serif;
-  font-size: 1em;
+  font-size: .9em;
   background-color: #f5f5f5;
   color: #2C3E50;
   border: 1px solid #2C3E50;

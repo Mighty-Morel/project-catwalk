@@ -1,16 +1,28 @@
+/* eslint-disable react/no-array-index-key */
+/* eslint-disable react/jsx-one-expression-per-line */
+/* eslint-disable no-unused-vars */
+/* eslint-disable no-shadow */
+/* eslint-disable no-plusplus */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 /* eslint-disable no-console */
 import React from 'react';
 import axios from 'axios';
 import card from './card.css';
+import carousel from './carousel.css';
 
 class ProductCarousel extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
       productInfo: [],
+      // prev: false,
+      // next: true,
+      // counter: 0,
     };
+    this.prev = this.prev.bind(this);
+    this.next = this.next.bind(this);
+    this.myRef = React.createRef();
   }
 
   componentDidMount() {
@@ -18,10 +30,9 @@ class ProductCarousel extends React.Component {
   }
 
   getInfo() {
-    // axios.get('/products/${current product id}/related')
-    axios.get('/products/48432/related')
+    // original #48432, holder 48438, 48439, 48434
+    axios.get('/products/48438/related')
       .then((res) => {
-        // console.log('list of related ids', res.data);
         const relatedIds = res.data;
         const ids = [];
         for (let i = 0; i < relatedIds.length; i++) {
@@ -66,27 +77,60 @@ class ProductCarousel extends React.Component {
       });
   }
 
+  prev() {
+    this.myRef.current.scrollLeft -= 230;
+    if (this.myRef.current.scrollLeft < 230) {
+      console.log('BEGINNING OF SCROLL');
+    }
+  }
+
+  next() {
+    const { productInfo } = this.state;
+    this.myRef.current.scrollLeft += 230;
+    if ((productInfo.length - 3) * 230 === this.myRef.current.scrollLeft) {
+      console.log('END OF SCROLL');
+    }
+  }
+
   render() {
     const { productInfo } = this.state;
     if (productInfo.length === 0) {
       return 'loading...';
     }
     return (
-      <>
-        {productInfo.map((product, i) => (
-          // eslint-disable-next-line react/no-array-index-key
-          <div className="card" key={i}>{product.name} - {product.category}</div>
-        ))}
-      </>
+      <div className="carousel">
+        <div>RELATED PRODUCTS</div>
+
+        <button className="carousel__button carousel__button--left" type="button" onClick={() => this.prev()}>
+          <img src="./images/arrow-left.png" alt="" />
+        </button>
+
+        <div className="carousel__track-container">
+          <ul className="carousel__track" ref={this.myRef}>
+            {productInfo.map((product, i) => (
+              <li className="carousel__slide" key={i}>
+                <div className="card">
+                  <div className="image__container">
+                    <img className="cardImage" src={product.pic} alt="" />
+                    <img className="cardStar" src="./images/star.png" alt="" />
+                  </div>
+                  <dl className="cardCategory">{product.category}</dl>
+                  <dl className="cardTitle">{product.name}</dl>
+                  <dl className="cardPrice">${product.price}</dl>
+                  <dl className="cardRating">* star placeholder *</dl>
+                </div>
+              </li>
+            ))}
+          </ul>
+        </div>
+
+        <button className="carousel__button carousel__button--right" type="button" onClick={() => this.next()}>
+          <img src="./images/arrow-right.png" alt="" />
+        </button>
+
+      </div>
     );
   }
 }
 
 export default ProductCarousel;
-
-// return (
-//   {productInfo.map((product) => (
-//     <ul>{product.name} - {product.category}</ul>
-//   ))}
-
-// );

@@ -5,23 +5,20 @@ import { useSelector } from 'react-redux';
 import overviewStyling from './overview.css';
 
 const AddToCart = () => {
-  const selectedSkus = useSelector((state) => state.style.skus);
-
+  // identify skus in stock
   let availableSkus = [];
-
+  const selectedSkus = useSelector((state) => state.style.skus);
   if (selectedSkus !== undefined) {
-    // console.log('skus', selectedSkus);
     availableSkus = Object.entries(selectedSkus).filter((sku) => sku[1].quantity > 0);
   }
-
-  console.log('availableskus', availableSkus);
 
   // set initial sku, quantity, size, views and cart
   const [selectSku, setSku] = useState(availableSkus[0]);
   const [selectQty, setQty] = useState(1);
   const [selectSize, setSize] = useState('Select Size');
   const [isQtyShown, showQty] = useState(false);
-  const [areSizesOpen, openSizes] = useState(false);
+  const [areSizesOpen, showSizes] = useState(false);
+  const [error, showError] = useState(false);
   const [cart, addToCart] = useState([]);
 
   // reset views when rendering new style
@@ -29,9 +26,9 @@ const AddToCart = () => {
     setSku(availableSkus[0]);
     setSize('Select Size');
     showQty(false);
-    openSizes(false);
+    showSizes(false);
+    showError(false);
   };
-
   useEffect(resetDefault, [selectedSkus]);
 
   // QUANTITY SELECTOR ========================================================
@@ -69,64 +66,84 @@ const AddToCart = () => {
   };
 
   // SIZE SELECTOR ========================================================
+  // when a size is selected, show quantity dropdown and close size dropdown
   const handleSizeInput = (inputSize) => {
+    setSize(inputSize);
     if (inputSize === 'Select Size') {
       showQty(false);
       setSku(availableSkus[0]);
     } else {
-      setSize(inputSize);
       const matchingSku = availableSkus.find((sku) => inputSize === sku[1].size);
       setSku(matchingSku);
       showQty(true);
-      openSizes(false);
+      showSizes(false);
+      showError(false);
     }
   };
 
+  // find the sizes for skus in stock
   const availableSizes = availableSkus.map(
     (sku) => (
-      <span
+      <li
         key={sku[0]}
-        className="sizes"
+        className="size"
         role="menuitem"
         tabIndex="-1"
         onClick={() => handleSizeInput(sku[1].size)}
         onKeyPress={() => handleSizeInput(sku[1].size)}
       >
         {sku[1].size}
-      </span>
+      </li>
     ),
   );
 
-  const renderSizeSelecter = () => {
+  const renderSizeSelector = () => {
     // if no size is chosen, clicking Add to Cart opens Select Size Dropdown
-    if (selectSize === 'Select Size' && availableQty > 0 && areSizesOpen) {
+    if (availableQty > 0) {
       return (
         <>
-          <p className="help-text">Please select a size</p>
-          <div className="size-dropdown" id="openSizeSelector">
-            <button className="size-dropdown-btn" type="submit">{selectSize}</button>
-            {availableSizes}
+          <div className={error ? 'help-text' : 'help-text-space'}>{error ? 'Please select a size' : ''}</div>
+          <div className="size-dropdown">
+            <button
+              className="size-dropdown-btn"
+              type="submit"
+              onClick={() => { showSizes(!areSizesOpen); }}
+            >
+              {selectSize}
+            </button>
+            <ul className={areSizesOpen ? 'size-options-open' : 'size-options'}>
+              <li
+                key="selectSize"
+                className="size"
+                role="menuitem"
+                tabIndex="-1"
+                onClick={() => {
+                  handleSizeInput('Select Size');
+                  showSizes(false);
+                }}
+                onKeyPress={() => {
+                  handleSizeInput('Select Size');
+                  showSizes(false);
+                }}
+              >
+                -
+              </li>
+              {availableSizes}
+            </ul>
           </div>
         </>
       );
     // Show OUT OF STOCK if no stock
-    } if (availableQty === 0) {
-      return (
-        <>
-          <div className="help-text-space" />
-          <div className="size-dropdown" id="disabledSizeSelector">
-            <button className="size-dropdown-btn" type="submit">{selectSize}</button>
-            <span className="disabled-content">OUT OF STOCK</span>
-          </div>
-        </>
-      );
-    }
-    return (
+    } return (
       <>
         <div className="help-text-space" />
-        <div className="size-dropdown" id="openSizeSelector">
-          <button className="size-dropdown-btn" type="submit">{selectSize}</button>
-          {availableSizes}
+        <div className="size-dropdown">
+          <button
+            className="size-dropdown-btn"
+            type="submit"
+          >
+            OUT OF STOCK
+          </button>
         </div>
       </>
     );
@@ -134,9 +151,10 @@ const AddToCart = () => {
 
   // ADD TO CART BUTTON ========================================================
   const handleClick = () => {
-    // if clicked without selecting size, trigger size dropdown
+    // if clicked without selecting a size, show error message and open size dropdown
     if (selectSize === 'Select Size') {
-      openSizes(true);
+      showError(true);
+      showSizes(true);
     } else {
       const item = {
         sku: selectSku[0],
@@ -148,7 +166,6 @@ const AddToCart = () => {
     }
   };
 
-  // Hide Add to Cart button if no stock available
   const renderButton = () => {
     if (availableQty > 0) {
       return (
@@ -157,15 +174,16 @@ const AddToCart = () => {
         </div>
       );
     }
+    // Hide Add to Cart button if no stock available
     return <div />;
   };
 
   if (!selectSku) {
-    return <div>Loading Styles...</div>;
+    return <div>Checking our inventory...</div>;
   }
   return (
     <div className="addToCart-container">
-      {renderSizeSelecter()}
+      {renderSizeSelector()}
       {renderQtySelector()}
       {renderButton()}
       <div className="heart-icon" />

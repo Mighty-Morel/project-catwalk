@@ -77,10 +77,10 @@ app.get('/products/:productId/related', (req, res) => {
 app.get('/qa/questions/:product_id', (req, res) => {
   axios.get('/qa/questions', { params: req.params })
     .then((response) => {
-      res.send(response.data);
+      res.status(200).send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting questions', err);
+      res.status(500).send('error in getting questions', err);
     });
 });
 
@@ -88,10 +88,10 @@ app.get('/qa/questions/:product_id', (req, res) => {
 app.get('/qa/questions/:question_id/answers', (req, res) => {
   axios.get(req.url)
     .then((response) => {
-      res.send(response.data);
+      res.status(200).send(response.data);
     })
     .catch((err) => {
-      res.send('error in getting answers', err);
+      res.status(500).send('error in getting answers', err);
     });
 });
 
@@ -99,11 +99,10 @@ app.get('/qa/questions/:question_id/answers', (req, res) => {
 app.post('/qa/questions/:question_id/answers', (req, res) => {
   axios.post(req.url, req.body)
     .then(() => {
-      console.log(req.body);
       res.status(201).send('CREATED');
     })
     .catch((err) => {
-      res.status(504).send('error in posting new answer', err);
+      res.status(501).send('error in posting new answer', err);
     });
 });
 
