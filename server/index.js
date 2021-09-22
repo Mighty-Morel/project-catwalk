@@ -203,6 +203,26 @@ app.put('/api/reviews/:review_id/report', (req, res) => {
     });
 });
 
+app.get('/cart', (req, res) => {
+  axios.get('/cart')
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
+app.post('/cart', (req, res) => {
+  axios.post('/cart', req.body)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 app.listen(port, () => {
   // eslint-disable-next-line no-console
   console.log(`Example app listening at http://localhost:${port}`);
