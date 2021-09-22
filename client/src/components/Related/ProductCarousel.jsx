@@ -16,6 +16,7 @@ import { updateProductId } from '../../reducers/Example-Reducer.js';
 import card from './card.css';
 import carousel from './carousel.css';
 import Modal from './Modal.jsx';
+import Price from './Price.jsx';
 
 const ProductCarousel = (props) => {
   const [productInfo, setProductInfo] = useState([]);
@@ -180,7 +181,8 @@ const ProductCarousel = (props) => {
                   </div>
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
-                  <dl className="cardPrice">${product.price}</dl>
+                  {/* <dl className="cardPrice">${product.price}</dl> */}
+                  <dl className="cardPrice"><Price price={product.price} sale={product.sale} /></dl>
                   <dl className="cardRating">* star placeholder *</dl>
                 </div>
               </li>

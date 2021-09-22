@@ -50,6 +50,16 @@ dl {
   font-size: 14px;
 }
 
+.cardSale {
+  color: red;
+  font-size: 12px;
+}
+
+.cardPrice-cross {
+  color: grey;
+  text-decoration: line-through
+}
+
 .cardPrice {
   color: grey;
   font-size: 12px;
