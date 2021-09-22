@@ -19,7 +19,7 @@ import overviewStyling from './Overview/overview.css';
 
 const App = () => {
   const currentId = useSelector((state) => state.product.id);
-  // const currentProduct = useSelector((state) => state.product);
+  const currentProduct = useSelector((state) => state.product.productInfo);
   const selectedStyleId = useSelector((state) => state.style.id);
 
   const dispatch = useDispatch();
@@ -28,10 +28,14 @@ const App = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works
     // delete when understood
   };
-  const domain = 'http://localhost:3005';
-  const productURL = new URL(`/${currentId}`, domain);
-  console.log(productURL);
-  window.location.href = productURL;
+  console.log(currentProduct);
+  //window.location.assign
+  //wildcard for server request
+  // const domain = 'http://localhost:3005';
+  // const productURL = new URL(`/${currentId}`, domain);
+  // console.log(productURL);
+  // window.location.href = productURL;
+  // window.location.assign(`http://localhost:3005/shop/${currentId}/${selectedStyleId}`);
 
   return (
     <>

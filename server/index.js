@@ -25,6 +25,25 @@ app.use(express.static(staticUrl));
 //   next();
 // });
 
+// // redirects all urls back to our index
+// app.get('/shop(/*)', (req, res) => {
+//   res.sendFile(`${staticUrl}/index.html`, (err) => {
+//     res.status(404).send(err);
+//   });
+// });
+
+// gets information for a single product
+app.get('/shop/:productId', (req, res) => {
+  const { productId } = req.params;
+  axios.get(`/products/${productId}`)
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((err) => {
+      res.send(err);
+    });
+});
+
 // gets all product information
 app.get('/products', (req, res) => {
   axios.get('/products')
