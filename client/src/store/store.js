@@ -8,9 +8,9 @@ export default configureStore({
   reducer: {
     product: productReducer,
     style: styleReducer,
-    [reviewsSlice.reducerPath]: reviewsSlice.reducer,
+    // [reviewsSlice.reducerPath]: reviewsSlice.reducer,
   },
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reviewsSlice.middleware),
+  // middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(reviewsSlice.middleware),
 });
 
 // setupListeners(store.dispatch)

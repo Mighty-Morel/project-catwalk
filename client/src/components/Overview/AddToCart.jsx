@@ -233,7 +233,7 @@ const AddToCartFeatures = ({ style }) => {
   const renderButton = () => {
     if (availableSkus.length > 0) {
       return (
-        <button className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
+        <button data-testid="addToCart" className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
     }
     return null;

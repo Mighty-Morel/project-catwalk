@@ -5,7 +5,7 @@
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { render, waitFor, screen } from '@testing-library/react';
+import { act, render, waitFor, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
@@ -21,6 +21,7 @@ jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeh
 jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Review List Style</div>));
 jest.mock('../client/src/components/Reviewlist/Review-list', () => () => (<div>Placeholder Review List</div>));
+jest.mock('../client/src/reducers/Review-List-Slice.js', () => () => (<div>Review List Slice Placeholder</div>));
 
 const mockProductData = {
   id: 48432,
@@ -91,18 +92,26 @@ const mockStyle = {
   },
 };
 
-const mockCartData = {
-  1702764: '8',
-  1702765: '11',
-  1702766: '14',
-  1702767: '4',
-};
+const mockCartData = [
+  {
+    sku_id: 1702764,
+    count: '8',
+  },
+  {
+    sku_id: 1702799,
+    count: '1',
+  },
+  {
+    sku_id: 1702925,
+    count: '7',
+  },
+];
 
 // declare which API requests to mock
 const server = setupServer(
-  rest.get('/products/48432', (req, res, ctx) => res(ctx.json({ mockProductData }))),
-  rest.get('/products/48432/styles', (req, res, ctx) => res(ctx.json({ mockStyleData }))),
-  rest.get('/cart', (req, res, ctx) => res(ctx.json({ mockCartData }))),
+  rest.get('/products/48432', (req, res, ctx) => res(ctx.json(mockProductData))),
+  rest.get('/products/48432/styles', (req, res, ctx) => res(ctx.json(mockStyleData))),
+  rest.get('/cart', (req, res, ctx) => res(ctx.json(mockCartData))),
 );
 
 beforeAll(() => server.listen());
@@ -130,15 +139,16 @@ test('renders App on load', async () => {
 // });
 
 test('renders Add to Cart Button on load', async () => {
-  render(
+  const { findAllByRole } = render(
     <Provider store={store}>
-      <AddToCartFeatures />
+      <AddToCartFeatures style={mockStyle} />
     </Provider>,
   );
 
-  expect(screen.getByText('Checking our inventory...')).toBeInTheDocument();
+  // expect(screen.getByText('Checking our inventory...')).toBeInTheDocument();
 
-  await waitFor(() => screen.getByText('Add to Cart'));
+  // await waitFor(() => findByRole('menuitem'));
+  await act(() => findAllByRole('menuitem'));
 
-  expect(screen.getByText('Add to Cart')).toBeInTheDocument();
+  expect(screen.getByTestId('addToCart')).toBeVisible();
 });
