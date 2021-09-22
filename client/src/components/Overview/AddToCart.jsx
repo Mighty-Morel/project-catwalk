@@ -240,7 +240,7 @@ const AddToCartFeatures = ({ style }) => {
   };
 
   if (!selectSku) {
-    return <div>Checking our inventory...</div>;
+    return <div data-testid="Loading">Checking our inventory...</div>;
   }
   return (
     <div className="addToCart-container">

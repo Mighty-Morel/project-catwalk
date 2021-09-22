@@ -5,7 +5,7 @@
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { act, render, waitFor, screen } from '@testing-library/react';
+import { act, render, waitFor, screen, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
@@ -145,10 +145,20 @@ test('renders Add to Cart Button on load', async () => {
     </Provider>,
   );
 
-  // expect(screen.getByText('Checking our inventory...')).toBeInTheDocument();
-
-  // await waitFor(() => findByRole('menuitem'));
   await act(() => findAllByRole('menuitem'));
 
   expect(screen.getByTestId('addToCart')).toBeVisible();
+});
+
+test('shows error message on click if no size selected', async () => {
+  const { findAllByRole } = render(
+    <Provider store={store}>
+      <AddToCartFeatures style={mockStyle} />
+    </Provider>,
+  );
+
+  await act(() => findAllByRole('menuitem'));
+
+  fireEvent.click(screen.getByTestId('addToCart'));
+  expect(screen.getByText('Please select a size')).toBeInTheDocument();
 });
