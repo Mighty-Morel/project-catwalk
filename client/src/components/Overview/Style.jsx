@@ -40,7 +40,7 @@ const Style = ({ style }) => {
 
   return (
     <div role="menuitem" tabIndex="-1" onClick={handleClick} onKeyPress={handleClick}>
-      <p className="style-name">{style.name}</p>
+      {/* <p className="style-name">{style.name}</p> */}
       <div className="style-thumbnail">
         {imageStyle}
       </div>
