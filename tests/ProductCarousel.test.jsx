@@ -16,6 +16,7 @@ import axios from 'axios';
 import ProductCarousel from '../client/src/components/Related/ProductCarousel';
 import Modal from '../client/src/components/Related/Modal';
 import RelatedItems from '../client/src/components/Related/RelatedItems';
+import Price from '../client/src/components/Related/Price';
 import store from '../client/src/store/store';
 
 const mockProductData = [
@@ -60,6 +61,16 @@ const mockStyleData = {
       original_price: '8000.00',
     },
   ],
+};
+
+const mockStylePriceData = {
+  category: 'Accessories',
+  features: null,
+  name: 'Bright Future Sunglasses',
+  pic: null,
+  price: '69.00',
+  relatedId: 48433,
+  sale: null,
 };
 
 beforeAll(() => {
