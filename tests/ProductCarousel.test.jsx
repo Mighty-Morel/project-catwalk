@@ -111,7 +111,7 @@ it('should load and display the styles of the product',
   () => axios.get('/products/48421/styles')
     .then((productStyles) => expect(productStyles).toEqual(mockStyleData)));
 
-it('should load and display module title', async () => {
+it('should load and display carousel module title', async () => {
   render(
     <Provider store={store}>
       <RelatedItems />

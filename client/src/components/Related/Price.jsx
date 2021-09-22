@@ -10,7 +10,7 @@ const Price = (props) => {
   if (sale > 0) {
     return (
       <>
-        <span className=".cardSale">
+        <span className=".cardSale" data-testid="sale">
           $
           {sale}
         </span>
