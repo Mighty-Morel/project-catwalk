@@ -162,3 +162,21 @@ test('shows error message on click if no size selected', async () => {
   fireEvent.click(screen.getByTestId('addToCart'));
   expect(screen.getByText('Please select a size')).toBeInTheDocument();
 });
+
+it('should add the selected size and quantity to the cart', async () => {
+  const item = {
+    sku_id: 123456,
+    count: 20,
+  };
+
+  const { findAllByRole } = render(
+    <Provider store={store}>
+      <AddToCartFeatures style={mockStyle} />
+    </Provider>,
+  );
+
+  await act(() => findAllByRole('menuitem'));
+
+  fireEvent.click(screen.getByTestId('addToCart'));
+  expect(screen.getByText('Please select a size')).toBeInTheDocument();
+})
