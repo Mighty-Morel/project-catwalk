@@ -18,29 +18,6 @@ import Modal from '../client/src/components/Related/Modal';
 import RelatedItems from '../client/src/components/Related/RelatedItems';
 import store from '../client/src/store/store';
 
-beforeAll(() => {
-  axios.get.mockImplementation((url) => {
-    switch (url) {
-      case '/products/1':
-        return Promise.resolve(mockProductData);
-      case '/products/1/related':
-        return Promise.resolve(mockRelatedIds);
-      case '/products/48421/styles':
-        return Promise.resolve(mockStyleData);
-      default:
-        return Promise.reject(new Error('Error - this test is not working'));
-    }
-  });
-});
-
-afterEach(cleanup);
-
-jest.mock('axios');
-jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
-jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
-jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal Style Placeholder</div>));
-jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
-
 const mockProductData = [
   {
     id: 1,
@@ -84,6 +61,29 @@ const mockStyleData = {
     },
   ],
 };
+
+beforeAll(() => {
+  axios.get.mockImplementation((url) => {
+    switch (url) {
+      case '/products/1':
+        return Promise.resolve(mockProductData);
+      case '/products/1/related':
+        return Promise.resolve(mockRelatedIds);
+      case '/products/48421/styles':
+        return Promise.resolve(mockStyleData);
+      default:
+        return Promise.reject(new Error('Error - this test is not working'));
+    }
+  });
+});
+
+afterEach(cleanup);
+
+jest.mock('axios');
+jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
+jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
+jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal Style Placeholder</div>));
+jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
 
 // TESTS =======================================================
 it('should load and display the selected product data',
