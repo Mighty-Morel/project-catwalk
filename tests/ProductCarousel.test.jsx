@@ -38,7 +38,8 @@ afterEach(cleanup);
 jest.mock('axios');
 jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
 jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
-jest.mock('../client/src/components/Related/modal.css', () => () => (<div>PlModal Style Placeholder</div>));
+jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal Style Placeholder</div>));
+jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
 
 const mockProductData = [
   {
