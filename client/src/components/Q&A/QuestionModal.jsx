@@ -90,18 +90,18 @@ const QuestionModal = (props) => {
         </div>
         <form>
           <div className="modal-body">
-            <span>Your Question:</span>
+            <span>Your Question: *</span>
             <br />
             <textarea type="text" id="modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
             <br />
             <br />
-            <span>Name: </span>
+            <span>What is your nickname: *</span>
             <input type="text" size="60" maxLength="60" placeholder="Example: jackson11!" onChange={nameChangeHandler} />
             <br />
             <span><em>For privacy reasons, do not use your full name or email address</em></span>
             <br />
             <br />
-            <span>Email: </span>
+            <span>Your email: *</span>
             <input type="text" size="60" maxLength="60" placeholder="jackson@email.com" onChange={emailChangeHandler} />
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>

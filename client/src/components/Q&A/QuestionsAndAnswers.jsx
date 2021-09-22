@@ -77,7 +77,6 @@ const QuestionsAndAnswers = () => {
 
   return (
     <>
-      <input className="search-question" type="text" placeholder="Search questions..." />
       {displayedQuestions.map((question) => {
         const {
           // eslint-disable-next-line camelcase

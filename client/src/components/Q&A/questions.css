@@ -14,16 +14,6 @@
   margin: 5px;
 }
 
-.search-question {
-  background-color: grey;
-  color: white;
-  margin: 5px;
-}
-/*
-::placeholder {
-  color: black;
-} */
-
 /* Answer Modal Formatting ------------------------------------------------- */
 .modal {
   position: fixed;
