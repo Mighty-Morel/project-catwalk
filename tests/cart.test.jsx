@@ -71,22 +71,10 @@ const mockStyle = {
   }],
   skus: {
     1702764: { quantity: 8, size: 'XS' },
-    1702765: {
-      quantity: 16,
-      size: 'S',
-    },
-    1702766: {
-      quantity: 17,
-      size: 'M',
-    },
-    1702767: {
-      quantity: 10,
-      size: 'L',
-    },
-    1702768: {
-      quantity: 15,
-      size: 'XL',
-    },
+    1702765: { quantity: 16, size: 'S' },
+    1702766: { quantity: 17, size: 'M' },
+    1702767: { quantity: 10, size: 'L' },
+    1702768: { quantity: 15, size: 'XL' },
   },
 };
 
@@ -161,35 +149,47 @@ test('shows error message on click if no size selected', async () => {
   expect(screen.getByText('Please select a size')).toBeInTheDocument();
 });
 
-const setup = async () => {
-  const utils = render(
+test('quantity dropdown is no longer disabled when a size is selected', async () => {
+  const { findAllByRole } = render(
     <Provider store={store}>
       <AddToCartFeatures style={mockStyle} />
     </Provider>,
   );
+
+  // await act(() => findAllByRole('menuitem'));
+  // 1702764: { quantity: 8, size: 'XS' },
+  fireEvent.click(screen.getByTestId('1702764'));
   await act(() => findAllByRole('menuitem'));
-  const input = utils.getByLabelText('qtySelector');
-  return {
-    input,
-    ...utils,
-  };
-};
 
-it('should add the selected size and quantity to the cart', async () => {
-  // const item = {
-  //   sku_id: 123456,
-  //   count: 20,
-  // };
+  await act(() => screen.findAllByText('XS'));
 
-  const { qtyInput, sizeInput } = setup();
-  fireEvent.change(qtyInput, { target: { value: '10' } });
-  expect(qtyInput.value).toBe('10');
-
-  fireEvent.click(sizeInput, { target: { value: 'M' } });
-  expect(sizeInput.value).toBe('M');
-
-
-  // fireEvent.click(screen.getByTestId('addToCart'));
-
-  // expect(screen.getByText('Please select a size')).toBeInTheDocument();
+  await act(() => screen.getByLabelText('qtySelector'));
+  expect(screen.getByLabelText('qtySelector')).not.toBeDisabled();
 });
+
+// const setup = async () => {
+//   const utils = render(
+//     <Provider store={store}>
+//       <AddToCartFeatures style={mockStyle} />
+//     </Provider>,
+//   );
+//   await act(() => findAllByRole('menuitem'));
+//   const input = utils.getByLabelText('qtySelector');
+//   return {
+//     input,
+//     ...utils,
+//   };
+// };
+
+// it('should add the selected size and quantity to the cart', async () => {
+//   // const item = {
+//   //   sku_id: 123456,
+//   //   count: 20,
+//   // };
+
+//   const { qtyInput } = setup();
+//   fireEvent.change(qtyInput, { target: { value: '10' } });
+//   expect(qtyInput.value).toBe('10');
+
+//   // fireEvent.click(sizeInput, { target: { value: 'M' } });
+//   // expect(sizeInput.value).toBe('M');

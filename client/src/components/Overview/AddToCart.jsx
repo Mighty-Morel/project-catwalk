@@ -143,6 +143,7 @@ const AddToCartFeatures = ({ style }) => {
         className="size"
         role="menuitem"
         tabIndex="-1"
+        data-testid={sku[0]}
         onClick={() => handleSizeInput(sku[1].size)}
         onKeyPress={() => handleSizeInput(sku[1].size)}
       >
