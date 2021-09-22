@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
@@ -27,15 +27,14 @@ const App = () => {
   const handleClick = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works
     // delete when understood
+    window.location.assign(`http://localhost:3005?product_id=${currentId}`);
   };
-  console.log(currentProduct);
-  // window.location.assign
-  //wildcard for server request
-  // const domain = 'http://localhost:3005';
-  // const productURL = new URL(`/${currentId}`, domain);
-  // console.log(productURL);
-  // window.location.href = productURL;
-  window.location.assign(`http://localhost:3005/shop/${currentId}/${selectedStyleId}`);
+
+  // redirects to product URL
+  const queryString = window.location.search;
+  if (queryString.length === 0) {
+    window.location.assign(`http://localhost:3005?product_id=${currentId}`);
+  }
 
   return (
     <>

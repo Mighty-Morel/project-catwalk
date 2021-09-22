@@ -12,7 +12,9 @@ const port = 3005;
 const staticUrl = path.join(__dirname, '../public');
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
+// app.use('/shop/*/*', express.static(staticUrl));
 app.use(express.static(staticUrl));
+
 
 // Identifies properties of the request being sent
 // app.use((req, res, next) => {
@@ -26,23 +28,23 @@ app.use(express.static(staticUrl));
 // });
 
 // redirects all urls back to our index
-app.get('/shop(/*)', (req, res) => {
-  res.sendFile(`${staticUrl}/index.html`, (err) => {
-    res.status(404).send(err);
-  });
-});
+// app.get('/shop(/*)', (req, res) => {
+//   res.sendFile(`${staticUrl}/index.html`, (err) => {
+//     res.status(404).send(err);
+//   });
 
-// gets information for a single product
-app.get('/shop/:productId', (req, res) => {
-  const { productId } = req.params;
-  axios.get(`/products/${productId}`)
-    .then((response) => {
-      res.send(response.data);
-    })
-    .catch((err) => {
-      res.send(err);
-    });
-});
+
+// // gets information for a single product
+// app.get('/shop/:productId', (req, res) => {
+//   const { productId } = req.params;
+//   axios.get(`/products/${productId}`)
+//     .then((response) => {
+//       res.send(response.data);
+//     })
+//     .catch((err) => {
+//       res.send(err);
+//     });
+// });
 
 // gets all product information
 app.get('/products', (req, res) => {

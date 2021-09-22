@@ -34,11 +34,13 @@ const ProductInfo = () => {
     axios.get(`/products/${productId}`)
       .then((response) => {
         dispatch(updateProductInfo(response.data));
+        // window.location.assign(`http://localhost:3005/?product_id=${productId}`)
+        // useEffect(() => window.location.assign(`http://localhost:3005/?product_id=${currentId}`), [])
       })
       .then(getAllStyles(productId))
       .catch((error) => console.log('Error getting product info:', error));
   };
-
+  // useEffect(() => {window.location.assign(`http://localhost:3005/?product_id=${productId}`)}, [])
   useEffect(updateProduct, [productId]);
 
   if (allStyles.length === 0) {
