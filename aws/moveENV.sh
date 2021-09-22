@@ -1,0 +1,1 @@
+#TODO use scp to move env file https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
