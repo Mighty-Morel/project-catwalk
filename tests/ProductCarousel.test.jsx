@@ -70,7 +70,7 @@ const mockStylePriceData = {
   pic: null,
   price: '69.00',
   relatedId: 48433,
-  sale: null,
+  sale: '29.00',
 };
 
 beforeAll(() => {
@@ -82,6 +82,8 @@ beforeAll(() => {
         return Promise.resolve(mockRelatedIds);
       case '/products/48421/styles':
         return Promise.resolve(mockStyleData);
+      case '/products/48433/styles':
+        return Promise.resolve(mockStylePriceData);
       default:
         return Promise.reject(new Error('Error - this test is not working'));
     }
@@ -120,6 +122,21 @@ it('should load and display module title', async () => {
     .then(async () => {
       const carousel = await waitFor(() => screen.getByTestId('carousel'));
       expect(carousel).toHaveTextContent('RELATED PRODUCTS');
+    })
+    .catch((err) => console.log(err));
+});
+
+it('should load and display sales price if not null', async () => {
+  render(
+    <Provider store={store}>
+      <Price />
+    </Provider>,
+  );
+
+  axios.get('/products/48433/styles')
+    .then(async () => {
+      const sale = await waitFor(() => screen.getByTestId('sale'));
+      expect(sale).toHaveTextContent('29.00');
     })
     .catch((err) => console.log(err));
 });
