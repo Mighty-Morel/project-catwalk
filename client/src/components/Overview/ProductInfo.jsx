@@ -6,16 +6,17 @@ import { updateProductInfo } from '../../reducers/Example-Reducer';
 import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
-import AddToCart from './AddToCart.jsx';
+import AddToCartFeatures from './AddToCart.jsx';
+
 // eslint-disable-next-line no-unused-vars
 import overviewStyling from './overview.css';
 import 'regenerator-runtime/runtime';
-
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
   const product = useSelector((state) => state.product.productInfo);
   const allStyles = useSelector((state) => state.style.allStyles);
+  const style = useSelector((state) => state.style.style);
 
   const dispatch = useDispatch();
 
@@ -46,7 +47,10 @@ const ProductInfo = () => {
   return (
     <>
       <div data-testid="resolved" className="product-info-container">
-        <span data-testid="ratings" className="ratings">Star Ratings Placeholder</span>
+        <span data-testid="ratings" className="ratings">
+          ★★★★☆
+          <a className="link">Read all reviews</a>
+        </span>
         <br />
         <span data-testid="show-category" className="category">{product.category}</span>
         <br />
@@ -56,13 +60,14 @@ const ProductInfo = () => {
         <br />
         <span data-testid="show-description" className="description">{product.description}</span>
         <br />
-        <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
-        <br />
+        {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
+        <br /> */}
+        <p className="style-name"><b>STYLE >  </b>{style.name}</p>
         <div data-testid="style-selector" className="style-selector">
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />
-        <AddToCart allStyles={allStyles} />
+        <AddToCartFeatures style={style} />
       </div>
     </>
   );
