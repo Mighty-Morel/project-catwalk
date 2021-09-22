@@ -5,15 +5,14 @@
   width: 56%;
   margin: 0 auto;
   padding: 10px;
+
 }
 
 .carousel__image {
   width: 100px;
   height: 100px;
-  /* width: 20%; */
-  /* height: 60%; */
-  /* object-fit: cover;
-  position: absolute; */
+  /* object-fit: cover; */
+  /* position: absolute; */
 }
 
 .carousel__track-container {
