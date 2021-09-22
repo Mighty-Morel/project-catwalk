@@ -5,7 +5,9 @@
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
-import { act, render, waitFor, screen, fireEvent } from '@testing-library/react';
+import {
+  act, render, waitFor, screen, fireEvent,
+} from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
@@ -85,21 +87,17 @@ const mockStyle = {
       quantity: 15,
       size: 'XL',
     },
-    1702769: {
-      quantity: 4,
-      size: 'XL',
-    },
   },
 };
 
 const mockCartData = [
   {
     sku_id: 1702764,
-    count: '8',
+    count: '1',
   },
   {
     sku_id: 1702799,
-    count: '1',
+    count: '3',
   },
   {
     sku_id: 1702925,
@@ -163,20 +161,35 @@ test('shows error message on click if no size selected', async () => {
   expect(screen.getByText('Please select a size')).toBeInTheDocument();
 });
 
-it('should add the selected size and quantity to the cart', async () => {
-  const item = {
-    sku_id: 123456,
-    count: 20,
-  };
-
-  const { findAllByRole } = render(
+const setup = async () => {
+  const utils = render(
     <Provider store={store}>
       <AddToCartFeatures style={mockStyle} />
     </Provider>,
   );
-
   await act(() => findAllByRole('menuitem'));
+  const input = utils.getByLabelText('qtySelector');
+  return {
+    input,
+    ...utils,
+  };
+};
 
-  fireEvent.click(screen.getByTestId('addToCart'));
-  expect(screen.getByText('Please select a size')).toBeInTheDocument();
-})
+it('should add the selected size and quantity to the cart', async () => {
+  // const item = {
+  //   sku_id: 123456,
+  //   count: 20,
+  // };
+
+  const { qtyInput, sizeInput } = setup();
+  fireEvent.change(qtyInput, { target: { value: '10' } });
+  expect(qtyInput.value).toBe('10');
+
+  fireEvent.click(sizeInput, { target: { value: 'M' } });
+  expect(sizeInput.value).toBe('M');
+
+
+  // fireEvent.click(screen.getByTestId('addToCart'));
+
+  // expect(screen.getByText('Please select a size')).toBeInTheDocument();
+});
