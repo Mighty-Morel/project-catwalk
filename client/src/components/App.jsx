@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
-import ReviewList from './Reviewlist/Review-list.jsx';
+import ReviewsAndRatings from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
@@ -23,6 +23,7 @@ const App = () => {
   const selectedStyleId = useSelector((state) => state.style.id);
 
   const dispatch = useDispatch();
+
 
   const handleClick = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works
@@ -48,7 +49,7 @@ const App = () => {
       </div>
       <div><RelatedItems productId={currentId} /></div>
       <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
-      <div><ReviewList /></div>
+      <div><ReviewsAndRatings /></div>
     </>
   );
 };
