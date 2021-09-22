@@ -25,12 +25,12 @@ app.use(express.static(staticUrl));
 //   next();
 // });
 
-// // redirects all urls back to our index
-// app.get('/shop(/*)', (req, res) => {
-//   res.sendFile(`${staticUrl}/index.html`, (err) => {
-//     res.status(404).send(err);
-//   });
-// });
+// redirects all urls back to our index
+app.get('/shop(/*)', (req, res) => {
+  res.sendFile(`${staticUrl}/index.html`, (err) => {
+    res.status(404).send(err);
+  });
+});
 
 // gets information for a single product
 app.get('/shop/:productId', (req, res) => {

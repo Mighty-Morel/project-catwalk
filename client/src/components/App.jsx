@@ -29,13 +29,13 @@ const App = () => {
     // delete when understood
   };
   console.log(currentProduct);
-  //window.location.assign
+  // window.location.assign
   //wildcard for server request
   // const domain = 'http://localhost:3005';
   // const productURL = new URL(`/${currentId}`, domain);
   // console.log(productURL);
   // window.location.href = productURL;
-  // window.location.assign(`http://localhost:3005/shop/${currentId}/${selectedStyleId}`);
+  window.location.assign(`http://localhost:3005/shop/${currentId}/${selectedStyleId}`);
 
   return (
     <>
