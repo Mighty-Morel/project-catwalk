@@ -110,7 +110,7 @@ const AddToCartFeatures = ({ style }) => {
     // only show Qty dropdown if size is selected and in stock
     if (isQtyShown && availableQty > 0) {
       return (
-        <select label="qtySelector" className="dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
+        <select data-testid="qtySelector" className="dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
       );
     } return (
       <select className="dropdown" name="disabledQtySelector" disabled>
