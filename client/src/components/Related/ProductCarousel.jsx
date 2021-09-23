@@ -5,7 +5,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProductId } from '../../reducers/Example-Reducer.js';
+import { updateProductId } from '../../reducers/Example-Reducer';
 import './card.css';
 import './carousel.css';
 import Modal from './Modal.jsx';
