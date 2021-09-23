@@ -168,7 +168,6 @@ const ProductCarousel = () => {
         <div className="carousel__track-container">
 
           <ul className="carousel__track" ref={myRef}>
-            {console.log(productInfo)}
             {productInfo.map((product, i) => (
               <li className="carousel__slide" key={i}>
                 <div className="card">
