@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from 'react';
 // import { useSelector } from 'react-redux';
 import axios from 'axios';
-// eslint-disable-next-line no-unused-vars
-import overviewStyling from './overview.css';
 
 const AddToCartFeatures = ({ style }) => {
   // identify skus in stock
@@ -99,7 +97,7 @@ const AddToCartFeatures = ({ style }) => {
     // show max of 15 in dropdown
     const listedQty = availableQty > 15 ? 15 : availableQty;
     const options = [...Array(listedQty + 1).keys()].slice(1);
-    return options.map((i) => <option key={selectSku[0] + i} className="dropdown-content" value={i}>{i}</option>);
+    return options.map((i) => <option key={selectSku[0] + i} className="overview-dropdown-content" value={i}>{i}</option>);
   };
 
   const handleQtyChange = (e) => {
@@ -110,10 +108,10 @@ const AddToCartFeatures = ({ style }) => {
     // only show Qty dropdown if size is selected and in stock
     if (isQtyShown && availableQty > 0) {
       return (
-        <select data-testid="qtySelector" className="dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
+        <select data-testid="qtySelector" className="overview-qty-dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
       );
     } return (
-      <select className="dropdown" name="disabledQtySelector" disabled>
+      <select className="overview-qty-dropdown" name="disabledQtySelector" disabled>
         <option defaultValue="-">-</option>
       </select>
     );
@@ -140,7 +138,7 @@ const AddToCartFeatures = ({ style }) => {
     (sku) => (
       <li
         key={sku[0]}
-        className="size"
+        className="overview-size"
         role="menuitem"
         tabIndex="-1"
         data-testid={sku[0]}
@@ -157,19 +155,19 @@ const AddToCartFeatures = ({ style }) => {
     if (availableSkus.length > 0) {
       return (
         <>
-          <div className={error ? 'help-text' : 'help-text-space'}>{error ? 'Please select a size' : ''}</div>
-          <div className="size-dropdown">
+          <div className={error ? 'overview-help-text' : 'overview-help-text-space'}>{error ? 'Please select a size' : ''}</div>
+          <div className="overview-size-dropdown">
             <button
-              className="size-dropdown-btn"
+              className="overview-size-dropdown-btn"
               type="submit"
               onClick={() => { showSizes(!areSizesOpen); }}
             >
               {selectSize}
             </button>
-            <ul className={areSizesOpen ? 'size-options-open' : 'size-options'}>
+            <ul className={areSizesOpen ? 'overview-size-options-open' : 'overview-size-options'}>
               <li
                 key="selectSize"
-                className="size"
+                className="overview-size"
                 role="menuitem"
                 tabIndex="-1"
                 onClick={() => {
@@ -191,10 +189,10 @@ const AddToCartFeatures = ({ style }) => {
     // Show OUT OF STOCK if no stock
     } return (
       <>
-        <div className="help-text-space" />
-        <div className="size-dropdown">
+        <div className="overview-help-text-space" />
+        <div className="overview-size-dropdown">
           <button
-            className="size-dropdown-btn"
+            className="overview-size-dropdown-btn"
             type="submit"
           >
             OUT OF STOCK
@@ -234,7 +232,7 @@ const AddToCartFeatures = ({ style }) => {
   const renderButton = () => {
     if (availableSkus.length > 0) {
       return (
-        <button data-testid="addToCart" className="addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
+        <button data-testid="addToCart" className="overview-addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
     }
     return null;
@@ -244,11 +242,11 @@ const AddToCartFeatures = ({ style }) => {
     return <div data-testid="Loading">Checking our inventory...</div>;
   }
   return (
-    <div className="addToCart-container">
+    <div className="overview-addToCart-container">
       {renderSizeSelector()}
       {renderQtySelector()}
       {renderButton()}
-      <div className="heart-icon" />
+      <div className="overview-heart-icon" />
     </div>
   );
 };

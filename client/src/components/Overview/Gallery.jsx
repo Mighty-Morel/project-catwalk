@@ -1,9 +1,8 @@
 /* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
-// eslint-disable-next-line no-unused-vars
-import overviewStyling from './overview.css';
 import GalleryThumbnail from './GalleryThumbnail.jsx';
+import './overview.css';
 
 const Gallery = () => {
   const selectedStyle = useSelector((state) => state.style.style);
@@ -41,7 +40,7 @@ const Gallery = () => {
     if (stylePhotos.length > 7 && mainPhotoIndex > 0) {
       return (
         <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
-          <img className="thumbnail-arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png" />
+          <img className="overview-thumbnail-arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png" />
         </span>
       );
     }
@@ -52,7 +51,7 @@ const Gallery = () => {
     if (stylePhotos.length > 7 && mainPhotoIndex < stylePhotos.length - 1) {
       return (
         <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
-          <img className="thumbnail-arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png" />
+          <img className="overview-thumbnail-arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png" />
         </span>
       );
     }
@@ -64,18 +63,18 @@ const Gallery = () => {
   }
   return (
     <>
-      <div className="gallery-container">
-        <div className="main-image-container">
+      <div className="overview-gallery-container">
+        <div className="overview-main-image-container">
           <img
-            className="main-image"
+            className="overview-main-image"
             src={mainImage.url}
             alt={selectedStyle.name}
             title={selectedStyle.name}
           />
         </div>
-        <div className="thumbnail-container">
+        <div className="overview-thumbnail-container">
           {renderUpArrow()}
-          <div className="thumbnail-image-container">
+          <div className="overview-thumbnail-image-container">
             {stylePhotos.map((photo, index) => (
               <GalleryThumbnail
                 key={photo.url}
@@ -89,12 +88,12 @@ const Gallery = () => {
           </div>
           {renderDownArrow()}
         </div>
-        <div className="main-arrow-container">
+        <div className="overview-main-arrow-container">
           <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
-            <img className="main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
+            <img className="overview-main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
           </span>
           <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
-            <img className="main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
+            <img className="overview-main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
           </span>
         </div>
       </div>

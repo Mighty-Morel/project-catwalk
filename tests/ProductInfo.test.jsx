@@ -127,5 +127,5 @@ test('selected images should have select formatting with border and checkmark', 
   );
 
   fireEvent.click(getByAltText('Selected Style'));
-  expect(getByAltText('Selected Style')).toHaveClass('style-selected');
+  expect(getByAltText('Selected Style')).toHaveClass('overview-style-selected');
 });
