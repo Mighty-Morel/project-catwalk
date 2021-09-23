@@ -2,7 +2,7 @@
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
-/* eslint-disable react/jsx-one-expression-per-line */
+// /* eslint-disable react/jsx-one-expression-per-line */
 /* eslint-disable no-shadow */
 /* eslint-disable no-plusplus */
 /* eslint-disable guard-for-in */
@@ -150,7 +150,15 @@ const ProductCarousel = () => {
             {modalInfo.map((item, i) => (
               <li key={i}>
                 <div>
-                  <ul className="modal-features">{item.overview} {item.feature}: {item.value}{item.card}</ul>
+                  <ul className="modal-features">
+                    {item.overview}
+                    {' '}
+                    {item.feature}
+                    :
+                    {' '}
+                    {item.value}
+                    {item.card}
+                  </ul>
                 </div>
               </li>
             ))}
