@@ -3,7 +3,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable no-unused-vars */
 /* eslint-disable no-shadow */
 /* eslint-disable no-plusplus */
 /* eslint-disable guard-for-in */
@@ -13,12 +12,12 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProductId } from '../../reducers/Example-Reducer.js';
-import card from './card.css';
-import carousel from './carousel.css';
+import './card.css';
+import './carousel.css';
 import Modal from './Modal.jsx';
 import Price from './Price.jsx';
 
-const ProductCarousel = (props) => {
+const ProductCarousel = () => {
   const [productInfo, setProductInfo] = useState([]);
   const [modalInfo, setModalInfo] = useState([]);
   const [show, setShow] = useState(false);
