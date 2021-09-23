@@ -1,19 +1,28 @@
+/* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetReviewsQuery } from '../../reducers/Review-List-Slice';
+import { useGetReviewsQuery, useGetMetaReviewsQuery, useGetProductInfoQuery } from '../../reducers/Review-List-Slice';
+import ReviewModal from './Review-Modal.jsx';
 import './reviewlist.css';
-// eslint-disable-next-line import/extensions
 import Tile from './Tile.jsx';
 
-const ReviewList = () => {
-  const [sortBy, setSort] = useState('helpful');
+const ReviewsAndRatings = () => {
+  const [sortBy, setSort] = useState(() => 'helpful');
   const [count, setCount] = useState(() => 2);
+  const [show, setShow] = useState(() => false);
   const productId = useSelector((state) => state.product.id);
 
   useEffect(() => {
     setCount(2);
     setSort('helpful');
   }, [productId]);
+
+  const showModal = () => {
+    setShow(true);
+  };
+  const hideModal = () => {
+    setShow(false);
+  };
 
   const {
     data: reviews,
@@ -28,10 +37,20 @@ const ReviewList = () => {
       sort: sortBy,
     },
   );
+  const {
+    data: productInfo,
+    isSuccess: infoSuccess,
+  } = useGetProductInfoQuery(productId);
+
+  const {
+    data: reviewInfo,
+    isSuccess: reviewInfoSuccess,
+  } = useGetMetaReviewsQuery(productId);
 
   let dropdown;
   let content;
   let moreReviews;
+  let addReview;
 
   if (isLoading) {
     content = (
@@ -39,7 +58,7 @@ const ReviewList = () => {
         Loading...zzz, this request might be taking some time
       </p>
     );
-  } else if (isSuccess) {
+  } else if (isSuccess && infoSuccess && reviewInfoSuccess) {
     dropdown = (
       <>
         {reviews.results.length}
@@ -57,6 +76,23 @@ const ReviewList = () => {
     content = reviews.results.map((review) => (
       <Tile key={review.review_id} review={review} />
     ));
+    addReview = (
+      <>
+        <ReviewModal
+          show={show}
+          handleClose={hideModal}
+          product={productInfo}
+          reviewInfo={reviewInfo}
+        />
+        <button
+          className="more-reviews"
+          type="button"
+          onClick={showModal}
+        >
+          Add a Review +
+        </button>
+      </>
+    );
     if (count === reviews.results.length) {
       moreReviews = (
         <>
@@ -91,10 +127,11 @@ const ReviewList = () => {
           {dropdown}
           {content}
           {moreReviews}
+          {addReview}
         </div>
       </div>
     </>
   );
 };
 
-export default ReviewList;
+export default ReviewsAndRatings;
