@@ -1,8 +1,7 @@
 /* eslint-disable import/extensions */
-/* eslint-disable no-unused-vars */
 /* eslint-disable react/prop-types */
 import React from 'react';
-import card from './card.css';
+import './card.css';
 
 const Price = (props) => {
   const { price, sale } = props;
