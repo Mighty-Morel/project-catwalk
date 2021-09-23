@@ -5,7 +5,6 @@
   width: 56%;
   margin: 0 auto;
   padding: 10px;
-
 }
 
 .c-carousel__track-container {
@@ -35,7 +34,6 @@
 }
 
 /* transform move btn to exact mid */
-/* border removes btn shadow*/
 .c-carousel__button {
   position: absolute;
   top: 50%;
