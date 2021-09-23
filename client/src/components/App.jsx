@@ -27,7 +27,18 @@ const App = () => {
   const handleClick = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works
     // delete when understood
+    window.location.assign(`http://localhost:3005?product_id=48436`);
   };
+
+  // redirects to product URL
+  const queryString = window.location.search;
+  if (queryString.length === 0) {
+    window.location.assign(`http://localhost:3005?product_id=${currentId}`);
+  }
+
+  if (queryString.length === 0) {
+    window.location.assign(`http://localhost:3005?product_id=${currentId}`);
+  }
 
   return (
     <>

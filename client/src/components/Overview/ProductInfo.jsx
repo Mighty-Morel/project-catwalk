@@ -13,7 +13,11 @@ import overviewStyling from './overview.css';
 import 'regenerator-runtime/runtime';
 
 const ProductInfo = () => {
-  const productId = useSelector((state) => state.product.id);
+  const params = new URLSearchParams(document.location.search.substring(1));
+  const productId = params.get('product_id');
+  console.log(productId);
+
+  // const productId = useSelector((state) => state.product.id);
   const product = useSelector((state) => state.product.productInfo);
   const allStyles = useSelector((state) => state.style.allStyles);
   const style = useSelector((state) => state.style.style);
@@ -62,7 +66,13 @@ const ProductInfo = () => {
         <br />
         {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
         <br /> */}
-        <p className="style-name"><b>STYLE >  </b>{style.name}</p>
+        <p className="style-name">
+          <b>
+            STYLE
+            {'>'}
+          </b>
+          {style.name}
+        </p>
         <div data-testid="style-selector" className="style-selector">
           <StyleSelector allStyles={allStyles} />
         </div>
