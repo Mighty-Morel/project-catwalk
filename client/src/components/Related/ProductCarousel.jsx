@@ -183,8 +183,7 @@ const ProductCarousel = () => {
                   </div>
                   <dl className="cardCategory">{product.category}</dl>
                   <dl className="cardTitle">{product.name}</dl>
-                  {/* <dl className="cardPrice">${product.price}</dl> */}
-                  <dl className="cardPrice"><Price price={product.price} sale={product.sale} /></dl>
+                  <dl className="c-cardPrice"><Price price={product.price} sale={product.sale} /></dl>
                   <dl className="cardRating">* star placeholder *</dl>
                 </div>
               </li>
