@@ -4,7 +4,7 @@ import './modal.css';
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ handleClose, show, children }) => {
-  const showHideClassName = show ? 'c-modal display-block' : 'c-modal display-none';
+  const showHideClassName = show ? 'c-modal c-display-block' : 'c-modal c-display-none';
 
   return (
     <div className={showHideClassName}>
