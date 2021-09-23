@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/extensions */
-/* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
@@ -32,30 +31,32 @@ const ProductCarousel = () => {
           ids[i] = { relatedId };
         }
         for (const id in ids) { // [{relatedId: 48433}, {…}, {…}, {…}]
-          const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
-          axios.get(`/products/${relatedId}`)
-            .then((res) => {
-              for (let j = 0; j < ids.length; j += 1) {
-                if (ids[j].relatedId === res.data.id) {
-                  ids[j] = { category: res.data.category, ...ids[j] };
-                  ids[j] = { features: res.data.features, ...ids[j] };
-                  ids[j] = { name: res.data.name, ...ids[j] };
+          if (ids[id]) {
+            const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
+            axios.get(`/products/${relatedId}`)
+              .then((res) => {
+                for (let j = 0; j < ids.length; j += 1) {
+                  if (ids[j].relatedId === res.data.id) {
+                    ids[j] = { category: res.data.category, ...ids[j] };
+                    ids[j] = { features: res.data.features, ...ids[j] };
+                    ids[j] = { name: res.data.name, ...ids[j] };
+                  }
                 }
-              }
-            });
-          axios.get(`/products/${relatedId}/styles`)
-            .then((res) => {
-              for (let k = 0; k < ids.length; k += 1) {
-                if (ids[k].relatedId === Number(res.data.product_id)) {
-                  ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
-                  ids[k] = { sale: res.data.results[0].sale_price, ...ids[k] };
-                  ids[k] = {
-                    pic: res.data.results[0].photos[0].thumbnail_url, ...ids[k],
-                  };
+              });
+            axios.get(`/products/${relatedId}/styles`)
+              .then((res) => {
+                for (let k = 0; k < ids.length; k += 1) {
+                  if (ids[k].relatedId === Number(res.data.product_id)) {
+                    ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
+                    ids[k] = { sale: res.data.results[0].sale_price, ...ids[k] };
+                    ids[k] = {
+                      pic: res.data.results[0].photos[0].thumbnail_url, ...ids[k],
+                    };
+                  }
                 }
-              }
-              setProductInfo([...ids]);
-            });
+                setProductInfo([...ids]);
+              });
+          }
         }
       });
   };
