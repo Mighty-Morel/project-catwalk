@@ -46,7 +46,7 @@ const App = () => {
       </div>
       <div><RelatedItems productId={currentId} /></div>
       <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
-      <div><ReviewList /></div>
+      <div id="reviews"><ReviewList /></div>
     </>
   );
 };

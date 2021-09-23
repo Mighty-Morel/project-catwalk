@@ -14,3 +14,8 @@ body {
   width: 90%;
   margin: auto;
 }
+
+/* unvisited link */
+a:link {
+  color: rgb(44, 44, 44);
+}

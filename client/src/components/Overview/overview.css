@@ -7,8 +7,6 @@
   grid-template-rows: auto;
   margin: auto;
   padding-right: 10px;
-  /* background-color: white; */
-  /* padding-bottom: 20px; */
 }
 
 /* Gallery Formatting --------------------------------------------------- */
@@ -165,12 +163,11 @@ hr {
   font-size: .8em;
 }
 
-.overview-link {
+.overview-ratings-link {
   margin-left: 5px;
   text-decoration: underline;
   font-weight: 200;
   font-size: .7em;
-  color: rgb(44, 44, 44);
 }
 
 .overview-product-name {
@@ -276,7 +273,6 @@ hr {
 /* Add To Cart Formatting ---------------------------------------- */
 .overview-addToCart-container {
   height: 100px;
-  /* display:inline-block; */
   display:grid;
   grid-template-columns: repeat(6, 1fr);
   grid-template-rows: 1fr 1fr 1fr;
@@ -288,7 +284,6 @@ hr {
 
 .overview-help-text-space {
   height: 30px;
-  /* margin: 1px; */
   grid-column: 1 / 5;
   grid-row: 1 / 2;
 }
