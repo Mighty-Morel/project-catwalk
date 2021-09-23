@@ -228,8 +228,8 @@ const AddToCartFeatures = ({ style }) => {
         postToCartOnce(selectSku[0]);
       }
       resetDefault();
-      console.log('Added to cart:', item);
-      console.log('Current cart:', userCart);
+      // console.log('Added to cart:', item);
+      // console.log('Current cart:', userCart);
     }
   };
 

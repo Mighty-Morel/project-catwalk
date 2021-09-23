@@ -2,7 +2,6 @@ import { configureStore } from '@reduxjs/toolkit';
 import productReducer from '../../client/src/reducers/Example-Reducer';
 import styleReducer from '../../client/src/reducers/Style-Reducer';
 
-
 // MOCK DATA FOR TESTS =========================================================
 
 const store = configureStore({
@@ -22,24 +21,26 @@ const mockProductData = {
 };
 
 const mockStyleData = {
-  product_id: '48432',
-  results: [
-    {
-      style_id: 293480,
-      name: 'Desert Brown & Tan',
-      original_price: '140.00',
-    },
-    {
-      style_id: 123456,
-      name: 'Testing only',
-      original_price: '0',
-    },
-    {
-      style_id: 654321,
-      name: 'Testing 2',
-      original_price: '10.00',
-    },
-  ],
+  data: {
+    product_id: '48432',
+    results: [
+      {
+        style_id: 293480,
+        name: 'Desert Brown & Tan',
+        original_price: '140.00',
+      },
+      {
+        style_id: 123456,
+        name: 'Testing only',
+        original_price: '0',
+      },
+      {
+        style_id: 654321,
+        name: 'Testing 2',
+        original_price: '10.00',
+      },
+    ],
+  },
 };
 
 const mockStyle = {

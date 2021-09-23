@@ -6,34 +6,36 @@ import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import {
-  act, render, screen, fireEvent,
+  act, render, screen, fireEvent, waitFor,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
 import AddToCartFeatures from '../client/src/components/Overview/AddToCart';
+import App from '../client/src/components/App';
 import Style from '../client/src/components/Overview/Style';
+import Gallery from '../client/src/components/Overview/Gallery';
 import mockData from './fixtures/OverviewMockData';
 
 // MOCK ALL COMPONENT AND CSS IMPORTS TO ISOLATE OVERVIEW COMPONENT ====================
-jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style</div>));
-jest.mock('../client/src/components/Overview/Gallery', () => () => (<div>Placeholder Gallery</div>));
+jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style Sheet</div>));
 jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
 jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Review List Style</div>));
 jest.mock('../client/src/components/Reviewlist/Review-list', () => () => (<div>Placeholder Review List</div>));
 jest.mock('../client/src/reducers/Review-List-Slice.js', () => () => (<div>Review List Slice Placeholder</div>));
+jest.mock('../client/src/components/Overview/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
 
 // SETUP MOCK SERVER =============================================================
 const {
-  mockProductData, mockStyleData, mockStyle, mockCartData, store,
+  mockProductData, mockStyle, mockCartData, store,
 } = mockData;
 
 // declare which API requests to mock
 const server = setupServer(
   rest.get('/products/48432', (req, res, ctx) => res(ctx.json(mockProductData))),
-  rest.get('/products/48432/styles', (req, res, ctx) => res(ctx.json(mockStyleData))),
+  rest.get('/products/48432/styles', (req, res, ctx) => res(ctx.json(mockStyle))),
   rest.get('/cart', (req, res, ctx) => res(ctx.json(mockCartData))),
 );
 
@@ -42,19 +44,20 @@ afterEach(() => server.resetHandlers());
 afterAll(() => server.close());
 
 // TESTS =============================================================
+// APP ===============================================================
+test('renders App on load', async () => {
+  render(
+    <Provider store={store}>
+      <App />
+    </Provider>,
+  );
 
-// test('renders App on load', async () => {
-//   render(
-//     <Provider store={store}>
-//       <App />
-//     </Provider>,
-//   );
+  await waitFor(() => screen.getByText('Hello World! CurrentId is 48432 and current Style is 293480'));
 
-//   await waitFor(() => screen.getByText('Hello World! CurrentId is 48432 and current Style is 293480'));
+  expect(screen.getByText('Placeholder Review List')).toBeInTheDocument();
+});
 
-//   expect(screen.getByText('Placeholder Product Info')).toBeInTheDocument();
-// });
-
+// ADD TO CART =============================================================
 test('renders Add to Cart Button on load', async () => {
   const { findAllByRole } = render(
     <Provider store={store}>
@@ -95,22 +98,53 @@ test('quantity dropdown is no longer disabled when a size is selected', async ()
   expect(screen.getByTestId('qtySelector')).not.toBeDisabled();
 });
 
-// Style Selector Tests ==============================================
+// STYLE SELECTOR ==============================================
 test('selected images should have select formatting with border and checkmark', () => {
-  const style = {
-    style_id: 123456,
-    name: 'Selected Style',
-    original_price: '0',
-    photos: [
-      { thumbnail_url: 'https://testing.com' },
-    ],
-  };
   const { getByAltText } = render(
     <Provider store={store}>
-      <Style style={style} />
+      <Style style={mockStyle} />
     </Provider>,
   );
 
-  fireEvent.click(getByAltText('Selected Style'));
-  expect(getByAltText('Selected Style')).toHaveClass('overview-style-selected');
+  fireEvent.click(getByAltText('Forest Green & Black'));
+  expect(getByAltText('Forest Green & Black')).toHaveClass('overview-style-selected');
+});
+
+// GALLERY IMAGES =========================================
+test('main image should be of the selected thumbnail', async () => {
+  const { getByAltText } = render(
+    <Provider store={store}>
+      <Gallery />
+    </Provider>,
+  );
+
+  await act(() => screen.findAllByRole('menuitem'));
+
+  expect(getByAltText('Forest Green & Black')).toBeInTheDocument();
+});
+
+test('main image should change to next photo when right arrow is clicked', async () => {
+  render(
+    <Provider store={store}>
+      <Gallery />
+    </Provider>,
+  );
+  await act(() => screen.findAllByRole('menuitem'));
+
+  fireEvent.click(screen.getByAltText('right arrow'));
+
+  expect(screen.getByAltText('Forest Green & Black_1')).toBeInTheDocument();
+});
+
+test('main image should not change if left arrow is clicked and the current photo is the already the first', async () => {
+  render(
+    <Provider store={store}>
+      <Gallery />
+    </Provider>,
+  );
+  await act(() => screen.findAllByRole('menuitem'));
+
+  fireEvent.click(screen.getByAltText('left arrow'));
+
+  expect(screen.getByAltText('Forest Green & Black_0')).toBeInTheDocument();
 });

@@ -16,7 +16,7 @@ import ProductInfo from '../client/src/components/Overview/ProductInfo';
 import mockData from './fixtures/OverviewMockData';
 
 const {
-  mockProductData, mockStyleData, store,
+  mockProductData, mockStyle, store,
 } = mockData;
 
 beforeAll(() => {
@@ -25,7 +25,7 @@ beforeAll(() => {
       case '/products/48432':
         return Promise.resolve(mockProductData);
       case '/products/48432/styles':
-        return Promise.resolve(mockStyleData);
+        return Promise.resolve(mockStyle);
       default:
         return Promise.reject(new Error('Error - this test is not working'));
     }
@@ -46,7 +46,7 @@ it('should load and display the selected product data',
 
 it('should load and display the styles of the product',
   () => axios.get('/products/48432/styles')
-    .then((styles) => expect(styles).toEqual(mockStyleData)));
+    .then((styles) => expect(styles).toEqual(mockStyle)));
 
 it('should load and display the selected product data', () => {
   axios.get('/products/48432');
@@ -82,4 +82,3 @@ it('should load and display the selected product data', async () => {
     })
     .catch((err) => console.log(err));
 });
-
