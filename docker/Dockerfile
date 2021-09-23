@@ -9,7 +9,7 @@ COPY . /app
 # Make sure I am in the right directory
 WORKDIR /app
 # Install all the npm dependencies
-RUN npm Install
+RUN npm install
 # Create bundle
 RUN npm run react-prod
 # Expose a port
