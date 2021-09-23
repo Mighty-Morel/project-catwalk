@@ -3,7 +3,6 @@
 /* eslint-disable import/extensions */
 /* eslint-disable react/no-array-index-key */
 /* eslint-disable no-shadow */
-/* eslint-disable no-plusplus */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useRef, useEffect } from 'react';
@@ -30,7 +29,7 @@ const ProductCarousel = () => {
       .then((res) => {
         const relatedIds = res.data;
         const ids = [];
-        for (let i = 0; i < relatedIds.length; i++) {
+        for (let i = 0; i < relatedIds.length; i += 1) {
           const relatedId = relatedIds[i];
           ids[i] = { relatedId };
         }
@@ -38,7 +37,7 @@ const ProductCarousel = () => {
           const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
           axios.get(`/products/${relatedId}`)
             .then((res) => {
-              for (let j = 0; j < ids.length; j++) {
+              for (let j = 0; j < ids.length; j += 1) {
                 if (ids[j].relatedId === res.data.id) {
                   ids[j] = { category: res.data.category, ...ids[j] };
                   ids[j] = { features: res.data.features, ...ids[j] };
@@ -48,7 +47,7 @@ const ProductCarousel = () => {
             });
           axios.get(`/products/${relatedId}/styles`)
             .then((res) => {
-              for (let k = 0; k < ids.length; k++) {
+              for (let k = 0; k < ids.length; k += 1) {
                 if (ids[k].relatedId === Number(res.data.product_id)) {
                   ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
                   ids[k] = { sale: res.data.results[0].sale_price, ...ids[k] };
@@ -72,7 +71,7 @@ const ProductCarousel = () => {
         const result = [];
         const overviewName = res.data.name;
         const overviewFeatures = res.data.features;
-        for (let l = 0; l < overviewFeatures.length; l++) {
+        for (let l = 0; l < overviewFeatures.length; l += 1) {
           overviewFeatures[l].overview = '✓'; // true
           overviewFeatures[l].card = ' '; // false
           result.push(overviewFeatures[l]);
@@ -85,9 +84,9 @@ const ProductCarousel = () => {
           .then((res) => {
             const cardName = res.data.name;
             const cardFeatures = res.data.features;
-            for (let m = 0; m < cardFeatures.length; m++) {
+            for (let m = 0; m < cardFeatures.length; m += 1) {
               const cardFeature = cardFeatures[m];
-              for (let n = 0; n < modal.length; n++) {
+              for (let n = 0; n < modal.length; n += 1) {
                 const overviewFeature = modal[n].feature;
                 const overviewValue = modal[n].value;
                 if (overviewFeature === cardFeature.feature
