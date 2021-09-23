@@ -7,10 +7,8 @@ import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCartFeatures from './AddToCart.jsx';
-
-// eslint-disable-next-line no-unused-vars
-import overviewStyling from './overview.css';
 import 'regenerator-runtime/runtime';
+import './overview.css';
 
 const ProductInfo = () => {
   const productId = useSelector((state) => state.product.id);
@@ -23,7 +21,6 @@ const ProductInfo = () => {
   const getAllStyles = async () => {
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
-        // console.log(response.data.results);
         dispatch(updateStyles(response.data.results));
         dispatch(updateStyle(response.data.results[0]));
       })
@@ -46,30 +43,31 @@ const ProductInfo = () => {
   }
   return (
     <>
-      <div data-testid="resolved" className="product-info-container">
-        <span data-testid="ratings" className="ratings">
+      <div data-testid="resolved" className="overview-product-info-container">
+        <span data-testid="ratings" className="overview-ratings">
           ★★★★☆
-          <a className="link">Read all reviews</a>
+          <a href="#reviews" className="overview-ratings-link">Read all reviews</a>
         </span>
         <br />
-        <span data-testid="show-category" className="category">{product.category}</span>
+        <span data-testid="show-category" className="overview-category">{product.category}</span>
         <br />
-        <span data-testid="show-name" className="product-name">{product.name}</span>
+        <span data-testid="show-name" className="overview-product-name">{product.name}</span>
         <br />
-        <span data-testid="show-price" className="price"><Price /></span>
+        <span data-testid="show-price" className="overview-price"><Price /></span>
         <br />
-        <span data-testid="show-description" className="description">{product.description}</span>
+        <span data-testid="show-description" className="overview-description">{product.description}</span>
         <br />
         {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
         <br /> */}
-        <p className="style-name">
+        <p className="overview-style-name">
           <b>
-            STYLE &nbsp;
-            {'>'}
+            STYLE
+            {' > '}
+            &nbsp;
           </b>
           {style.name}
         </p>
-        <div data-testid="style-selector" className="style-selector">
+        <div data-testid="style-selector" className="overview-style-selector">
           <StyleSelector allStyles={allStyles} />
         </div>
         <br />

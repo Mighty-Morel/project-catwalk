@@ -7,9 +7,7 @@ import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
 import ReviewsAndRatings from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
-// import RelatedItems from './Related/RelatedItems.jsx';
-import questionStyling from './Q&A/questions.css';
-import overviewStyling from './Overview/overview.css';
+import RelatedItems from './Related/RelatedItems.jsx';
 
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
@@ -48,7 +46,7 @@ const App = () => {
       </div>
       {/* <div><RelatedItems productId={currentId} /></div> */}
       <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
-      <div><ReviewsAndRatings /></div>
+      <div id="reviews"><ReviewsAndRatings /></div>
     </>
   );
 };
