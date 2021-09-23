@@ -162,7 +162,7 @@ const ProductCarousel = () => {
         </Modal>
       </main>
 
-      <div className="carousel" data-testid="carousel">
+      <div className="c-carousel" data-testid="carousel">
         <div>RELATED PRODUCTS</div>
 
         <button className="carousel__button carousel__button--left" type="button" onClick={() => prev()}>

@@ -1,4 +1,4 @@
-.carousel {
+.c-carousel {
   background: white;
   position: relative;
   height: 390px;
@@ -6,13 +6,6 @@
   margin: 0 auto;
   padding: 10px;
 
-}
-
-.carousel__image {
-  width: 100px;
-  height: 100px;
-  /* object-fit: cover; */
-  /* position: absolute; */
 }
 
 .carousel__track-container {
