@@ -5,3 +5,5 @@
 **/*.min.js
 **/public/bundle.js
 jest.config.js
+**/SSH
+**/coverage
