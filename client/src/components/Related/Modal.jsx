@@ -1,8 +1,6 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
-import axios from 'axios';
-import modal from './modal.css';
+import './modal.css';
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ handleClose, show, children }) => {
