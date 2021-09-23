@@ -175,16 +175,16 @@ const ProductCarousel = () => {
             {productInfo.map((product) => (
               <li className="c-carousel__slide" key={product.relatedId}>
                 <div className="card">
-                  <div className="image__container">
-                    <img className="cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
-                    <button className="card__star" type="button" onClick={() => showModal(product.relatedId)}>
+                  <div className="c-image__container">
+                    <img className="c-cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
+                    <button className="c-card__star" type="button" onClick={() => showModal(product.relatedId)}>
                       <img src="./images/star.png" alt="" />
                     </button>
                   </div>
-                  <dl className="cardCategory">{product.category}</dl>
-                  <dl className="cardTitle">{product.name}</dl>
+                  <dl className="c-cardCategory">{product.category}</dl>
+                  <dl className="c-cardTitle">{product.name}</dl>
                   <dl className="c-cardPrice"><Price price={product.price} sale={product.sale} /></dl>
-                  <dl className="cardRating">* star placeholder *</dl>
+                  <dl className="c-cardRating">* star placeholder *</dl>
                 </div>
               </li>
             ))}

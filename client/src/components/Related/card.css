@@ -1,12 +1,12 @@
 /* Related Product Cards ---------------------------------------- */
 
-.image__container {
+.c-image__container {
   position: relative;
   top: 0;
   left: 0;
 }
 
-.cardImage {
+.c-cardImage {
   position: relative;
   display: block;
   object-fit: cover;
@@ -14,7 +14,7 @@
   height: 13rem;
 }
 
-.card__star {
+.c-card__star {
   position: absolute;
   top: 10px;
   left: 170px;
@@ -24,23 +24,22 @@
   border: none;
 }
 
-.card__star img {
+.c-card__star img {
   width: 20px;
 }
 
-dl {
+.c-cardCategory {
+  color: grey;
+  font-size: 12px;
   margin-left: 10px;
   line-height: 1;
 }
 
-.cardCategory {
-  color: grey;
-  font-size: 12px;
-}
-
-.cardTitle {
+.c-cardTitle {
   color: black;
   font-size: 14px;
+  margin-left: 10px;
+  line-height: 1;
 }
 
 .c-cardSale {
@@ -56,11 +55,15 @@ dl {
 .c-cardPrice {
   color: grey;
   font-size: 12px;
+  margin-left: 10px;
+  line-height: 1;
 }
 
-.cardRating {
+.c-cardRating {
   color: grey;
   font-size: 12px;
+  margin-left: 10px;
+  line-height: 1;
 }
 
 .compareProduct {
