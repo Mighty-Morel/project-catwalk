@@ -1,7 +1,5 @@
 /* eslint-disable react/prop-types */
 import React from 'react';
-// eslint-disable-next-line no-unused-vars
-import overviewStyling from './overview.css';
 
 const GalleryThumbnail = ({
   photo, index, style, selectPhoto, mainPhotoIndex,
@@ -14,12 +12,12 @@ const GalleryThumbnail = ({
     if (index === mainPhotoIndex) {
       return (
         <>
-          <img className="image-thumbnail" id="selected-thumbnail" src={photo.thumbnail_url} alt={style.name} />
+          <img className="overview-image-thumbnail" id="overview-selected-thumbnail" src={photo.thumbnail_url} alt={style.name} />
           <hr />
         </>
       );
     }
-    return <img className="image-thumbnail" src={photo.thumbnail_url} alt={style.name} />;
+    return <img className="overview-image-thumbnail" src={photo.thumbnail_url} alt={style.name} />;
   };
 
   return (
