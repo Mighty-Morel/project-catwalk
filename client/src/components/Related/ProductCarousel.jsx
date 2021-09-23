@@ -6,7 +6,6 @@
 /* eslint-disable no-plusplus */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
@@ -109,14 +108,14 @@ const ProductCarousel = () => {
   const prev = () => {
     myRef.current.scrollLeft -= 230;
     if (myRef.current.scrollLeft < 230) {
-      console.log('BEGINNING OF SCROLL');
+      // console.log('BEGINNING OF SCROLL');
     }
   };
 
   const next = () => {
     myRef.current.scrollLeft += 230;
     if ((productInfo.length - 3) * 230 === myRef.current.scrollLeft) {
-      console.log('END OF SCROLL');
+      // console.log('END OF SCROLL');
     }
   };
 
