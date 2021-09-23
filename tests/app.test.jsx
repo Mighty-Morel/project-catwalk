@@ -7,6 +7,7 @@
 // See https://reactjs.org/docs/testing-recipes.html for more testing examples
 // And here: https://testing-library.com/docs/react-testing-library/example-intro/
 import React from 'react';
+import 'whatwg-fetch';
 import { render, cleanup, fireEvent } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
@@ -23,7 +24,6 @@ jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
 jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Review List Style</div>));
-
 
 // Tests 1 and 2 are the same
 it('test 1 using getByText: renders App on load', async () => {

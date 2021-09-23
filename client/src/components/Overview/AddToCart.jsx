@@ -37,7 +37,12 @@ const AddToCartFeatures = ({ style }) => {
     showError(false);
   };
 
-  useEffect(resetDefault, [style]);
+  useEffect(() => {
+    resetDefault();
+    return () => {
+      setUserCart({});
+    };
+  }, [style]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
