@@ -15,10 +15,7 @@ import { Provider } from 'react-redux';
 import QuestionsAndAnswers from '../client/src/components/Q&A/QuestionsAndAnswers';
 // import QuestionEntry from '../client/src/components/Q&A/QuestionEntry';
 import store from '../client/src/store/store';
-import data from './fixtures/QuestionMockData';
-
-// Destructuring data from fixtures
-const { mockQuestionData, mockAnswerData } = data;
+import { mockQuestionData, mockAnswerData } from './fixtures/QuestionMockData';
 
 beforeAll(() => {
   axios.get.mockImplementation((url) => {

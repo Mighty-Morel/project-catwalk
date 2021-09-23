@@ -75,4 +75,4 @@ const mockAnswerData = {
   ],
 };
 
-export default { mockQuestionData, mockAnswerData };
+export { mockQuestionData, mockAnswerData };
