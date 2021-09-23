@@ -57,7 +57,8 @@ const ProductInfo = () => {
         <br />
         <span data-testid="show-description" className="overview-description">{product.description}</span>
         <br />
-        {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
+        {/* <span data-testid="social-media"className="social-media">
+          Social Media Placeholder</span>
         <br /> */}
         <p className="overview-style-name">
           <b>

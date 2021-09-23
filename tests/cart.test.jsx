@@ -1,7 +1,6 @@
 /**
  * @jest-environment jsdom
  */
-// Import this sample server data for your tests
 import React from 'react';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
@@ -14,7 +13,9 @@ import { Provider } from 'react-redux';
 import store from '../client/src/store/store';
 import App from '../client/src/components/App';
 import AddToCartFeatures from '../client/src/components/Overview/AddToCart';
+import data from './fixtures/OverviewMockData';
 
+// MOCK ALL COMPONENT AND CSS IMPORTS TO ISOLATE CART COMPONENT ====================
 jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style</div>));
 jest.mock('../client/src/components/Overview/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
 jest.mock('../client/src/components/Overview/Gallery', () => () => (<div>Placeholder Gallery</div>));
@@ -25,76 +26,11 @@ jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<di
 jest.mock('../client/src/components/Reviewlist/Review-list', () => () => (<div>Placeholder Review List</div>));
 jest.mock('../client/src/reducers/Review-List-Slice.js', () => () => (<div>Review List Slice Placeholder</div>));
 
-// MOCK DATA FOR TESTS =========================================================
-const mockProductData = {
-  id: 48432,
-  name: 'Morning Joggers',
-  slogan: 'Make yourself a morning person',
-  description: "Whether you're a morning person or not. Whether you're gym bound or not. Everyone looks good in joggers.",
-  category: 'Pants',
-  default_price: '40',
-};
-
-const mockStyleData = {
-  product_id: '48432',
-  results: [
-    {
-      style_id: 293480,
-      name: 'Desert Brown & Tan',
-      original_price: '140.00',
-    },
-    {
-      style_id: 123456,
-      name: 'Testing only',
-      original_price: '0',
-    },
-    {
-      style_id: 654321,
-      name: 'Testing 2',
-      original_price: '10.00',
-    },
-  ],
-};
-
-const mockStyle = {
-  style_id: 293480,
-  name: 'Forest Green & Black',
-  original_price: '140.00',
-  sale_price: null,
-  'default?': true,
-  photos: [{
-    thumbnail_url: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-    url: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=668&q=80',
-  },
-  {
-    thumbnail_url: 'https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-    url: 'https://images.unsplash.com/photo-1534011546717-407bced4d25c?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2734&q=80',
-  }],
-  skus: {
-    1702764: { quantity: 8, size: 'XS' },
-    1702765: { quantity: 16, size: 'S' },
-    1702766: { quantity: 17, size: 'M' },
-    1702767: { quantity: 10, size: 'L' },
-    1702768: { quantity: 15, size: 'XL' },
-  },
-};
-
-const mockCartData = [
-  {
-    sku_id: 1702764,
-    count: '1',
-  },
-  {
-    sku_id: 1702799,
-    count: '3',
-  },
-  {
-    sku_id: 1702925,
-    count: '7',
-  },
-];
-
 // SETUP MOCK SERVER =============================================================
+const {
+  mockProductData, mockStyleData, mockStyle, mockCartData,
+} = data;
+
 // declare which API requests to mock
 const server = setupServer(
   rest.get('/products/48432', (req, res, ctx) => res(ctx.json(mockProductData))),
