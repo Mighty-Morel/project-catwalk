@@ -43,12 +43,12 @@ const App = () => {
           <Route exact path="products/:productId" component={ProductInfo} />
           <Redirect to="/" />
         </Router> */}
-      <div className="overview-container">
+      {/* <div className="overview-container">
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
       <div><RelatedItems productId={currentId} /></div>
-      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
+      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div> */}
       <div><ReviewsAndRatings /></div>
     </>
   );

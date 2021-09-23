@@ -1,7 +1,7 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetReviewsQuery, useGetMetaReviewsQuery } from '../../reducers/Review-List-Slice';
+import { useGetReviewsQuery, useGetMetaReviewsQuery, useGetProductInfoQuery } from '../../reducers/Review-List-Slice';
 import ReviewModal from './Review-Modal.jsx';
 import './reviewlist.css';
 import Tile from './Tile.jsx';
@@ -37,18 +37,28 @@ const ReviewsAndRatings = () => {
       sort: sortBy,
     },
   );
+  const {
+    data: productInfo,
+    isSuccess: infoSuccess,
+  } = useGetProductInfoQuery(productId);
+
+  const {
+    data: reviewInfo,
+    isSuccess: reviewInfoSuccess,
+  } = useGetMetaReviewsQuery(productId);
 
   let dropdown;
   let content;
   let moreReviews;
   let addReview;
+
   if (isLoading) {
     content = (
       <p>
         Loading...zzz, this request might be taking some time
       </p>
     );
-  } else if (isSuccess) {
+  } else if (isSuccess && infoSuccess && reviewInfoSuccess) {
     dropdown = (
       <>
         {reviews.results.length}
@@ -68,7 +78,12 @@ const ReviewsAndRatings = () => {
     ));
     addReview = (
       <>
-        <ReviewModal show={show} handleClose={hideModal} />
+        <ReviewModal
+          show={show}
+          handleClose={hideModal}
+          product={productInfo}
+          reviewInfo={reviewInfo}
+        />
         <button
           className="more-reviews"
           type="button"

@@ -3,6 +3,7 @@ h4 {
   color: rgba(44, 62, 80, 0.8);
   font-weight: 300
 }
+
 .container {
   display: grid;
   grid-template-columns: 1fr 2fr;
@@ -94,6 +95,7 @@ h4 {
   width:100%;
   height: 100%;
   background: rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
 }
 
 .modal-main {
@@ -104,6 +106,8 @@ h4 {
   top:50%;
   left:50%;
   transform: translate(-50%,-50%);
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
 }
 
 .display-block {
@@ -126,4 +130,83 @@ h4 {
   padding: 10px;
   border-top: 1px solid #eee;
   border-bottom: 1px solid #eee;
+  display: grid;
+}
+
+textarea {
+  resize: none;
+  width: 90%;
+  height: 100px;
+}
+
+input {
+  width: 90%;
+  padding-bottom: 20px;
+}
+
+.rate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.rate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.rate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.rate:not(:checked) > label:before {
+  content: '★ ';
+}
+.rate > input:checked ~ label {
+  color: #ffc700;
+}
+.rate:not(:checked) > label:hover,
+.rate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.rate > input:checked + label:hover,
+.rate > input:checked + label:hover ~ label,
+.rate > input:checked ~ label:hover,
+.rate > input:checked ~ label:hover ~ label,
+.rate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+#rating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#characteristic {
+  display: flex;
+  justify-content:left;
+}
+
+label.recommended, label.char {
+  float: left;
+  padding: 0 1em;
+  text-align: center;
+}
+
+.charRating {
+  margin-top:12px;
+  padding-bottom: 50px;
+}
+
+span {
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.error {
+  color:red;
 }
