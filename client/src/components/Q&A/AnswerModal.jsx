@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import styling from './questions.css';
+import './questions.css';
 
 const AnswerModal = (props) => {
   const currentId = useSelector((state) => state.product.id);

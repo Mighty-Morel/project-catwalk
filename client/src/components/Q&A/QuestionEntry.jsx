@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AnswerEntry from './AnswerEntry.jsx';
 import AnswerModal from './AnswerModal.jsx';
-import styling from './questions.css';
+import './questions.css';
 
 const QuestionEntry = (props) => {
   const [answerCount, setCount] = useState(2);
