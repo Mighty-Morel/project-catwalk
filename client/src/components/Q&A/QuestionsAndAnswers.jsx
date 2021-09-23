@@ -9,6 +9,7 @@ import QuestionModal from './QuestionModal.jsx';
 const QuestionsAndAnswers = () => {
   // Get the current product_id
   console.log(11);
+  // CurrentId = 48432
   const currentId = useSelector((state) => state.product.id);
 
   // Create the state component to hold the questions
@@ -61,10 +62,10 @@ const QuestionsAndAnswers = () => {
     console.log(61);
     // Can be taken out if deemed collapse is unnecessary
     if (extra) {
-      return (<button data-testid="render-more-question" type="button" onClick={showMoreQuestions}>See more questions</button>);
+      return (<button data-testid="render-more-questions" type="button" onClick={showMoreQuestions}>See more questions</button>);
     }
     if (questionCount > 2) {
-      return (<button data-testid="render-more-question" type="button" onClick={collapseQuestions}>Collapse questions</button>);
+      return (<button data-testid="collapse-questions" type="button" onClick={collapseQuestions}>Collapse questions</button>);
     }
     return null;
   };

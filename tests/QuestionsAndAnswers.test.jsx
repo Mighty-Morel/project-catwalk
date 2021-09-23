@@ -61,6 +61,23 @@ it('should load and display the selected product data', async () => {
   expect(getByTestId('add-question')).toHaveTextContent('Add Question');
 });
 
+it('should be able to show more questions if there are more than two and then collapse', async () => {
+  const { getByTestId, findAllByTestId } = render(
+    <Provider store={store}>
+      <QuestionsAndAnswers />
+    </Provider>,
+  );
+  const initialQuestions = await findAllByTestId('question-entry');
+  expect(initialQuestions).toHaveLength(2);
+  expect(getByTestId('render-more-questions')).toHaveTextContent('See more questions');
+  fireEvent.click(getByTestId('render-more-questions'));
+  const moreQuestions = await findAllByTestId('question-entry');
+  expect(moreQuestions).toHaveLength(3);
+  expect(getByTestId('collapse-questions')).toHaveTextContent('Collapse questions');
+  fireEvent.click(getByTestId('collapse-questions'));
+  const endQuestions = await findAllByTestId('question-entry');
+  expect(endQuestions).toHaveLength(2);
+});
 // it('should load and display the questions for the selected product', async () => {
 //   const { getByTestId } = render(
 //     <Provider store={store}>
