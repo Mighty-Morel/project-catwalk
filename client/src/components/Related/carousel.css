@@ -8,7 +8,7 @@
 
 }
 
-.carousel__track-container {
+.c-carousel__track-container {
   background: white;
   overflow: hidden;
   padding: 10px;
@@ -17,7 +17,7 @@
 }
 
 /* ul */
-.carousel__track {
+.c-carousel__track {
   display: flex;
   overflow-x: auto;
   scroll-behavior: smooth;
@@ -26,7 +26,7 @@
   list-style: none;
 }
 
-.carousel__slide {
+.c-carousel__slide {
   /* position: absolute;
   top: 0;
   bottom: 0;
@@ -36,7 +36,7 @@
 
 /* transform move btn to exact mid */
 /* border removes btn shadow*/
-.carousel__button {
+.c-carousel__button {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
@@ -45,15 +45,15 @@
   cursor: pointer;
 }
 
-.carousel__button--left {
+.c-carousel__button--left {
   left: -15px;
 }
 
-.carousel__button--right {
+.c-carousel__button--right {
   right: -15px;
 }
 
-.carousel__button img {
+.c-carousel__button img {
   width: 7px;
 }
 

@@ -165,15 +165,15 @@ const ProductCarousel = () => {
       <div className="c-carousel" data-testid="carousel">
         <div>RELATED PRODUCTS</div>
 
-        <button className="carousel__button carousel__button--left" type="button" onClick={() => prev()}>
+        <button className="c-carousel__button c-carousel__button--left" type="button" onClick={() => prev()}>
           <img src="./images/arrow-left.png" alt="" />
         </button>
 
-        <div className="carousel__track-container">
+        <div className="c-carousel__track-container">
 
-          <ul className="carousel__track" ref={myRef}>
+          <ul className="c-carousel__track" ref={myRef}>
             {productInfo.map((product) => (
-              <li className="carousel__slide" key={product.relatedId}>
+              <li className="c-carousel__slide" key={product.relatedId}>
                 <div className="card">
                   <div className="image__container">
                     <img className="cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
@@ -191,7 +191,7 @@ const ProductCarousel = () => {
           </ul>
         </div>
 
-        <button className="carousel__button carousel__button--right" type="button" onClick={() => next()}>
+        <button className="c-carousel__button c-carousel__button--right" type="button" onClick={() => next()}>
           <img src="./images/arrow-right.png" alt="" />
         </button>
 
