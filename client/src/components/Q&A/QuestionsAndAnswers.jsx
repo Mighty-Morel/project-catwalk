@@ -8,8 +8,6 @@ import QuestionModal from './QuestionModal.jsx';
 
 const QuestionsAndAnswers = () => {
   // Get the current product_id
-  console.log(11);
-  // CurrentId = 48432
   const currentId = useSelector((state) => state.product.id);
 
   // Create the state component to hold the questions
@@ -22,17 +20,14 @@ const QuestionsAndAnswers = () => {
   const getQuestions = () => {
     axios.get(`/qa/questions/${currentId}`)
       .then((response) => {
-        console.log(24, response);
         const { results } = response.data;
         results.sort((a, b) => b.question_helpfulness - a.question_helpfulness);
         setQuestions(results);
         // Compares count to number of questions, display up to four questions
         if (results.length > 2) {
-          console.log(30);
           setCount(2);
           setExtra(true);
         } else {
-          console.log(34);
           setCount(results.length);
         }
       })
@@ -46,20 +41,17 @@ const QuestionsAndAnswers = () => {
 
   // Show more questions and conditional rendering for extras
   const showMoreQuestions = () => {
-    console.log(48);
     setCount(questionCount + 2);
     (() => { if (questions.length <= questionCount + 2) { setExtra(false); } })();
   };
 
   // Can be taken out if deemed collapse is unnecessary
   const collapseQuestions = () => {
-    console.log(55);
     setCount(2);
     setExtra(true);
   };
 
   const renderMoreQuestions = () => {
-    console.log(61);
     // Can be taken out if deemed collapse is unnecessary
     if (extra) {
       return (<button data-testid="render-more-questions" type="button" onClick={showMoreQuestions}>See more questions</button>);
