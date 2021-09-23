@@ -174,7 +174,7 @@ const ProductCarousel = () => {
           <ul className="c-carousel__track" ref={myRef}>
             {productInfo.map((product) => (
               <li className="c-carousel__slide" key={product.relatedId}>
-                <div className="card">
+                <div className="c-card">
                   <div className="c-image__container">
                     <img className="c-cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
                     <button className="c-card__star" type="button" onClick={() => showModal(product.relatedId)}>
