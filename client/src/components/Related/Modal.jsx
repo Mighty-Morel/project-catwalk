@@ -8,9 +8,9 @@ const Modal = ({ handleClose, show, children }) => {
 
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
+      <section className="c-modal-main">
         {children}
-        <button className="modal-button" type="button" onClick={handleClose}>
+        <button className="c-modal-button" type="button" onClick={handleClose}>
           X
         </button>
       </section>

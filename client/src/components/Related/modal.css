@@ -7,7 +7,7 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal-main {
+.c-modal-main {
   position: fixed;
   background: white;
   width: 30%;
@@ -26,7 +26,7 @@
   display: none;
 }
 
-.modal-button {
+.c-modal-button {
   position: absolute;
   top: 5%;
   left: 95%;
