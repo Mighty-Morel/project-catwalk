@@ -36,34 +36,30 @@
   cursor: pointer;
 }
 
-.modal-title {
+.c-modal-title {
   font-size: 15px;
   margin-left: 5px;
   margin-bottom: 20px;
 }
 
-.modal-title-wrapper {
+.c-modal-title-wrapper {
   border: 1px solid lightgrey;
   overflow: hidden;
 }
 
-.modal-overview {
+.c-modal-overview {
   font-size: 15px;
   margin-left: 5px;
   float: left;
 }
 
-.modal-card {
+.c-modal-card {
   font-size: 15px;
   margin-right: 5px;
   float: right;
 }
 
-ul {
-  list-style-type: none;
-}
-
-.modal-features {
+.c-modal-features {
   font-size: 15px;
   list-style-type: none;
 }

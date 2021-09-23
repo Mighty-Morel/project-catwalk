@@ -137,16 +137,16 @@ const ProductCarousel = () => {
     <>
       <main>
         <Modal show={show} handleClose={hideModal}>
-          <div className="modal-title">Comparing</div>
-          <div className="modal-title-wrapper">
-            <div className="modal-overview">{overviewName}</div>
-            <div className="modal-card">{cardName}</div>
+          <div className="c-modal-title">Comparing</div>
+          <div className="c-modal-title-wrapper">
+            <div className="c-modal-overview">{overviewName}</div>
+            <div className="c-modal-card">{cardName}</div>
           </div>
-          <ul>
+          <ul className="c-modal-features">
             {modalInfo.map((item) => (
               <li key={item.value}>
                 <div>
-                  <ul className="modal-features">
+                  <ul>
                     {item.overview}
                     {' '}
                     {item.feature}
