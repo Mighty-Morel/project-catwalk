@@ -12,7 +12,7 @@
 }
 
 /* Gallery Formatting --------------------------------------------------- */
-.gallery-container {
+.overview-gallery-container {
   grid-column: 1 / 4;
   height: 100%;
   max-height: 670px;
@@ -21,11 +21,11 @@
   grid-template-rows: auto;
 }
 
-.main-image-container, .thumbnail-container, .main-arrow-container {
+.overview-main-image-container, .overview-thumbnail-container, .overview-main-arrow-container {
   grid-row: 1 / 2;
 }
 
-.main-image-container {
+.overview-main-image-container {
   grid-column: 1 / -1;
   grid-row: 1 / 2;
   min-width: 300px;
@@ -39,11 +39,11 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.main-image-container::-webkit-scrollbar {
+.overview-main-image-container::-webkit-scrollbar {
   display: none;
 }
 
-.main-arrow-container {
+.overview-main-arrow-container {
   grid-column: 2 / -1;
   grid-row: 1 / 2;
   z-index: 3;
@@ -53,21 +53,21 @@
   height: 30px;
 }
 
-.main-arrow {
+.overview-main-arrow {
   padding-top: 5px;
   width: 25px;
 }
 
-.main-arrow.right {
+.overview-main-arrow.right {
   float: right;
 }
 
-.main-arrow:hover {
+.overview-main-arrow:hover {
   width: 35px;
   transform: translateY(-4px);
 }
 
-.main-image {
+.overview-main-image {
   max-height: 100%;
   position: absolute;
   top: -9999px;
@@ -79,7 +79,7 @@
   object-fit: cover;
 }
 
-.thumbnail-container {
+.overview-thumbnail-container {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
   z-index: 3;
@@ -89,19 +89,19 @@
   align-content: center;
 }
 
-.thumbnail-arrow {
+.overview-thumbnail-arrow {
   margin-left: 20px;
   margin-top: 8px;
   margin-bottom: -5px;
   width: 15px;
 }
 
-.thumbnail-arrow:hover {
+.overview-thumbnail-arrow:hover {
   width: 20px;
   margin-left: 18px;
 }
 
-.thumbnail-image-container {
+.overview-thumbnail-image-container {
   min-width: 60px;
   height: 520px;
   display: flex;
@@ -112,7 +112,7 @@
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
-.thumbnail-image-container::-webkit-scrollbar {
+.overview-thumbnail-image-container::-webkit-scrollbar {
   display: none;
 }
 
@@ -120,7 +120,7 @@
   transform: translateY(60px);
 } */
 
-.image-thumbnail {
+.overview-image-thumbnail {
   object-fit: cover;
   height: 55px;
   width: 55px;
@@ -132,7 +132,7 @@
   border: 2px solid white;
 } */
 
-#selected-thumbnail {
+#overview-selected-thumbnail {
   border-width: 2px;
 }
 
@@ -149,7 +149,7 @@ hr {
 
 /* Product Info Formatting ---------------------------------------- */
 
-.product-info-container {
+.overview-product-info-container {
   grid-column: 4 / 5;
   margin: 0 auto;
   max-width: 800px;
@@ -160,12 +160,12 @@ hr {
   padding: 40px 30px 15px 30px;
 }
 
-.ratings {
+.overview-ratings {
   line-height: 2em;
   font-size: .8em;
 }
 
-.link {
+.overview-link {
   margin-left: 5px;
   text-decoration: underline;
   font-weight: 200;
@@ -173,44 +173,44 @@ hr {
   color: rgb(44, 44, 44);
 }
 
-.product-name {
+.overview-product-name {
   font-style: bold;
   font-weight: 800;
   font-size: 2em;
   line-height: 1em;
 }
 
-.category {
+.overview-category {
   font-size: .9em;
   font-weight: 300;
   line-height: 2.5em;
   text-transform: uppercase;
 }
 
-.price {
+.overview-price {
   line-height: 4em;
 }
 
-.price-sale {
+.overview-price-sale {
   color: rgb(170, 0, 0);
 }
 
-.price-original {
+.overview-price-original {
   text-decoration: line-through;
   margin-left: .5em;
 }
 
-.description {
+.overview-description {
   font-size: .9em;
   font-weight: 400;
 }
 
-.social-media {
+.overview-social-media {
   line-height: 5em;
 }
 
 /* Style Selector Formatting ---------------------------------------- */
-.style-selector {
+.overview-style-selector {
   display: inline-grid;
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-template-rows: auto;
@@ -220,7 +220,7 @@ hr {
   margin: 15px;
 }
 
-.style-thumbnail {
+.overview-style-thumbnail {
   height: 55px;
   width: 60px;
   padding-left: 5px;
@@ -228,7 +228,7 @@ hr {
   margin-top: 8px;
 }
 
-.style-selected {
+.overview-style-selected {
   height: 55px;
   width: 55px;
   object-fit: cover;
@@ -236,21 +236,21 @@ hr {
   border: 3px solid black;
 }
 
-.style-unselected {
+.overview-style-unselected {
   height: 55px;
   width: 55px;
   object-fit: cover;
   border-radius: 50%;
 }
 
-.style-name {
+.overview-style-name {
   margin: 35px 0px 0px;
   font-weight: 300;
   font-size: .85em;
   text-transform: uppercase;
 }
 
-/* .style-name {
+/* .overview-style-name {
   padding-right: .3em;
   padding-left: .3em;
   font-weight: 300;
@@ -261,7 +261,7 @@ hr {
   margin: 20px 2px 5px;
 } */
 
-.checkmark-icon {
+.overview-checkmark-icon {
   display: inline-block;
   vertical-align: text-top;
   margin-left: 40px;
@@ -274,7 +274,7 @@ hr {
 
 
 /* Add To Cart Formatting ---------------------------------------- */
-.addToCart-container {
+.overview-addToCart-container {
   height: 100px;
   /* display:inline-block; */
   display:grid;
@@ -286,14 +286,14 @@ hr {
   width: 270px;
 }
 
-.help-text-space {
+.overview-help-text-space {
   height: 30px;
   /* margin: 1px; */
   grid-column: 1 / 5;
   grid-row: 1 / 2;
 }
 
-.help-text {
+.overview-help-text {
   vertical-align: bottom;
   padding-top: 15px;
   font-weight: 200;
@@ -307,7 +307,7 @@ hr {
 
 
 /* Size Selector Styling ------------------- */
-.size-dropdown-btn {
+.overview-size-dropdown-btn {
   font-family: 'Roboto Condensed', sans-serif;
   font-size: .8em;
   text-transform: uppercase;
@@ -325,7 +325,7 @@ hr {
 
 }
 
-.size-dropdown {
+.overview-size-dropdown {
   position: relative;
   display: inline-block;
   margin: 5px 0px;
@@ -334,7 +334,7 @@ hr {
   vertical-align: middle;
 }
 
-.size-options {
+.overview-size-options {
   display: none;
   position: absolute;
   background-color: #f9f9f9;
@@ -347,7 +347,7 @@ hr {
   margin: 0px;
 }
 
-.size-options-open {
+.overview-size-options-open {
   display: block;
   position: absolute;
   background-color: #f9f9f9;
@@ -362,17 +362,17 @@ hr {
 }
 
 
-.size {
+.overview-size {
   display: block;
 }
 
-.size:hover {
+.overview-size:hover {
   color: white;
   background-color: #00747c;
 }
 
 /* Quantity Selector Styling ------------------- */
-select {
+.overview-qty-dropdown {
   height: 30px;
   width: 78px;
   border-radius: 0;
@@ -398,7 +398,7 @@ select {
   margin-left: 16px;
 }
 
-button.addToCart {
+button.overview-addToCart {
   height: 40px;
   /* width: 220px; */
   font-family: 'Roboto Condensed', sans-serif;
@@ -411,7 +411,7 @@ button.addToCart {
   grid-row: 3 / 4;
 }
 
-.heart-icon {
+.overview-heart-icon {
   height: 40px;
   width: 44px;
   border: 1px solid #2C3E50;
@@ -424,7 +424,7 @@ button.addToCart {
   margin: 2px 0px;
 }
 
-.heart-icon:hover {
+.overview-heart-icon:hover {
   height: 40px;
   width: 44px;
   border: 1px solid #2C3E50;

@@ -8,8 +8,6 @@ import ReviewList from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
-import questionStyling from './Q&A/questions.css';
-import overviewStyling from './Overview/overview.css';
 
 // assume that App has the state with the default product Id
 // clicking on another product from the Related Products component will change that id
