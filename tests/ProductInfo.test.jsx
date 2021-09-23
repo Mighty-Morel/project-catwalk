@@ -3,7 +3,6 @@
  */
 
 // Product Info Tests ==============================================
-
 import React from 'react';
 import {
   render, cleanup, waitFor, fireEvent, screen,
@@ -83,18 +82,8 @@ it('should load and display the selected product data', () => {
       <ProductInfo />
     </Provider>,
   );
-    // On first render, we expect the "loading" span to be displayed
+  // On first render, we expect the "loading" span to be displayed
   expect(getByTestId('loading')).toHaveTextContent('Loading...');
-  // const resolvedDiv = await waitFor(() => screen.getByTestId('resolved'));
-  // const category = await waitFor(() => screen.getByTestId('show-category'));
-  // const name = await waitFor(() => screen.getByTestId('show-name'));
-  // const description = await waitFor(() => screen.getByTestId('show-description'));
-
-  // expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
-  // expect(category).toHaveTextContent('Pants');
-  // expect(name).toHaveTextContent('Morning Joggers');
-  // expect(description).toHaveTextContent('Whether you\'re a morning person or not.
-  // Whether you\'re gym bound or not. Everyone looks good in joggers.');
 });
 
 it('should load and display the selected product data', async () => {
@@ -120,66 +109,6 @@ it('should load and display the selected product data', async () => {
     })
     .catch((err) => console.log(err));
 });
-
-// it('should load and display the selected product data', async () => {
-//   // What data Axios is to return when `get` is called.
-
-//   axios.get.mockResolvedValue(mockProductData);
-
-//   const url = '/products/3';
-//   const { getByTestId } = render(
-//     <Provider store={store}>
-//       <ProductInfo url={url} />
-//     </Provider>,
-//   );
-
-//   // On first render, we expect the "loading" span to be displayed
-//   expect(getByTestId('loading')).toHaveTextContent('Loading...');
-//   // We need to handle the async nature of an AJAX call by waiting for the
-//   // element to be rendered.
-//   const allStyles = { results: [1, 2, 3, 4] };
-//   const resolvedDiv = await waitFor(() => getByTestId('resolved'));
-//   const category = await waitFor(() => getByTestId('show-category'));
-//   const name = await waitFor(() => getByTestId('show-name'));
-//   const description = await waitFor(() => getByTestId('show-description'));
-
-//   expect(axios.get).toHaveBeenCalledTimes(1);
-//   expect(axios.get).toHaveBeenCalledWith(url);
-//   expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
-//   expect(category).toHaveTextContent('Pants');
-//   expect(name).toHaveTextContent('Morning Joggers');
-//   expect(description).toHaveTextContent('Whether you\'re a morning person or not.
-// Whether you\'re gym bound or not. Everyone looks good in joggers.');
-// });
-
-// it('should load and display the selected styles data', async () => {
-
-//   const url = '/products/3';
-//   const { getByTestId } = render(
-//     <Provider store={store}>
-//       <ProductInfo url={url} />
-//     </Provider>,
-//   );
-//   axios.get.mockResolvedValueOnce(mockStyleData);
-//   axios.get.mockResolvedValueOnce(mockStyleData);
-
-//   // On first render, we expect the "loading" span to be displayed
-//   expect(getByTestId('loading')).toHaveTextContent('Loading...');
-//   // We need to handle the async nature of an AJAX call by waiting for the
-//   // element to be rendered.
-//   const resolvedDiv = await waitFor(() => getByTestId('resolved'));
-//   const category = await waitFor(() => getByTestId('show-category'));
-//   const name = await waitFor(() => getByTestId('show-name'));
-//   const description = await waitFor(() => getByTestId('show-description'));
-
-//   expect(axios.get).toHaveBeenCalledTimes(1);
-//   expect(axios.get).toHaveBeenCalledWith(url);
-//   expect(resolvedDiv).toHaveTextContent('Star Ratings Placeholder');
-//   expect(category).toHaveTextContent('Pants');
-//   expect(name).toHaveTextContent('Morning Joggers');
-//   expect(description).toHaveTextContent('Whether you\'re a morning person or not.
-// Whether you\'re gym bound or not. Everyone looks good in joggers.');
-// });
 
 // Style Selector Tests ==============================================
 test('selected images should have select formatting with border and checkmark', () => {

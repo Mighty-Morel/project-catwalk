@@ -120,14 +120,6 @@ test('renders App on load', async () => {
   expect(screen.getByText('Placeholder Product Info')).toBeInTheDocument();
 });
 
-// test('handlers server error', async () => {
-//   server.use(
-//     rest.get('/products/48432', (req, res, ctx) => res(ctx.status(500))),
-//   );
-
-//   // ...
-// });
-
 test('renders Add to Cart Button on load', async () => {
   const { findAllByRole } = render(
     <Provider store={store}>
@@ -170,26 +162,3 @@ test('quantity dropdown is no longer disabled when a size is selected', async ()
   await act(() => screen.getByTestId('qtySelector'));
   expect(screen.getByTestId('qtySelector')).not.toBeDisabled();
 });
-
-// const setup = async () => {
-//   const utils = render(
-//     <Provider store={store}>
-//       <AddToCartFeatures style={mockStyle} />
-//     </Provider>,
-//   );
-//   await act(() => findAllByRole('menuitem'));
-//   const input = utils.getByLabelText('qtySelector');
-//   return {
-//     input,
-//     ...utils,
-//   };
-// };
-
-// it('should add the selected size and quantity to the cart', async () => {
-//   const { qtyInput } = setup();
-//   fireEvent.change(qtyInput, { target: { value: '10' } });
-//   expect(qtyInput.value).toBe('10');
-
-//   fireEvent.click(sizeInput, { target: { value: 'M' } });
-//   expect(sizeInput.value).toBe('M');
-// }
