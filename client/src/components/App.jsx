@@ -7,7 +7,7 @@ import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
 import ReviewsAndRatings from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
-import RelatedItems from './Related/RelatedItems.jsx';
+// import RelatedItems from './Related/RelatedItems.jsx';
 import questionStyling from './Q&A/questions.css';
 import overviewStyling from './Overview/overview.css';
 
@@ -23,7 +23,6 @@ const App = () => {
   const selectedStyleId = useSelector((state) => state.style.id);
 
   const dispatch = useDispatch();
-
 
   const handleClick = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works
@@ -43,12 +42,12 @@ const App = () => {
           <Route exact path="products/:productId" component={ProductInfo} />
           <Redirect to="/" />
         </Router> */}
-      {/* <div className="overview-container">
+      <div className="overview-container">
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
-      <div><RelatedItems productId={currentId} /></div>
-      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div> */}
+      {/* <div><RelatedItems productId={currentId} /></div> */}
+      <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
       <div><ReviewsAndRatings /></div>
     </>
   );
