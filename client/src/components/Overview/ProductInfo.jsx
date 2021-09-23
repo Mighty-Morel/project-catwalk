@@ -13,11 +13,7 @@ import overviewStyling from './overview.css';
 import 'regenerator-runtime/runtime';
 
 const ProductInfo = () => {
-  const params = new URLSearchParams(document.location.search.substring(1));
-  const productId = params.get('product_id');
-  console.log(productId);
-
-  // const productId = useSelector((state) => state.product.id);
+  const productId = useSelector((state) => state.product.id);
   const product = useSelector((state) => state.product.productInfo);
   const allStyles = useSelector((state) => state.style.allStyles);
   const style = useSelector((state) => state.style.style);
@@ -27,7 +23,6 @@ const ProductInfo = () => {
   const getAllStyles = async () => {
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
-        // console.log(response.data.results);
         dispatch(updateStyles(response.data.results));
         dispatch(updateStyle(response.data.results[0]));
       })
