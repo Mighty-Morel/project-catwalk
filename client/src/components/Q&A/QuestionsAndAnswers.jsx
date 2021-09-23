@@ -76,7 +76,7 @@ const QuestionsAndAnswers = () => {
   };
 
   return (
-    <>
+    <div className="questions-container">
       {displayedQuestions.map((question) => {
         const {
           // eslint-disable-next-line camelcase
@@ -112,7 +112,7 @@ const QuestionsAndAnswers = () => {
       {renderMoreQuestions()}
       <button type="button" onClick={toggleQuestionForm}> Add Question</button>
       {renderModal()}
-    </>
+    </div>
   );
 };
 
