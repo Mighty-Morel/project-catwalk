@@ -1,4 +1,17 @@
+import { configureStore } from '@reduxjs/toolkit';
+import productReducer from '../../client/src/reducers/Example-Reducer';
+import styleReducer from '../../client/src/reducers/Style-Reducer';
+
+
 // MOCK DATA FOR TESTS =========================================================
+
+const store = configureStore({
+  reducer: {
+    product: productReducer,
+    style: styleReducer,
+  },
+});
+
 const mockProductData = {
   id: 48432,
   name: 'Morning Joggers',
@@ -68,5 +81,5 @@ const mockCartData = [
 ];
 
 export default {
-  mockProductData, mockStyleData, mockStyle, mockCartData,
+  mockProductData, mockStyleData, mockStyle, mockCartData, store,
 };

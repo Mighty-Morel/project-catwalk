@@ -6,21 +6,17 @@ import 'whatwg-fetch';
 import { rest } from 'msw';
 import { setupServer } from 'msw/node';
 import {
-  act, render, waitFor, screen, fireEvent,
+  act, render, screen, fireEvent,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
-import store from '../client/src/store/store';
-import App from '../client/src/components/App';
-import ProductInfo from '../client/src/components/Overview/ProductInfo';
 import AddToCartFeatures from '../client/src/components/Overview/AddToCart';
 import Style from '../client/src/components/Overview/Style';
 import mockData from './fixtures/OverviewMockData';
 
 // MOCK ALL COMPONENT AND CSS IMPORTS TO ISOLATE OVERVIEW COMPONENT ====================
 jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style</div>));
-// jest.mock('../client/src/components/Overview/ProductInfo', () => () => (<div>Placeholder Product Info</div>));
 jest.mock('../client/src/components/Overview/Gallery', () => () => (<div>Placeholder Gallery</div>));
 jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
@@ -31,7 +27,7 @@ jest.mock('../client/src/reducers/Review-List-Slice.js', () => () => (<div>Revie
 
 // SETUP MOCK SERVER =============================================================
 const {
-  mockProductData, mockStyleData, mockStyle, mockCartData,
+  mockProductData, mockStyleData, mockStyle, mockCartData, store,
 } = mockData;
 
 // declare which API requests to mock
@@ -118,4 +114,3 @@ test('selected images should have select formatting with border and checkmark', 
   fireEvent.click(getByAltText('Selected Style'));
   expect(getByAltText('Selected Style')).toHaveClass('overview-style-selected');
 });
-

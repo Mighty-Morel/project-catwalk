@@ -6,27 +6,25 @@
 import React from 'react';
 import 'whatwg-fetch';
 import {
-  render, cleanup, waitFor, fireEvent, screen,
+  render, cleanup, waitFor, screen,
 } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import ProductInfo from '../client/src/components/Overview/ProductInfo';
-import Style from '../client/src/components/Overview/Style';
-import store from '../client/src/store/store';
 import mockData from './fixtures/OverviewMockData';
 
 const {
-  mockProductData, mockStyleData, mockStyle, mockCartData,
+  mockProductData, mockStyleData, store,
 } = mockData;
 
 beforeAll(() => {
   axios.get.mockImplementation((url) => {
     switch (url) {
-      case '/products/3':
+      case '/products/48432':
         return Promise.resolve(mockProductData);
-      case '/products/3/styles':
+      case '/products/48432/styles':
         return Promise.resolve(mockStyleData);
       default:
         return Promise.reject(new Error('Error - this test is not working'));
@@ -43,15 +41,15 @@ jest.mock('../client/src/components/Overview/StyleSelector.jsx', () => () => (<d
 
 // TESTS =======================================================
 it('should load and display the selected product data',
-  () => axios.get('/products/3')
+  () => axios.get('/products/48432')
     .then((productInfo) => expect(productInfo).toEqual(mockProductData)));
 
 it('should load and display the styles of the product',
-  () => axios.get('/products/3/styles')
+  () => axios.get('/products/48432/styles')
     .then((styles) => expect(styles).toEqual(mockStyleData)));
 
 it('should load and display the selected product data', () => {
-  axios.get('/products/3');
+  axios.get('/products/48432');
   const { getByTestId } = render(
     <Provider store={store}>
       <ProductInfo />
