@@ -1,7 +1,6 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/extensions */
-/* eslint-disable no-shadow */
 /* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
 import React, { useState, useRef, useEffect } from 'react';
@@ -25,8 +24,8 @@ const ProductCarousel = () => {
 
   const getInfo = () => {
     axios.get(`/products/${productId}/related`)
-      .then((res) => {
-        const relatedIds = res.data;
+      .then((relatedIdData) => {
+        const relatedIds = relatedIdData.data;
         const ids = [];
         for (let i = 0; i < relatedIds.length; i += 1) {
           const relatedId = relatedIds[i];
@@ -68,7 +67,7 @@ const ProductCarousel = () => {
     axios.get(`/products/${productId}`)
       .then((res) => {
         const result = [];
-        const overviewName = res.data.name;
+        const overviewNameData = res.data.name;
         const overviewFeatures = res.data.features;
         for (let l = 0; l < overviewFeatures.length; l += 1) {
           overviewFeatures[l].overview = '✓'; // true
@@ -76,12 +75,12 @@ const ProductCarousel = () => {
           result.push(overviewFeatures[l]);
         }
         modal = result;
-        setOverviewName(overviewName);
+        setOverviewName(overviewNameData);
       })
       .then(() => {
         axios.get(`/products/${cardId}`)
           .then((res) => {
-            const cardName = res.data.name;
+            const cardNameData = res.data.name;
             const cardFeatures = res.data.features;
             for (let m = 0; m < cardFeatures.length; m += 1) {
               const cardFeature = cardFeatures[m];
@@ -97,7 +96,7 @@ const ProductCarousel = () => {
               cardFeature.card = '✓'; // true
               modal.push(cardFeature);
             }
-            setCardName(cardName);
+            setCardName(cardNameData);
             setModalInfo([...modal]);
           });
       });
@@ -126,8 +125,8 @@ const ProductCarousel = () => {
     setShow(false);
   };
 
-  const showOverview = (productId) => {
-    dispatch(updateProductId(productId));
+  const showOverview = (currentProductId) => {
+    dispatch(updateProductId(currentProductId));
   };
 
   if (productInfo.length === 0) {
