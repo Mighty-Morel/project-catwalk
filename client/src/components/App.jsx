@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
-import ReviewList from './Reviewlist/Review-list.jsx';
+import ReviewsAndRatings from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
@@ -44,9 +44,9 @@ const App = () => {
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>
-      <div><RelatedItems productId={currentId} /></div>
+      {/* <div><RelatedItems productId={currentId} /></div> */}
       <div className="questions-container"><QuestionsAndAnswers productId={currentId} /></div>
-      <div id="reviews"><ReviewList /></div>
+      <div id="reviews"><ReviewsAndRatings /></div>
     </>
   );
 };
