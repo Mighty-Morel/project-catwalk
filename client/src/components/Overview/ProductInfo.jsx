@@ -63,6 +63,7 @@ const ProductInfo = () => {
           <b>
             STYLE
             {' > '}
+            &nbsp;
           </b>
           {style.name}
         </p>
