@@ -13,17 +13,16 @@ import 'regenerator-runtime/runtime';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import QuestionsAndAnswers from '../client/src/components/Q&A/QuestionsAndAnswers';
+// import QuestionModal from '../client/src/components/Q&A/QuestionModal';
 // import QuestionEntry from '../client/src/components/Q&A/QuestionEntry';
 import store from '../client/src/store/store';
-import { mockQuestionData, mockAnswerData } from './fixtures/QuestionMockData';
+import { mockQuestionData } from './fixtures/QuestionMockData';
 
 beforeAll(() => {
   axios.get.mockImplementation((url) => {
     switch (url) {
       case '/qa/questions/48432':
         return Promise.resolve(mockQuestionData);
-      case '/qa/questions/1/answers':
-        return Promise.resolve(mockAnswerData);
       default:
         return Promise.reject(new Error('Error - Q&A test is not working'));
     }
@@ -42,9 +41,9 @@ it('should load the mock questions',
   () => axios.get('/qa/questions/48432')
     .then((questions) => expect(questions).toEqual(mockQuestionData)));
 
-it('should load the mock answers',
-  () => axios.get('/qa/questions/1/answers')
-    .then((answers) => expect(answers).toEqual(mockAnswerData)));
+// it('should load the mock answers',
+//   () => axios.get('/products/48432')
+//     .then((answers) => expect(answers).toEqual(mockProductData)));
 
 it('should load and display the selected product data', async () => {
   const { getByTestId, findAllByTestId } = render(
@@ -76,28 +75,13 @@ it('should be able to show more questions if there are more than two and then co
   const endQuestions = await findAllByTestId('question-entry');
   expect(endQuestions).toHaveLength(2);
 });
-// it('should load and display the questions for the selected product', async () => {
-//   const { getByTestId } = render(
-//     <Provider store={store}>
-//       <QuestionsAndAnswers />
-//     </Provider>,
-//   );
 
-//   axios.get('/qa/questions/11')
-//     .then(() => {
-//       waitFor(() => screen.getByTestId('render-more-questions'));
-//       fireEvent.click(getByTestId('render-more-questions'));
-//       expect(getByTestId('render-more-questions')).toHaveTextContent('Collapse questions');
-//     });
-// });
-
-// test('question modal should pop up after clicking add-question', () => {
-//   const { getByTestId } = render(
-//     <Provider store={store}>
-//       <QuestionsAndAnswers />
-//     </Provider>,
-//   );
-
-//   fireEvent.click(getByTestId('add-question'));
-//   expect(getByTestId('question-modal')).toHaveTextContent('Placeholder Question Modal');
-// });
+it('should have the question modal pop up when submit a question is clicked', async () => {
+  const { getByTestId } = render(
+    <Provider store={store}>
+      <QuestionsAndAnswers />
+    </Provider>,
+  );
+  fireEvent.click(getByTestId('add-question'));
+  expect(getByTestId('question-modal')).toHaveTextContent('Placeholder Question');
+});

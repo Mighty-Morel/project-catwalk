@@ -75,4 +75,10 @@ const mockAnswerData = {
   ],
 };
 
-export { mockQuestionData, mockAnswerData };
+const mockProductData = {
+  data: {
+    name: 'gucci socks',
+  },
+};
+
+export { mockQuestionData, mockAnswerData, mockProductData };

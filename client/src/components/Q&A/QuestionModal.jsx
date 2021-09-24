@@ -67,6 +67,7 @@ const QuestionModal = (props) => {
   const getProductName = () => {
     axios.get(`/products/${productId}`)
       .then((response) => {
+        console.log(response);
         setProductName(response.data.name);
       })
       .catch((error) => {
@@ -80,8 +81,8 @@ const QuestionModal = (props) => {
     <div className="modal">
       <div className="modal-content">
         <div className="modal-header">
-          <h4 className="modal-title">Ask Your Question</h4>
-          <span>
+          <h4 data-testid="modal-header" className="modal-title">Ask Your Question</h4>
+          <span data-testid="modal-subheader">
             &#34;
             About the&#160;
             {productName}
@@ -107,7 +108,7 @@ const QuestionModal = (props) => {
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
           <div className="modal-footer">
-            <button type="button" onClick={toggleQuestionForm}>Close</button>
+            <button data-testid="close-modal" type="button" onClick={toggleQuestionForm}>Close</button>
             <button type="button" onClick={submitQuestion}>Submit</button>
           </div>
         </form>
