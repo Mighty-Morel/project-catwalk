@@ -1,9 +1,10 @@
 /* Reviews ---------------------------------------- */
-h4 {
+h4.RL {
   color: rgba(44, 62, 80, 0.8);
   font-weight: 300
 }
-.container {
+
+.RLcontainer {
   display: grid;
   grid-template-columns: 1fr 2fr;
   grid-template-rows: auto;
@@ -18,14 +19,14 @@ h4 {
   grid-area: ratings;
 }
 
-.tile {
+.RLtile {
   border-bottom: thin solid;
 }
 .review-title {
   display: grid;
   grid-template-columns: 1fr 1fr;
 }
-.identity {
+.RLidentity {
   font-size: 60%;
   color: rgba(0,0,0,0.5);
   align-self: center;
@@ -42,7 +43,7 @@ h4 {
 .more-reviews {
   display:inline-block;
   padding: 0.35em 1.2em;
-  border: 0.1em solid #FFFFFF;
+  border: 0.1em solid black;
   margin: 0 0.3em 0.3em 0;
   border-radius: 0.12em;
   box-sizing: border-box;
@@ -52,34 +53,163 @@ h4 {
   color: black;
   text-align: center;
   transition: all 0.2s;
+  background-color: white;
  }
 .more-reviews:hover {
   color:#000000;
-  background-color:#FFFFFF;
+  background-color:rgb(44, 62, 80);
 }
 /* Dropdown ---------------------------------------- */
-.dropdown {
+.RLdropdown {
   display: inline-block;
   position: relative;
 }
-.dropdown-content {
+.RLdropdown-content {
   display: none;
   position: absolute;
   width: 100%;
   overflow: auto;
   box-shadow: 0px 10px 10px 0px rgba(0,0,0,0.4);
 }
-.dropdown:hover .dropdown-content {
+.RLdropdown:hover .RLdropdown-content {
   display: block;
   width: 70px;
 }
-.dropdown-content option {
+.RLdropdown-content option {
   display: block;
   color: #000000;
   padding: 5px;
   text-decoration: none;
 }
-.dropdown-content option:hover {
+.RLdropdown-content option:hover {
   color: #FFFFFF;
   background-color: #00A4BD;
+}
+
+/* Modal ---------------------------------------- */
+
+.RLmodal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width:100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.6);
+  overflow-y: auto;
+  z-index: 5;
+}
+
+.RLmodal-main {
+  position:fixed;
+  background: white;
+  width: 80%;
+  height: auto;
+  top:50%;
+  left:50%;
+  transform: translate(-50%,-50%);
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
+}
+
+.RLdisplay-block {
+  display: block;
+}
+
+.RLdisplay-none {
+  display: none;
+}
+
+.RLmodal-header, .RLmodal-footer {
+  padding: 10px;
+}
+
+.RLmodal-title {
+  margin: 0;
+}
+
+.RLmodal-body {
+  padding: 10px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+  display: grid;
+}
+
+textarea.RL {
+  resize: none;
+  width: 90%;
+  height: 100px;
+}
+
+input.RL {
+  width: 90%;
+  padding-bottom: 20px;
+}
+
+.RLrate {
+  float: left;
+  height: 46px;
+  padding: 0 10px;
+}
+.RLrate:not(:checked) > input {
+  position:absolute;
+  top:-9999px;
+}
+.RLrate:not(:checked) > label {
+  float:right;
+  width:1em;
+  overflow:hidden;
+  white-space:nowrap;
+  cursor:pointer;
+  font-size:30px;
+  color:#ccc;
+}
+.RLrate:not(:checked) > label:before {
+  content: '★ ';
+}
+.RLrate > input:checked ~ label {
+  color: #ffc700;
+}
+.RLrate:not(:checked) > label:hover,
+.RLrate:not(:checked) > label:hover ~ label {
+  color: #deb217;
+}
+.RLrate > input:checked + label:hover,
+.RLrate > input:checked + label:hover ~ label,
+.RLrate > input:checked ~ label:hover,
+.RLrate > input:checked ~ label:hover ~ label,
+.RLrate > label:hover ~ input:checked ~ label {
+  color: #c59b08;
+}
+
+#RLrating {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#RLcharacteristic {
+  display: flex;
+  justify-content:left;
+}
+
+label.RLrecommended, label.RLchar {
+  float: left;
+  padding: 0 1em;
+  text-align: center;
+}
+
+.RLcharRating {
+  margin-top:12px;
+  padding-bottom: 50px;
+}
+
+span.RL {
+  padding-bottom: 10px;
+  padding-top: 5px;
+}
+
+.RLerror {
+  padding-bottom: 10px;
+  padding-top: 5px;
+  color:red;
 }

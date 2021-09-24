@@ -65,7 +65,7 @@ const ProductCarousel = (props) => {
       });
   };
 
-  useEffect(() => { getInfo(); }, []);
+  useEffect(() => { getInfo(); }, [productId]);
 
   const getModalInfo = (cardId) => {
     let modal;
