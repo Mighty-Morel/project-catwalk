@@ -4,7 +4,7 @@ import React from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { updateProductId } from '../reducers/Example-Reducer';
 import QuestionsAndAnswers from './Q&A/QuestionsAndAnswers.jsx';
-import ReviewList from './Reviewlist/Review-list.jsx';
+import ReviewsAndRatings from './Reviewlist/Review-list.jsx';
 import ProductInfo from './Overview/ProductInfo.jsx';
 import Gallery from './Overview/Gallery.jsx';
 import RelatedItems from './Related/RelatedItems.jsx';
