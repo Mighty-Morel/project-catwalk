@@ -2,10 +2,10 @@ import React from 'react';
 import moment from 'moment';
 
 const tile = (props) => (
-  <div className="tile">
+  <div className="RLtile">
     <p className="review-title">
       stars placeholder
-      <span className="identity">
+      <span className="RLidentity">
         {props.review.reviewer_name}
         ,&nbsp;
         {moment(props.review.date).format('LL')}

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import AnswerEntry from './AnswerEntry.jsx';
 import AnswerModal from './AnswerModal.jsx';
-import styling from './questions.css';
+import './questions.css';
 
 const QuestionEntry = (props) => {
   const [answerCount, setCount] = useState(2);
@@ -115,6 +115,39 @@ const QuestionEntry = (props) => {
     return null;
   };
 
+  // Render answers if there are any
+  const renderAnswers = () => {
+    if (answers.length === 0) {
+      return null;
+    }
+    return (
+      <>
+        <h2>A: </h2>
+        {displayedAnswers.map((answer) => {
+          const {
+            answer_id,
+            body,
+            date,
+            answerer_name,
+            helpfulness,
+            photos,
+          } = answer;
+          return (
+            <AnswerEntry
+              key={answer_id}
+              id={answer_id}
+              answer={body}
+              date={date}
+              answerer={answerer_name}
+              helpfulness={helpfulness}
+              photos={photos}
+            />
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div data-testid="question-entry" className="question-entry">
       <h1>
@@ -125,28 +158,7 @@ const QuestionEntry = (props) => {
       {renderHelpful()}
       <button data-testid="add-answer" type="button" onClick={toggleAnswerForm}> Add Answer</button>
       {renderModal()}
-      <h2>A: </h2>
-      {displayedAnswers.map((answer) => {
-        const {
-          answer_id,
-          body,
-          date,
-          answerer_name,
-          helpfulness,
-          photos,
-        } = answer;
-        return (
-          <AnswerEntry
-            key={answer_id}
-            id={answer_id}
-            answer={body}
-            date={date}
-            answerer={answerer_name}
-            helpfulness={helpfulness}
-            photos={photos}
-          />
-        );
-      })}
+      {renderAnswers()}
       {renderMoreAnswers()}
     </div>
   );

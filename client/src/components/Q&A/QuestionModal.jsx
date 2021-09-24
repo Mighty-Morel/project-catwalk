@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
-import styling from './questions.css';
+import './questions.css';
 
 const QuestionModal = (props) => {
   const [productName, setProductName] = useState('');
@@ -77,10 +77,10 @@ const QuestionModal = (props) => {
   useEffect(getProductName, [productId]);
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h4 data-testid="modal-header" className="modal-title">Ask Your Question</h4>
+    <div className="QA-modal">
+      <div className="QA-modal-content">
+        <div className="QA-modal-header">
+          <h4 className="QA-modal-title">Ask Your Question</h4>
           <span data-testid="modal-subheader">
             &#34;About the&#160;
             {productName}
@@ -88,10 +88,10 @@ const QuestionModal = (props) => {
           </span>
         </div>
         <form>
-          <div className="modal-body">
+          <div className="QA-modal-body">
             <span>Your Question: *</span>
             <br />
-            <textarea data-testid="question-input" type="text" id="modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
+            <textarea data-testid="question-input" type="text" id="QA-modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
             <br />
             <br />
             <span>What is your nickname: *</span>
@@ -105,7 +105,7 @@ const QuestionModal = (props) => {
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
-          <div className="modal-footer">
+          <div className="QA-modal-footer">
             <button data-testid="close-modal" type="button" onClick={toggleQuestionForm}>Close</button>
             <button data-testid="submit-question" type="button" onClick={submitQuestion}>Submit</button>
           </div>

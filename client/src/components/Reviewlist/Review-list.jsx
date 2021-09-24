@@ -1,19 +1,29 @@
+/* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { useGetReviewsQuery } from '../../reducers/Review-List-Slice';
+import { useGetReviewsQuery, useGetMetaReviewsQuery, useGetProductInfoQuery } from '../../reducers/Review-List-Slice';
+import ReviewModal from './Review-Modal.jsx';
 import './reviewlist.css';
-// eslint-disable-next-line import/extensions
 import Tile from './Tile.jsx';
+import Ratings from './Ratings.jsx';
 
-const ReviewList = () => {
-  const [sortBy, setSort] = useState('helpful');
+const ReviewsAndRatings = () => {
+  const [sortBy, setSort] = useState(() => 'helpful');
   const [count, setCount] = useState(() => 2);
+  const [show, setShow] = useState(() => false);
   const productId = useSelector((state) => state.product.id);
 
   useEffect(() => {
     setCount(2);
     setSort('helpful');
   }, [productId]);
+
+  const showModal = () => {
+    setShow(true);
+  };
+  const hideModal = () => {
+    setShow(false);
+  };
 
   const {
     data: reviews,
@@ -28,10 +38,21 @@ const ReviewList = () => {
       sort: sortBy,
     },
   );
+  const {
+    data: productInfo,
+    isSuccess: infoSuccess,
+  } = useGetProductInfoQuery(productId);
+
+  const {
+    data: reviewInfo,
+    isSuccess: reviewInfoSuccess,
+  } = useGetMetaReviewsQuery(productId);
 
   let dropdown;
   let content;
   let moreReviews;
+  let addReview;
+  let ratings;
 
   if (isLoading) {
     content = (
@@ -39,14 +60,14 @@ const ReviewList = () => {
         Loading...zzz, this request might be taking some time
       </p>
     );
-  } else if (isSuccess) {
+  } else if (isSuccess && infoSuccess && reviewInfoSuccess) {
     dropdown = (
       <>
         {reviews.results.length}
         &nbsp;reviews, sorted by&nbsp;
-        <div className="dropdown">
+        <div className="RLdropdown">
           {sortBy}
-          <div className="dropdown-content">
+          <div className="RLdropdown-content">
             <option onClick={() => setSort('helpful')}>helpful</option>
             <option onClick={() => setSort('relevant')}>relevant</option>
             <option onClick={() => setSort('newest')}>recent</option>
@@ -57,6 +78,23 @@ const ReviewList = () => {
     content = reviews.results.map((review) => (
       <Tile key={review.review_id} review={review} />
     ));
+    addReview = (
+      <>
+        <ReviewModal
+          show={show}
+          handleClose={hideModal}
+          product={productInfo}
+          reviewInfo={reviewInfo}
+        />
+        <button
+          className="more-reviews"
+          type="button"
+          onClick={showModal}
+        >
+          Add a Review +
+        </button>
+      </>
+    );
     if (count === reviews.results.length) {
       moreReviews = (
         <>
@@ -72,6 +110,11 @@ const ReviewList = () => {
         </>
       );
     }
+    ratings = (
+      <Ratings
+        meta={reviewInfo}
+      />
+    );
   } else if (isError) {
     content = (
       <p>
@@ -81,20 +124,22 @@ const ReviewList = () => {
   }
 
   return (
-    <>
-      <h4> Ratings & Reviews</h4>
-      <div className="container">
+    <div id="ratingsAndReviews">
+      <h4 className="RL"> Ratings & Reviews</h4>
+      <div className="RLcontainer">
         <div className=".item-ratings">
-          Ratings Placeholder
+          {ratings}
         </div>
         <div className="item-reviews">
           {dropdown}
           {content}
+          <br />
           {moreReviews}
+          {addReview}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
-export default ReviewList;
+export default ReviewsAndRatings;
