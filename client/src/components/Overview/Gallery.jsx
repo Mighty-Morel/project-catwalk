@@ -58,6 +58,28 @@ const Gallery = () => {
     return null;
   };
 
+  const renderLeftArrow = () => {
+    if (mainPhotoIndex > 0) {
+      return (
+        <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
+          <img className="overview-main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
+        </span>
+      );
+    }
+    return null;
+  };
+
+  const renderRightArrow = () => {
+    if (mainPhotoIndex < stylePhotos.length - 1) {
+      return (
+        <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
+          <img className="overview-main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
+        </span>
+      );
+    }
+    return null;
+  };
+
   if (!mainImage) {
     return <div>Loading Images...</div>;
   }
@@ -89,12 +111,8 @@ const Gallery = () => {
           {renderDownArrow()}
         </div>
         <div className="overview-main-arrow-container">
-          <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
-            <img className="overview-main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
-          </span>
-          <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
-            <img className="overview-main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
-          </span>
+          {renderLeftArrow()}
+          {renderRightArrow()}
         </div>
       </div>
     </>
