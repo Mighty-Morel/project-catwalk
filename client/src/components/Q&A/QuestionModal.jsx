@@ -109,7 +109,7 @@ const QuestionModal = (props) => {
           </div>
           <div className="modal-footer">
             <button data-testid="close-modal" type="button" onClick={toggleQuestionForm}>Close</button>
-            <button type="button" onClick={submitQuestion}>Submit</button>
+            <button data-testid="submit-question" type="button" onClick={submitQuestion}>Submit</button>
           </div>
         </form>
       </div>

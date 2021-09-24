@@ -5,6 +5,7 @@
 // Environment Setup ------------------------------------------------------
 import React from 'react';
 import 'whatwg-fetch';
+import { act } from 'react-dom/test-utils';
 import {
   render, cleanup, waitFor, fireEvent, screen,
 } from '@testing-library/react';
@@ -13,16 +14,18 @@ import 'regenerator-runtime/runtime';
 import axios from 'axios';
 import { Provider } from 'react-redux';
 import QuestionsAndAnswers from '../client/src/components/Q&A/QuestionsAndAnswers';
-// import QuestionModal from '../client/src/components/Q&A/QuestionModal';
+import QuestionModal from '../client/src/components/Q&A/QuestionModal';
 // import QuestionEntry from '../client/src/components/Q&A/QuestionEntry';
 import store from '../client/src/store/store';
-import { mockQuestionData } from './fixtures/QuestionMockData';
+import { mockQuestionData, mockProductData } from './fixtures/QuestionMockData';
 
 beforeAll(() => {
   axios.get.mockImplementation((url) => {
     switch (url) {
       case '/qa/questions/48432':
         return Promise.resolve(mockQuestionData);
+      case '/products/48432':
+        return Promise.resolve(mockProductData);
       default:
         return Promise.reject(new Error('Error - Q&A test is not working'));
     }
@@ -34,16 +37,16 @@ afterEach(cleanup);
 jest.mock('axios');
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder QuestionsAndAnswers Style</div>));
 jest.mock('../client/src/components/Q&A/QuestionEntry.jsx', () => () => (<div data-testid="question-entry">Placeholder Question Entry</div>));
-jest.mock('../client/src/components/Q&A/QuestionModal.jsx', () => () => (<div data-testid="question-modal">Placeholder Question Modal</div>));
+// jest.mock('../client/src/components/Q&A/QuestionModal.jsx', () => () => (<div data-testid="question-modal">Placeholder Question Modal</div>));
 
 // TESTS ---------------------------------------------------
 it('should load the mock questions',
   () => axios.get('/qa/questions/48432')
     .then((questions) => expect(questions).toEqual(mockQuestionData)));
 
-// it('should load the mock answers',
-//   () => axios.get('/products/48432')
-//     .then((answers) => expect(answers).toEqual(mockProductData)));
+it('should load the mock answers',
+  () => axios.get('/products/48432')
+    .then((productInfo) => expect(productInfo).toEqual(mockProductData)));
 
 it('should load and display the selected product data', async () => {
   const { getByTestId, findAllByTestId } = render(
@@ -76,12 +79,14 @@ it('should be able to show more questions if there are more than two and then co
   expect(endQuestions).toHaveLength(2);
 });
 
-it('should have the question modal pop up when submit a question is clicked', async () => {
+it('should have the question modal pop up when submit a question is clicked', () => {
   const { getByTestId } = render(
     <Provider store={store}>
       <QuestionsAndAnswers />
     </Provider>,
   );
   fireEvent.click(getByTestId('add-question'));
-  expect(getByTestId('question-modal')).toHaveTextContent('Placeholder Question');
+  // expect(getByTestId('question-modal')).toHaveTextContent('Placeholder Question');
+  expect(getByTestId('close-modal')).toHaveTextContent('Close');
+  expect(getByTestId('submit-question')).toHaveTextContent('Submit');
 });
