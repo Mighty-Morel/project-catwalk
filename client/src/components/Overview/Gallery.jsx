@@ -88,6 +88,7 @@ const Gallery = () => {
   };
 
   const toggleView = () => {
+    console.log('click')
     dispatch(updateView(true));
   };
 
@@ -98,31 +99,44 @@ const Gallery = () => {
   const renderMainImage = () => {
     if (zoomView) {
       return (
-        <img
-          className="overview-main-image-zoom"
-          onClick={() => toggleZoom()}
-          onKeyPress={() => toggleZoom()}
-          role="link"
-          tabIndex="-1"
-          src={mainImage.url}
-          alt={selectedStyle.name}
-          title={selectedStyle.name}
-        />
+        <>
+          <img
+            className="overview-main-image-zoom"
+            onClick={() => toggleZoom()}
+            onKeyPress={() => toggleZoom()}
+            role="link"
+            tabIndex="-1"
+            src={mainImage.url}
+            alt={selectedStyle.name}
+            title={selectedStyle.name}
+          />
+          <div className="overview-collapse-gallery">
+            <span role="button" tabIndex="-1" onClick={() => toggleView()} onKeyDown={() => toggleView()}>
+              <img className="overview-collapse-icon" alt="collapse" src="./images/collapse-icon.png" />
+            </span>
+          </div>
+        </>
       );
     }
     if (expandedView) {
       return (
-        <img
-          className="overview-main-image-expanded"
-          onClick={() => toggleZoom()}
-          onKeyPress={() => toggleZoom()}
-          role="link"
-          tabIndex="-1"
-          src={mainImage.url}
-          alt={selectedStyle.name}
-          title={selectedStyle.name}
-        />
-
+        <>
+          <img
+            className="overview-main-image-expanded"
+            onClick={() => toggleZoom()}
+            onKeyPress={() => toggleZoom()}
+            role="link"
+            tabIndex="-1"
+            src={mainImage.url}
+            alt={selectedStyle.name}
+            title={selectedStyle.name}
+          />
+          <div className="overview-collapse-gallery">
+            <span role="button" tabIndex="-1" onClick={() => toggleView()} onKeyDown={() => toggleView()}>
+              <img className="overview-collapse-icon" alt="collapse" src="./images/collapse-icon.png" />
+            </span>
+          </div>
+        </>
       );
     }
     return (
