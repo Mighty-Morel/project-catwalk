@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useGetReviewsQuery, useGetMetaReviewsQuery, useGetProductInfoQuery } from '../../reducers/Review-List-Slice';
 import ReviewModal from './Review-Modal.jsx';
@@ -48,6 +49,11 @@ const ReviewsAndRatings = () => {
     isSuccess: reviewInfoSuccess,
   } = useGetMetaReviewsQuery(productId);
 
+  const handlePut = (reviewId, type) => {
+    axios.put(`/api/reviews/${reviewId}/${type}`);
+    console.log(`/api/reviews/${reviewId}/${type}`);
+  };
+
   let dropdown;
   let content;
   let moreReviews;
@@ -76,7 +82,7 @@ const ReviewsAndRatings = () => {
       </>
     );
     content = reviews.results.map((review) => (
-      <Tile key={review.review_id} review={review} />
+      <Tile key={review.review_id} review={review} handlePut={handlePut} />
     ));
     addReview = (
       <>

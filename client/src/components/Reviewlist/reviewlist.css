@@ -38,6 +38,9 @@ h4.RL {
   font-size: 90%;
   color: rgba(0,0,0,0.5);
 }
+.review-footer {
+  font-size: 90%;
+}
 
 /* Buttons ---------------------------------------- */
 .more-reviews {
@@ -250,5 +253,13 @@ span.RL {
 }
 
 .RLratingfilter:hover {
+  color: red;
+}
+
+.underline {
+  text-decoration: underline;
+}
+
+.underline:hover {
   color: red;
 }

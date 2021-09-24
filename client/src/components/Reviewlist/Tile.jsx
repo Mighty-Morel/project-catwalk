@@ -17,6 +17,14 @@ const tile = (props) => (
     <p className="review-body">
       {props.review.body}
     </p>
+    <p className="review-footer">
+      Helpful?&nbsp;
+      <span className="underline" onClick={() => props.handlePut(props.review.review_id, 'helpful')}>Yes</span>
+      (
+      {props.review.helpfulness}
+      ) |&nbsp;
+      <span className="underline" onClick={() => props.handlePut(props.review.review_id, 'report')}>Report</span>
+    </p>
   </div>
 );
 
