@@ -45,7 +45,7 @@ const Gallery = () => {
     if (stylePhotos.length > 7 && mainPhotoIndex > 0) {
       return (
         <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
-          <img className="overview-thumbnail-arrow" alt="up arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-up-arrows-those-icons-fill-those-icons.png" />
+          <img className="overview-thumbnail-arrow" alt="up arrow" src="./images/up-arrow.png" />
         </span>
       );
     }
@@ -56,7 +56,7 @@ const Gallery = () => {
     if (stylePhotos.length > 7 && mainPhotoIndex < stylePhotos.length - 1) {
       return (
         <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
-          <img className="overview-thumbnail-arrow" alt="down arrow" src="https://img.icons8.com/external-those-icons-fill-those-icons/24/ffffff/external-down-arrows-those-icons-fill-those-icons-1.png" />
+          <img className="overview-thumbnail-arrow" alt="down arrow" src="./images/down-arrow.png" />
         </span>
       );
     }
@@ -67,7 +67,7 @@ const Gallery = () => {
     if (mainPhotoIndex > 0) {
       return (
         <span role="button" tabIndex="-1" onClick={moveUp} onKeyDown={handleKeyDown}>
-          <img className="overview-main-arrow left" alt="left arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-left--v1.png" />
+          <img className="overview-main-arrow left" alt="left arrow" src="./images/double-left-arrow.png" />
         </span>
       );
     }
@@ -78,7 +78,7 @@ const Gallery = () => {
     if (mainPhotoIndex < stylePhotos.length - 1) {
       return (
         <span role="button" tabIndex="-1" onClick={moveDown} onKeyDown={handleKeyDown}>
-          <img className="overview-main-arrow right" alt="right arrow" src="https://img.icons8.com/ios-glyphs/30/ffffff/double-right--v1.png" />
+          <img className="overview-main-arrow right" alt="right arrow" src="./images/double-right-arrow.png" />
         </span>
       );
     }
