@@ -88,8 +88,7 @@ const Gallery = () => {
   };
 
   const toggleView = () => {
-    console.log('click')
-    dispatch(updateView(true));
+    dispatch(updateView(!expandedView));
   };
 
   const toggleZoom = () => {
@@ -144,21 +143,36 @@ const Gallery = () => {
     );
   };
 
+  const renderContainer = () => {
+    if (expandedView) {
+      return (
+        <div
+          className="overview-main-image-container-expanded"
+        >
+          {renderMainImage()}
+        </div>
+      );
+    }
+    return (
+      <div
+        className="overview-main-image-container"
+        onClick={() => toggleView()}
+        onKeyPress={() => toggleView()}
+        role="link"
+        tabIndex="-1"
+      >
+        {renderMainImage()}
+      </div>
+    );
+  };
+
   if (!mainImage) {
     return <div>Loading Images...</div>;
   }
   return (
     <>
       <div className="overview-gallery-container">
-        <div
-          className="overview-main-image-container"
-          onClick={() => toggleView()}
-          onKeyPress={() => toggleView()}
-          role="link"
-          tabIndex="-1"
-        >
-          {renderMainImage()}
-        </div>
+        {renderContainer()}
         <div className="overview-thumbnail-container">
           {renderUpArrow()}
           <div className="overview-thumbnail-image-container">
