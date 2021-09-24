@@ -15,6 +15,7 @@ const ProductInfo = () => {
   const product = useSelector((state) => state.product.productInfo);
   const allStyles = useSelector((state) => state.style.allStyles);
   const style = useSelector((state) => state.style.style);
+  const expandedView = useSelector((state) => state.product.expandedView);
 
   const dispatch = useDispatch();
 
@@ -43,7 +44,7 @@ const ProductInfo = () => {
   }
   return (
     <>
-      <div data-testid="resolved" className="overview-product-info-container">
+      <div data-testid="resolved" className={expandedView ? 'overview-product-info-container-hidden' : 'overview-product-info-container'}>
         <span data-testid="ratings" className="overview-ratings">
           ★★★★☆
           <a href="#reviews" className="overview-ratings-link">Read all reviews</a>

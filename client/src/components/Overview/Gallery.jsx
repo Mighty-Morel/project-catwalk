@@ -94,7 +94,7 @@ const Gallery = () => {
   }
   return (
     <>
-      <div className={expandedView ? 'overview-gallery-container-expand' : 'overview-gallery-container'}>
+      <div className="overview-gallery-container">
         <div className="overview-main-image-container" onClick={toggleView}>
           <img
             className="overview-main-image"
