@@ -63,9 +63,9 @@ const ReviewsAndRatings = () => {
       <>
         {reviews.results.length}
         &nbsp;reviews, sorted by&nbsp;
-        <div className="dropdown">
+        <div className="RLdropdown">
           {sortBy}
-          <div className="dropdown-content">
+          <div className="RLdropdown-content">
             <option onClick={() => setSort('helpful')}>helpful</option>
             <option onClick={() => setSort('relevant')}>relevant</option>
             <option onClick={() => setSort('newest')}>recent</option>
@@ -118,8 +118,8 @@ const ReviewsAndRatings = () => {
 
   return (
     <>
-      <h4> Ratings & Reviews</h4>
-      <div className="container">
+      <h4 className="RL"> Ratings & Reviews</h4>
+      <div className="RLcontainer">
         <div className=".item-ratings">
           Ratings Placeholder
         </div>

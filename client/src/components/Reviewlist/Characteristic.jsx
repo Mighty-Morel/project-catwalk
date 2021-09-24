@@ -20,29 +20,29 @@ const characteristic = ({
   };
   const [one, two, three, four, five] = descriptions[name];
   return (
-    <div id="characteristics">
+    <div id="RLcharacteristics">
       {name}
       :&nbsp;
       {def}
-      <div className="charRating">
-        <label className="char" htmlFor={`${name}char1`} title="text">
-          <input type="radio" id={`${name}char1`} name={name} value="1" onClick={(e) => set(e.target.value, one)} />
+      <div className="RLcharRating">
+        <label className="RLchar" htmlFor={`${name}char1`} title="text">
+          <input className="RL" type="radio" id={`${name}char1`} name={name} value="1" onClick={(e) => set(e.target.value, one)} />
           {one}
         </label>
-        <label className="char" htmlFor={`${name}char2`} title="text">
-          <input type="radio" id={`${name}char2`} name={name} value="2" onClick={(e) => set(e.target.value, two)} />
+        <label className="RLchar" htmlFor={`${name}char2`} title="text">
+          <input className="RL" type="radio" id={`${name}char2`} name={name} value="2" onClick={(e) => set(e.target.value, two)} />
           &nbsp; &nbsp; &nbsp;
         </label>
-        <label className="char" htmlFor={`${name}char3`} title="text">
-          <input type="radio" id={`${name}char3`} name={name} value="3" onClick={(e) => set(e.target.value, three)} />
+        <label className="RLchar" htmlFor={`${name}char3`} title="text">
+          <input className="RL" type="radio" id={`${name}char3`} name={name} value="3" onClick={(e) => set(e.target.value, three)} />
           &nbsp; &nbsp; &nbsp;
         </label>
-        <label className="char" htmlFor={`${name}char4`} title="text">
-          <input type="radio" id={`${name}char4`} name={name} value="4" onClick={(e) => set(e.target.value, four)} />
+        <label className="RLchar" htmlFor={`${name}char4`} title="text">
+          <input className="RL" type="radio" id={`${name}char4`} name={name} value="4" onClick={(e) => set(e.target.value, four)} />
           &nbsp; &nbsp; &nbsp;
         </label>
-        <label className="char" htmlFor={`${name}char5`} title="text">
-          <input type="radio" id={`${name}char5`} name={name} value="5" onClick={(e) => set(e.target.value, five)} />
+        <label className="RLchar" htmlFor={`${name}char5`} title="text">
+          <input className="RL" type="radio" id={`${name}char5`} name={name} value="5" onClick={(e) => set(e.target.value, five)} />
           {five}
         </label>
       </div>
