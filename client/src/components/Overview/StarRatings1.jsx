@@ -2,39 +2,32 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import { useSelector, useDispatch } from 'react-redux';
-// import { useGetMetaReviewsQuery } from '../../reducers/Review-List-Slice';
+import { useGetMetaReviewsQuery } from '../../reducers/Review-List-Slice';
 
 const StarRatings = ({ productId }) => {
   // const productId = useSelector((state) => state.product.id);
   const [starType, setStarType] = useState(0);
-  const [isLoading, updateLoading] = useState(true);
-  const [isSuccess, updateSuccess] = useState(false);
 
-  let ratings;
-  const getRatings = () => {
-    axios.get('/api/reviews/meta', { product_id: productId })
-      .then((response) => {
-        ratings = response.data.ratings;
-        console.log(response);
-        updateLoading(false);
-        updateSuccess(true);
-      })
-      .catch((err) => console.log('Error getting ratings', err));
-  };
+  // const data;
+  // const getRatings = (productId) => {
+  //   axios.get('/api/reviews/meta', { product_id: productId })
+  //     .then((response) => {
+  //       data = response.data;
+  //       return response.data})
+  //     .catch((err) => console.log('Error getting ratings', err));
+  // };
 
-  useEffect(() => { getRatings(productId); }, [productId]);
-
-  // const {
-  //   data: reviewInfo,
-  //   isLoading,
-  //   isSuccess,
-  // } = useGetMetaReviewsQuery(productId);
+  const {
+    data: reviewInfo,
+    isLoading,
+    isSuccess,
+  } = useGetMetaReviewsQuery(productId);
 
   let wholeNum;
   let totalRatings;
   let decimals;
   if (isSuccess) {
-    // const { ratings } = reviewInfo;
+    const { ratings } = reviewInfo;
     let totalScore = 0;
     Object.entries(ratings).forEach((pair) => {
       const score = pair[0];
@@ -45,7 +38,7 @@ const StarRatings = ({ productId }) => {
 
     const avgRating = totalScore / totalRatings;
     wholeNum = Math.floor(avgRating);
-    decimals = avgRating - wholeNum;
+    const decimals = avgRating - wholeNum;
 
     console.log(totalRatings, totalScore, avgRating, wholeNum, decimals);
   }
@@ -61,7 +54,9 @@ const StarRatings = ({ productId }) => {
       setStarType(3);
     } else setStarType(4);
   };
-  useEffect(() => renderStarType(), [decimals]);
+    // renderStarType();
+
+  useEffect(renderStarType, [decimals]);
 
   const renderStars = () => {
     switch (wholeNum) {
@@ -109,20 +104,19 @@ const StarRatings = ({ productId }) => {
   if (isLoading) {
     return <div>Loading Rating...</div>;
   }
-  // if (isSuccess) {
-  return (
-    <>
-      {renderStars()}
-      <a href="#reviews" className="overview-ratings-link">
-        Read all
-        {' '}
-        {totalRatings}
-        {' '}
-        reviews
-      </a>
-    </>
-  );
+  if (isSuccess) {
+    return (
+      <>
+        {renderStars()}
+        <a href="#reviews" className="overview-ratings-link">
+          Read all
+          {' '}
+          {totalRatings}
+          {' '}
+          reviews
+        </a>
+      </>
+    );
+  }
 };
-// };
-
 export default StarRatings;
