@@ -87,46 +87,48 @@ const Gallery = () => {
   };
 
   const toggleView = () => {
-    dispatch(() => updateView(true));
+    dispatch(updateView(true));
   };
 
   const toggleZoom = () => {
-    dispatch(() => setZoomView(!zoomView));
+    dispatch(setZoomView(!zoomView));
   };
 
   const renderMainImage = () => {
     if (zoomView) {
       return (
-        <div
+        <img
           className="overview-main-image-zoom"
           onClick={() => toggleZoom()}
           onKeyPress={() => toggleZoom()}
           onMouseEnter={() => dragElement()}
           role="link"
           tabIndex="-1"
-        >
-          <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-        </div>
+          src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
+        // >
+        //   <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
+        // </div>
       );
     }
     if (expandedView) {
       return (
-        <div
+        <img
           className="overview-main-image-expanded"
           onClick={() => toggleZoom()}
           onKeyPress={() => toggleZoom()}
           onMouseEnter={() => dragElement()}
           role="link"
           tabIndex="-1"
-        >
-          <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-        </div>
+          src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
+        // >
+        //   <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
+        // </div>
       );
     }
     return (
-      <div className="overview-main-image">
-        <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-      </div>
+      // <div className="overview-main-image">
+        <img className="overview-main-image" src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
+      /* </div> */
     );
   };
 
@@ -182,7 +184,7 @@ const Gallery = () => {
         >
           {renderMainImage()}
           {/* <img
-            className={if (expandedView) ? "overview-main-image-expanded" : "overview-main-image"}
+            className={expandedView ? 'overview-main-image-expanded' : 'overview-main-image'}
             src={mainImage.url}
             alt={selectedStyle.name}
             title={selectedStyle.name}
