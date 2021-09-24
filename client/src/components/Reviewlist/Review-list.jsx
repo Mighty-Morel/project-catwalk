@@ -11,6 +11,16 @@ const ReviewsAndRatings = () => {
   const [sortBy, setSort] = useState(() => 'helpful');
   const [count, setCount] = useState(() => 2);
   const [show, setShow] = useState(() => false);
+  const [filter, setFilter] = useState(() => (
+    {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+    }
+  ));
+
   const productId = useSelector((state) => state.product.id);
 
   useEffect(() => {
@@ -24,9 +34,8 @@ const ReviewsAndRatings = () => {
   const hideModal = () => {
     setShow(false);
   };
-
   const {
-    data: reviews,
+    data: allReviews,
     isLoading,
     isSuccess,
     isError,
@@ -42,7 +51,6 @@ const ReviewsAndRatings = () => {
     data: productInfo,
     isSuccess: infoSuccess,
   } = useGetProductInfoQuery(productId);
-
   const {
     data: reviewInfo,
     isSuccess: reviewInfoSuccess,
@@ -61,9 +69,18 @@ const ReviewsAndRatings = () => {
       </p>
     );
   } else if (isSuccess && infoSuccess && reviewInfoSuccess) {
+    let reviews = [];
+    for (let i = 0; i < allReviews.results.length; i += 1) {
+      if (filter[allReviews.results[i].rating]) {
+        reviews.push(allReviews.results[i]);
+      }
+    }
+    if (reviews.length === 0) {
+      reviews = allReviews.results;
+    }
     dropdown = (
       <>
-        {reviews.results.length}
+        {reviews.length}
         &nbsp;reviews, sorted by&nbsp;
         <div className="RLdropdown">
           {sortBy}
@@ -75,7 +92,7 @@ const ReviewsAndRatings = () => {
         </div>
       </>
     );
-    content = reviews.results.map((review) => (
+    content = reviews.map((review) => (
       <Tile key={review.review_id} review={review} />
     ));
     addReview = (
@@ -95,7 +112,7 @@ const ReviewsAndRatings = () => {
         </button>
       </>
     );
-    if (count === reviews.results.length) {
+    if (count === allReviews.results.length) {
       moreReviews = (
         <>
           <button
@@ -113,6 +130,8 @@ const ReviewsAndRatings = () => {
     ratings = (
       <Ratings
         meta={reviewInfo}
+        setFilter={setFilter}
+        filter={filter}
       />
     );
   } else if (isError) {
