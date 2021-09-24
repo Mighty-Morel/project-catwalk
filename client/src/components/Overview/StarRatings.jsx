@@ -8,19 +8,24 @@ const StarRatings = ({ productId }) => {
   // const productId = useSelector((state) => state.product.id);
   const [starType, setStarType] = useState(0);
 
+  let ratings = {};
   const getRatings = (productId) => {
     axios.get('/api/reviews/meta', { product_id: productId })
-      .then((response) => response.status)
+      .then((response) => {
+        ratings = response.data.ratings;
+        return response.data})
       .catch((err) => console.log('Error getting ratings', err));
   };
+  // useEffect(getRatings(productId), []);
+  // const {
+  //   data: reviewInfo,
+  //   isLoading,
+  //   isSuccess: reviewInfoSuccess,
+  // } = useGetMetaReviewsQuery(productId);
 
-  const {
-    data: reviewInfo,
-    isLoading,
-    isSuccess: reviewInfoSuccess,
-  } = useGetMetaReviewsQuery(productId);
+  // useEffect(useGetMetaReviewsQuery(productId), []);
 
-  const { ratings } = reviewInfo;
+  // const { ratings } = reviewInfo;
   let totalRatings = 0;
   let totalScore = 0;
   Object.entries(ratings).forEach((pair) => {
@@ -94,7 +99,8 @@ const StarRatings = ({ productId }) => {
     }
   };
 
-  if (isLoading) {
+  if (!ratings[1]) {
+  // if (isLoading || !reviewInfo.ratings[1]) {
     return <div>Loading Rating...</div>;
   }
   return (
