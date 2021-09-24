@@ -52,10 +52,10 @@ const QuestionEntry = (props) => {
 
   const renderMoreAnswers = () => {
     if (extra) {
-      return (<button type="button" onClick={showMoreAnswers}>See more answers</button>);
+      return (<button data-testid="render-more-answers" type="button" onClick={showMoreAnswers}>See more answers</button>);
     }
     if (answerCount > 2) {
-      return (<button type="button" onClick={collapseAnswers}>Collapse answers</button>);
+      return (<button data-testid="collapse-answers" type="button" onClick={collapseAnswers}>Collapse answers</button>);
     }
     return null;
   };
@@ -110,7 +110,7 @@ const QuestionEntry = (props) => {
 
   const renderModal = () => {
     if (answerModal) {
-      return (<AnswerModal toggleAnswerForm={toggleAnswerForm} id={id} question={question} />);
+      return (<AnswerModal data-testid="answer-modal" toggleAnswerForm={toggleAnswerForm} id={id} question={question} />);
     }
     return null;
   };
@@ -123,7 +123,7 @@ const QuestionEntry = (props) => {
       </h1>
       <span>Helpful? </span>
       {renderHelpful()}
-      <button type="button" onClick={toggleAnswerForm}> Add Answer</button>
+      <button data-testid="add-answer" type="button" onClick={toggleAnswerForm}> Add Answer</button>
       {renderModal()}
       <h2>A: </h2>
       {displayedAnswers.map((answer) => {

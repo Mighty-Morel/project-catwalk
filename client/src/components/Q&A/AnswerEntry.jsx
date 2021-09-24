@@ -97,7 +97,7 @@ const AnswerEntry = (props) => {
 
   return (
     <>
-      <p>{answer}</p>
+      <p data-testid="answer-entry">{answer}</p>
       {renderSeller()}
       <span>{formattedDate}</span>
       <span>Helpful?</span>
