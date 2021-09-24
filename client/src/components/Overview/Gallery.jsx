@@ -1,12 +1,16 @@
 /* eslint-disable import/extensions */
 import React, { useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
+import { updateView } from '../../reducers/Example-Reducer';
+
 import GalleryThumbnail from './GalleryThumbnail.jsx';
 import './overview.css';
 
 const Gallery = () => {
+  const dispatch = useDispatch();
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
+  const expandedView = useSelector((state) => state.product.expandedView);
   const [mainPhotoIndex, setPhotoIndex] = useState(0);
 
   const mainImage = stylePhotos[mainPhotoIndex];
@@ -80,13 +84,17 @@ const Gallery = () => {
     return null;
   };
 
+  const toggleView = () => {
+    dispatch(updateView(!expandedView));
+  };
+
   if (!mainImage) {
     return <div>Loading Images...</div>;
   }
   return (
     <>
-      <div className="overview-gallery-container">
-        <div className="overview-main-image-container">
+      <div className={expandedView ? 'overview-gallery-container-expand' : 'overview-gallery-container'}>
+        <div className="overview-main-image-container" onClick={toggleView}>
           <img
             className="overview-main-image"
             src={mainImage.url}
