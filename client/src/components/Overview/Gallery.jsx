@@ -97,7 +97,7 @@ const Gallery = () => {
       <div className="overview-gallery-container">
         <div className="overview-main-image-container" onClick={toggleView}>
           <img
-            className="overview-main-image"
+            className={expandedView? "overview-main-image-expanded" : "overview-main-image"}
             src={mainImage.url}
             alt={selectedStyle.name}
             title={selectedStyle.name}

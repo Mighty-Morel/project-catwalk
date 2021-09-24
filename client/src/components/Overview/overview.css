@@ -87,6 +87,19 @@
   object-fit: cover;
 }
 
+.overview-main-image-expanded {
+  max-height: 100%;
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  z-index: 1;
+  object-fit: cover;
+  cursor: zoom-out;
+}
+
 .overview-thumbnail-container {
   grid-column: 1 / 2;
   grid-row: 1 / 2;
