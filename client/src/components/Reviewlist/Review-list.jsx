@@ -124,7 +124,7 @@ const ReviewsAndRatings = () => {
   }
 
   return (
-    <>
+    <div id="ratingsAndReviews">
       <h4 className="RL"> Ratings & Reviews</h4>
       <div className="RLcontainer">
         <div className=".item-ratings">
@@ -133,11 +133,12 @@ const ReviewsAndRatings = () => {
         <div className="item-reviews">
           {dropdown}
           {content}
+          <br />
           {moreReviews}
           {addReview}
         </div>
       </div>
-    </>
+    </div>
   );
 };
 
