@@ -4,17 +4,17 @@
   height:fit-content;
   display: grid;
   grid-template-columns: 3fr 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr;
   margin: auto;
   padding-right: 10px;
 }
 
 .overview-container-expand {
   width: 100%;
-  height:fit-content;
+  height: 670px;
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-rows: auto;
+  grid-template-rows: 1fr;
   margin: auto;
 }
 
