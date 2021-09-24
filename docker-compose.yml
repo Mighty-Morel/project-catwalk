@@ -1,0 +1,10 @@
+version: "3.8"
+services:
+  app:
+    image: node:14
+    command: bash -c "npm install && npm run react-prod && npm start"
+    ports:
+      - 3005:3005
+    working_dir: /app
+    volumes:
+      - ./:/app
