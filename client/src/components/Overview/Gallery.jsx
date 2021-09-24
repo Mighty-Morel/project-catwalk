@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/no-noninteractive-element-to-interactive-role */
 /* eslint-disable import/extensions */
 import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -92,85 +93,41 @@ const Gallery = () => {
 
   const toggleZoom = () => {
     dispatch(setZoomView(!zoomView));
-    dragElement(document.getElementById("mydiv"));
   };
 
   const renderMainImage = () => {
     if (zoomView) {
       return (
         <img
-          id="main-image"
           className="overview-main-image-zoom"
           onClick={() => toggleZoom()}
           onKeyPress={() => toggleZoom()}
-          // onMouseEnter={() => dragElement()}
           role="link"
           tabIndex="-1"
-          src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-        // >
-        //   <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-        // </div>
+          src={mainImage.url}
+          alt={selectedStyle.name}
+          title={selectedStyle.name}
+        />
       );
     }
     if (expandedView) {
       return (
         <img
-          id="main-image"
           className="overview-main-image-expanded"
           onClick={() => toggleZoom()}
           onKeyPress={() => toggleZoom()}
-          // onMouseEnter={() => dragElement()}
           role="link"
           tabIndex="-1"
-          src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-        // >
-        //   <img src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-        // </div>
+          src={mainImage.url}
+          alt={selectedStyle.name}
+          title={selectedStyle.name}
+        />
+
       );
     }
     return (
-      // <div className="overview-main-image">
-        <img className="overview-main-image" src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
-      /* </div> */
+      <img className="overview-main-image" src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
     );
-  };
-
-  // zoom and drag function
-  let pos1 = 0; let pos2 = 0; let pos3 = 0; let pos4 = 0;
-
-  const dragElement = (elmnt) => {
-    console.log(elmnt)
-    const elementDrag = (e) => {
-      // e = e || window.event;
-      e.preventDefault();
-      // calculate the new cursor position:
-      pos1 = pos3 - e.clientX;
-      pos2 = pos4 - e.clientY;
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      // set the element's new position:
-      elmnt.style.top = `${elmnt.offsetTop - pos2}px`;
-      elmnt.style.left = `${elmnt.offsetLeft - pos1}px`;
-    };
-
-    const dragMouseDown = (e) => {
-      // e = e || window.event;
-      e.preventDefault();
-      // get the mouse cursor position at startup:
-      pos3 = e.clientX;
-      pos4 = e.clientY;
-      document.onmouseup = closeDragElement;
-      // call a function whenever the cursor moves:
-      document.onmousemove = elementDrag;
-    };
-
-    elmnt.onmousedown = dragMouseDown;
-
-    const closeDragElement = () => {
-    // stop moving when mouse button is released:
-      document.onmouseup = null;
-      document.onmousemove = null;
-    };
   };
 
   if (!mainImage) {
@@ -187,12 +144,6 @@ const Gallery = () => {
           tabIndex="-1"
         >
           {renderMainImage()}
-          {/* <img
-            className={expandedView ? 'overview-main-image-expanded' : 'overview-main-image'}
-            src={mainImage.url}
-            alt={selectedStyle.name}
-            title={selectedStyle.name}
-          /> */}
         </div>
         <div className="overview-thumbnail-container">
           {renderUpArrow()}
