@@ -26,6 +26,7 @@ const App = () => {
     dispatch(updateProductId(48436)); // this is an example to show how update works
     // delete when understood
   };
+  const expandedView = useSelector((state) => state.product.expandedView);
 
   return (
     <>
@@ -40,7 +41,7 @@ const App = () => {
           <Route exact path="products/:productId" component={ProductInfo} />
           <Redirect to="/" />
         </Router> */}
-      <div className="overview-container">
+      <div className={expandedView ? 'overview-container-expand' : 'overview-container'}>
         <div><Gallery /></div>
         <div><ProductInfo productId={currentId} /></div>
       </div>

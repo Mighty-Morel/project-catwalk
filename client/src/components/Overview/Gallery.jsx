@@ -11,6 +11,7 @@ const Gallery = () => {
   const selectedStyle = useSelector((state) => state.style.style);
   const stylePhotos = useSelector((state) => state.style.photos);
   const expandedView = useSelector((state) => state.product.expandedView);
+
   const [mainPhotoIndex, setPhotoIndex] = useState(0);
 
   const mainImage = stylePhotos[mainPhotoIndex];
