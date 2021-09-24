@@ -15,7 +15,7 @@ import axios from 'axios';
 import { Provider } from 'react-redux';
 import QuestionsAndAnswers from '../client/src/components/Q&A/QuestionsAndAnswers';
 import QuestionModal from '../client/src/components/Q&A/QuestionModal';
-// import QuestionEntry from '../client/src/components/Q&A/QuestionEntry';
+import QuestionEntry from '../client/src/components/Q&A/QuestionEntry';
 import store from '../client/src/store/store';
 import { mockQuestionData, mockProductData } from './fixtures/QuestionMockData';
 
@@ -27,7 +27,15 @@ beforeAll(() => {
       case '/products/48432':
         return Promise.resolve(mockProductData);
       default:
-        return Promise.reject(new Error('Error - Q&A test is not working'));
+        return Promise.reject(new Error('Error - No URL found'));
+    }
+  });
+  axios.post.mockImplementation((url) => {
+    switch (url) {
+      case '/qa/questions':
+        return Promise.resolve('CREATED');
+      default:
+        return Promise.reject(new Error('Error - No URL found'));
     }
   });
 });
@@ -36,10 +44,10 @@ afterEach(cleanup);
 
 jest.mock('axios');
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder QuestionsAndAnswers Style</div>));
-jest.mock('../client/src/components/Q&A/QuestionEntry.jsx', () => () => (<div data-testid="question-entry">Placeholder Question Entry</div>));
+// jest.mock('../client/src/components/Q&A/QuestionEntry.jsx', () => () => (<div data-testid="question-entry">Placeholder Question Entry</div>));
 // jest.mock('../client/src/components/Q&A/QuestionModal.jsx', () => () => (<div data-testid="question-modal">Placeholder Question Modal</div>));
 
-// TESTS ---------------------------------------------------
+// Mock Axios Request Questions ---------------------------------------------------------
 it('should load the mock questions',
   () => axios.get('/qa/questions/48432')
     .then((questions) => expect(questions).toEqual(mockQuestionData)));
@@ -48,6 +56,11 @@ it('should load the mock answers',
   () => axios.get('/products/48432')
     .then((productInfo) => expect(productInfo).toEqual(mockProductData)));
 
+it('should post mock question',
+  () => axios.post('/qa/questions')
+    .then((response) => expect(response).toEqual('CREATED')));
+
+// Question And Answers Tests -------------------------------------------------------
 it('should load and display the selected product data', async () => {
   const { getByTestId, findAllByTestId } = render(
     <Provider store={store}>
@@ -79,14 +92,55 @@ it('should be able to show more questions if there are more than two and then co
   expect(endQuestions).toHaveLength(2);
 });
 
-it('should have the question modal pop up when submit a question is clicked', () => {
-  const { getByTestId } = render(
+// Question Modal Tests -------------------------------------------------------
+it('should have the question modal pop up when submit a question is clicked', async () => {
+  const { getByTestId, findAllByTestId } = render(
+    <Provider store={store}>
+      <QuestionsAndAnswers />
+    </Provider>,
+  );
+  // expect(getByTestId('question-modal')).toHaveTextContent('Placeholder Question');
+  fireEvent.click(getByTestId('add-question'));
+  getByTestId('close-modal');
+  getByTestId('submit-question');
+  await getByTestId('modal-subheader');
+  const questionInputs = await findAllByTestId('question-input');
+
+  expect(getByTestId('close-modal')).toHaveTextContent('Close');
+  expect(getByTestId('submit-question')).toHaveTextContent('Submit');
+  expect(getByTestId('modal-subheader')).toHaveTextContent('"About the gucci socks"');
+  expect(questionInputs).toHaveLength(3);
+});
+
+it('inputs of the form should reflect the value when changed', () => {
+  const { getByTestId, getByPlaceholderText } = render(
+    <Provider store={store}>
+      <QuestionsAndAnswers />
+    </Provider>,
+  );
+
+  fireEvent.click(getByTestId('add-question'));
+  fireEvent.change(getByPlaceholderText('Why did you like the product or not?'), { target: { value: 'question' } });
+  fireEvent.change(getByPlaceholderText('Example: jackson11!'), { target: { value: 'nickname' } });
+  fireEvent.change(getByPlaceholderText('jackson@email.com'), { target: { value: 'email@gmail.com' } });
+  expect(getByPlaceholderText('Why did you like the product or not?').value).toBe('question');
+  expect(getByPlaceholderText('Example: jackson11!').value).toBe('nickname');
+  expect(getByPlaceholderText('jackson@email.com').value).toBe('email@gmail.com');
+});
+
+it('sends a post request if the inputs are correct', () => {
+  const { getByTestId, getByPlaceholderText, queryByTestId } = render(
     <Provider store={store}>
       <QuestionsAndAnswers />
     </Provider>,
   );
   fireEvent.click(getByTestId('add-question'));
-  // expect(getByTestId('question-modal')).toHaveTextContent('Placeholder Question');
-  expect(getByTestId('close-modal')).toHaveTextContent('Close');
-  expect(getByTestId('submit-question')).toHaveTextContent('Submit');
+  fireEvent.change(getByPlaceholderText('Why did you like the product or not?'), { target: { value: 'question' } });
+  fireEvent.change(getByPlaceholderText('Example: jackson11!'), { target: { value: 'nickname' } });
+  fireEvent.change(getByPlaceholderText('jackson@email.com'), { target: { value: 'email@gmail.com' } });
+  fireEvent.click(getByTestId('submit-question'));
+  expect(queryByTestId('question-modal')).toBe(null);
 });
+
+//Question Entry Tests --------------------------------------------------
+

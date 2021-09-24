@@ -116,7 +116,7 @@ const QuestionEntry = (props) => {
   };
 
   return (
-    <div className="question-entry">
+    <div data-testid="question-entry" className="question-entry">
       <h1>
         Q:
         {question}

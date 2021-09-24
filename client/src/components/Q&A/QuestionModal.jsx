@@ -67,7 +67,6 @@ const QuestionModal = (props) => {
   const getProductName = () => {
     axios.get(`/products/${productId}`)
       .then((response) => {
-        console.log(response);
         setProductName(response.data.name);
       })
       .catch((error) => {
@@ -83,8 +82,7 @@ const QuestionModal = (props) => {
         <div className="modal-header">
           <h4 data-testid="modal-header" className="modal-title">Ask Your Question</h4>
           <span data-testid="modal-subheader">
-            &#34;
-            About the&#160;
+            &#34;About the&#160;
             {productName}
             &#34;
           </span>
@@ -93,17 +91,17 @@ const QuestionModal = (props) => {
           <div className="modal-body">
             <span>Your Question: *</span>
             <br />
-            <textarea type="text" id="modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
+            <textarea data-testid="question-input" type="text" id="modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
             <br />
             <br />
             <span>What is your nickname: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="Example: jackson11!" onChange={nameChangeHandler} />
+            <input data-testid="question-input" type="text" size="60" maxLength="60" placeholder="Example: jackson11!" onChange={nameChangeHandler} />
             <br />
             <span><em>For privacy reasons, do not use your full name or email address</em></span>
             <br />
             <br />
             <span>Your email: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="jackson@email.com" onChange={emailChangeHandler} />
+            <input data-testid="question-input" type="text" size="60" maxLength="60" placeholder="jackson@email.com" onChange={emailChangeHandler} />
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>

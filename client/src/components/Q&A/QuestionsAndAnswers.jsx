@@ -70,7 +70,7 @@ const QuestionsAndAnswers = () => {
 
   const renderModal = () => {
     if (questionModal) {
-      return (<QuestionModal toggleQuestionForm={toggleQuestionForm} productId={currentId} />);
+      return (<QuestionModal data-testid="question-modal" toggleQuestionForm={toggleQuestionForm} productId={currentId} />);
     }
     return null;
   };
