@@ -5,6 +5,7 @@ import { useGetReviewsQuery, useGetMetaReviewsQuery, useGetProductInfoQuery } fr
 import ReviewModal from './Review-Modal.jsx';
 import './reviewlist.css';
 import Tile from './Tile.jsx';
+import Ratings from './Ratings.jsx';
 
 const ReviewsAndRatings = () => {
   const [sortBy, setSort] = useState(() => 'helpful');
@@ -51,6 +52,7 @@ const ReviewsAndRatings = () => {
   let content;
   let moreReviews;
   let addReview;
+  let ratings;
 
   if (isLoading) {
     content = (
@@ -108,6 +110,11 @@ const ReviewsAndRatings = () => {
         </>
       );
     }
+    ratings = (
+      <Ratings
+        meta={reviewInfo}
+      />
+    );
   } else if (isError) {
     content = (
       <p>
@@ -121,7 +128,7 @@ const ReviewsAndRatings = () => {
       <h4 className="RL"> Ratings & Reviews</h4>
       <div className="RLcontainer">
         <div className=".item-ratings">
-          Ratings Placeholder
+          {ratings}
         </div>
         <div className="item-reviews">
           {dropdown}
