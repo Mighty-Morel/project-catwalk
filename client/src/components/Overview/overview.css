@@ -97,7 +97,20 @@
   margin: auto;
   z-index: 1;
   object-fit: cover;
+  cursor: crosshair;
+}
+
+.overview-main-image-zoom {
+  position: absolute;
+  top: -9999px;
+  bottom: -9999px;
+  left: -9999px;
+  right: -9999px;
+  margin: auto;
+  z-index: 1;
+  object-fit: cover;
   cursor: zoom-out;
+  overflow: auto;
 }
 
 .overview-thumbnail-container {
@@ -445,6 +458,7 @@ button.overview-addToCart {
   grid-row: 3 / 4;
   margin: 2px 0px;
   text-align: center;
+  font-size: .95em;
   padding:20%;
 }
 
@@ -460,7 +474,7 @@ button.overview-addToCart {
   grid-row: 3 / 4;
   margin: 2px 0px;
   text-align: center;
-  font-size: 1.3em;
+  font-size: 1.25em;
   padding:20%;
 }
 
