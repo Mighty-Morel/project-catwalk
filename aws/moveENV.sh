@@ -1,1 +1,2 @@
 #TODO use scp to move env file https://linuxize.com/post/how-to-use-scp-command-to-securely-transfer-files/
+scp /Users/katherineyu/bootcamp/project-catwalk/config/config.js chiakat@172.31.10.121:/project-catwalk/config/
