@@ -29,14 +29,14 @@ const StarRatings = ({ productId }) => {
 
   console.log(totalRatings, totalScore, avgRating);
 
-
   if (isLoading) {
-    return <div>Loading...</div>;
+    return <div>Loading Rating...</div>;
   }
   return (
     <>
       <a href="#reviews" className="overview-ratings-link">
         Read all
+        {' '}
         {totalRatings}
         {' '}
         reviews
