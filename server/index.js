@@ -203,6 +203,7 @@ app.put('/api/reviews/:review_id/report', (req, res) => {
     });
 });
 
+// Retrieves list of products added to the cart by a user.
 app.get('/cart', (req, res) => {
   axios.get('/cart')
     .then((response) => {
@@ -213,6 +214,7 @@ app.get('/cart', (req, res) => {
     });
 });
 
+// Adds a product to the cart.
 app.post('/cart', (req, res) => {
   axios.post('/cart', req.body)
     .then((response) => {

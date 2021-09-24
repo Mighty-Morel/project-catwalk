@@ -7,6 +7,7 @@ import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCartFeatures from './AddToCart.jsx';
+import StarRatings from './StarRatings.jsx';
 import 'regenerator-runtime/runtime';
 import './overview.css';
 
@@ -46,6 +47,7 @@ const ProductInfo = () => {
       <div data-testid="resolved" className="overview-product-info-container">
         <span data-testid="ratings" className="overview-ratings">
           ★★★★☆
+          <StarRatings />
           <a href="#reviews" className="overview-ratings-link">Read all reviews</a>
         </span>
         <br />
