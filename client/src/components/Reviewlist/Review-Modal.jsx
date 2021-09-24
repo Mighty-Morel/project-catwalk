@@ -10,7 +10,7 @@ import Characteristic from './Characteristic.jsx';
 const ReviewModal = ({
   handleClose, show, product, reviewInfo,
 }) => {
-  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+  const showHideClassName = show ? 'RLmodal RLdisplay-block' : 'RLmodal RLdisplay-none';
 
   const [recommend, setRecommend] = useState(null);
   const [characteristics, setCharacteristics] = useState({});
@@ -95,58 +95,62 @@ const ReviewModal = ({
 
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
-        <div className="modal-header">
-          <h3 className="modal-title">Write Your Review</h3>
+      <section className="RLmodal-main">
+        <div className="RLmodal-header">
+          <h3 className="RLmodal-title">Write Your Review</h3>
           <h5>
             About the&nbsp;
             {product.name}
           </h5>
         </div>
-        <form className="modal-body">
+        <form className="RLmodal-body">
           <Stars setStarRating={setStarRating} />
           <Recommend setRecommend={setRecommend} />
           <br />
-          <span>Characteristics:</span>
+          <span className="RL">Characteristics:</span>
           {chars}
-          <span>Review Summary:</span>
+          <span className="RL">Review Summary:</span>
           <input
+            className="RL"
             type="text"
             size="60"
             maxLength="60"
             placeholder="Example: Best purchase ever!"
             onChange={(e) => { setSummary(e.target.value); }}
           />
-          <span>Review Body:</span>
+          <span className="RL">Review Body:</span>
           <textarea
+            className="RL"
             type="text"
             maxLength="1000"
             placeholder="Why did you like the product or not?."
             onChange={(e) => { setBody(e.target.value); }}
           />
-          <span>What is your nickname: </span>
+          <span className="RL">What is your nickname: </span>
           <input
+            className="RL"
             type="text"
             size="60"
             maxLength="60"
             placeholder="Example: jack543!"
             onChange={(e) => { setNickname(e.target.value); }}
           />
-          <span><em>For privacy reasons, do not use your full name or email address</em></span>
-          <span>Your email: </span>
+          <span className="RL"><em>For privacy reasons, do not use your full name or email address</em></span>
+          <span className="RL">Your email: </span>
           <input
+            className="RL"
             type="text"
             size="60"
             maxLength="60"
             placeholder="jack@email.com"
             onChange={(e) => { setEmail(e.target.value); }}
           />
-          <span><em>For authentication reasons, you will not be emailed</em></span>
-          <span className="error">
+          <span className="RL"><em>For authentication reasons, you will not be emailed</em></span>
+          <span className="RLerror">
             {error}
           </span>
         </form>
-        <div className="modal-footer">
+        <div className="RLmodal-footer">
           <button
             className="more-reviews"
             type="button"
