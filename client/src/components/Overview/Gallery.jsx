@@ -92,16 +92,18 @@ const Gallery = () => {
 
   const toggleZoom = () => {
     dispatch(setZoomView(!zoomView));
+    dragElement(document.getElementById("mydiv"));
   };
 
   const renderMainImage = () => {
     if (zoomView) {
       return (
         <img
+          id="main-image"
           className="overview-main-image-zoom"
           onClick={() => toggleZoom()}
           onKeyPress={() => toggleZoom()}
-          onMouseEnter={() => dragElement()}
+          // onMouseEnter={() => dragElement()}
           role="link"
           tabIndex="-1"
           src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
@@ -113,10 +115,11 @@ const Gallery = () => {
     if (expandedView) {
       return (
         <img
+          id="main-image"
           className="overview-main-image-expanded"
           onClick={() => toggleZoom()}
           onKeyPress={() => toggleZoom()}
-          onMouseEnter={() => dragElement()}
+          // onMouseEnter={() => dragElement()}
           role="link"
           tabIndex="-1"
           src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
@@ -136,6 +139,7 @@ const Gallery = () => {
   let pos1 = 0; let pos2 = 0; let pos3 = 0; let pos4 = 0;
 
   const dragElement = (elmnt) => {
+    console.log(elmnt)
     const elementDrag = (e) => {
       // e = e || window.event;
       e.preventDefault();
