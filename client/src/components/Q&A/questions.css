@@ -4,14 +4,68 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  width: 70%;
-  margin:auto;
-  border: 1px solid black;
+  /* width: 70%; */
+  margin: 10px;
+  /* border: 1px solid black; */
+  border-top:2px solid black;
+  border-bottom:2px solid black;
 }
 
 .question-entry {
-  border: 1px solid grey;
-  margin: 5px;
+  /* border: 1px solid grey; */
+  margin: 5px 5px 5px 10px;
+  border-bottom: 1.5px solid #2C3E50;
+}
+
+.question-buttons{
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0px 10px 0px;
+}
+
+.answer-entry {
+  margin: 0px 10px 0px 30px;
+  padding-bottom: 20px;
+  border-top: 1px solid #eee;
+  border-bottom: 1px solid #eee;
+}
+
+.seeMoreAnswers {
+  display: flex;
+  justify-content: flex-end;
+  margin: 10px 0px 10px 0px;
+}
+
+.answerSellerInfo {
+  flex: none;
+  align-self: flex-start;
+}
+
+.answerExtras {
+  display: flex;
+  justify-content: flex-end;
+  gap: 20px;
+  color: rgba(0,0,0,0.5);
+}
+
+.questionExtras {
+  display: flex;
+  justify-content: flex-end;
+  color: rgba(0,0,0,0.5);
+}
+
+.addAnswer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 10px;
+}
+
+.answerText{
+  font-size: 1.2em;
+}
+
+#QA-helpful-yes:hover {
+  text-decoration: underline;
 }
 
 /* Answer Modal Formatting ------------------------------------------------- */
@@ -49,4 +103,25 @@
 
 #QA-modal-textbox {
   width: 98%;
+}
+
+/* Buttons --------------------------------------------------------------*/
+.QA-buttons {
+  display:inline-block;
+  padding: 0.35em 1.2em;
+  border: 0.1em solid black;
+  margin: 0 0.3em 0.3em 0;
+  border-radius: 0.12em;
+  box-sizing: border-box;
+  text-decoration: none;
+  font-family: 'Roboto',sans-serif;
+  font-weight: 300;
+  color: black;
+  text-align: center;
+  transition: all 0.2s;
+  background-color: white;
+}
+.QA-buttons:hover {
+  color:#000000;
+  background-color:rgb(44, 62, 80);
 }

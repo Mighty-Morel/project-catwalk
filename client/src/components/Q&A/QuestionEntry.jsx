@@ -52,10 +52,10 @@ const QuestionEntry = (props) => {
 
   const renderMoreAnswers = () => {
     if (extra) {
-      return (<button data-testid="render-more-answers" type="button" onClick={showMoreAnswers}>See more answers</button>);
+      return (<button className="QA-buttons" data-testid="render-more-answers" type="button" onClick={showMoreAnswers}>See more answers</button>);
     }
     if (answerCount > 2) {
-      return (<button data-testid="collapse-answers" type="button" onClick={collapseAnswers}>Collapse answers</button>);
+      return (<button className="QA-buttons" data-testid="collapse-answers" type="button" onClick={collapseAnswers}>Collapse answers</button>);
     }
     return null;
   };
@@ -84,6 +84,7 @@ const QuestionEntry = (props) => {
           onKeyPress={putHelpfulness}
           role="button"
           tabIndex="0"
+          id="QA-helpful-yes"
         >
           Yes &#40;
           {helpfulness}
@@ -122,7 +123,7 @@ const QuestionEntry = (props) => {
     }
     return (
       <>
-        <h2>A: </h2>
+        <h2>A:</h2>
         {displayedAnswers.map((answer) => {
           const {
             answer_id,
@@ -151,15 +152,21 @@ const QuestionEntry = (props) => {
   return (
     <div data-testid="question-entry" className="question-entry">
       <h1>
-        Q:
+        Q:&#160;
         {question}
       </h1>
-      <span>Helpful? </span>
-      {renderHelpful()}
-      <button data-testid="add-answer" type="button" onClick={toggleAnswerForm}> Add Answer</button>
+      <div className="questionExtras">
+        <span>Helpful?&#160;</span>
+        {renderHelpful()}
+      </div>
+      <div className="addAnswer">
+        <button className="QA-buttons" data-testid="add-answer" type="button" onClick={toggleAnswerForm}> Add Answer</button>
+      </div>
       {renderModal()}
       {renderAnswers()}
-      {renderMoreAnswers()}
+      <div className="seeMoreAnswers">
+        {renderMoreAnswers()}
+      </div>
     </div>
   );
 };
