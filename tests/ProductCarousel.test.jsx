@@ -149,8 +149,7 @@ it('should load and display product info for related product data',
 
 it('should load and display product styles for related product data',
   () => axios.get('/products/48433/styles')
-    // eslint-disable-next-line max-len
-    .then((relatedProductDataStyles) => expect(relatedProductDataStyles).toEqual(mockRelatedDataThird)));
+    .then((relatedProductStyles) => expect(relatedProductStyles).toEqual(mockRelatedDataThird)));
 
 it('should load and display carousel module title', async () => {
   render(
@@ -183,6 +182,20 @@ it('should load and render Modal component', async () => {
   );
 });
 
+it('should load and display the product carousel title', async () => {
+  const { getByTestId, findAllByTestId } = render(
+    <Provider store={store}>
+      <ProductCarousel />
+    </Provider>,
+  );
+  await findAllByTestId('carousel-title');
+  expect(getByTestId('carousel-title')).toHaveTextContent('RELATED PRODUCTS');
+  // expect(carouselTitle).toHaveTextContent('RELATED PRODUCTS');
+});
+
+// findAllByTestId waits for everything to render
+// getByTestId doesn't wait, will throw error immediately
+
 // it('should have the comparison modal pop up when star is clicked', async () => {
 //   const { getByTestId, findAllByTestId } = render(
 //     <Provider store={store}>
@@ -197,17 +210,3 @@ it('should load and render Modal component', async () => {
 
 //   expect(getByTestId('modal-title')).toHaveTextContent('Comparing');
 // });
-
-it('should load and display the product carousel title', async () => {
-  const { getByTestId, findAllByTestId } = render(
-    <Provider store={store}>
-      <ProductCarousel />
-    </Provider>,
-  );
-  await findAllByTestId('carousel-title');
-  expect(getByTestId('carousel-title')).toHaveTextContent('RELATED PRODUCTS');
-  // expect(carouselTitle).toHaveTextContent('RELATED PRODUCTS');
-});
-
-// findAllByTestId waits for everything to render
-// getByTestId doesn't wait, will throw error immediately
