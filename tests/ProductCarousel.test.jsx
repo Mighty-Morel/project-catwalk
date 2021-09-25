@@ -14,7 +14,6 @@ import { Provider } from 'react-redux';
 import axios from 'axios';
 
 import ProductCarousel from '../client/src/components/Related/ProductCarousel';
-import Modal from '../client/src/components/Related/Modal';
 import RelatedItems from '../client/src/components/Related/RelatedItems';
 import Price from '../client/src/components/Related/Price';
 import store from '../client/src/store/store';
@@ -140,3 +139,15 @@ it('should load and display sales price if not null', async () => {
     })
     .catch((err) => console.log(err));
 });
+
+// test('star selected should have text comparing on modal card', () => {
+//   render(
+//     <Provider store={store}>
+//       <ProductCarousel />
+//     </Provider>,
+//   );
+
+//   const openModal = screen.getByTestId('open-comparison-modal');
+//   fireEvent.click(openModal);
+//   expect(screen.getByTestId('modal-title')).toHaveTextContent('Comparing');
+// });

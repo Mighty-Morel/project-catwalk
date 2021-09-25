@@ -137,7 +137,7 @@ const ProductCarousel = () => {
     <>
       <main>
         <Modal show={show} handleClose={hideModal}>
-          <div className="c-modal-title">Comparing</div>
+          <div className="c-modal-title" data-testid="modal-title">Comparing</div>
           <div className="c-modal-title-wrapper">
             <div className="c-modal-overview">{overviewName}</div>
             <div className="c-modal-card">{cardName}</div>
