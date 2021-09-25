@@ -247,7 +247,7 @@ hr {
   line-height: 2em;
   font-size: .9em;
   display: flex;
-  align-self: center;
+  align-items: center;
   vertical-align: middle;
 }
 
