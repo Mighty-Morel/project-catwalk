@@ -4,6 +4,35 @@
   <meta charset="utf-8">
   <title>Project CatWalk</title>
   <link href="style.css" rel="stylesheet">
+  <style>
+
+    /* For Chrome or Safari */
+    progress::-webkit-progress-bar {
+        background-color: #eeeeee;
+    }
+
+    progress::-webkit-progress-value {
+        background-color: #2C3E50 !important;
+    }
+
+    /* For Firefox */
+    progress {
+        background-color: #eee;
+    }
+
+    progress::-moz-progress-bar {
+        background-color: #2C3E50 !important;
+    }
+
+    /* For IE10 */
+    progress {
+        background-color: #eee;
+    }
+
+    progress {
+        background-color: #2C3E50;
+    }
+  </style>
 </head>
 <body>
   <div id="app"> If you see this, React is not running. Check that webpack and server is runnning! :) </div>
