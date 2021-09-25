@@ -15,6 +15,7 @@ import axios from 'axios';
 
 import ProductCarousel from '../client/src/components/Related/ProductCarousel';
 import RelatedItems from '../client/src/components/Related/RelatedItems';
+import Modal from '../client/src/components/Related/Modal';
 import Price from '../client/src/components/Related/Price';
 import store from '../client/src/store/store';
 
@@ -72,6 +73,22 @@ const mockStylePriceData = {
   sale: '29.00',
 };
 
+const mockRelatedData = [
+  {
+    pic: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+    sale: null,
+    price: '140.00',
+    name: 'Camo Onesie',
+    features:
+      [
+        { feature: 'Fabric', value: 'Canvas' },
+        { feature: 'Buttons', value: 'Brass' },
+      ],
+    category: 'Jackets',
+    relatedId: 48432,
+  },
+];
+
 beforeAll(() => {
   axios.get.mockImplementation((url) => {
     switch (url) {
@@ -95,7 +112,7 @@ jest.mock('axios');
 jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
 jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
 jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal Style Placeholder</div>));
-jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
+// jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
 
 // TESTS =======================================================
 it('should load and display the selected product data',
@@ -117,12 +134,14 @@ it('should load and display carousel module title', async () => {
     </Provider>,
   );
 
-  axios.get('/products/48421/styles')
-    .then(async () => {
-      const carousel = await waitFor(() => screen.getByTestId('carousel'));
-      expect(carousel).toHaveTextContent('RELATED PRODUCTS');
-    })
-    .catch((err) => console.log(err));
+  // axios.get('/products/48421/styles')
+  //   .then(async () => {
+  //     const carousel = await waitFor(() => screen.getByTestId('carousel'));
+  //     expect(carousel).toHaveTextContent('RELATED PRODUCTS');
+  //     const starPlaceholder = await waitFor(() => screen.getByTestId('star-placeholder'));
+  //     expect(starPlaceholder).toHaveTextContent('*star placeholder*');
+  //   })
+  //   .catch((err) => console.log(err));
 });
 
 it('should load and display sales price if not null', async () => {
@@ -140,14 +159,60 @@ it('should load and display sales price if not null', async () => {
     .catch((err) => console.log(err));
 });
 
-// test('star selected should have text comparing on modal card', () => {
+it('should load and render Modal component', async () => {
+  render(
+    <Provider store={store}>
+      <Modal />
+    </Provider>,
+  );
+});
+
+// it('should load carousel title', async () => {
 //   render(
 //     <Provider store={store}>
 //       <ProductCarousel />
 //     </Provider>,
 //   );
 
-//   const openModal = screen.getByTestId('open-comparison-modal');
-//   fireEvent.click(openModal);
-//   expect(screen.getByTestId('modal-title')).toHaveTextContent('Comparing');
+//   expect(screen.getByTestId('carousel-title')).toHaveTextContent('RELATED PRODUCTS');
+// });
+
+// test('selected card should have jackets category', () => {
+//   const mockRelatedDataCard = {
+//     pic: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+//     sale: null,
+//     price: '140.00',
+//     name: 'Camo Onesie',
+//     features:
+//       [
+//         { feature: 'Fabric', value: 'Canvas' },
+//         { feature: 'Buttons', value: 'Brass' },
+//       ],
+//     category: 'Jackets',
+//     relatedId: 48432,
+//   };
+
+//   render(
+//     <Provider store={store}>
+//       <ProductCarousel mockRelatedDataCard={mockRelatedDataCard} />
+//     </Provider>,
+//   );
+
+//   const card = waitFor(() => screen.getByTestId('card-category"'));
+//   expect(card).toHaveTextContent('Jackets');
+// });
+
+// it('should have the comparison modal pop up when star is clicked', async () => {
+//   const { getByTestId, findAllByTestId } = render(
+//     <Provider store={store}>
+//       <ProductCarousel />
+//     </Provider>,
+//   );
+
+//   await screen.getByTestId('carousel');
+//   const openComparisonModal = await screen.findAllByTestId('open-modal');
+//   fireEvent.click(getByTestId(openComparisonModal));
+//   // const comparisonModal = await findAllByTestId('comparison-modal');
+
+//   expect(getByTestId('modal-title')).toHaveTextContent('Comparing');
 // });

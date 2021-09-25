@@ -136,7 +136,7 @@ const ProductCarousel = () => {
   return (
     <>
       <main>
-        <Modal show={show} handleClose={hideModal}>
+        <Modal show={show} handleClose={hideModal} data-testid="comparison-modal">
           <div className="c-modal-title" data-testid="modal-title">Comparing</div>
           <div className="c-modal-title-wrapper">
             <div className="c-modal-overview">{overviewName}</div>
@@ -162,8 +162,8 @@ const ProductCarousel = () => {
         </Modal>
       </main>
 
-      <div className="c-carousel" data-testid="carousel">
-        <div>RELATED PRODUCTS</div>
+      <div className="c-carousel">
+        <div data-testid="carousel-title">RELATED PRODUCTS</div>
 
         <button className="c-carousel__button c-carousel__button--left" type="button" onClick={() => prev()}>
           <img src="./images/arrow-left.png" alt="" />
@@ -177,14 +177,14 @@ const ProductCarousel = () => {
                 <div className="c-card">
                   <div className="c-image__container">
                     <img className="c-cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
-                    <button className="c-card__star" type="button" onClick={() => showModal(product.relatedId)}>
-                      <img src="./images/star.png" alt="" />
+                    <button className="c-card__star" data-testid="open-modal" type="button" onClick={() => showModal(product.relatedId)}>
+                      <img src="./images/star.png" alt="" data-testid="star" />
                     </button>
                   </div>
-                  <dl className="c-cardCategory">{product.category}</dl>
+                  <dl className="c-cardCategory" data-testid="card-category">{product.category}</dl>
                   <dl className="c-cardTitle">{product.name}</dl>
                   <dl className="c-cardPrice"><Price price={product.price} sale={product.sale} /></dl>
-                  <dl className="c-cardRating">* star placeholder *</dl>
+                  <dl className="c-cardRating" data-testid="star-placeholder">* star placeholder *</dl>
                 </div>
               </li>
             ))}
