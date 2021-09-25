@@ -99,65 +99,58 @@ const Gallery = () => {
   };
 
   const toggleZoom = () => {
+    console.log('click zoom')
     dispatch(setZoomView(!zoomView));
   };
 
-  const renderMainImage = () => {
+  const imageClass = () => {
     if (zoomView) {
-      return (
-        <>
-          <img
-            className="overview-main-image-zoom"
-            onClick={() => toggleZoom()}
-            onKeyPress={() => toggleZoom()}
-            role="link"
-            tabIndex="-1"
-            src={mainImage.url}
-            alt={selectedStyle.name}
-            title={selectedStyle.name}
-          />
-          <div className="overview-collapse-gallery">
-            <span role="button" tabIndex="-1" onClick={() => toggleView()} onKeyDown={() => toggleView()}>
-              <img className="overview-collapse-icon" alt="collapse" src="./images/collapse-icon.png" />
-            </span>
-          </div>
-        </>
-      );
+      return 'overview-main-image-zoom';
     }
     if (expandedView) {
+      return 'overview-main-image-expanded';
+    }
+    return 'overview-main-image';
+  };
+
+  const renderMainImage = () => {
+    if (zoomView || expandedView) {
       return (
-        <>
-          <img
-            className="overview-main-image-expanded"
-            onClick={() => toggleZoom()}
-            onKeyPress={() => toggleZoom()}
-            role="link"
-            tabIndex="-1"
-            src={mainImage.url}
-            alt={selectedStyle.name}
-            title={selectedStyle.name}
-          />
-          <div className="overview-collapse-gallery">
-            <span role="button" tabIndex="-1" onClick={() => toggleView()} onKeyDown={() => toggleView()}>
-              <img className="overview-collapse-icon" alt="collapse" src="./images/collapse-icon.png" />
-            </span>
-          </div>
-        </>
+        <img
+          className={imageClass()}
+          onClick={() => toggleZoom()}
+          onKeyPress={() => toggleZoom()}
+          role="link"
+          tabIndex="-1"
+          src={mainImage.url}
+          alt={selectedStyle.name}
+          title={selectedStyle.name}
+        />
       );
     }
     return (
-      <img className="overview-main-image" src={mainImage.url} alt={selectedStyle.name} title={selectedStyle.name} />
+      <img
+        className={imageClass()}
+        src={mainImage.url}
+        alt={selectedStyle.name}
+        title={selectedStyle.name}
+      />
     );
   };
 
-  const renderContainer = () => {
+  const renderGalleryView = () => {
     if (expandedView) {
       return (
-        <div
-          className="overview-main-image-container-expanded"
-        >
-          {renderMainImage()}
-        </div>
+        <>
+          <div className="overview-main-image-container-expanded">
+            {renderMainImage()}
+          </div>
+          <div className="overview-collapse-gallery">
+            <span role="button" tabIndex="-1" onClick={() => toggleView()} onKeyDown={() => toggleView()}>
+              <img className="overview-collapse-icon" alt="collapse" src="./images/collapse-icon.png" />
+            </span>
+          </div>
+        </>
       );
     }
     return (
@@ -179,7 +172,7 @@ const Gallery = () => {
   return (
     <>
       <div className="overview-gallery-container">
-        {renderContainer()}
+        {renderGalleryView()}
         <div className="overview-thumbnail-container">
           {renderUpArrow()}
           <div className="overview-thumbnail-image-container">
