@@ -55,10 +55,10 @@ const QuestionsAndAnswers = () => {
   const renderMoreQuestions = () => {
     // Can be taken out if deemed collapse is unnecessary
     if (extra) {
-      return (<button type="button" onClick={showMoreQuestions}>See more questions</button>);
+      return (<button data-testid="render-more-questions" type="button" onClick={showMoreQuestions}>See more questions</button>);
     }
     if (questionCount > 2) {
-      return (<button type="button" onClick={collapseQuestions}>Collapse questions</button>);
+      return (<button data-testid="collapse-questions" type="button" onClick={collapseQuestions}>Collapse questions</button>);
     }
     return null;
   };
@@ -71,7 +71,7 @@ const QuestionsAndAnswers = () => {
 
   const renderModal = () => {
     if (questionModal) {
-      return (<QuestionModal toggleQuestionForm={toggleQuestionForm} productId={currentId} />);
+      return (<QuestionModal data-testid="question-modal" toggleQuestionForm={toggleQuestionForm} productId={currentId} />);
     }
     return null;
   };
@@ -111,7 +111,7 @@ const QuestionsAndAnswers = () => {
         );
       })}
       {renderMoreQuestions()}
-      <button type="button" onClick={toggleQuestionForm}> Add Question</button>
+      <button data-testid="add-question" type="button" onClick={toggleQuestionForm}> Add Question</button>
       {renderModal()}
     </div>
   );
