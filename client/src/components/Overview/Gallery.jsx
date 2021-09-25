@@ -93,6 +93,9 @@ const Gallery = () => {
 
   const toggleView = () => {
     dispatch(updateView(!expandedView));
+    if (zoomView) {
+      setZoomView(false);
+    }
   };
 
   const toggleZoom = () => {
