@@ -1,7 +1,8 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useGetMetaReviewsQuery } from '../../reducers/Review-List-Slice';
-import OverviewStars from './OverviewStars.jsx';
+// import OverviewStars from './OverviewStars.jsx';
+import StarRating from '../Reviewlist/StarRating.jsx';
 
 const StarRatings = ({ productId }) => {
   const {
@@ -37,7 +38,7 @@ const StarRatings = ({ productId }) => {
 
     content = (
       <div className="overview-ratings">
-        <OverviewStars width={`${(starAvg / 5) * 100}%`} />
+        <StarRatings width={`${(starAvg / 5) * 100}%`} />
         <a data-testid="rating" href="#reviews" className="overview-ratings-link">
           Read all
           {' '}
