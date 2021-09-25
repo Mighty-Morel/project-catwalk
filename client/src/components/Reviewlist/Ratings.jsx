@@ -22,7 +22,7 @@ const Ratings = ({ meta, setFilter, filter }) => {
       ratings.push(0);
     }
   }
-  const [ones, twos, threes, fours, fives] = ratings
+  const [ones, twos, threes, fours, fives] = ratings;
 
   const totalRatings = ones + twos + threes + fours + fives;
   const avgRating = (ones * 1 + twos * 2 + threes * 3 + fours * 4 + fives * 5) / totalRatings;
