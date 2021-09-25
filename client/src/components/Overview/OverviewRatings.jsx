@@ -4,7 +4,7 @@ import { useGetMetaReviewsQuery } from '../../reducers/Review-List-Slice';
 // import OverviewStars from './OverviewStars.jsx';
 import StarRating from '../Reviewlist/StarRating.jsx';
 
-const StarRatings = ({ productId }) => {
+const OverviewRatings = ({ productId }) => {
   const {
     data: reviewInfo,
     isLoading,
@@ -38,7 +38,7 @@ const StarRatings = ({ productId }) => {
 
     content = (
       <div className="overview-ratings">
-        <StarRatings width={`${(starAvg / 5) * 100}%`} />
+        <StarRating width={`${(starAvg / 5) * 100}%`} />
         <a data-testid="rating" href="#reviews" className="overview-ratings-link">
           Read all
           {' '}
@@ -59,4 +59,4 @@ const StarRatings = ({ productId }) => {
   return content;
 };
 
-export default StarRatings;
+export default OverviewRatings;

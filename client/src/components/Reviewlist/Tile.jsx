@@ -6,7 +6,9 @@ import StarRating from './StarRating.jsx';
 const tile = ({ review, handlePut }) => (
   <div className="RLtile">
     <div className="review-title">
-      <StarRating width={`${(parseInt(review.rating, 10) / 5) * 100}%`} />
+      <span className="star-rating">
+        <StarRating width={`${(parseInt(review.rating, 10) / 5) * 100}%`} />
+      </span>
       <span className="RLidentity">
         {review.reviewer_name}
         ,&nbsp;
