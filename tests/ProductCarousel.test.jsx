@@ -147,10 +147,6 @@ it('should load and display product info for related product data',
   () => axios.get('/products/48433')
     .then((relatedProductData) => expect(relatedProductData).toEqual(mockRelatedDataSecond)));
 
-it('should load and display product styles for related product data',
-  () => axios.get('/products/48433/styles')
-    .then((relatedProductStyles) => expect(relatedProductStyles).toEqual(mockRelatedDataThird)));
-
 it('should load and display carousel module title', async () => {
   render(
     <Provider store={store}>
