@@ -34,20 +34,25 @@ const OverviewRatings = ({ productId }) => {
       totalRatings += count;
       totalScore += (score * count);
     });
-    starAvg = totalScore / totalRatings;
 
-    content = (
-      <div className="overview-ratings">
-        <StarRating width={`${(starAvg / 5) * 100}%`} />
-        <a data-testid="rating" href="#reviews" className="overview-ratings-link">
-          Read all
-          {' '}
-          {totalRatings}
-          {' '}
-          reviews
-        </a>
-      </div>
-    );
+    starAvg = totalRatings === 0 ? 0 : totalScore / totalRatings;
+
+    if (totalRatings === 0) {
+      content = <div className="overview-ratings" />;
+    } else {
+      content = (
+        <div className="overview-ratings">
+          <StarRating width={`${(starAvg / 5) * 100}%`} />
+          <a data-testid="rating" href="#reviews" className="overview-ratings-link">
+            Read all
+            {' '}
+            {totalRatings}
+            {' '}
+            reviews
+          </a>
+        </div>
+      );
+    }
   } else if (isError) {
     content = (
       <p>
