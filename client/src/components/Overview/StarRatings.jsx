@@ -34,8 +34,9 @@ const StarRatings = ({ productId }) => {
       totalScore += (score * count);
     });
     starAvg = totalScore / totalRatings;
-    // console.log(totalScore, totalRatings)
-    // console.log(reviewInfo.ratings, starAvg);
+    console.log(totalScore, totalRatings)
+    console.log(reviewInfo.ratings, starAvg);
+    console.log (reviewInfo)
 
     content = (
       <div className="overview-ratings">
