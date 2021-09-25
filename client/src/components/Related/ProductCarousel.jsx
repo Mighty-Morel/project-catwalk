@@ -1,23 +1,17 @@
 /* eslint-disable jsx-a11y/no-noninteractive-element-interactions */
 /* eslint-disable jsx-a11y/click-events-have-key-events */
 /* eslint-disable import/extensions */
-/* eslint-disable react/no-array-index-key */
-/* eslint-disable react/jsx-one-expression-per-line */
-/* eslint-disable no-unused-vars */
-/* eslint-disable no-shadow */
-/* eslint-disable no-plusplus */
-/* eslint-disable guard-for-in */
 /* eslint-disable no-restricted-syntax */
-/* eslint-disable no-console */
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProductId } from '../../reducers/Example-Reducer.js';
-import card from './card.css';
-import carousel from './carousel.css';
+import './card.css';
+import './carousel.css';
 import Modal from './Modal.jsx';
+import Price from './Price.jsx';
 
-const ProductCarousel = (props) => {
+const ProductCarousel = () => {
   const [productInfo, setProductInfo] = useState([]);
   const [modalInfo, setModalInfo] = useState([]);
   const [show, setShow] = useState(false);
@@ -29,38 +23,40 @@ const ProductCarousel = (props) => {
 
   const getInfo = () => {
     axios.get(`/products/${productId}/related`)
-      .then((res) => {
-        const relatedIds = res.data;
+      .then((relatedIdData) => {
+        const relatedIds = relatedIdData.data;
         const ids = [];
-        for (let i = 0; i < relatedIds.length; i++) {
+        for (let i = 0; i < relatedIds.length; i += 1) {
           const relatedId = relatedIds[i];
           ids[i] = { relatedId };
         }
         for (const id in ids) { // [{relatedId: 48433}, {…}, {…}, {…}]
-          const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
-          axios.get(`/products/${relatedId}`)
-            .then((res) => {
-              for (let j = 0; j < ids.length; j++) {
-                if (ids[j].relatedId === res.data.id) {
-                  ids[j] = { category: res.data.category, ...ids[j] };
-                  ids[j] = { features: res.data.features, ...ids[j] };
-                  ids[j] = { name: res.data.name, ...ids[j] };
+          if (ids[id]) {
+            const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
+            axios.get(`/products/${relatedId}`)
+              .then((res) => {
+                for (let j = 0; j < ids.length; j += 1) {
+                  if (ids[j].relatedId === res.data.id) {
+                    ids[j] = { category: res.data.category, ...ids[j] };
+                    ids[j] = { features: res.data.features, ...ids[j] };
+                    ids[j] = { name: res.data.name, ...ids[j] };
+                  }
                 }
-              }
-            });
-          axios.get(`/products/${relatedId}/styles`)
-            .then((res) => {
-              for (let k = 0; k < ids.length; k++) {
-                if (ids[k].relatedId === Number(res.data.product_id)) {
-                  ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
-                  ids[k] = { sale: res.data.results[0].sale_price, ...ids[k] };
-                  ids[k] = {
-                    pic: res.data.results[0].photos[0].thumbnail_url, ...ids[k],
-                  };
+              });
+            axios.get(`/products/${relatedId}/styles`)
+              .then((res) => {
+                for (let k = 0; k < ids.length; k += 1) {
+                  if (ids[k].relatedId === Number(res.data.product_id)) {
+                    ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
+                    ids[k] = { sale: res.data.results[0].sale_price, ...ids[k] };
+                    ids[k] = {
+                      pic: res.data.results[0].photos[0].thumbnail_url, ...ids[k],
+                    };
+                  }
                 }
-              }
-              setProductInfo([...ids]);
-            });
+                setProductInfo([...ids]);
+              });
+          }
         }
       });
   };
@@ -72,24 +68,24 @@ const ProductCarousel = (props) => {
     axios.get(`/products/${productId}`)
       .then((res) => {
         const result = [];
-        const overviewName = res.data.name;
+        const overviewNameData = res.data.name;
         const overviewFeatures = res.data.features;
-        for (let l = 0; l < overviewFeatures.length; l++) {
+        for (let l = 0; l < overviewFeatures.length; l += 1) {
           overviewFeatures[l].overview = '✓'; // true
           overviewFeatures[l].card = ' '; // false
           result.push(overviewFeatures[l]);
         }
         modal = result;
-        setOverviewName(overviewName);
+        setOverviewName(overviewNameData);
       })
       .then(() => {
         axios.get(`/products/${cardId}`)
           .then((res) => {
-            const cardName = res.data.name;
+            const cardNameData = res.data.name;
             const cardFeatures = res.data.features;
-            for (let m = 0; m < cardFeatures.length; m++) {
+            for (let m = 0; m < cardFeatures.length; m += 1) {
               const cardFeature = cardFeatures[m];
-              for (let n = 0; n < modal.length; n++) {
+              for (let n = 0; n < modal.length; n += 1) {
                 const overviewFeature = modal[n].feature;
                 const overviewValue = modal[n].value;
                 if (overviewFeature === cardFeature.feature
@@ -101,7 +97,7 @@ const ProductCarousel = (props) => {
               cardFeature.card = '✓'; // true
               modal.push(cardFeature);
             }
-            setCardName(cardName);
+            setCardName(cardNameData);
             setModalInfo([...modal]);
           });
       });
@@ -110,14 +106,14 @@ const ProductCarousel = (props) => {
   const prev = () => {
     myRef.current.scrollLeft -= 230;
     if (myRef.current.scrollLeft < 230) {
-      console.log('BEGINNING OF SCROLL');
+      // console.log('BEGINNING OF SCROLL');
     }
   };
 
   const next = () => {
     myRef.current.scrollLeft += 230;
     if ((productInfo.length - 3) * 230 === myRef.current.scrollLeft) {
-      console.log('END OF SCROLL');
+      // console.log('END OF SCROLL');
     }
   };
 
@@ -130,8 +126,8 @@ const ProductCarousel = (props) => {
     setShow(false);
   };
 
-  const showOverview = (productId) => {
-    dispatch(updateProductId(productId));
+  const showOverview = (currentProductId) => {
+    dispatch(updateProductId(currentProductId));
   };
 
   if (productInfo.length === 0) {
@@ -141,16 +137,24 @@ const ProductCarousel = (props) => {
     <>
       <main>
         <Modal show={show} handleClose={hideModal}>
-          <div className="modal-title">Comparing</div>
-          <div className="modal-title-wrapper">
-            <div className="modal-overview">{overviewName}</div>
-            <div className="modal-card">{cardName}</div>
+          <div className="c-modal-title">Comparing</div>
+          <div className="c-modal-title-wrapper">
+            <div className="c-modal-overview">{overviewName}</div>
+            <div className="c-modal-card">{cardName}</div>
           </div>
-          <ul>
-            {modalInfo.map((item, i) => (
-              <li key={i}>
+          <ul className="c-modal-features">
+            {modalInfo.map((item) => (
+              <li key={item.value}>
                 <div>
-                  <ul className="modal-features">{item.overview} {item.feature}: {item.value}{item.card}</ul>
+                  <ul>
+                    {item.overview}
+                    {' '}
+                    {item.feature}
+                    :
+                    {' '}
+                    {item.value}
+                    {item.card}
+                  </ul>
                 </div>
               </li>
             ))}
@@ -158,37 +162,36 @@ const ProductCarousel = (props) => {
         </Modal>
       </main>
 
-      <div className="carousel" data-testid="carousel">
+      <div className="c-carousel" data-testid="carousel">
         <div>RELATED PRODUCTS</div>
 
-        <button className="carousel__button carousel__button--left" type="button" onClick={() => prev()}>
+        <button className="c-carousel__button c-carousel__button--left" type="button" onClick={() => prev()}>
           <img src="./images/arrow-left.png" alt="" />
         </button>
 
-        <div className="carousel__track-container">
+        <div className="c-carousel__track-container">
 
-          <ul className="carousel__track" ref={myRef}>
-            {console.log(productInfo)}
-            {productInfo.map((product, i) => (
-              <li className="carousel__slide" key={i}>
-                <div className="card">
-                  <div className="image__container">
-                    <img className="cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
-                    <button className="card__star" type="button" onClick={() => showModal(product.relatedId)}>
+          <ul className="c-carousel__track" ref={myRef}>
+            {productInfo.map((product) => (
+              <li className="c-carousel__slide" key={product.relatedId}>
+                <div className="c-card">
+                  <div className="c-image__container">
+                    <img className="c-cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
+                    <button className="c-card__star" type="button" onClick={() => showModal(product.relatedId)}>
                       <img src="./images/star.png" alt="" />
                     </button>
                   </div>
-                  <dl className="cardCategory">{product.category}</dl>
-                  <dl className="cardTitle">{product.name}</dl>
-                  <dl className="cardPrice">${product.price}</dl>
-                  <dl className="cardRating">* star placeholder *</dl>
+                  <dl className="c-cardCategory">{product.category}</dl>
+                  <dl className="c-cardTitle">{product.name}</dl>
+                  <dl className="c-cardPrice"><Price price={product.price} sale={product.sale} /></dl>
+                  <dl className="c-cardRating">* star placeholder *</dl>
                 </div>
               </li>
             ))}
           </ul>
         </div>
 
-        <button className="carousel__button carousel__button--right" type="button" onClick={() => next()}>
+        <button className="c-carousel__button c-carousel__button--right" type="button" onClick={() => next()}>
           <img src="./images/arrow-right.png" alt="" />
         </button>
 
