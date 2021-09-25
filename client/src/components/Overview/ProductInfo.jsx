@@ -22,9 +22,13 @@ const ProductInfo = () => {
     axios.get(`/products/${productId}/styles`)
       .then((response) => {
         dispatch(updateStyles(response.data.results));
-        dispatch(updateStyle(response.data.results[0]));
+        return response.data.results;
       })
-      .catch((error) => console.log('Error getting all styles:', error));
+      .catch((error) => console.log('Error getting all styles:', error))
+      .then((results) => {
+        dispatch(updateStyle(results[0]));
+      })
+      .catch((error) => console.log('Error getting one style:', error));
   };
 
   const updateProduct = async () => {
@@ -53,11 +57,12 @@ const ProductInfo = () => {
         <br />
         <span data-testid="show-name" className="overview-product-name">{product.name}</span>
         <br />
-        <span data-testid="show-price" className="overview-price"><Price /></span>
+        <span data-testid="show-price" className="overview-price"><Price style={style} /></span>
         <br />
         <span data-testid="show-description" className="overview-description">{product.description}</span>
         <br />
-        {/* <span data-testid="social-media" className="social-media">Social Media Placeholder</span>
+        {/* <span data-testid="social-media"className="social-media">
+          Social Media Placeholder</span>
         <br /> */}
         <p className="overview-style-name">
           <b>

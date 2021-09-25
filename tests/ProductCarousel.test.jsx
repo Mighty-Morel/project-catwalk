@@ -5,6 +5,7 @@
 // Product Carousel Tests ==============================================
 
 import React from 'react';
+import 'whatwg-fetch';
 import {
   render, cleanup, waitFor, fireEvent, screen,
 } from '@testing-library/react';
