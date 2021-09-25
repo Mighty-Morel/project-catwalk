@@ -22,6 +22,7 @@ const AddToCartFeatures = ({ style }) => {
   const [availableQty, setAvailableQty] = useState(1);
   const [availableSkus, setAvailableSkus] = useState(initialSkus);
   const [userCart, setUserCart] = useState({});
+  const [liked, setLiked] = useState(false);
 
   // reset views when rendering new style
   const resetDefault = () => {
@@ -249,7 +250,16 @@ const AddToCartFeatures = ({ style }) => {
       {renderSizeSelector()}
       {renderQtySelector()}
       {renderButton()}
-      <div className="overview-heart-icon" />
+      <div
+        className="overview-heart-icon"
+        role="button"
+        aria-label="Like"
+        tabIndex={0}
+        onKeyPress={() => setLiked(!liked)}
+        onClick={() => setLiked(!liked)}
+      >
+        {liked ? '♥' : '♡'}
+      </div>
     </div>
   );
 };

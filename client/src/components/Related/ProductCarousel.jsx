@@ -5,7 +5,7 @@
 import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
-import { updateProductId } from '../../reducers/Example-Reducer.js';
+import { updateProductId } from '../../reducers/Example-Reducer';
 import './card.css';
 import './carousel.css';
 import Modal from './Modal.jsx';
@@ -22,15 +22,15 @@ const ProductCarousel = () => {
   const myRef = useRef(null);
 
   const getInfo = () => {
-    axios.get(`/products/${productId}/related`)
+    axios.get(`/products/${productId}/related`) // 48432
       .then((relatedIdData) => {
-        const relatedIds = relatedIdData.data;
+        const relatedIds = relatedIdData.data; // data: [48433, 48434, 48439, 48438]
         const ids = [];
         for (let i = 0; i < relatedIds.length; i += 1) {
           const relatedId = relatedIds[i];
           ids[i] = { relatedId };
         }
-        for (const id in ids) { // [{relatedId: 48433}, {…}, {…}, {…}]
+        for (const id in ids) { // [{relatedId: 48433}, {relatedId: 48434}, {…}, {…}]
           if (ids[id]) {
             const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
             axios.get(`/products/${relatedId}`)
@@ -136,8 +136,8 @@ const ProductCarousel = () => {
   return (
     <>
       <main>
-        <Modal show={show} handleClose={hideModal}>
-          <div className="c-modal-title">Comparing</div>
+        <Modal show={show} handleClose={hideModal} data-testid="comparison-modal">
+          <div className="c-modal-title" data-testid="modal-title">Comparing</div>
           <div className="c-modal-title-wrapper">
             <div className="c-modal-overview">{overviewName}</div>
             <div className="c-modal-card">{cardName}</div>
@@ -162,8 +162,8 @@ const ProductCarousel = () => {
         </Modal>
       </main>
 
-      <div className="c-carousel" data-testid="carousel">
-        <div>RELATED PRODUCTS</div>
+      <div className="c-carousel" data-testid="product-carousel">
+        <div data-testid="carousel-title">RELATED PRODUCTS</div>
 
         <button className="c-carousel__button c-carousel__button--left" type="button" onClick={() => prev()}>
           <img src="./images/arrow-left.png" alt="" />
@@ -177,14 +177,14 @@ const ProductCarousel = () => {
                 <div className="c-card">
                   <div className="c-image__container">
                     <img className="c-cardImage" src={product.pic} alt="" onClick={() => showOverview(product.relatedId)} />
-                    <button className="c-card__star" type="button" onClick={() => showModal(product.relatedId)}>
-                      <img src="./images/star.png" alt="" />
+                    <button className="c-card__star" data-testid="open-modal" type="button" onClick={() => showModal(product.relatedId)}>
+                      <img src="./images/star.png" alt="" data-testid="star" />
                     </button>
                   </div>
-                  <dl className="c-cardCategory">{product.category}</dl>
+                  <dl className="c-cardCategory" data-testid="card-category">{product.category}</dl>
                   <dl className="c-cardTitle">{product.name}</dl>
                   <dl className="c-cardPrice"><Price price={product.price} sale={product.sale} /></dl>
-                  <dl className="c-cardRating">* star placeholder *</dl>
+                  <dl className="c-cardRating" data-testid="star-placeholder">* star placeholder *</dl>
                 </div>
               </li>
             ))}

@@ -4,6 +4,7 @@ import { createSlice } from '@reduxjs/toolkit';
 const initialState = {
   id: 48432,
   productInfo: {},
+  expandedView: false,
 };
 
 export const productSlice = createSlice({
@@ -16,11 +17,14 @@ export const productSlice = createSlice({
     updateProductInfo: (state, action) => {
       state.productInfo = action.payload;
     },
+    updateView: (state, action) => {
+      state.expandedView = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { updateProductId, updateProductInfo } = productSlice.actions;
+export const { updateProductId, updateProductInfo, updateView } = productSlice.actions;
 
 export default productSlice.reducer;
 

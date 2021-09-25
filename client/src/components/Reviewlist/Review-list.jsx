@@ -1,5 +1,6 @@
 /* eslint-disable import/extensions */
 import React, { useState, useEffect } from 'react';
+import axios from 'axios';
 import { useSelector } from 'react-redux';
 import { useGetReviewsQuery, useGetMetaReviewsQuery, useGetProductInfoQuery } from '../../reducers/Review-List-Slice';
 import ReviewModal from './Review-Modal.jsx';
@@ -49,12 +50,20 @@ const ReviewsAndRatings = () => {
   );
   const {
     data: productInfo,
-    isSuccess: infoSuccess,
+    isLoading: infoIsLoading,
+    isSuccess: infoIsSuccess,
+    // isError: infoisError,
+    // error: infoError
   } = useGetProductInfoQuery(productId);
   const {
     data: reviewInfo,
-    isSuccess: reviewInfoSuccess,
+    isLoading: reviewInfoIsLoading,
+    isSuccess: reviewInfoIsSuccess,
   } = useGetMetaReviewsQuery(productId);
+
+  const handlePut = (reviewId, type) => {
+    axios.put(`/api/reviews/${reviewId}/${type}`);
+  };
 
   let dropdown;
   let content;
@@ -62,13 +71,13 @@ const ReviewsAndRatings = () => {
   let addReview;
   let ratings;
 
-  if (isLoading) {
+  if (isLoading || infoIsLoading || reviewInfoIsLoading) {
     content = (
       <p>
         Loading...zzz, this request might be taking some time
       </p>
     );
-  } else if (isSuccess && infoSuccess && reviewInfoSuccess) {
+  } else if (isSuccess && infoIsSuccess && reviewInfoIsSuccess) {
     let reviews = [];
     for (let i = 0; i < allReviews.results.length; i += 1) {
       if (filter[allReviews.results[i].rating]) {
@@ -93,7 +102,7 @@ const ReviewsAndRatings = () => {
       </>
     );
     content = reviews.map((review) => (
-      <Tile key={review.review_id} review={review} />
+      <Tile key={review.review_id} review={review} handlePut={handlePut} />
     ));
     addReview = (
       <>

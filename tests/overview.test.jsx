@@ -143,7 +143,7 @@ test('main image should change to next photo when right arrow is clicked', async
   expect(screen.getByAltText('Forest Green & Black_1')).toBeInTheDocument();
 });
 
-test('main image should not change if left arrow is clicked and the current photo is the already the first', async () => {
+test('left arrow should appear after the right arrow is clicked', async () => {
   render(
     <Provider store={store}>
       <Gallery />
@@ -151,8 +151,9 @@ test('main image should not change if left arrow is clicked and the current phot
   );
   await act(() => screen.findAllByRole('menuitem'));
 
-  fireEvent.click(screen.getByAltText('left arrow'));
+  fireEvent.click(screen.getByAltText('right arrow'));
 
+<<<<<<< HEAD
   expect(screen.getByAltText('Forest Green & Black_0')).toBeInTheDocument();
 });
 
@@ -182,3 +183,7 @@ test('expect loading screen to appear while data is still loading', async () => 
 
   expect(screen.getByText('Loading ratings...')).toBeInTheDocument();
 });
+=======
+  expect(screen.getByAltText('left arrow')).toBeInTheDocument();
+});
+>>>>>>> main
