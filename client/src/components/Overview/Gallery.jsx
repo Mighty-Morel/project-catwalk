@@ -68,9 +68,11 @@ const Gallery = () => {
   const renderLeftArrow = () => {
     if (mainPhotoIndex > 0) {
       return (
-        <span role="button" tabIndex="-1" onClick={() => moveUp()} onKeyDown={() => handleKeyDown()}>
-          <img className="overview-main-arrow left" alt="left arrow" src="./images/double-left-arrow.png" />
-        </span>
+        <div className="overview-main-arrow-container left">
+          <span role="button" tabIndex="-1" onClick={() => moveUp()} onKeyDown={() => handleKeyDown()}>
+            <img className="overview-main-arrow left" alt="left arrow" src="./images/double-left-arrow.png" />
+          </span>
+        </div>
       );
     }
     return null;
@@ -79,9 +81,11 @@ const Gallery = () => {
   const renderRightArrow = () => {
     if (mainPhotoIndex < stylePhotos.length - 1) {
       return (
-        <span role="button" tabIndex="-1" onClick={() => moveDown()} onKeyDown={() => handleKeyDown()}>
-          <img className="overview-main-arrow right" alt="right arrow" src="./images/double-right-arrow.png" />
-        </span>
+        <div className="overview-main-arrow-container right">
+          <span role="button" tabIndex="-1" onClick={() => moveDown()} onKeyDown={() => handleKeyDown()}>
+            <img className="overview-main-arrow right" alt="right arrow" src="./images/double-right-arrow.png" />
+          </span>
+        </div>
       );
     }
     return null;
@@ -189,10 +193,10 @@ const Gallery = () => {
           </div>
           {renderDownArrow()}
         </div>
-        <div className="overview-main-arrow-container">
+        {/* <div className="overview-main-arrow-container"> */}
           {renderLeftArrow()}
           {renderRightArrow()}
-        </div>
+        {/* </div> */}
       </div>
     </>
   );
