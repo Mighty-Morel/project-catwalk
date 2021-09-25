@@ -81,9 +81,8 @@ const QuestionModal = (props) => {
       <div className="QA-modal-content">
         <div className="QA-modal-header">
           <h4 className="QA-modal-title">Ask Your Question</h4>
-          <span>
-            &#34;
-            About the&#160;
+          <span data-testid="modal-subheader">
+            &#34;About the&#160;
             {productName}
             &#34;
           </span>
@@ -92,23 +91,23 @@ const QuestionModal = (props) => {
           <div className="QA-modal-body">
             <span>Your Question: *</span>
             <br />
-            <textarea type="text" id="QA-modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
+            <textarea data-testid="question-input" type="text" id="QA-modal-textbox" maxLength="1000" placeholder="Why did you like the product or not?" onChange={textChangeHandler} />
             <br />
             <br />
             <span>What is your nickname: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="Example: jackson11!" onChange={nameChangeHandler} />
+            <input data-testid="question-input" type="text" size="60" maxLength="60" placeholder="Example: jackson11!" onChange={nameChangeHandler} />
             <br />
             <span><em>For privacy reasons, do not use your full name or email address</em></span>
             <br />
             <br />
             <span>Your email: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="jackson@email.com" onChange={emailChangeHandler} />
+            <input data-testid="question-input" type="text" size="60" maxLength="60" placeholder="jackson@email.com" onChange={emailChangeHandler} />
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
           <div className="QA-modal-footer">
-            <button type="button" onClick={toggleQuestionForm}>Close</button>
-            <button type="button" onClick={submitQuestion}>Submit</button>
+            <button data-testid="close-modal" type="button" onClick={toggleQuestionForm}>Close</button>
+            <button data-testid="submit-question" type="button" onClick={submitQuestion}>Submit</button>
           </div>
         </form>
       </div>

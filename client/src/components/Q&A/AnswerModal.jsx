@@ -85,7 +85,7 @@ const AnswerModal = (props) => {
       <div className="QA-modal-content">
         <div className="QA-modal-header">
           <h4 className="QA-modal-title">Submit Your Answer</h4>
-          <span>
+          <span data-testid="modal-subheader">
             &#34;
             {productName}
             :&#160;
@@ -97,23 +97,23 @@ const AnswerModal = (props) => {
           <div className="QA-modal-body">
             <span>Your Answer: *</span>
             <br />
-            <textarea type="text" id="QA-modal-textbox" maxLength="1000" onChange={textChangeHandler} />
+            <textarea data-testid="answer-input" type="text" id="QA-modal-textbox" maxLength="1000" onChange={textChangeHandler} />
             <br />
             <br />
             <span>What is your nickname: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="Example: jack543!" onChange={nameChangeHandler} />
+            <input data-testid="answer-input" type="text" size="60" maxLength="60" placeholder="Example: jack543!" onChange={nameChangeHandler} />
             <br />
             <span><em>For privacy reasons, do not use your full name or email address</em></span>
             <br />
             <br />
             <span>Your email: *</span>
-            <input type="text" size="60" maxLength="60" placeholder="jack@email.com" onChange={emailChangeHandler} />
+            <input data-testid="answer-input" type="text" size="60" maxLength="60" placeholder="jack@email.com" onChange={emailChangeHandler} />
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
           <div className="QA-modal-footer">
-            <button type="button" onClick={toggleAnswerForm}>Close</button>
-            <button type="button" onClick={postAnswer}>Submit</button>
+            <button data-testid="close-modal" type="button" onClick={toggleAnswerForm}>Close</button>
+            <button data-testid="submit-answer" type="button" onClick={postAnswer}>Submit</button>
           </div>
         </form>
       </div>
