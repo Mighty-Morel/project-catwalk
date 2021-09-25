@@ -5,6 +5,7 @@
 // Product Carousel Tests ==============================================
 
 import React from 'react';
+import 'whatwg-fetch';
 import {
   render, cleanup, waitFor, fireEvent, screen,
 } from '@testing-library/react';
@@ -16,30 +17,8 @@ import axios from 'axios';
 import ProductCarousel from '../client/src/components/Related/ProductCarousel';
 import Modal from '../client/src/components/Related/Modal';
 import RelatedItems from '../client/src/components/Related/RelatedItems';
+import Price from '../client/src/components/Related/Price';
 import store from '../client/src/store/store';
-
-beforeAll(() => {
-  axios.get.mockImplementation((url) => {
-    switch (url) {
-      case '/products/1':
-        return Promise.resolve(mockProductData);
-      case '/products/1/related':
-        return Promise.resolve(mockRelatedIds);
-      case '/products/48421/styles':
-        return Promise.resolve(mockStyleData);
-      default:
-        return Promise.reject(new Error('Error - this test is not working'));
-    }
-  });
-});
-
-afterEach(cleanup);
-
-jest.mock('axios');
-jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
-jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
-jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal Style Placeholder</div>));
-jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
 
 const mockProductData = [
   {
@@ -85,6 +64,41 @@ const mockStyleData = {
   ],
 };
 
+const mockStylePriceData = {
+  category: 'Accessories',
+  features: null,
+  name: 'Bright Future Sunglasses',
+  pic: null,
+  price: '69.00',
+  relatedId: 48433,
+  sale: '29.00',
+};
+
+beforeAll(() => {
+  axios.get.mockImplementation((url) => {
+    switch (url) {
+      case '/products/1':
+        return Promise.resolve(mockProductData);
+      case '/products/1/related':
+        return Promise.resolve(mockRelatedIds);
+      case '/products/48421/styles':
+        return Promise.resolve(mockStyleData);
+      case '/products/48433/styles':
+        return Promise.resolve(mockStylePriceData);
+      default:
+        return Promise.reject(new Error('Error - this test is not working'));
+    }
+  });
+});
+
+afterEach(cleanup);
+
+jest.mock('axios');
+jest.mock('../client/src/components/Related/card.css', () => () => (<div>Carousel Card Style Placeholder</div>));
+jest.mock('../client/src/components/Related/carousel.css', () => () => (<div>Carousel Style Placeholder</div>));
+jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal Style Placeholder</div>));
+jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
+
 // TESTS =======================================================
 it('should load and display the selected product data',
   () => axios.get('/products/1')
@@ -98,7 +112,7 @@ it('should load and display the styles of the product',
   () => axios.get('/products/48421/styles')
     .then((productStyles) => expect(productStyles).toEqual(mockStyleData)));
 
-it('should load and display module title', async () => {
+it('should load and display carousel module title', async () => {
   render(
     <Provider store={store}>
       <RelatedItems />
@@ -109,6 +123,21 @@ it('should load and display module title', async () => {
     .then(async () => {
       const carousel = await waitFor(() => screen.getByTestId('carousel'));
       expect(carousel).toHaveTextContent('RELATED PRODUCTS');
+    })
+    .catch((err) => console.log(err));
+});
+
+it('should load and display sales price if not null', async () => {
+  render(
+    <Provider store={store}>
+      <Price />
+    </Provider>,
+  );
+
+  axios.get('/products/48433/styles')
+    .then(async () => {
+      const sale = await waitFor(() => screen.getByTestId('sale'));
+      expect(sale).toHaveTextContent('29.00');
     })
     .catch((err) => console.log(err));
 });

@@ -1,21 +1,23 @@
 import React from 'react';
 import moment from 'moment';
+// eslint-disable-next-line import/extensions
+import StarRating from './StarRating.jsx';
 
-const tile = (props) => (
+const tile = ({ review }) => (
   <div className="RLtile">
-    <p className="review-title">
-      stars placeholder
+    <div className="review-title">
+      <StarRating width={`${(parseInt(review.rating, 10) / 5) * 100}%`} />
       <span className="RLidentity">
-        {props.review.reviewer_name}
+        {review.reviewer_name}
         ,&nbsp;
-        {moment(props.review.date).format('LL')}
+        {moment(review.date).format('LL')}
       </span>
-    </p>
+    </div>
     <p className="review-summary">
-      <b>{props.review.summary}</b>
+      <b>{review.summary}</b>
     </p>
     <p className="review-body">
-      {props.review.body}
+      {review.body}
     </p>
     <p className="review-footer">
       Helpful?&nbsp;

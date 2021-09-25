@@ -25,6 +25,7 @@ h4.RL {
 .review-title {
   display: grid;
   grid-template-columns: 1fr 1fr;
+  margin-top: 1em;
 }
 .RLidentity {
   font-size: 60%;

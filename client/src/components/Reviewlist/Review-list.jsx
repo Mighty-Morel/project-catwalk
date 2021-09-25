@@ -12,6 +12,16 @@ const ReviewsAndRatings = () => {
   const [sortBy, setSort] = useState(() => 'helpful');
   const [count, setCount] = useState(() => 2);
   const [show, setShow] = useState(() => false);
+  const [filter, setFilter] = useState(() => (
+    {
+      1: false,
+      2: false,
+      3: false,
+      4: false,
+      5: false,
+    }
+  ));
+
   const productId = useSelector((state) => state.product.id);
 
   useEffect(() => {
@@ -25,9 +35,8 @@ const ReviewsAndRatings = () => {
   const hideModal = () => {
     setShow(false);
   };
-
   const {
-    data: reviews,
+    data: allReviews,
     isLoading,
     isSuccess,
     isError,
@@ -46,11 +55,10 @@ const ReviewsAndRatings = () => {
     // isError: infoisError,
     // error: infoError
   } = useGetProductInfoQuery(productId);
-
   const {
     data: reviewInfo,
     isLoading: reviewInfoIsLoading,
-    isSuccess: reviewIsInfoSuccess,
+    isSuccess: reviewInfoIsSuccess,
   } = useGetMetaReviewsQuery(productId);
 
   const handlePut = (reviewId, type) => {
@@ -69,10 +77,19 @@ const ReviewsAndRatings = () => {
         Loading...zzz, this request might be taking some time
       </p>
     );
-  } else if (isSuccess && infoIsSuccess && reviewIsInfoSuccess) {
+  } else if (isSuccess && infoIsSuccess && reviewInfoIsSuccess) {
+    let reviews = [];
+    for (let i = 0; i < allReviews.results.length; i += 1) {
+      if (filter[allReviews.results[i].rating]) {
+        reviews.push(allReviews.results[i]);
+      }
+    }
+    if (reviews.length === 0) {
+      reviews = allReviews.results;
+    }
     dropdown = (
       <>
-        {reviews.results.length}
+        {reviews.length}
         &nbsp;reviews, sorted by&nbsp;
         <div className="RLdropdown">
           {sortBy}
@@ -104,7 +121,7 @@ const ReviewsAndRatings = () => {
         </button>
       </>
     );
-    if (count === reviews.results.length) {
+    if (count === allReviews.results.length) {
       moreReviews = (
         <>
           <button
@@ -122,6 +139,8 @@ const ReviewsAndRatings = () => {
     ratings = (
       <Ratings
         meta={reviewInfo}
+        setFilter={setFilter}
+        filter={filter}
       />
     );
   } else if (isError) {
