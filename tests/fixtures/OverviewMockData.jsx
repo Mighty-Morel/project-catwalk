@@ -81,6 +81,39 @@ const mockCartData = [
   },
 ];
 
+const mockRatingsData = {
+  product_id: '48432',
+  ratings: {
+    1: '42',
+    2: '8',
+    3: '10',
+    4: '4',
+    5: '82',
+  },
+  recommended: {
+    false: '96',
+    true: '50',
+  },
+  characteristics: {
+    Fit: {
+      id: 162510,
+      value: '2.5357142857142857',
+    },
+    Length: {
+      id: 162511,
+      value: '2.7549019607843137',
+    },
+    Comfort: {
+      id: 162512,
+      value: '2.2970297029702970',
+    },
+    Quality: {
+      id: 162513,
+      value: '2.3614457831325301',
+    },
+  },
+};
+
 export default {
-  mockProductData, mockStyleData, mockStyle, mockCartData, store,
+  mockProductData, mockStyleData, mockStyle, mockCartData, store, mockRatingsData,
 };

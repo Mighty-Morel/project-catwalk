@@ -7,6 +7,7 @@ import { updateStyles, updateStyle } from '../../reducers/Style-Reducer';
 import Price from './Price.jsx';
 import StyleSelector from './StyleSelector.jsx';
 import AddToCartFeatures from './AddToCart.jsx';
+import OverviewRatings from './OverviewRatings.jsx';
 import 'regenerator-runtime/runtime';
 import './overview.css';
 
@@ -49,10 +50,7 @@ const ProductInfo = () => {
   return (
     <>
       <div data-testid="resolved" className={expandedView ? 'overview-product-info-container-hidden' : 'overview-product-info-container'}>
-        <span data-testid="ratings" className="overview-ratings">
-          ★★★★☆
-          <a href="#reviews" className="overview-ratings-link">Read all reviews</a>
-        </span>
+        <OverviewRatings productId={productId} />
         <br />
         <span data-testid="show-category" className="overview-category">{product.category}</span>
         <br />

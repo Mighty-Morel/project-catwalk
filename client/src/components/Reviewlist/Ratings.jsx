@@ -77,7 +77,9 @@ const Ratings = ({ meta, setFilter, filter }) => {
     <>
       <div className="ratingTitle">
         <div id="rating">{avgRating.toFixed(1)}</div>
-        <StarRating width={`${(starAvg / 5) * 100}%`} />
+        <span className="star-rating">
+          <StarRating width={`${(starAvg / 5) * 100}%`} />
+        </span>
       </div>
       <p>
         {recommendPercent}
