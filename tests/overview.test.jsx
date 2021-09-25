@@ -15,7 +15,7 @@ import AddToCartFeatures from '../client/src/components/Overview/AddToCart';
 import App from '../client/src/components/App';
 import Style from '../client/src/components/Overview/Style';
 import Gallery from '../client/src/components/Overview/Gallery';
-import StarRatings from '../client/src/components/Overview/StarRatings';
+import OverviewRatings from '../client/src/components/Overview/OverviewRatings';
 import mockData from './fixtures/OverviewMockData';
 
 // MOCK ALL COMPONENT AND CSS IMPORTS TO ISOLATE OVERVIEW COMPONENT ====================
@@ -153,7 +153,6 @@ test('left arrow should appear after the right arrow is clicked', async () => {
 
   fireEvent.click(screen.getByAltText('right arrow'));
 
-<<<<<<< HEAD
   expect(screen.getByAltText('Forest Green & Black_0')).toBeInTheDocument();
 });
 
@@ -177,13 +176,9 @@ jest.mock('../client/src/reducers/Review-List-Slice', () => {
 test('expect loading screen to appear while data is still loading', async () => {
   const { getByText } = render(
     <Provider store={store}>
-      <StarRatings productId={48432} />
+      <OverviewRatings productId={48432} />
     </Provider>,
   );
 
   expect(screen.getByText('Loading ratings...')).toBeInTheDocument();
 });
-=======
-  expect(screen.getByAltText('left arrow')).toBeInTheDocument();
-});
->>>>>>> main

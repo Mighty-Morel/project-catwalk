@@ -38,6 +38,8 @@ jest.mock('axios');
 jest.mock('../client/src/components/Overview/overview.css', () => () => (<div>Placeholder Overview Style</div>));
 jest.mock('../client/src/components/Overview/Price.jsx', () => () => (<div>$100</div>));
 jest.mock('../client/src/components/Overview/StyleSelector.jsx', () => () => (<div>Styles Placeholder</div>));
+jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Placeholder Reviewlist Style</div>));
+
 
 // TESTS =======================================================
 it('should load and display the selected product data',

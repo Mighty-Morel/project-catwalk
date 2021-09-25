@@ -9,8 +9,12 @@ import { render, screen } from '@testing-library/react';
 import '@testing-library/jest-dom';
 import 'regenerator-runtime/runtime';
 import { Provider } from 'react-redux';
-import StarRatings from '../client/src/components/Overview/StarRatings';
+import OverviewRatings from '../client/src/components/Overview/OverviewRatings';
 import mockData from './fixtures/OverviewMockData';
+
+// MOCK ALL COMPONENT AND CSS IMPORTS TO ISOLATE OVERVIEW COMPONENT ====================
+jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Placeholder Reviewlist Style</div>));
+
 
 // SETUP MOCK SERVER ======================================================================
 const { store, mockRatingsData } = mockData;
@@ -48,7 +52,7 @@ jest.mock('../client/src/reducers/Review-List-Slice', () => {
 test('number of reviews should reflect the number of ratings for the product', async () => {
   const { getByText } = render(
     <Provider store={store}>
-      <StarRatings productId={48432} />
+      <OverviewRatings productId={48432} />
     </Provider>,
   );
 
