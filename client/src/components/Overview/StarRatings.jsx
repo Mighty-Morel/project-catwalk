@@ -34,14 +34,11 @@ const StarRatings = ({ productId }) => {
       totalScore += (score * count);
     });
     starAvg = totalScore / totalRatings;
-    console.log(totalScore, totalRatings)
-    console.log(reviewInfo.ratings, starAvg);
-    console.log (reviewInfo)
 
     content = (
       <div className="overview-ratings">
         <OverviewStars width={`${(starAvg / 5) * 100}%`} />
-        <a href="#reviews" className="overview-ratings-link">
+        <a data-testid="rating" href="#reviews" className="overview-ratings-link">
           Read all
           {' '}
           {totalRatings}

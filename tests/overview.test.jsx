@@ -157,57 +157,28 @@ test('main image should not change if left arrow is clicked and the current phot
 });
 
 // STAR RATINGS =========================================
-// const _ReviewListSlice.useGetMetaReviewsQuery = jest.fn();
-// _ReviewListSlice.useGetMetaReviewsQuery.mockReturnValueOnce({
 
-// jest.mock('../client/src/reducers/Review-List-Slice', (productId) => {
-//   const reviewsSlice = {
-//     useGetMetaReviewsQuery(productId) {
-//       const data = {
-//         product_id: '48432',
-//         ratings: {
-//           1: '42',
-//           2: '8',
-//           3: '10',
-//           4: '4',
-//           5: '82',
-//         },
-//         recommended: {
-//           false: '96',
-//           true: '50',
-//         },
-//         characteristics: {
-//           Fit: {
-//             id: 162510,
-//             value: '2.5357142857142857',
-//           },
-//           Length: {
-//             id: 162511,
-//             value: '2.7549019607843137',
-//           },
-//           Comfort: {
-//             id: 162512,
-//             value: '2.2970297029702970',
-//           },
-//           Quality: {
-//             id: 162513,
-//             value: '2.3614457831325301',
-//           },
-//         },
-//       }
-//       return data
-//     }
-//   };
-// });
+jest.mock('../client/src/reducers/Review-List-Slice', () => {
+  const reviewsSlice = {
+    useGetMetaReviewsQuery: (productId) => {
+      const result = {
+        isLoading: true,
+        isSuccess: false,
+        data: mockRatingsData,
+        isError: false,
+      };
+      return result;
+    },
+  };
+  return reviewsSlice;
+});
 
-// test('number of reviews should reflect the number of ratings for the product', async () => {
-//   const { getByText } = render(
-//     <Provider store={store}>
-//       <StarRatings productId={48432} />
-//     </Provider>,
-//   );
+test('expect loading screen to appear while data is still loading', async () => {
+  const { getByText } = render(
+    <Provider store={store}>
+      <StarRatings productId={48432} />
+    </Provider>,
+  );
 
-//   await act(() => screen.getByText('Read All'));
-
-//   expect(screen.getByText('Read All')).toBeInTheDocument();
-// });
+  expect(screen.getByText('Loading ratings...')).toBeInTheDocument();
+});
