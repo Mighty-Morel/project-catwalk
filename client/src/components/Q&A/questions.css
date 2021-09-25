@@ -4,8 +4,8 @@
   display: flex;
   flex-direction: column;
   justify-content: center;
-  /* width: 70%; */
-  margin: 10px;
+  width: 90%;
+  margin: auto;
   /* border: 1px solid black; */
   border-top:2px solid black;
   border-bottom:2px solid black;
@@ -14,6 +14,8 @@
 .question-entry {
   /* border: 1px solid grey; */
   margin: 5px 5px 5px 10px;
+  padding-left: 50px;
+  padding-right: 50px;
   border-bottom: 1.5px solid #2C3E50;
 }
 
@@ -46,12 +48,14 @@
   justify-content: flex-end;
   gap: 20px;
   color: rgba(0,0,0,0.5);
+  font-size: .7em;
 }
 
 .questionExtras {
   display: flex;
   justify-content: flex-end;
   color: rgba(0,0,0,0.5);
+  font-size: .7em;
 }
 
 .addAnswer {
@@ -61,13 +65,26 @@
 }
 
 .answerText{
-  font-size: 1.2em;
+  font-size: 1em;
 }
 
 #QA-helpful-yes:hover {
   text-decoration: underline;
 }
 
+.QA-header {
+  color: rgba(44, 62, 80, 0.8);
+  font-weight: 300;
+  font-size: 1em;
+}
+
+.question-header {
+  font-size: 1em;
+}
+
+.answer-header {
+  font-size: .9em;
+}
 /* Answer Modal Formatting ------------------------------------------------- */
 .QA-modal {
   position: fixed;
@@ -121,7 +138,14 @@
   transition: all 0.2s;
   background-color: white;
 }
+
 .QA-buttons:hover {
   color:#000000;
   background-color:rgb(44, 62, 80);
+}
+
+#addAnswerButtons {
+  font-size: .6em;
+  width: 85px;
+  height: 20px;
 }
