@@ -25,6 +25,7 @@ jest.mock('../client/src/components/Q&A/QuestionsAndAnswers', () => () => (<div>
 jest.mock('../client/src/components/Q&A/questions.css', () => () => (<div>Placeholder Questions And Answers Style</div>));
 jest.mock('../client/src/components/Related/RelatedItems', () => () => (<div>Placeholder Questions And Answers</div>));
 jest.mock('../client/src/components/Reviewlist/reviewlist.css', () => () => (<div>Review List Style</div>));
+jest.mock('font-awesome/css/font-awesome.min.css', () => () => (<div>Ignore Font Awesome</div>));
 jest.mock('../client/src/components/Reviewlist/Review-list', () => () => (<div>Placeholder Review List</div>));
 jest.mock('../client/src/reducers/Review-List-Slice.js', () => () => (<div>Review List Slice Placeholder</div>));
 
