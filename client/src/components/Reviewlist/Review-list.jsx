@@ -41,17 +41,20 @@ const ReviewsAndRatings = () => {
   );
   const {
     data: productInfo,
-    isSuccess: infoSuccess,
+    isLoading: infoIsLoading,
+    isSuccess: infoIsSuccess,
+    // isError: infoisError,
+    // error: infoError
   } = useGetProductInfoQuery(productId);
 
   const {
     data: reviewInfo,
-    isSuccess: reviewInfoSuccess,
+    isLoading: reviewInfoIsLoading,
+    isSuccess: reviewIsInfoSuccess,
   } = useGetMetaReviewsQuery(productId);
 
   const handlePut = (reviewId, type) => {
     axios.put(`/api/reviews/${reviewId}/${type}`);
-    console.log(`/api/reviews/${reviewId}/${type}`);
   };
 
   let dropdown;
@@ -60,13 +63,13 @@ const ReviewsAndRatings = () => {
   let addReview;
   let ratings;
 
-  if (isLoading) {
+  if (isLoading || infoIsLoading || reviewInfoIsLoading) {
     content = (
       <p>
         Loading...zzz, this request might be taking some time
       </p>
     );
-  } else if (isSuccess && infoSuccess && reviewInfoSuccess) {
+  } else if (isSuccess && infoIsSuccess && reviewIsInfoSuccess) {
     dropdown = (
       <>
         {reviews.results.length}

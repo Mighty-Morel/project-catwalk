@@ -19,11 +19,11 @@ const tile = (props) => (
     </p>
     <p className="review-footer">
       Helpful?&nbsp;
-      <span className="underline" onClick={() => props.handlePut(props.review.review_id, 'helpful')}>Yes</span>
+      <span role="option" aria-selected="false" tabIndex={0} aria-hidden="true" className="underline" onClick={() => props.handlePut(props.review.review_id, 'helpful')}>Yes</span>
       (
       {props.review.helpfulness}
       ) |&nbsp;
-      <span className="underline" onClick={() => props.handlePut(props.review.review_id, 'report')}>Report</span>
+      <span role="option" aria-selected="false" tabIndex={0} aria-hidden="true" className="underline" onClick={() => props.handlePut(props.review.review_id, 'report')}>Report</span>
     </p>
   </div>
 );
