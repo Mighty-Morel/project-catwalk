@@ -50,9 +50,7 @@ const ProductInfo = () => {
   return (
     <>
       <div data-testid="resolved" className={expandedView ? 'overview-product-info-container-hidden' : 'overview-product-info-container'}>
-        <span data-testid="ratings" className="overview-ratings">
-          <OverviewRatings productId={productId} />
-        </span>
+        <OverviewRatings productId={productId} />
         <br />
         <span data-testid="show-category" className="overview-category">{product.category}</span>
         <br />
