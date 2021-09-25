@@ -1,4 +1,6 @@
-.modal {
+/* Related Modal Comparison */
+
+.c-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -7,7 +9,7 @@
   background: rgba(0, 0, 0, 0.6);
 }
 
-.modal-main {
+.c-modal-main {
   position: fixed;
   background: white;
   width: 30%;
@@ -17,16 +19,16 @@
   transform: translate(-50%,-50%);
 }
 
-.display-block {
+.c-display-block {
   display: block;
   z-index: 9999;
 }
 
-.display-none {
+.c-display-none {
   display: none;
 }
 
-.modal-button {
+.c-modal-button {
   position: absolute;
   top: 5%;
   left: 95%;
@@ -36,34 +38,30 @@
   cursor: pointer;
 }
 
-.modal-title {
+.c-modal-title {
   font-size: 15px;
   margin-left: 5px;
   margin-bottom: 20px;
 }
 
-.modal-title-wrapper {
+.c-modal-title-wrapper {
   border: 1px solid lightgrey;
   overflow: hidden;
 }
 
-.modal-overview {
+.c-modal-overview {
   font-size: 15px;
   margin-left: 5px;
   float: left;
 }
 
-.modal-card {
+.c-modal-card {
   font-size: 15px;
   margin-right: 5px;
   float: right;
 }
 
-ul {
-  list-style-type: none;
-}
-
-.modal-features {
+.c-modal-features {
   font-size: 15px;
   list-style-type: none;
 }

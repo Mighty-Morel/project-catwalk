@@ -1,18 +1,16 @@
-/* eslint-disable no-unused-vars */
 /* eslint-disable import/extensions */
 import React from 'react';
-import axios from 'axios';
-import modal from './modal.css';
+import './modal.css';
 
 // eslint-disable-next-line react/prop-types
 const Modal = ({ handleClose, show, children }) => {
-  const showHideClassName = show ? 'modal display-block' : 'modal display-none';
+  const showHideClassName = show ? 'c-modal c-display-block' : 'c-modal c-display-none';
 
   return (
     <div className={showHideClassName}>
-      <section className="modal-main">
+      <section className="c-modal-main">
         {children}
-        <button className="modal-button" type="button" onClick={handleClose}>
+        <button className="c-modal-button" type="button" onClick={handleClose}>
           X
         </button>
       </section>
