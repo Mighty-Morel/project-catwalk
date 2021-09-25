@@ -22,19 +22,21 @@ const ProductCarousel = () => {
   const myRef = useRef(null);
 
   const getInfo = () => {
-    axios.get(`/products/${productId}/related`)
+    axios.get(`/products/${productId}/related`) // 48432
       .then((relatedIdData) => {
-        const relatedIds = relatedIdData.data;
+        // console.log('relatedIdData', relatedIdData);
+        const relatedIds = relatedIdData.data; // data: [48433, 48434, 48439, 48438]
         const ids = [];
         for (let i = 0; i < relatedIds.length; i += 1) {
           const relatedId = relatedIds[i];
           ids[i] = { relatedId };
         }
-        for (const id in ids) { // [{relatedId: 48433}, {…}, {…}, {…}]
+        for (const id in ids) { // [{relatedId: 48433}, {relatedId: 48434}, {…}, {…}]
           if (ids[id]) {
             const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
             axios.get(`/products/${relatedId}`)
               .then((res) => {
+                // console.log('second response', JSON.stringify(res.data));
                 for (let j = 0; j < ids.length; j += 1) {
                   if (ids[j].relatedId === res.data.id) {
                     ids[j] = { category: res.data.category, ...ids[j] };
@@ -45,6 +47,7 @@ const ProductCarousel = () => {
               });
             axios.get(`/products/${relatedId}/styles`)
               .then((res) => {
+                console.log('third response', JSON.stringify(res));
                 for (let k = 0; k < ids.length; k += 1) {
                   if (ids[k].relatedId === Number(res.data.product_id)) {
                     ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
@@ -162,7 +165,7 @@ const ProductCarousel = () => {
         </Modal>
       </main>
 
-      <div className="c-carousel">
+      <div className="c-carousel" data-testid="product-carousel">
         <div data-testid="carousel-title">RELATED PRODUCTS</div>
 
         <button className="c-carousel__button c-carousel__button--left" type="button" onClick={() => prev()}>

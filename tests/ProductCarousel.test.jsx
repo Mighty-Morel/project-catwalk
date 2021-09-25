@@ -6,6 +6,7 @@
 
 import React from 'react';
 import 'whatwg-fetch';
+import { act } from 'react-dom/test-utils';
 import {
   render, cleanup, waitFor, fireEvent, screen,
 } from '@testing-library/react';
@@ -31,12 +32,9 @@ const mockProductData = [
   },
 ];
 
-const mockRelatedIds = [
-  2,
-  3,
-  8,
-  7,
-];
+const mockRelatedIds = {
+  data: [48433],
+};
 
 const mockStyleData = {
   product_id: '48421',
@@ -74,33 +72,125 @@ const mockStylePriceData = {
   sale: '29.00',
 };
 
-const mockRelatedData = [
-  {
-    pic: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
-    sale: null,
-    price: '140.00',
-    name: 'Camo Onesie',
+// const mockRelatedData = {
+//   optionOne: {
+//     data: {
+//       [{
+//         pic: 'https://images.unsplash.com/photo-1501088430049-71c79fa3283e?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=300&q=80',
+//         sale: null,
+//         price: '140.00',
+//         name: 'Camo Onesie',
+//         features:
+//           [
+//             { feature: 'Fabric', value: 'Canvas' },
+//             { feature: 'Buttons', value: 'Brass' },
+//           ],
+//         category: 'Jackets',
+//         relatedId: 48433,
+//       }]
+//     },
+//   },
+// };
+
+const mockRelatedDataSecond = {
+  data: {
+    id: 48433,
+    campus: 'hr-sfo',
+    name: 'Bright Future Sunglasses',
+    slogan: 'You\'ve got to wear shades',
+    description: 'Where you\'re going you might not need roads, but you definitely need some shades. Give those baby blues a rest and let the future shine bright on these timeless lenses.',
+    category: 'Accessories',
+    default_price: '69.00',
+    created_at: '2021-09-09T19:03:37.378Z',
+    updated_at: '2021-09-09T19:03:37.378Z',
     features:
-      [
-        { feature: 'Fabric', value: 'Canvas' },
-        { feature: 'Buttons', value: 'Brass' },
-      ],
-    category: 'Jackets',
-    relatedId: 48432,
+      [{
+        feature: 'Lenses',
+        value: 'Ultrasheen',
+      }, {
+        feature: 'UV Protection',
+        value: null,
+      }, {
+        feature: 'Frames',
+        value: 'LightCompose',
+      }],
   },
-];
+};
+
+const mockRelatedDataThird = {
+  data: {
+    product_id: '48433',
+    results: [{
+      style_id: 293486,
+      name: "Black Lenses & Black Frame",
+      original_price: "69.00",
+      sale_price: null,
+      'default?': false,
+      photos: [{
+        thumbnail_url: null, url: null
+      }],
+      skus: {
+        null: { quantity: null, size: null }
+      }
+    },
+    {
+      style_id: 293487,
+      name: "Black Lenses & Gold Frame",
+      original_price: "69.00",
+      sale_price: null,
+      'default?': true,
+      photos: [{
+        thumbnail_url: null, url: null
+      }],
+      skus: {
+        null: {
+          quantity: null, size: null
+        }
+      }
+    },
+    {
+      style_id: 293488,
+      name: "Gold Lenses & Black Frame",
+      original_price: "69.00",
+      sale_price: null,
+      'default?': false,
+      photos: [{
+        thumbnail_url: null, url: null
+      }],
+      skus:
+      {
+        null: {
+          quantity: null, size: null
+        }
+      }
+    },
+    {
+      style_id: 293489,
+      name: "Gold Lenses & Gold Frame",
+      original_price: "69.00",
+      sale_price: null,
+      'default?': false,
+      photos: [{
+        thumbnail_url: null, url: null
+      }],
+      skus: {
+        null: {
+          quantity: null, size: null
+        }
+      }
+    }]
+  },
+}
 
 beforeAll(() => {
   axios.get.mockImplementation((url) => {
     switch (url) {
-      case '/products/1':
-        return Promise.resolve(mockProductData);
-      case '/products/1/related':
+      case '/products/48432/related':
         return Promise.resolve(mockRelatedIds);
-      case '/products/48421/styles':
-        return Promise.resolve(mockStyleData);
+      case '/products/48433':
+        return Promise.resolve(mockRelatedDataSecond);
       case '/products/48433/styles':
-        return Promise.resolve(mockStylePriceData);
+        return Promise.resolve(mockRelatedDataThird);
       default:
         return Promise.reject(new Error('Error - this test is not working'));
     }
@@ -116,17 +206,27 @@ jest.mock('../client/src/components/Related/modal.css', () => () => (<div>Modal 
 // jest.mock('../client/src/components/Related/Modal.jsx', () => () => (<div>Modal Placeholder</div>));
 
 // TESTS =======================================================
-it('should load and display the selected product data',
-  () => axios.get('/products/1')
-    .then((productInfo) => expect(productInfo).toEqual(mockProductData)));
+// it('should load and display the selected product data',
+//   () => axios.get('/products/1')
+//     .then((productInfo) => expect(productInfo).toEqual(mockProductData)));
 
+// it('should load and display the styles of the product',
+//   () => axios.get('/products/48421/styles')
+//     .then((productStyles) => expect(productStyles).toEqual(mockStyleData)));
+
+// write axios get requests for new data
 it('should load and display the related ids of the product',
-  () => axios.get('/products/1/related')
+  () => axios.get('/products/48432/related')
     .then((relatedIds) => expect(relatedIds).toEqual(mockRelatedIds)));
 
-it('should load and display the styles of the product',
-  () => axios.get('/products/48421/styles')
-    .then((productStyles) => expect(productStyles).toEqual(mockStyleData)));
+it('should load and display product info for related product data',
+  () => axios.get('/products/48433')
+    .then((relatedProductData) => expect(relatedProductData).toEqual(mockRelatedDataSecond)));
+
+it('should load and display product styles for related product data',
+  () => axios.get('/products/48433/styles')
+    // eslint-disable-next-line max-len
+    .then((relatedProductDataStyles) => expect(relatedProductDataStyles).toEqual(mockRelatedDataThird)));
 
 it('should load and display carousel module title', async () => {
   render(
@@ -168,14 +268,14 @@ it('should load and render Modal component', async () => {
   );
 });
 
-// it('should load carousel title', async () => {
+// test('should load carousel title on load', async () => {
 //   render(
 //     <Provider store={store}>
 //       <ProductCarousel />
 //     </Provider>,
 //   );
-
-//   expect(screen.getByTestId('carousel-title')).toHaveTextContent('RELATED PRODUCTS');
+//   await waitFor(() => screen.getByText('RELATED PRODUCTS'));
+//   expect(screen.getByTestId('carousel-title')).toBeInTheDocument('RELATED PRODUCTS');
 // });
 
 // test('selected card should have jackets category', () => {
@@ -217,3 +317,30 @@ it('should load and render Modal component', async () => {
 
 //   expect(getByTestId('modal-title')).toHaveTextContent('Comparing');
 // });
+
+// it('should load and display the selected question data', async () => {
+//   const { getByTestId, findAllByTestId } = render(
+//     <Provider store={store}>
+//       <QuestionsAndAnswers />
+//     </Provider>,
+//   );
+//   // await waitFor(() => screen.getByTestId('question-entry'));
+//   const questions = await findAllByTestId('question-entry');
+//   // three questions as input from mock data, should only display 2 on load
+//   expect(questions).toHaveLength(2);
+//   expect(getByTestId('add-question')).toHaveTextContent('Add Question');
+// });
+
+it('should load and display the product carousel title', async () => {
+  const { getByTestId, findAllByTestId } = render(
+    <Provider store={store}>
+      <ProductCarousel />
+    </Provider>,
+  );
+  await findAllByTestId('carousel-title');
+  expect(getByTestId('carousel-title')).toHaveTextContent('RELATED PRODUCTS');
+  // expect(carouselTitle).toHaveTextContent('RELATED PRODUCTS');
+});
+
+// findAllByTestId might wait for eth to render
+// getByTestId doesn't really wait, throws error immediately
