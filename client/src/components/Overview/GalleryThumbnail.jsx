@@ -12,12 +12,12 @@ const GalleryThumbnail = ({
     if (index === mainPhotoIndex) {
       return (
         <>
-          <img className="overview-image-thumbnail" id="overview-selected-thumbnail" src={photo.thumbnail_url} alt={style.name} />
+          <img className="overview-image-thumbnail" id="overview-selected-thumbnail" src={photo.thumbnail_url} alt={`${style.name}_${index}`} />
           <hr />
         </>
       );
     }
-    return <img className="overview-image-thumbnail" src={photo.thumbnail_url} alt={style.name} />;
+    return <img className="overview-image-thumbnail" src={photo.thumbnail_url} alt={`${style.name}_${index}`} />;
   };
 
   return (

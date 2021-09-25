@@ -37,7 +37,12 @@ const AddToCartFeatures = ({ style }) => {
     showError(false);
   };
 
-  useEffect(resetDefault, [style]);
+  useEffect(() => {
+    resetDefault();
+    return () => {
+      setUserCart({});
+    };
+  }, [style]);
 
   // QUANTITY SELECTOR ========================================================
   // Should this account for multiple skus with the same size? I'm currently assuming all unique.
@@ -108,7 +113,7 @@ const AddToCartFeatures = ({ style }) => {
     // only show Qty dropdown if size is selected and in stock
     if (isQtyShown && availableQty > 0) {
       return (
-        <select className="overview-qty-dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
+        <select data-testid="qtySelector" className="overview-qty-dropdown" name="activeQtySelector" onChange={handleQtyChange}>{qtySelector()}</select>
       );
     } return (
       <select className="overview-qty-dropdown" name="disabledQtySelector" disabled>
@@ -141,6 +146,7 @@ const AddToCartFeatures = ({ style }) => {
         className="overview-size"
         role="menuitem"
         tabIndex="-1"
+        data-testid={sku[0]}
         onClick={() => handleSizeInput(sku[1].size)}
         onKeyPress={() => handleSizeInput(sku[1].size)}
       >
@@ -229,14 +235,14 @@ const AddToCartFeatures = ({ style }) => {
   const renderButton = () => {
     if (availableSkus.length > 0) {
       return (
-        <button className="overview-addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
+        <button data-testid="addToCart" className="overview-addToCart" type="submit" onClick={handleClick}>Add to Cart</button>
       );
     }
     return null;
   };
 
   if (!selectSku) {
-    return <div>Checking our inventory...</div>;
+    return <div data-testid="Loading">Checking our inventory...</div>;
   }
   return (
     <div className="overview-addToCart-container">
