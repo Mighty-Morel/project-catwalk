@@ -115,6 +115,39 @@ const QuestionEntry = (props) => {
     return null;
   };
 
+  // Render answers if there are any
+  const renderAnswers = () => {
+    if (answers.length === 0) {
+      return null;
+    }
+    return (
+      <>
+        <h2>A: </h2>
+        {displayedAnswers.map((answer) => {
+          const {
+            answer_id,
+            body,
+            date,
+            answerer_name,
+            helpfulness,
+            photos,
+          } = answer;
+          return (
+            <AnswerEntry
+              key={answer_id}
+              id={answer_id}
+              answer={body}
+              date={date}
+              answerer={answerer_name}
+              helpfulness={helpfulness}
+              photos={photos}
+            />
+          );
+        })}
+      </>
+    );
+  };
+
   return (
     <div className="question-entry">
       <h1>
@@ -125,28 +158,7 @@ const QuestionEntry = (props) => {
       {renderHelpful()}
       <button type="button" onClick={toggleAnswerForm}> Add Answer</button>
       {renderModal()}
-      <h2>A: </h2>
-      {displayedAnswers.map((answer) => {
-        const {
-          answer_id,
-          body,
-          date,
-          answerer_name,
-          helpfulness,
-          photos,
-        } = answer;
-        return (
-          <AnswerEntry
-            key={answer_id}
-            id={answer_id}
-            answer={body}
-            date={date}
-            answerer={answerer_name}
-            helpfulness={helpfulness}
-            photos={photos}
-          />
-        );
-      })}
+      {renderAnswers()}
       {renderMoreAnswers()}
     </div>
   );

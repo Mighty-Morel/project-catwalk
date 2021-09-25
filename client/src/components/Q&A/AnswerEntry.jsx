@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import moment from 'moment';
 import axios from 'axios';
-import styling from './questions.css';
+import './questions.css';
 
 const AnswerEntry = (props) => {
   const [helpfulnessClick, setHelpfulnessClick] = useState(false);
