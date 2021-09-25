@@ -7,6 +7,7 @@
   grid-template-rows: 1fr;
   margin: auto;
   padding-right: 10px;
+  display: flex;
 }
 
 .overview-container-expand {
@@ -230,11 +231,11 @@ hr {
 
 .overview-product-info-container {
   grid-column: 4 / 5;
-  margin: 0 auto;
+  margin-right: 8%;
   max-width: 800px;
   height: 670px;
-  font-size: 1em;
-  line-height: 1.2em;
+  font-size: 100%;
+  line-height: 130%;
   background-color: white;
   padding: 40px 30px 15px 30px;
 }
@@ -244,8 +245,8 @@ hr {
 }
 
 .overview-ratings {
-  line-height: 2em;
-  font-size: .9em;
+  line-height: 200%;
+  font-size: 90%;
   display: flex;
   align-items: center;
   vertical-align: middle;
