@@ -123,7 +123,7 @@ const QuestionEntry = (props) => {
     }
     return (
       <>
-        <h2>A:</h2>
+        <h2 className="answer-header">A:</h2>
         {displayedAnswers.map((answer) => {
           const {
             answer_id,
@@ -151,7 +151,7 @@ const QuestionEntry = (props) => {
 
   return (
     <div data-testid="question-entry" className="question-entry">
-      <h1>
+      <h1 className="question-header">
         Q:&#160;
         {question}
       </h1>
@@ -160,7 +160,7 @@ const QuestionEntry = (props) => {
         {renderHelpful()}
       </div>
       <div className="addAnswer">
-        <button className="QA-buttons" data-testid="add-answer" type="button" onClick={toggleAnswerForm}> Add Answer</button>
+        <button className="QA-buttons" id="addAnswerButtons" data-testid="add-answer" type="button" onClick={toggleAnswerForm}> Add Answer</button>
       </div>
       {renderModal()}
       {renderAnswers()}

@@ -78,7 +78,7 @@ const QuestionsAndAnswers = () => {
 
   return (
     <div className="questions-container">
-      <h1>Questions and Answers</h1>
+      <h1 className="QA-header">Questions and Answers</h1>
       {displayedQuestions.map((question) => {
         const {
           // eslint-disable-next-line camelcase
