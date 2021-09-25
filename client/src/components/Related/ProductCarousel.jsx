@@ -24,7 +24,6 @@ const ProductCarousel = () => {
   const getInfo = () => {
     axios.get(`/products/${productId}/related`) // 48432
       .then((relatedIdData) => {
-        // console.log('relatedIdData', relatedIdData);
         const relatedIds = relatedIdData.data; // data: [48433, 48434, 48439, 48438]
         const ids = [];
         for (let i = 0; i < relatedIds.length; i += 1) {
@@ -36,7 +35,6 @@ const ProductCarousel = () => {
             const { relatedId } = ids[id]; // [48433, 48434, 48439, 48438]
             axios.get(`/products/${relatedId}`)
               .then((res) => {
-                // console.log('second response', JSON.stringify(res.data));
                 for (let j = 0; j < ids.length; j += 1) {
                   if (ids[j].relatedId === res.data.id) {
                     ids[j] = { category: res.data.category, ...ids[j] };
@@ -47,7 +45,6 @@ const ProductCarousel = () => {
               });
             axios.get(`/products/${relatedId}/styles`)
               .then((res) => {
-                console.log('third response', JSON.stringify(res));
                 for (let k = 0; k < ids.length; k += 1) {
                   if (ids[k].relatedId === Number(res.data.product_id)) {
                     ids[k] = { price: res.data.results[0].original_price, ...ids[k] };
