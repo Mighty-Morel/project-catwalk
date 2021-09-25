@@ -3,7 +3,7 @@ import moment from 'moment';
 // eslint-disable-next-line import/extensions
 import StarRating from './StarRating.jsx';
 
-const tile = ({ review }) => (
+const tile = ({ review, handlePut }) => (
   <div className="RLtile">
     <div className="review-title">
       <StarRating width={`${(parseInt(review.rating, 10) / 5) * 100}%`} />
@@ -21,11 +21,11 @@ const tile = ({ review }) => (
     </p>
     <p className="review-footer">
       Helpful?&nbsp;
-      <span role="option" aria-selected="false" tabIndex={0} aria-hidden="true" className="underline" onClick={() => props.handlePut(props.review.review_id, 'helpful')}>Yes</span>
+      <span role="option" aria-selected="false" tabIndex={0} aria-hidden="true" className="underline" onClick={() => handlePut(review.review_id, 'helpful')}>Yes</span>
       (
-      {props.review.helpfulness}
+      {review.helpfulness}
       ) |&nbsp;
-      <span role="option" aria-selected="false" tabIndex={0} aria-hidden="true" className="underline" onClick={() => props.handlePut(props.review.review_id, 'report')}>Report</span>
+      <span role="option" aria-selected="false" tabIndex={0} aria-hidden="true" className="underline" onClick={() => handlePut(review.review_id, 'report')}>Report</span>
     </p>
   </div>
 );

@@ -78,6 +78,7 @@ const ReviewsAndRatings = () => {
       </p>
     );
   } else if (isSuccess && infoIsSuccess && reviewInfoIsSuccess) {
+    console.log(allReviews);
     let reviews = [];
     for (let i = 0; i < allReviews.results.length; i += 1) {
       if (filter[allReviews.results[i].rating]) {
@@ -87,6 +88,7 @@ const ReviewsAndRatings = () => {
     if (reviews.length === 0) {
       reviews = allReviews.results;
     }
+    console.log('reviews', reviews);
     dropdown = (
       <>
         {reviews.length}
@@ -101,7 +103,7 @@ const ReviewsAndRatings = () => {
         </div>
       </>
     );
-    content = reviews.results.map((review) => (
+    content = reviews.map((review) => (
       <Tile key={review.review_id} review={review} handlePut={handlePut} />
     ));
     addReview = (
