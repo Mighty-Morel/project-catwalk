@@ -60,7 +60,6 @@
   scrollbar-width: none;  /* Firefox */
   display: grid;
   grid-template-columns: 9fr 1fr;
-  cursor: zoom-out;
 }
 
 /* Hide scrollbar for Chrome, Safari and Opera */
@@ -137,6 +136,7 @@
   object-fit: cover;
   cursor: zoom-out;
   overflow: auto;
+  height: 250%;
 }
 
 .overview-thumbnail-container {
