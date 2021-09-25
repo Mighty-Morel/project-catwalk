@@ -99,7 +99,6 @@ const Gallery = () => {
   };
 
   const toggleZoom = () => {
-    console.log('click zoom')
     dispatch(setZoomView(!zoomView));
   };
 
@@ -168,6 +167,13 @@ const Gallery = () => {
 
   if (!mainImage) {
     return <div>Loading Images...</div>;
+  }
+  if (zoomView) {
+    return (
+      <div className="overview-gallery-container">
+        {renderGalleryView()}
+      </div>
+    );
   }
   return (
     <>
