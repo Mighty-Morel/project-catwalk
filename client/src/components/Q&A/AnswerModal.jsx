@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import axios from 'axios';
-import styling from './questions.css';
+import './questions.css';
 
 const AnswerModal = (props) => {
   const currentId = useSelector((state) => state.product.id);
@@ -81,10 +81,10 @@ const AnswerModal = (props) => {
   useEffect(getProductName, [currentId]);
 
   return (
-    <div className="modal">
-      <div className="modal-content">
-        <div className="modal-header">
-          <h4 className="modal-title">Submit Your Answer</h4>
+    <div className="QA-modal">
+      <div className="QA-modal-content">
+        <div className="QA-modal-header">
+          <h4 className="QA-modal-title">Submit Your Answer</h4>
           <span>
             &#34;
             {productName}
@@ -94,10 +94,10 @@ const AnswerModal = (props) => {
           </span>
         </div>
         <form>
-          <div className="modal-body">
+          <div className="QA-modal-body">
             <span>Your Answer: *</span>
             <br />
-            <textarea type="text" id="modal-textbox" maxLength="1000" onChange={textChangeHandler} />
+            <textarea type="text" id="QA-modal-textbox" maxLength="1000" onChange={textChangeHandler} />
             <br />
             <br />
             <span>What is your nickname: *</span>
@@ -111,7 +111,7 @@ const AnswerModal = (props) => {
             <br />
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
-          <div className="modal-footer">
+          <div className="QA-modal-footer">
             <button type="button" onClick={toggleAnswerForm}>Close</button>
             <button type="button" onClick={postAnswer}>Submit</button>
           </div>
