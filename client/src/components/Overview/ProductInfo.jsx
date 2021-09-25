@@ -50,9 +50,7 @@ const ProductInfo = () => {
     <>
       <div data-testid="resolved" className="overview-product-info-container">
         <span data-testid="ratings" className="overview-ratings">
-          {/* ★★★★☆ */}
           <StarRatings productId={productId} />
-          {/* <a href="#reviews" className="overview-ratings-link">Read all reviews</a> */}
         </span>
         <br />
         <span data-testid="show-category" className="overview-category">{product.category}</span>
