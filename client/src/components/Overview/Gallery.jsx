@@ -196,10 +196,8 @@ const Gallery = () => {
           </div>
           {renderDownArrow()}
         </div>
-        {/* <div className="overview-main-arrow-container"> */}
-          {renderLeftArrow()}
-          {renderRightArrow()}
-        {/* </div> */}
+        {renderLeftArrow()}
+        {renderRightArrow()}
       </div>
     </>
   );
