@@ -10,6 +10,7 @@ test('should return the initial state', () => {
     {
       id: 48432,
       productInfo: {},
+      expandedView: false,
     },
   );
 });

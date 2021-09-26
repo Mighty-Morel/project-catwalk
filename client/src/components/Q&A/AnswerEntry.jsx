@@ -37,7 +37,7 @@ const AnswerEntry = (props) => {
     if (answerer.toLowerCase() === 'seller') {
       return (
         <span>
-          by
+          By:&#160;
           <b>
             Seller
           </b>
@@ -46,7 +46,7 @@ const AnswerEntry = (props) => {
     }
     return (
       <span>
-        by
+        By:&#160;
         {answerer}
       </span>
     );
@@ -60,6 +60,8 @@ const AnswerEntry = (props) => {
           onKeyPress={putHelpfulness}
           role="button"
           tabIndex="0"
+          className="answer-helpful"
+          id="QA-helpful-yes"
         >
           Yes &#40;
           {helpfulness}
@@ -68,7 +70,7 @@ const AnswerEntry = (props) => {
       );
     }
     return (
-      <span>
+      <span className="answer-helpful">
         <b>
           Yes
           &#40;
@@ -96,14 +98,23 @@ const AnswerEntry = (props) => {
   };
 
   return (
-    <>
-      <p data-testid="answer-entry">{answer}</p>
-      {renderSeller()}
-      <span>{formattedDate}</span>
-      <span>Helpful?</span>
-      {renderHelpful()}
-      {renderReported()}
-    </>
+    <div className="answer-entry">
+      <p className="answerText" data-testid="answer-entry">{answer}</p>
+      <div className="answerExtras">
+        <div className="answerSellerInfo">
+          {renderSeller()}
+          <span>
+            &#160;&#160;
+            <em>{formattedDate}</em>
+          </span>
+        </div>
+        <div>
+          <span className="answer-helpful">Helpful?&#160;</span>
+          {renderHelpful()}
+        </div>
+        {renderReported()}
+      </div>
+    </div>
   );
 };
 

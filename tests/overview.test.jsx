@@ -15,6 +15,7 @@ import AddToCartFeatures from '../client/src/components/Overview/AddToCart';
 import App from '../client/src/components/App';
 import Style from '../client/src/components/Overview/Style';
 import Gallery from '../client/src/components/Overview/Gallery';
+import OverviewRatings from '../client/src/components/Overview/OverviewRatings';
 import mockData from './fixtures/OverviewMockData';
 
 // MOCK ALL COMPONENT AND CSS IMPORTS TO ISOLATE OVERVIEW COMPONENT ====================
@@ -29,7 +30,7 @@ jest.mock('../client/src/components/Overview/ProductInfo', () => () => (<div>Pla
 
 // SETUP MOCK SERVER =============================================================
 const {
-  mockProductData, mockStyle, mockCartData, store,
+  mockProductData, mockStyle, mockCartData, store, mockRatingsData,
 } = mockData;
 
 // declare which API requests to mock
@@ -37,6 +38,12 @@ const server = setupServer(
   rest.get('/products/48432', (req, res, ctx) => res(ctx.json(mockProductData))),
   rest.get('/products/48432/styles', (req, res, ctx) => res(ctx.json(mockStyle))),
   rest.get('/cart', (req, res, ctx) => res(ctx.json(mockCartData))),
+  // rest.get('api/reviews/meta', (req, res, ctx) => res(ctx.json(mockRatingsData))),
+  rest.get('api/reviews/meta', (req, res, ctx) => {
+    const query = req.url.searchParams;
+    const product_id = query.get('product_id');
+    res(ctx.json(mockRatingsData));
+  }),
 );
 
 beforeAll(() => server.listen());
@@ -136,7 +143,7 @@ test('main image should change to next photo when right arrow is clicked', async
   expect(screen.getByAltText('Forest Green & Black_1')).toBeInTheDocument();
 });
 
-test('main image should not change if left arrow is clicked and the current photo is the already the first', async () => {
+test('left arrow should appear after the right arrow is clicked', async () => {
   render(
     <Provider store={store}>
       <Gallery />
@@ -144,7 +151,34 @@ test('main image should not change if left arrow is clicked and the current phot
   );
   await act(() => screen.findAllByRole('menuitem'));
 
-  fireEvent.click(screen.getByAltText('left arrow'));
+  fireEvent.click(screen.getByAltText('right arrow'));
 
   expect(screen.getByAltText('Forest Green & Black_0')).toBeInTheDocument();
+});
+
+// STAR RATINGS =========================================
+
+jest.mock('../client/src/reducers/Review-List-Slice', () => {
+  const reviewsSlice = {
+    useGetMetaReviewsQuery: (productId) => {
+      const result = {
+        isLoading: true,
+        isSuccess: false,
+        data: mockRatingsData,
+        isError: false,
+      };
+      return result;
+    },
+  };
+  return reviewsSlice;
+});
+
+test('expect loading screen to appear while data is still loading', async () => {
+  const { getByText } = render(
+    <Provider store={store}>
+      <OverviewRatings productId={48432} />
+    </Provider>,
+  );
+
+  expect(screen.getByText('Loading ratings...')).toBeInTheDocument();
 });

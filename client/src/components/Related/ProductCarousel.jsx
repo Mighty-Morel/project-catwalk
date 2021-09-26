@@ -6,6 +6,7 @@ import React, { useState, useRef, useEffect } from 'react';
 import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { updateProductId } from '../../reducers/Example-Reducer';
+import CarouselStar from './CarouselStar.jsx';
 import './card.css';
 import './carousel.css';
 import Modal from './Modal.jsx';
@@ -227,7 +228,9 @@ const ProductCarousel = () => {
                   <dl className="c-cardCategory" data-testid="card-category">{product.category}</dl>
                   <dl className="c-cardTitle">{product.name}</dl>
                   <dl className="c-cardPrice"><Price price={product.price} sale={product.sale} /></dl>
-                  <dl className="c-cardRating" data-testid="star-placeholder">★★★★☆</dl>
+                  <dl className="c-cardRating" data-testid="star-placeholder">
+                    <CarouselStar product={product} />
+                  </dl>
                 </div>
               </li>
             ))}

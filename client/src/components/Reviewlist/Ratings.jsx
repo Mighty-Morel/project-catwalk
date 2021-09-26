@@ -5,16 +5,25 @@ import StarRating from './StarRating.jsx';
 import RatingBreakdown from './RatingBreakdown.jsx';
 
 const Ratings = ({ meta, setFilter, filter }) => {
-  const recommended = parseInt(meta.recommended.true, 10);
-  const notRecommended = parseInt(meta.recommended.false, 10);
+  let recommended = parseInt(meta.recommended.true, 10);
+  let notRecommended = parseInt(meta.recommended.false, 10);
+  if (Number.isNaN(recommended)) {
+    recommended = 0;
+  }
+  if (Number.isNaN(notRecommended)) {
+    notRecommended = 0;
+  }
   const recommendPercent = ((recommended / (notRecommended + recommended)) * 100).toFixed(0);
-
   const ratings = [];
-  const ratingKeys = Object.keys(meta.ratings);
-  for (let i = 0; i < ratingKeys.length; i += 1) {
-    ratings.push(parseInt(meta.ratings[ratingKeys[i]], 10));
+  for (let i = 1; i < 6; i += 1) {
+    if (meta.ratings[i]) {
+      ratings.push(parseInt(meta.ratings[i], 10));
+    } else {
+      ratings.push(0);
+    }
   }
   const [ones, twos, threes, fours, fives] = ratings;
+
   const totalRatings = ones + twos + threes + fours + fives;
   const avgRating = (ones * 1 + twos * 2 + threes * 3 + fours * 4 + fives * 5) / totalRatings;
   const starAvg = (Math.round(avgRating * 4) / 4).toFixed(2);
@@ -77,7 +86,9 @@ const Ratings = ({ meta, setFilter, filter }) => {
     <>
       <div className="ratingTitle">
         <div id="rating">{avgRating.toFixed(1)}</div>
-        <StarRating width={`${(starAvg / 5) * 100}%`} />
+        <span className="star-rating">
+          <StarRating width={`${(starAvg / 5) * 100}%`} />
+        </span>
       </div>
       <p>
         {recommendPercent}

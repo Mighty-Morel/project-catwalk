@@ -112,8 +112,8 @@ const AnswerModal = (props) => {
             <span><em>For authentication reasons, you will not be emailed</em></span>
           </div>
           <div className="QA-modal-footer">
-            <button data-testid="close-modal" type="button" onClick={toggleAnswerForm}>Close</button>
-            <button data-testid="submit-answer" type="button" onClick={postAnswer}>Submit</button>
+            <button className="QA-buttons" data-testid="close-modal" type="button" onClick={toggleAnswerForm}>Close</button>
+            <button className="QA-buttons" data-testid="submit-answer" type="button" onClick={postAnswer}>Submit</button>
           </div>
         </form>
       </div>
