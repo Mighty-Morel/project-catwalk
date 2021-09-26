@@ -72,7 +72,7 @@ const ProductCarousel = () => {
         const overviewFeatures = res.data.features;
         for (let l = 0; l < overviewFeatures.length; l += 1) {
           overviewFeatures[l].overview = '✓'; // true
-          overviewFeatures[l].card = ' '; // false
+          overviewFeatures[l].card = 'x'; // false
           result.push(overviewFeatures[l]);
         }
         modal = result;
@@ -93,7 +93,7 @@ const ProductCarousel = () => {
                   overviewFeature.card = '✓'; // true
                 }
               }
-              cardFeature.overview = ' '; // false
+              cardFeature.overview = 'x'; // false
               cardFeature.card = '✓'; // true
               modal.push(cardFeature);
             }
@@ -142,7 +142,7 @@ const ProductCarousel = () => {
             <div className="c-modal-overview">{overviewName}</div>
             <div className="c-modal-card">{cardName}</div>
           </div>
-          <ul className="c-modal-features">
+          {/* <ul className="c-modal-features">
             {modalInfo.map((item) => (
               <li key={item.value}>
                 <div>
@@ -158,7 +158,50 @@ const ProductCarousel = () => {
                 </div>
               </li>
             ))}
-          </ul>
+          </ul> */}
+          <div className="c-modal-container">
+            <div className="c-modal-features-overview">
+              {modalInfo.map((item) => (
+                <li key={item.value}>
+                  <div>
+                    <ul>
+                      {item.overview}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </div>
+
+            <div className="c-modal-features">
+              {modalInfo.map((item) => (
+                <li key={item.value}>
+                  <div>
+                    <ul>
+                      {item.feature}
+                      :
+                      {' '}
+                      {item.value}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </div>
+
+            <div className="c-modal-features-card">
+              {modalInfo.map((item) => (
+                <li key={item.value}>
+                  <div>
+                    <ul>
+                      {item.card}
+                    </ul>
+                  </div>
+                </li>
+              ))}
+            </div>
+
+          </div>
+
+
         </Modal>
       </main>
 
