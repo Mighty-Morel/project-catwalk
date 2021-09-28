@@ -30,12 +30,12 @@ const App = () => {
 
   return (
     <>
-      <div data-testid="loadapp" onClick={handleClick}>
+      {/* <div data-testid="loadapp" onClick={handleClick}>
         Hello World! CurrentId is&nbsp;
         {currentId}
         &nbsp;and current Style is&nbsp;
         {selectedStyleId}
-      </div>
+      </div> */}
       {/* <ProductList /> */}
       {/* <Router>
           <Route exact path="products/:productId" component={ProductInfo} />
