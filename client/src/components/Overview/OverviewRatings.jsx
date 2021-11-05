@@ -1,7 +1,6 @@
 /* eslint-disable import/extensions */
 import React from 'react';
 import { useGetMetaReviewsQuery } from '../../reducers/Review-List-Slice';
-// import OverviewStars from './OverviewStars.jsx';
 import StarRating from '../Reviewlist/StarRating.jsx';
 
 const OverviewRatings = ({ productId }) => {
