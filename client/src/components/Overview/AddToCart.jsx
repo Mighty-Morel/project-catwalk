@@ -46,11 +46,6 @@ const AddToCartFeatures = ({ style }) => {
   }, [style]);
 
   // QUANTITY SELECTOR ========================================================
-  // Should this account for multiple skus with the same size? I'm currently assuming all unique.
-  // In default style, should sku 1702769 be 'XXL' instead?
-  //   1702768: {quantity: 15, size: 'XL'}
-  //   1702769: {quantity: 4, size: 'XL'}
-
   // Retrieves list of products added to the cart by a user
   const getCart = () => {
     axios.get('/cart')
