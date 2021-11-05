@@ -88,8 +88,6 @@ This project was completed over a 2-week sprint in which our team built the fron
 * [React.js](https://reactjs.org/)
 * [Redux.js](https://redux.js.org/)
 * [Express.js](https://expressjs.com/)
-
-### Tested With
 * [React Testing Library](https://testing-library.com/)
 * [CircleCi](https://circleci.com/)
 
